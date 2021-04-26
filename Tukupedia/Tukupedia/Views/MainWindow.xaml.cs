@@ -23,6 +23,15 @@ namespace Tukupedia.View
         public MainWindow()
         {
             InitializeComponent();
+
+            IDseq id = new IDseq(9959076001234567890, 3138428376859, 1771566314683, 16);
+
+            string a = "";
+            for(int i = 0; i < 10; i++)
+            {
+                a += id.nextId() + "\n";
+            }
+            MessageBox.Show(a);
         }
     }
 }

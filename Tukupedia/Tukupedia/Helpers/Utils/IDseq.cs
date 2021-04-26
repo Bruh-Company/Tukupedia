@@ -11,29 +11,31 @@ namespace Tukupedia
     {
         BigInteger num;
         BigInteger M;
+        short length;
 
-        public IDseq(long seed, long first_prime, long second_prime)
+        public IDseq(ulong seed, ulong first_prime, ulong second_prime, short size)
         {
             num = seed;
             M = new BigInteger(first_prime) * new BigInteger(second_prime);
+            length = size;
         }
 
         public string nextId()
         {
-            string id = toBase64Converter();
+            string id = toBase36Converter();
             num = (num * num) % M;
 
             return id;
         }
 
-        private string toBase64Converter()
+        private string toBase36Converter()
         {
             int Base = 36;
             string digit = "0123456789abcdefghijklmnopqrstuvwxyz";
 
             BigInteger temp = num;
             string res = "";
-            while(temp > 0)
+            for(int i = 0; i < length; i++)
             {
                 res += digit[(int)(temp % Base)];
                 temp /= Base;
