@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 G:\Google Drive\SYNC\stts\PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\
+=======
+E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\
+>>>>>>> parent of 2897003 (id generator)
 Tukupedia
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 G:\Google Drive\SYNC\stts\PCS\Tukupedia\Tukupedia\Tukupedia\App.xaml
 3-485116946
 
 12-1125495321
 20-2079168705
 LoginForm.xaml;MainWindow.xaml;RegisterForm.xaml;
+=======
+E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\App.xaml
+11151548125
+
+6-1049819441
+19-1693364304
+MainWindow.xaml;
+>>>>>>> parent of 2897003 (id generator)
 
 True
 

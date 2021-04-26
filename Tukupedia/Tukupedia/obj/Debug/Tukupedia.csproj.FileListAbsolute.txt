@@ -35,39 +35,3 @@ E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tu
 E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.CopyComplete
 E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.exe
 E:\College\Semester 4\PCS\Project PCS\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.pdb
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\Tukupedia.exe.config
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\Tukupedia.exe
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\Tukupedia.pdb
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportSource.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.Shared.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\SAPBusinessObjects.WPF.Viewer.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\SAPBusinessObjects.WPF.ViewerShared.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.DataDefModel.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.ClientDoc.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.ReportDefModel.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.Controllers.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.CommLayer.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.DataSetConversion.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.Prompting.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.XmlSerialize.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.CubeDefModel.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.CommonObjectModel.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\AxShockwaveFlashObjects.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\ShockwaveFlashObjects.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\stdole.dll
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csprojAssemblyReference.cache
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\MainWindow.g.cs
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\App.g.cs
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia_MarkupCompile.cache
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia_MarkupCompile.lref
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\MainWindow.baml
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.g.resources
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.Properties.Resources.resources
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.GenerateResource.cache
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.CoreCompileInputs.cache
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.CopyComplete
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.exe
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.pdb
