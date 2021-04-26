@@ -10,27 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Tukupedia
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RegisterForm.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RegisterForm : Window
     {
-        public MainWindow()
+        public RegisterForm()
         {
             InitializeComponent();
-
-            IDseq id = new IDseq(995907600, 17287154817239303, 28294726871);
-            string res = "";
-            for(int i = 0; i < 100; i++)
-            {
-                res += id.nextId() + "\n";
-            }
-            MessageBox.Show(res);
         }
     }
 }
