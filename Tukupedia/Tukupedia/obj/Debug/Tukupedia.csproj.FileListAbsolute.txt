@@ -59,11 +59,9 @@ E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\Cry
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\ShockwaveFlashObjects.dll
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\bin\Debug\stdole.dll
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csprojAssemblyReference.cache
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\MainWindow.g.cs
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\App.g.cs
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia_MarkupCompile.cache
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia_MarkupCompile.lref
-E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\MainWindow.baml
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.g.resources
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.Properties.Resources.resources
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.GenerateResource.cache
@@ -71,3 +69,5 @@ E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tuk
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.csproj.CopyComplete
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.exe
 E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Tukupedia.pdb
+E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Views\MainWindow.g.cs
+E:\DATA\CHRISTIAN\KULIAH\pcs\project\Tukupedia\Tukupedia\Tukupedia\obj\Debug\Views\MainWindow.baml
