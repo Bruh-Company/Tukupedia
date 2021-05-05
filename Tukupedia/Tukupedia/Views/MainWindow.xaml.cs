@@ -24,14 +24,18 @@ namespace Tukupedia.View
         {
             InitializeComponent();
 
-            IDseq id = new IDseq(9959076001234567890, 3138428376859, 1771566314683, 16);
+            //IDseq id = new IDseq(9959076001234567890, 3138428376859, 1771566314683, 16);
 
-            string a = "";
-            for(int i = 0; i < 10; i++)
-            {
-                a += id.nextId() + "\n";
-            }
-            MessageBox.Show(a);
+            //string a = "";
+            //for(int i = 0; i < 10; i++)
+            //{
+            //    a += id.nextId() + "\n";
+            //}
+            //MessageBox.Show(a);
+            Views.TestMaterial t = new Views.TestMaterial();
+            this.Hide();
+            t.ShowDialog();
+            this.Close();
         }
     }
 }
