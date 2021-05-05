@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Views\RegisterPage.xaml.cs">
@@ -144,7 +145,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\DatabaseHelpers\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
