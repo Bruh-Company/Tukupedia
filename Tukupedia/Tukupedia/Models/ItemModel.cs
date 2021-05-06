@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Models
 {
-    class Login
+    public class ItemModel : Model
     {
+        public ItemModel()
+        {
+            TableName = "ITEM";
+            init();
+        }
+
     }
 }

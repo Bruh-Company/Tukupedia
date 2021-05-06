@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Models
 {
-    class Login
+    public class Jenis_PromoModel : Model
     {
+        public Jenis_PromoModel()
+        {
+            TableName = "JENIS_PROMO";
+            init();
+        }
     }
 }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Models
 {
-    class Register
+    public class H_Trans_ItemModel:Model
     {
+        public H_Trans_ItemModel()
+        {
+            TableName = "H_TRANS_ITEM";
+            init();
+        }
     }
 }
