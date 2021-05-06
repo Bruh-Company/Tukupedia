@@ -27,7 +27,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
         /*
          * Cara Kerja Insert
-         * new DB("user").insert(["id","1"],["name","bruh"]).execute();
+         * new DB("user").insert(["id","1"],["name,"bruh"]).execute();
          */
         public DB insert(params object[] param)
         {

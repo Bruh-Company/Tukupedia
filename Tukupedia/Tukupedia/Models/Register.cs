@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Models
 {
-    public class Trans_OSModel : Model
+    class Register
     {
-        public Trans_OSModel()
-        {
-            TableName = "TRANS_OS";
-            init();
-        }
     }
 }
