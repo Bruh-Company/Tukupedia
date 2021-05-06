@@ -80,11 +80,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Views\RegisterPage.xaml.cs">
-      <DependentUpon>RegisterPage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="Views\TestMaterial.xaml.cs">
       <DependentUpon>TestMaterial.xaml</DependentUpon>
     </Compile>
@@ -108,10 +104,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\RegisterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\TestMaterial.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -145,7 +137,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ReadMe Please.txt" />
