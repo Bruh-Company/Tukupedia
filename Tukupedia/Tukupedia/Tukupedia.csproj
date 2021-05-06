@@ -80,6 +80,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\D_Trans_ItemModel.cs" />
+    <Compile Include="Models\H_Trans_ItemModel.cs" />
+    <Compile Include="Models\ItemModel.cs" />
+    <Compile Include="Models\Jenis_PromoModel.cs" />
+    <Compile Include="Models\Kontrak_OSModel.cs" />
+    <Compile Include="Models\KurirModel.cs" />
+    <Compile Include="Models\Metode_PembayaranModel.cs" />
+    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PromoModel.cs" />
+    <Compile Include="Models\SellerModel.cs" />
+    <Compile Include="Models\Trans_OSModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="Views\TestMaterial.xaml.cs">
       <DependentUpon>TestMaterial.xaml</DependentUpon>
@@ -136,9 +149,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="ReadMe Please.txt" />
   </ItemGroup>
