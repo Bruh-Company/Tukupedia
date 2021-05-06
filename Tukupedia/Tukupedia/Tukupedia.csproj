@@ -80,15 +80,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
-<<<<<<< HEAD
-    <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-=======
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
->>>>>>> parent of 5e51c3f... Model V1
     <Compile Include="Views\TestMaterial.xaml.cs">
       <DependentUpon>TestMaterial.xaml</DependentUpon>
     </Compile>
