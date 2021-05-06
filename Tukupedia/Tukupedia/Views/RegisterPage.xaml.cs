@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 namespace Tukupedia.Views
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class RegisterPage : Window
     {
-        public LoginPage()
+        public RegisterPage()
         {
             InitializeComponent();
         }
-        
     }
 }
