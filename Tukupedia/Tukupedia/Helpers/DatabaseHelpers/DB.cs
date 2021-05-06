@@ -18,10 +18,11 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
         public DB()
         {
-
+            statement = "";
         }
         public DB(string table)
         {
+            statement = "";
             this.table = table;
         }
 
@@ -193,7 +194,10 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             DataTable table = new DataTable();
             try
             {
+                App.openConnection();
                 OracleDataAdapter adapter = new OracleDataAdapter(statement, App.connection);
+                //MessageBox.Show(statement);
+                App.closeConnection();
                 adapter.Fill(table);
             }
             catch (Exception ex)
@@ -207,6 +211,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             DataRow row = null;
             try
             {
+                //MessageBox.Show(get().Rows.Count.ToString());
                 row = get().Rows[0];
                 
             }

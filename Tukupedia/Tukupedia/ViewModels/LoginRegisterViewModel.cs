@@ -20,8 +20,9 @@ namespace Tukupedia.ViewModels
                 return true;
             }
             DB db = new DB("customer");
-            DataRow customer = db.where("email", username)
-                .where("password",password)
+            DataRow customer = db.select()
+                .where("email", username)
+                .where("password", password)
                 .getFirst();
             if (customer == null)
             {
@@ -32,10 +33,12 @@ namespace Tukupedia.ViewModels
             else
             {
                 MessageBox.Show("Berhasil Login Customer"+customer[0].ToString());
+                return true;
             }
 
             db = new DB("seller");
-            DataRow seller = db.where("email", username)
+            DataRow seller = db.select()
+                .where("email", username)
                 .where("password", password)
                 .getFirst();
             if (seller == null)
@@ -46,6 +49,8 @@ namespace Tukupedia.ViewModels
             else
             {
                 MessageBox.Show("Berhasil Login Seller" + seller[0].ToString());
+                return true;
+
             }
 
             return false;
