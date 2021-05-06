@@ -14,11 +14,22 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public string statement { get; set; }
 
         public void resetStatement() { statement = ""; }
+        public string table;
+
+        public DB()
+        {
+
+        }
+        public DB(string table)
+        {
+            this.table = table;
+        }
+
         /*
          * Cara Kerja Insert
-         * new DB().insert("user",[],[])
+         * new DB("user").insert(["id","1"],["name,"bruh"]).execute();
          */
-        public DB insert(string table, params object[] param)
+        public DB insert(params object[] param)
         {
             resetStatement();
             string columns = "(";
@@ -33,19 +44,32 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             statement += $"INSERT INTO {table} ({columns} VALUES {values})";
             return this;
         }
+        /*
+         * Cara Kerja Insert Raw
+         * new DB().insertRAW($"INSERT INTO CUSTOMER(ID,NAME) VALUES ('1','BRUH')").execute();
+         */
         public DB insertRAW(string statement)
         {
             resetStatement();
             this.statement = statement;
             return this;
         }
-        public DB delete(string table)
+        /*
+         * Cara Kerja Delete
+         * new DB("user").delete().where("id","1").execute();
+         * new DB("user").delete().where("id","1",">").execute();
+         */
+        public DB delete()
         {
             resetStatement();
             statement += $"DELETE {table} ";
             return this;
         }
-        public DB update(string table, params object[] param)
+        /*
+         * Cara Kerja Update
+         * new DB("user").update(["name","boodie"],["alamat","UKP"]).execute();
+         */
+        public DB update(params object[] param)
         {
             resetStatement();
             string str = "";
@@ -59,19 +83,39 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
             return this;
         }
-        public DB where(string column, string value)
+        /*
+         * Digunakan jika where harus "AND"
+         */
+        public DB where(string column, string value, string Operator="=")
         {
             string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
-            statement += $" {where} {column} = '{value}' ";
+            statement += $" {where} {column} {Operator} '{value}' ";
             return this;
         }
-        public DB orWhere(string column, string value)
+        /*
+         * Digunakan jika where harus "OR"
+         */
+        public DB orWhere(string column, string value, string Operator = "=")
         {
             string where = statement.Contains("WHERE") ? " OR " : " WHERE ";
-            statement += $" {where} {column} = '{value}' ";
+            statement += $" {where} {column} {Operator} '{value}' ";
             return this;
         }
-        public DB select(string table, params object[] param)
+        /*
+         * Cara Kerja Select
+         * Note : untuk select gunakan (nama table).(column)
+         * Karena tidak memakai alias
+         * -Cara 1-
+         * Mendapatkan sebuah data table yang rownya memiliki price yang
+         * lebih dari 1000
+         * new DB("user").select().where("price","1000",">").get();
+         * 
+         * -Cara 2-
+         * Mendapatkan sebuah data table yang rownya memiliki price yang
+         * lebih dari 1000. Dengan kolom yang ditentukan
+         * new DB("user").select("Nama as nama", "ID as identity", "price as harga").where("price","1000",">").get();
+         */
+        public DB select(params object[] param)
         {
             resetStatement();
             if (param.Length == 0)
@@ -88,24 +132,32 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                     statement += $" {temp} {comma} ";
                 }
             }
-
             return this;
         }
+        /*
+         * Cara Kerja Join
+         * 
+         * new DB("user").select().join("barang","barang_id","=","ID").where("price","1000",">").get();
+         * 
+         */
         public DB join(string table, string id ,string Operator, string foreignKey)
         {
-            statement += $" join {table} on {id} {Operator} {foreignKey} ";
+            statement += $" join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
             return this;
         }
         public DB leftJoin(string table, string id, string Operator, string foreignKey)
         {
-            statement += $" left join {table} on {id} {Operator} {foreignKey} ";
+            statement += $" left join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
             return this;
         }
         public DB rightJoin(string table, string id, string Operator, string foreignKey)
         {
-            statement += $" right join {table} on {id} {Operator} {foreignKey} ";
+            statement += $" right join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
             return this;
         }
+        /**
+         * Note Jika ada having dan memakai alias, maka berilah alias nya juga
+         * */
         public DB having(string column ,string Operator, string value)
         {
             statement += $" having {column} {Operator} {value} ";
