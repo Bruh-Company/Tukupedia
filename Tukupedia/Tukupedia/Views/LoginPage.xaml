@@ -18,16 +18,27 @@
             <Button x:Name="btLoginLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="289" Height="48" FontSize="24" FontWeight="Bold" Canvas.Left="54" Canvas.Top="331" Click="btLoginLogin_Click"/>
             <Button x:Name="btRegisterLogin" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="289" Height="48" FontSize="24" FontWeight="Bold" Canvas.Left="54" Canvas.Top="412" Click="BtRegisterLogin_Click"/>
         </Canvas>
-        <Canvas x:Name="PanelRegister" HorizontalAlignment="Left" Height="611" Margin="579,42,0,0" VerticalAlignment="Top" Width="538">
-            <Label Content="Welcome to Tukupedia" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="36" Canvas.Left="90" Canvas.Top="21"/>
-            <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Canvas.Left="136" Canvas.Top="102"/>
-            <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Canvas.Left="134" Canvas.Top="290"/>
-            <TextBox x:Name="tbEmailRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" FontSize="18" Canvas.Left="136" Canvas.Top="138"/>
-            <PasswordBox x:Name="tbConfirmRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" FontSize="18" Canvas.Left="134" Canvas.Top="326"/>
-            <Button x:Name="btRegisterRegister" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="48" FontSize="24" FontWeight="Bold" Canvas.Left="134" Canvas.Top="400"/>
-            <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Canvas.Left="134" Canvas.Top="190"/>
-            <PasswordBox x:Name="tbPasswordRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" FontSize="18" Canvas.Left="134" Canvas.Top="226"/>
-            <Button x:Name="btLoginRegister" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="48" FontSize="24" FontWeight="Bold" Canvas.Left="136" Canvas.Top="480" Click="BtLoginRegister_Click"/>
+        <Canvas x:Name="PanelRegister" HorizontalAlignment="Left" Height="669" Margin="622,10,0,0" VerticalAlignment="Top" Width="538">
+            <Label Content="Welcome to Tukupedia" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Canvas.Left="160" Canvas.Top="10"/>
+            <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="56"/>
+            <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="198"/>
+            <TextBox x:Name="tbEmailRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" FontSize="14" Canvas.Left="136" Canvas.Top="85"/>
+            <PasswordBox x:Name="tbConfirmRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" Canvas.Left="136" Canvas.Top="222"/>
+            <Button x:Name="btRegisterRegister" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="286" Height="29" FontSize="14" FontWeight="Bold" Canvas.Left="136" Canvas.Top="584" Click="btRegisterRegister_Click"/>
+            <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="134" Canvas.Top="126"/>
+            <PasswordBox x:Name="tbPasswordRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" Canvas.Left="134" Canvas.Top="155" FontSize="14"/>
+            <Button x:Name="btLoginRegister" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="28" FontSize="14" FontWeight="Bold" Canvas.Left="134" Canvas.Top="631" Click="BtLoginRegister_Click"/>
+            <Label Content="Alamat" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="270"/>
+            <TextBox x:Name="tbAlamatRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" Canvas.Left="134" Canvas.Top="294"/>
+            <Label Content="Nomor Telepon" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="345"/>
+            <TextBox x:Name="tbNoTelpRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" Canvas.Left="136" Canvas.Top="374"/>
+            <Label Content="Mendaftar Sebagai" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="422"/>
+            <ComboBox x:Name="cbMendaftarSebagai" Canvas.Left="136" Canvas.Top="451" Width="289" DropDownClosed="cbMendaftarSebagai_DropDownClosed">
+                <ListBoxItem Content="Pembeli"/>
+                <ListBoxItem Content="Penjual"/>
+            </ComboBox>
+            <Label x:Name="lbTanggalLahir" Content="Tanggal Lahir" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="137" Canvas.Top="489"/>
+            <DatePicker x:Name="dpTanggalLahir" Canvas.Left="137" Canvas.Top="523" Width="285"/>
         </Canvas>
 
     </Grid>

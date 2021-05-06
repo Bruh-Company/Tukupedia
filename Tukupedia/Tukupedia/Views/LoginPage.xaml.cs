@@ -23,6 +23,7 @@ namespace Tukupedia.Views
         public LoginPage()
         {
             InitializeComponent();
+            cbMendaftarSebagai_DropDownClosed(null, null);
         }
 
         private void BtRegisterLogin_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,62 @@ namespace Tukupedia.Views
 
         private void btLoginLogin_Click(object sender, RoutedEventArgs e)
         {
+            if (LoginRegisterViewModel.login(tbEmailLogin.Text.ToString(), tbPasswordLogin.Password.ToString()))
+            {
+                tbEmailLogin.Text = "";
+                tbPasswordLogin.Password = "";
+            }
+            else
+            {
+                tbPasswordLogin.Password = "";
+            }
+        }
+
+        private void cbMendaftarSebagai_DropDownClosed(object sender, EventArgs e)
+        {
+            if(cbMendaftarSebagai.SelectedIndex == 0)
+            {
+                lbTanggalLahir.Visibility = Visibility.Visible;
+                dpTanggalLahir.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                lbTanggalLahir.Visibility = Visibility.Hidden;
+                dpTanggalLahir.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btRegisterRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if(tbEmailRegister.Text == "" || tbPasswordRegister.Password == "" || tbAlamatRegister.Text == "" || tbNoTelpRegister.Text == "")
+            {
+                MessageBox.Show("Pastikan anda sudah mengisi semua data :)");
+            }
+            else if(tbPasswordRegister.Password != tbConfirmRegister.Password)
+            {
+                MessageBox.Show("Password dan Confirm Password tidak sama :(");
+            }
+            //0 = user
+            //1 = Seller
+            if(cbMendaftarSebagai.SelectedIndex == 0)
+            {
+                if(dpTanggalLahir.SelectedDate == null)
+                {
+                    MessageBox.Show("Tanggal Lahir tidak boleh kosong");
+                }
+                else
+                {
+                    ViewModels.LoginRegisterViewModel.registeruser(tbEmailRegister.Text)
+                }
+            }
+            else if(cbMendaftarSebagai.SelectedIndex == 1)
+            {
+
+            }
+            else
+            {
+                
+            }
             if (LoginRegisterViewModel.login(tbEmailLogin.Text.ToString(), tbPasswordLogin.Password.ToString()))
             {
                 tbEmailLogin.Text = "";
