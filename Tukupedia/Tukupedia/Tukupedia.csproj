@@ -93,6 +93,11 @@
     <Compile Include="Models\PromoModel.cs" />
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
+    <Compile Include="ViewModels\Admin\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
