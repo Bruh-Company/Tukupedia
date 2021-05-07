@@ -18,9 +18,9 @@ namespace Tukupedia.Views
     /// <summary>
     /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class LoginPage : Window
+    public partial class LoginRegisterView : Window
     {
-        public LoginPage()
+        public LoginRegisterView()
         {
             InitializeComponent();
             cbMendaftarSebagai_DropDownClosed(null, null);

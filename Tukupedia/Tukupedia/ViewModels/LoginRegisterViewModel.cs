@@ -6,15 +6,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Tukupedia.Helpers.DatabaseHelpers;
+using Tukupedia.Models;
 using Tukupedia.Views.Admin;
+using Tukupedia.Views;
 
 namespace Tukupedia.ViewModels
 {
-    class LoginRegisterViewModel
+    public class LoginRegisterViewModel
     {
+        public static LoginRegisterView view;
+        public static void setView(LoginRegisterView view)
+        {
+            LoginRegisterViewModel.view = view;
+        }
         public static bool login(string username, string password)
         {
-            
             if (username == "admin" && password == "admin")
             {
                 MessageBox.Show("Berhasil Login Admin");
@@ -24,6 +30,7 @@ namespace Tukupedia.ViewModels
             }
             DataRow customer = new DB("customer").select()
                 .where("email", username)
+                .orWhere("username",username)
                 .where("password", password)
                 .getFirst();
             if (customer == null)
@@ -63,13 +70,12 @@ namespace Tukupedia.ViewModels
                 return false;
             }
             new DB("customer").insert(
-                "id",1,
-                "nama", "test",
+                "nama", nama,
                 "email", "test",
                 "tanggal_lahir", "TO_DATE('070903', 'MMDDYY')",
-                "alamat", "asd",
-                "no_telp", "bruh",
-                "password", "test"
+                "alamat", alamat,
+                "no_telp", notelp,
+                "password", password
                 ).execute();
             return false;
             

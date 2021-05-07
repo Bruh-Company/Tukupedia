@@ -94,10 +94,17 @@
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
+    <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
+      <DependentUpon>HomeAdminView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestMaterial.xaml.cs">
       <DependentUpon>TestMaterial.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\LoginPage.xaml">
+    <Page Include="Views\Admin\HomeAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginRegisterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -110,8 +117,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\Utils\IDseq.cs" />
-    <Compile Include="Views\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
+    <Compile Include="Views\LoginRegisterView.xaml.cs">
+      <DependentUpon>LoginRegisterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
