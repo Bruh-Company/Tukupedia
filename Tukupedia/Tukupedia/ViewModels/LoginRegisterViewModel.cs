@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using Tukupedia.Helpers.DatabaseHelpers;
+using Tukupedia.Views.Admin;
 
 namespace Tukupedia.ViewModels
 {
@@ -17,6 +18,8 @@ namespace Tukupedia.ViewModels
             if (username == "admin" && password == "admin")
             {
                 MessageBox.Show("Berhasil Login Admin");
+                HomeAdminView hav = new HomeAdminView();
+                hav.ShowDialog();
                 return true;
             }
             DataRow customer = new DB("customer").select()
@@ -50,7 +53,8 @@ namespace Tukupedia.ViewModels
 
             return false;
         }
-        public static bool registeruser(string username,string nama, DateTime lahir, string alamat, string notelp, string password)
+
+        public static bool registerUser(string username,string nama, DateTime lahir, string alamat, string notelp, string password)
         {
 
             if (username == "admin")
@@ -58,7 +62,15 @@ namespace Tukupedia.ViewModels
                 MessageBox.Show("Dilarang jadi Admin");
                 return false;
             }
-            //new DB("customer").insert(["id","0"]);
+            new DB("customer").insert(
+                "id",1,
+                "nama", "test",
+                "email", "test",
+                "tanggal_lahir", "TO_DATE('070903', 'MMDDYY')",
+                "alamat", "asd",
+                "no_telp", "bruh",
+                "password", "test"
+                ).execute();
             return false;
             
         }

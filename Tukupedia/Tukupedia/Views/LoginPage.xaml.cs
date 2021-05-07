@@ -89,7 +89,7 @@ namespace Tukupedia.Views
                 }
                 else
                 {
-                    //ViewModels.LoginRegisterViewModel.registeruser(tbEmailRegister.Text)
+                    LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
                 }
             }
             else if(cbMendaftarSebagai.SelectedIndex == 1)

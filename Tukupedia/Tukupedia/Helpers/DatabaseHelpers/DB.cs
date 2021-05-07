@@ -28,21 +28,21 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
         /*
          * Cara Kerja Insert
-         * new DB("user").insert(["id","1"],["name","bruh"]).execute();
+         * new DB("user").insert("id",1,"name","bruh").execute();
          */
         public DB insert(params object[] param)
         {
             resetStatement();
             string columns = "(";
             string values = "(";
-            for (int i = 0; i < param.Length; i++)
+            for (int i = 0; i < param.Length; i+=2)
             {
-                var item = param[i] as string[];
-                string comma = (i == param.Length - 1) ? ")" : ",";
-                columns += $" '{item[0]}' {comma}";
-                values += $" '{item[1]}' {comma}";
+                string comma = (i == param.Length - 2) ? ")" : ",";
+                columns += $" {param[i]} {comma} ";
+                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                values += $" {petik}{param[i+1]}{petik} {comma} ";
             }
-            statement += $"INSERT INTO {table} ({columns} VALUES {values})";
+            statement += $"INSERT INTO {table} {columns} VALUES {values} ";
             return this;
         }
         /*
@@ -185,6 +185,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 CommandText = statement,
                 Connection = App.connection
             };
+            MessageBox.Show(statement);
             App.openConnection();
             cmd.ExecuteNonQuery();
             App.closeConnection();

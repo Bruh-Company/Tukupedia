@@ -294,5 +294,4 @@ BEGIN
     :new.ID := new_id;
 END;
 /
-
-
+commit;
