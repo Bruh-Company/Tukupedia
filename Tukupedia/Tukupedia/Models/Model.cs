@@ -18,11 +18,17 @@ namespace Tukupedia.Models
 
         public Model()
         {
-            
+            TableName = "";
         }
         public void init()
         {
             statement = $"SELECT * FROM {TableName}";
+            Adapter = new OracleDataAdapter(statement, App.connection);
+            Builder = new OracleCommandBuilder(Adapter);
+        }
+        public void initAdapter(string statement)
+        {
+            this.statement = statement;
             Adapter = new OracleDataAdapter(statement, App.connection);
             Builder = new OracleCommandBuilder(Adapter);
         }

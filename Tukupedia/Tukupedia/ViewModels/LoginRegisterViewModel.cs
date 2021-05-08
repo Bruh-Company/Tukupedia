@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -19,6 +19,13 @@ namespace Tukupedia.ViewModels
         {
             LoginRegisterViewModel.view = view;
         }
+        public static bool validateUser(DataTable table,string username,string email)
+        {
+            int counter = table.Select($"username = '{username}' or email = '{email}'").Length;
+
+            return counter == 0;
+
+        }
         public static bool login(string username, string password)
         {
             if (username == "admin" && password == "admin")
@@ -30,7 +37,6 @@ namespace Tukupedia.ViewModels
             }
             DataRow customer = new DB("customer").select()
                 .where("email", username)
-                .orWhere("username",username)
                 .where("password", password)
                 .getFirst();
             if (customer == null)
@@ -61,65 +67,65 @@ namespace Tukupedia.ViewModels
             return false;
         }
 
-        public static bool registerUser(string username,string nama, DateTime lahir, string alamat, string notelp, string password)
+        public static bool registerCustomer(string username,string nama, DateTime lahir, string alamat, string notelp, string password,string email)
         {
-
+            //Validasi
+            bool validation = true;
             if (username == "admin")
             {
                 MessageBox.Show("Dilarang jadi Admin");
-                return false;
+                validation= false;
             }
-            new DB("customer").insert(
+            //Check Username/Email Unique
+            validation &= validateUser(new CustomerModel().Table, username, email);
+            //Buat Kode Customer
+            if (validation)
+            {
+                new DB("customer").insert(
                 "nama", nama,
-                "email", "test",
-                "tanggal_lahir", "TO_DATE('070903', 'MMDDYY')",
+                "email", email,
+                "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
                 "alamat", alamat,
                 "no_telp", notelp,
                 "password", password
                 ).execute();
-            return false;
-            
+                MessageBox.Show("Berhasil Daftar");
+            }
+            else
+            {
+                MessageBox.Show("Gagal Daftar Custoemer");
+            }
+            return validation;
         }
-        public static bool registerseller(string username, string nama, string alamat, string notelp, string password)
+        public static bool registerSeller(string username, string nama, DateTime lahir, string alamat, string notelp, string password, string email)
         {
-
+            //Validasi
+            bool validation = true;
             if (username == "admin")
             {
                 MessageBox.Show("Dilarang jadi Admin");
-                return false;
+                validation = false;
             }
-            DB db = new DB("customer");
-            DataRow customer = db.select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-            if (customer == null)
+            //Check Username/Email sama belum
+            validation &= validateUser(new SellerModel().Table, username, email);
+            //Buat Kode Customer
+            if (validation)
             {
-                //MessageBox.Show("Gagal Customer");
+                new DB("seller").insert(
+                "nama", nama,
+                "email", email,
+                "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                "alamat", alamat,
+                "no_telp", notelp,
+                "password", password
+                ).execute();
+                MessageBox.Show("Berhasil Daftar Seller");
             }
             else
             {
-                MessageBox.Show("Berhasil Login Customer" + customer[0].ToString());
-                return true;
+                MessageBox.Show("Gagal Daftar Seller");
             }
-
-            db = new DB("seller");
-            DataRow seller = db.select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-            if (seller == null)
-            {
-                //MessageBox.Show("Gagal Seller");
-            }
-            else
-            {
-                MessageBox.Show("Berhasil Login Seller" + seller[0].ToString());
-                return true;
-
-            }
-
-            return false;
+            return validation;
         }
 
     }

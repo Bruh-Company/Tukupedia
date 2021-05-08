@@ -68,7 +68,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         }
         /*
          * Cara Kerja Update
-         * new DB("user").update(["name","boodie"],["alamat","UKP"]).execute();
+         * new DB("user").update("name","boodie","alamat","UKP").execute();
          */
         public DB update(params object[] param)
         {

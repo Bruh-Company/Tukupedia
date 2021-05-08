@@ -24,6 +24,7 @@ namespace Tukupedia.Views
         {
             InitializeComponent();
             cbMendaftarSebagai_DropDownClosed(null, null);
+            LoginRegisterViewModel.setView(this);
         }
 
         private void BtRegisterLogin_Click(object sender, RoutedEventArgs e)
