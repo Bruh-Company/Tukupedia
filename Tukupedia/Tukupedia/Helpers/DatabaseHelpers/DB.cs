@@ -74,11 +74,10 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         {
             resetStatement();
             string str = "";
-            for (int i = 0; i < param.Length; i++)
+            for (int i = 0; i < param.Length; i+=2)
             {
-                var item = param[i] as string[];
-                string comma = (i == param.Length - 1) ? "" : ",";
-                str +=$" {item[0]} = '{item[1]}' {comma}";
+                string comma = (i == param.Length - 2) ? "" : ",";
+                str +=$" {param[i]} = '{param[i+1]}' {comma}";
             }
             statement += $"UPDATE {table} SET {str} ";
 

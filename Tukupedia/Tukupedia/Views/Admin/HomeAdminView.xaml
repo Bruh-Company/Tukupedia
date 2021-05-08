@@ -32,22 +32,22 @@
             <Button Content="Update Kategori" Canvas.Left="778" Canvas.Top="310" Width="143"/>
             <Button Content="Hapus Kategori" Canvas.Left="944" Canvas.Top="310" Width="143"/>
         </Canvas>
-        <Canvas x:Name="CanvasCustomer" HorizontalAlignment="Left" Height="624" Margin="10,971,0,-906" VerticalAlignment="Top" Width="1252">
-            <DataGrid x:Name="dgCustomer" Height="493" Canvas.Left="10" Canvas.Top="121" Width="761"/>
+        <Canvas x:Name="CanvasCustomer" HorizontalAlignment="Left" Height="624" Margin="10,55,0,0" VerticalAlignment="Top" Width="1252">
+            <DataGrid x:Name="dgCustomer" Height="493" Canvas.Left="10" Canvas.Top="121" Width="849" MouseDoubleClick="dgCustomer_MouseDoubleClick" FontSize="16"/>
             <Label Content="Tukupedia Customer Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
-            <Label Content="Nama" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="84"/>
-            <TextBox Height="41" Canvas.Left="776" TextWrapping="Wrap" Canvas.Top="121" Width="300" FontSize="14"/>
-            <Button Content="Reset Password" Canvas.Left="776" Canvas.Top="540" Width="152"/>
-            <Button Content="Banned User" Canvas.Left="933" Canvas.Top="540" Width="143"/>
-            <Label Content="Alamat" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="170"/>
-            <TextBox Height="41" Canvas.Left="776" TextWrapping="Wrap" Canvas.Top="207" Width="300" FontSize="20"/>
-            <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="253"/>
-            <TextBox Height="41" Canvas.Left="776" TextWrapping="Wrap" Canvas.Top="285" Width="300" FontSize="20"/>
-            <Label Content="No Telp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="331"/>
-            <TextBox Height="41" Canvas.Left="776" TextWrapping="Wrap" Canvas.Top="368" Width="300" FontSize="20"/>
-            <Label Content="Tanggal Lahir" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="425"/>
-            <Button Content="Update User" Canvas.Left="776" Canvas.Top="582" Width="300" FontSize="18"/>
-            <DatePicker Canvas.Left="776" Canvas.Top="484" Width="300"/>
+            <Label Content="Nama" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="884" Canvas.Top="84"/>
+            <TextBox x:Name="tbNamaCustomer" Height="41" Canvas.Left="884" TextWrapping="Wrap" Canvas.Top="121" Width="300" FontSize="20"/>
+            <Button Content="Reset Password" Canvas.Left="884" Canvas.Top="540" Width="152"/>
+            <Button Content="Banned User" Canvas.Left="1041" Canvas.Top="540" Width="143"/>
+            <Label Content="Alamat" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="884" Canvas.Top="170"/>
+            <TextBox x:Name="tbAlamatCustomer" Height="41" Canvas.Left="884" TextWrapping="Wrap" Canvas.Top="207" Width="300" FontSize="20"/>
+            <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="884" Canvas.Top="253"/>
+            <TextBox x:Name="tbEmailCustomer" Height="41" Canvas.Left="884" TextWrapping="Wrap" Canvas.Top="285" Width="300" FontSize="20"/>
+            <Label Content="No Telp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="884" Canvas.Top="331"/>
+            <TextBox x:Name="tbNotelpCustomer" Height="41" Canvas.Left="884" TextWrapping="Wrap" Canvas.Top="368" Width="300" FontSize="20"/>
+            <Label Content="Tanggal Lahir" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="884" Canvas.Top="425"/>
+            <Button x:Name="btUpdateCustomer" Content="Update User" Canvas.Left="884" Canvas.Top="582" Width="300" FontSize="18" Click="btUpdateCustomer_Click"/>
+            <DatePicker x:Name="tbLahirCustomer" Canvas.Left="884" Canvas.Top="484" Width="300" FontSize="18"/>
             <TextBox Height="29" Canvas.Left="602" TextWrapping="Wrap" Canvas.Top="84" Width="134" FontSize="18"/>
             <Label Content="Search" Canvas.Left="122" Canvas.Top="84" FontSize="16" Height="31" Width="60"/>
             <RadioButton Content="Nama" Canvas.Left="200" Canvas.Top="88" FontSize="16"/>
@@ -72,7 +72,7 @@
             <Button Content="Update User" Canvas.Left="776" Canvas.Top="582" Width="300" FontSize="18"/>
         </Canvas>
         <Button x:Name="btTransaction" Content="Transaction" HorizontalAlignment="Left" Margin="799,9,0,0" VerticalAlignment="Top" Width="160" Height="41" FontSize="22" Click="btTransaction_Click"/>
-        <Canvas x:Name="CanvasUnknown" HorizontalAlignment="Left" Height="624" Margin="10,65,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasUnknown" HorizontalAlignment="Left" Height="624" Margin="-1304,-1135,0,0" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgSeller1" Height="559" Canvas.Left="10" Canvas.Top="55" Width="761"/>
             <Label Content="Tukupedia Seller Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Nama" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="776" Canvas.Top="84"/>

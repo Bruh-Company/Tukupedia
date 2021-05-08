@@ -90,7 +90,7 @@ namespace Tukupedia.Views
                 }
                 else
                 {
-                    LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
+                    //LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
                 }
             }
             else if(cbMendaftarSebagai.SelectedIndex == 1)

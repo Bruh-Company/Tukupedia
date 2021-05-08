@@ -21,7 +21,7 @@ namespace Tukupedia.Views.Admin
     /// </summary>
     public partial class HomeAdminView : Window
     {
-        DataTable dtCustomer, dtSeller;
+        CustomerViewModel cvm;
         public HomeAdminView()
         {
             InitializeComponent();
@@ -50,10 +50,8 @@ namespace Tukupedia.Views.Admin
 
         private void btCustomer_Click(object sender, RoutedEventArgs e)
         {
-            dtCustomer = null;
-            CanvasCustomer.Visibility = Visibility.Visible;
-            dtCustomer = CustomerViewModel.initCustomer();
-            dgCustomer.ItemsSource = dtCustomer.DefaultView;
+            cvm = new CustomerViewModel();
+            dgCustomer.ItemsSource = cvm.getDataTable().DefaultView;
         }
 
         private void btSeller_Click(object sender, RoutedEventArgs e)
@@ -64,6 +62,34 @@ namespace Tukupedia.Views.Admin
         private void btTransaction_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void dgCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(dgCustomer.SelectedIndex != -1)
+            {
+                DataRow dr = cvm.selectData(dgCustomer.SelectedIndex);
+                tbNamaCustomer.Text = dr[2].ToString();
+                tbAlamatCustomer.Text = dr[3].ToString();
+                tbEmailCustomer.Text = dr[1].ToString();
+                tbNotelpCustomer.Text = dr[4].ToString();
+                tbLahirCustomer.SelectedDate = DateTime.Parse(dr[5].ToString());
+
+            }
+        }
+
+        void resetInput()
+        {
+            tbNamaCustomer.Text = "";
+            tbEmailCustomer.Text = "";
+            tbAlamatCustomer.Text = "";
+            tbNotelpCustomer.Text = "";
+            tbLahirCustomer.SelectedDate = null;
+        }
+        private void btUpdateCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            cvm.update(tbNamaCustomer.Text, tbEmailCustomer.Text, tbAlamatCustomer.Text, tbNotelpCustomer.Text, tbLahirCustomer.SelectedDate.Value);
+            resetInput();
         }
     }
 }
