@@ -77,7 +77,8 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             for (int i = 0; i < param.Length; i+=2)
             {
                 string comma = (i == param.Length - 2) ? "" : ",";
-                str +=$" {param[i]} = '{param[i+1]}' {comma}";
+                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                str +=$" {param[i]} = {petik}{param[i+1]}{petik} {comma}";
             }
             statement += $"UPDATE {table} SET {str} ";
 
