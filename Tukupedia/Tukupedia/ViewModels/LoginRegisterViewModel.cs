@@ -19,12 +19,10 @@ namespace Tukupedia.ViewModels
         {
             LoginRegisterViewModel.view = view;
         }
-        public static bool validateUser(DataTable table,string username,string email)
+        public static bool validateRegisterUser(DataTable table,string email)
         {
-            int counter = table.Select($"username = '{username}' or email = '{email}'").Length;
-
+            int counter = table.Select($"email = '{email}'").Length;
             return counter == 0;
-
         }
         public static bool login(string username, string password)
         {
@@ -77,7 +75,7 @@ namespace Tukupedia.ViewModels
                 validation= false;
             }
             //Check Username/Email Unique
-            validation &= validateUser(new CustomerModel().Table, username, email);
+            validation &= validateRegisterUser(new CustomerModel().Table, email);
             //Buat Kode Customer
             if (validation)
             {
@@ -107,7 +105,7 @@ namespace Tukupedia.ViewModels
                 validation = false;
             }
             //Check Username/Email sama belum
-            validation &= validateUser(new SellerModel().Table, username, email);
+            validation &= validateRegisterUser(new SellerModel().Table,  email);
             //Buat Kode Customer
             if (validation)
             {

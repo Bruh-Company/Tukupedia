@@ -1,16 +1,3 @@
-DROP TABLE CATEGORY CASCADE CONSTRAINT PURGE;
-DROP TABLE CUSTOMER CASCADE CONSTRAINT PURGE;
-DROP TABLE D_TRANS_ITEM CASCADE CONSTRAINT PURGE;
-DROP TABLE H_TRANS_ITEM CASCADE CONSTRAINT PURGE;
-DROP TABLE ITEM CASCADE CONSTRAINT PURGE;
-DROP TABLE JENIS_PROMO CASCADE CONSTRAINT PURGE;
-DROP TABLE KONTRAK_OS CASCADE CONSTRAINT PURGE;
-DROP TABLE KURIR CASCADE CONSTRAINT PURGE;
-DROP TABLE METODE_PEMBAYARAN CASCADE CONSTRAINT PURGE;
-DROP TABLE PROMO CASCADE CONSTRAINT PURGE;
-DROP TABLE SELLER CASCADE CONSTRAINT PURGE;
-DROP TABLE TRANS_OS CASCADE CONSTRAINT PURGE;
-
 create table CUSTOMER
 (
     ID            NUMBER        not null
@@ -84,8 +71,30 @@ create table SELLER
     IS_OFFICIAL   CHAR,
     STATUS        CHAR   default 1,
     PASSWORD      VARCHAR2(100) not null,
-    TANGGAL_LAHIR DATE          not null
+    TANGGAL_LAHIR DATE          not null,
+    NAMA_PENJUAL  VARCHAR2(100) not null,
+    NIK           NUMBER        not null
 )
+/
+
+create unique index SELLER_EMAIL_UINDEX
+    on SELLER (EMAIL)
+/
+
+create unique index SELLER_KODE_SELLER_UINDEX
+    on SELLER (KODE)
+/
+
+create or replace trigger AUTO_ID_SELLER
+    before insert
+    on SELLER
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from SELLER;
+    :new.ID := new_id;
+END;
 /
 
 create table ITEM
@@ -115,26 +124,6 @@ DECLARE
     new_id number;
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from ITEM;
-    :new.ID := new_id;
-END;
-/
-
-create unique index SELLER_EMAIL_UINDEX
-    on SELLER (EMAIL)
-/
-
-create unique index SELLER_KODE_SELLER_UINDEX
-    on SELLER (KODE)
-/
-
-create or replace trigger AUTO_ID_SELLER
-    before insert
-    on SELLER
-    for each row
-DECLARE
-    new_id number;
-BEGIN
-    select nvl(max(id), 0) + 1 into new_id from SELLER;
     :new.ID := new_id;
 END;
 /
@@ -206,15 +195,15 @@ END;
 
 create table H_TRANS_ITEM
 (
-    ID                NUMBER       not null
-        constraint H_TRANS_ITEM_CUSTOMER_ID_FK
-            references CUSTOMER
-        constraint H_TRANS_ITEM_KURIR_ID_FK
-            references KURIR,
+    ID                NUMBER       not null,
     KODE              VARCHAR2(32) not null,
     TANGGAL_TRANSAKSI DATE         not null,
-    ID_CUSTOMER       NUMBER,
+    ID_CUSTOMER       NUMBER
+        constraint H_TRANS_ITEM_CUSTOMER_ID_FK
+            references CUSTOMER,
     ID_KURIR          NUMBER
+        constraint H_TRANS_ITEM_KURIR_ID_FK
+            references KURIR
 )
 /
 
@@ -245,13 +234,13 @@ END;
 
 create table D_TRANS_ITEM
 (
-    ID        NUMBER not null
+    ID        NUMBER not null,
+    ID_HTRANS NUMBER not null
         constraint DTRANS_ITEM_H_TRANS_ITEM
-            references H_TRANS_ITEM
-        constraint D_TRANS_ITEM_ITEM_ID_FK
-            references ITEM,
-    ID_HTRANS NUMBER not null,
+            references H_TRANS_ITEM,
     ID_ITEM   NUMBER not null
+        constraint D_TRANS_ITEM_ITEM_ID_FK
+            references ITEM
 )
 /
 
@@ -276,47 +265,22 @@ BEGIN
 END;
 /
 
-create table H_TRANS_OS
-(
-    ID                NUMBER       not null,
-    KODE              VARCHAR2(32) not null,
-    TANGGAL_TRANSAKSI DATE         not null
-)
-/
-
-create unique index H_TRANS_OS_ID_UINDEX
-    on H_TRANS_OS (ID)
-/
-
-create unique index H_TRANS_OS_KODE_UINDEX
-    on H_TRANS_OS (KODE)
-/
-
-alter table H_TRANS_OS
-    add constraint H_TRANS_OS_PK
-        primary key (ID)
-/
-
-create or replace trigger AUTO_ID_H_TRANS_OS
-    before insert
-    on H_TRANS_OS
-    for each row
-DECLARE
-    new_id number;
-BEGIN
-    select nvl(max(id), 0) + 1 into new_id from H_TRANS_OS;
-    :new.ID := new_id;
-END;
-/
-
 create table JENIS_PROMO
 (
     ID                   NUMBER        not null,
     NAMA                 VARCHAR2(255) not null,
-    ID_CATEGORY          NUMBER,
-    ID_KURIR             NUMBER,
-    ID_SELLER            NUMBER,
+    ID_CATEGORY          NUMBER
+        constraint JENIS_PROMO_CATEGORY_ID_FK
+            references CATEGORY,
+    ID_KURIR             NUMBER
+        constraint JENIS_PROMO_KURIR_ID_FK
+            references KURIR,
+    ID_SELLER            NUMBER
+        constraint JENIS_PROMO_SELLER_ID_FK
+            references SELLER,
     ID_METODE_PEMBAYARAN NUMBER
+        constraint JENIS_PROMO_MP__FK
+            references METODE_PEMBAYARAN
 )
 /
 
@@ -343,15 +307,15 @@ END;
 
 create table PROMO
 (
-    ID             NUMBER       not null
-        constraint PROMO_JENIS_PROMO_ID_FK
-            references JENIS_PROMO,
+    ID             NUMBER       not null,
     KODE           VARCHAR2(32) not null,
     POTONGAN       NUMBER       not null,
     POTONGAN_MAKS  NUMBER,
     HARGA_MIN      NUMBER       not null,
     JENIS_POTONGAN CHAR         not null,
-    ID_JENIS_PROMO NUMBER       not null,
+    ID_JENIS_PROMO NUMBER       not null
+        constraint PROMO_JENIS_PROMO_ID_FK
+            references JENIS_PROMO,
     TANGGAL_AWAL   DATE         not null,
     TANGGAL_AKHIR  DATE         not null
 )
@@ -385,7 +349,9 @@ END;
 create table KONTRAK_OS
 (
     ID           NUMBER not null,
-    ID_SELLER    NUMBER,
+    ID_SELLER    NUMBER
+        constraint KONTRAK_OS_SELLER_ID_FK
+            references SELLER,
     CREATED_AT   DATE,
     JANGKA_WAKTU NUMBER not null,
     STATUS       CHAR   not null
@@ -415,12 +381,12 @@ END;
 
 create table TRANS_OS
 (
-    ID                NUMBER       not null
-        constraint TRANS_OS_KONTRAK_OS_ID_FK
-            references KONTRAK_OS,
+    ID                NUMBER       not null,
     KODE              VARCHAR2(32) not null,
     TANGGAL_TRANSAKSI DATE         not null,
     ID_KONTRAK        NUMBER       not null
+        constraint TRANS_OS_KONTRAK_OS_ID_FK
+            references KONTRAK_OS
 )
 /
 
@@ -436,4 +402,55 @@ BEGIN
 END;
 /
 
-commit;
+create table DISKUSI
+(
+    ID          NUMBER        not null
+        constraint DISKUSI_CUSTOMER_ID_FK
+            references CUSTOMER,
+    ID_CUSTOMER NUMBER,
+    ID_SELLER   NUMBER
+        constraint DISKUSI_SELLER_ID_FK
+            references SELLER,
+    MESSAGE     VARCHAR2(255) not null,
+    ID_ITEM     NUMBER        not null
+        constraint DISKUSI_ITEM_ID_FK
+            references ITEM
+)
+/
+
+create unique index DISKUSI_ID_UINDEX
+    on DISKUSI (ID)
+/
+
+alter table DISKUSI
+    add constraint DISKUSI_PK
+        primary key (ID)
+/
+
+create table ULASAN
+(
+    ID          NUMBER not null,
+    ID_CUSTOMER NUMBER
+        constraint ULASAN_CUSTOMER_ID_FK
+            references CUSTOMER,
+    ID_SELLER   NUMBER
+        constraint ULASAN_SELLER_ID_FK
+            references SELLER,
+    ID_ITEM     NUMBER
+        constraint ULASAN_ITEM_ID_FK
+            references ITEM,
+    MESSAGE     VARCHAR2(255) default '',
+    RATING      NUMBER not null
+)
+/
+
+create unique index ULASAN_ID_UINDEX
+    on ULASAN (ID)
+/
+
+alter table ULASAN
+    add constraint ULASAN_PK
+        primary key (ID)
+/
+
+
