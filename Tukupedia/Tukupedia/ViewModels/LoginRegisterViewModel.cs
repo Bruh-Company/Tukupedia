@@ -11,6 +11,7 @@ using Tukupedia.Models;
 using Tukupedia.Views.Admin;
 using Tukupedia.Views;
 using System.Windows.Controls;
+using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.ViewModels
 {
@@ -52,17 +53,15 @@ namespace Tukupedia.ViewModels
             int counter = table.Select($"email = '{email}'").Length;
             return counter == 0;
         }
-        
-        public static bool LoginCustomer(string username, string password)
+
+        public static void LoginCustomer(string username, string password)
         {
             if (username == "admin" && password == "admin")
             {
                 MessageBox.Show("Berhasil Login Admin");
-                HomeAdminView hav = new HomeAdminView();
-                hav.ShowDialog();
-                return true;
+                Session.isLogin = true;
+                Session.Login(null, "Admin");
             }
-
             DataRow customer = new DB("customer").select()
                 .where("email", username)
                 .where("password", password)
@@ -70,27 +69,25 @@ namespace Tukupedia.ViewModels
 
             if (customer == null)
             {
-                //MessageBox.Show("Gagal Customer");
+                MessageBox.Show("Gagal Login Customer");
             }
             else
             {
-                MessageBox.Show("Berhasil Login Customer"+customer[0].ToString());
-                return true;
+                MessageBox.Show("Berhasil Login Customer \n Selamat Datang "+customer["NAMA"].ToString());
+                Session.Login(customer,"customer");
+                Session.isLogin = true;
             }
 
-            return false;
         }
 
-        public static bool LoginSeller(string username, string password)
+        public static void LoginSeller(string username, string password)
         {
             if (username == "admin" && password == "admin")
             {
                 MessageBox.Show("Berhasil Login Admin");
-                HomeAdminView hav = new HomeAdminView();
-                hav.ShowDialog();
-                return true;
+                Session.isLogin = true;
+                Session.Login(null, "Admin");
             }
-
             DataRow seller = new DB("seller").select()
                 .where("email", username)
                 .where("password", password)
@@ -98,16 +95,15 @@ namespace Tukupedia.ViewModels
 
             if (seller == null)
             {
-                //MessageBox.Show("Gagal Seller");
+                MessageBox.Show("Gagal Login Seller");
             }
             else
             {
-                MessageBox.Show("Berhasil Login Seller" + seller[0].ToString());
-                return true;
-
+                MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
+                Session.Login(seller, "Seller");
+                Session.isLogin = true;
             }
 
-            return false;
         }
 
         public static bool RegisterCustomer(string username,string nama, DateTime lahir, string alamat, string notelp, string password, string email)
@@ -136,7 +132,7 @@ namespace Tukupedia.ViewModels
             }
             else
             {
-                MessageBox.Show("Gagal Daftar Custoemer");
+                MessageBox.Show("Gagal Daftar Customer");
             }
             return validation;
         }

@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tukupedia.ViewModels;
+using Tukupedia.Helpers.Utils;
+using Tukupedia.Views.Admin;
+using Tukupedia.Views.Customer;
 
 namespace Tukupedia.Views
 {
@@ -50,35 +53,11 @@ namespace Tukupedia.Views
             CardCustomer.Opacity = 1;
         }
 
-        private void BtRegisterLogin_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-        }
-
         public void closeThis()
         {
             this.Close();
         }
 
-        private void BtLoginRegister_Click(object sender, RoutedEventArgs e)
-        {
-            
-            
-        }
-
-        private void btLoginLogin_Click(object sender, RoutedEventArgs e)
-        {
-            if (LoginRegisterViewModel.LoginCustomer(tbCustomerUnameLogin.Text.ToString(), tbCustomerPasswordLogin.Password.ToString()))
-            {
-                tbCustomerUnameLogin.Text = "";
-                tbCustomerPasswordLogin.Password = "";
-            }
-            else
-            {
-                tbCustomerPasswordLogin.Password = "";
-            }
-        }
 
         private void cbMendaftarSebagai_DropDownClosed(object sender, EventArgs e)
         {
@@ -93,7 +72,7 @@ namespace Tukupedia.Views
                 dpTanggalLahir.Visibility = Visibility.Hidden;
             }
         }
-
+        //Untuk Register (Diganti saat sudah ganti nama Button)
         private void btRegisterRegister_Click(object sender, RoutedEventArgs e)
         {
             if(tbEmailRegister.Text == "" || tbPasswordRegister.Password == "" || tbAlamatRegister.Text == "" || tbNoTelpRegister.Text == "")
@@ -125,20 +104,58 @@ namespace Tukupedia.Views
             {
                 
             }
-            if (LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text.ToString(), tbSellerPasswordLogin.Password.ToString()))
-            {
-                tbSellerEmailLogin.Text = "";
-                tbSellerPasswordLogin.Password = "";
-            }
-            else
-            {
-                tbSellerPasswordLogin.Password = "";
-            }
+            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text.ToString(), tbSellerPasswordLogin.Password.ToString());
         }
 
         private void swapCard(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapCard();
+        }
+        //Button Customer Login
+        private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel
+                .LoginCustomer
+                (tbCustomerEmailLogin.Text,
+                tbCustomerPasswordLogin.Password.ToString());
+            if (Session.isLogin)
+            {
+                this.Hide();
+                if (Session.role.ToUpper() == "ADMIN")
+                {
+                    HomeAdminView hav = new HomeAdminView();
+                    hav.ShowDialog();
+                }
+                else
+                {
+                    CustomerView cv = new CustomerView();
+                    cv.ShowDialog();
+                }
+                this.Show();
+            }
+        }
+        //Butoon Seller Login
+        private void btnSellerLogin_Click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel
+                .LoginSeller
+                (tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password.ToString());
+            if (Session.isLogin)
+            {
+                this.Hide();
+                if (Session.role.ToUpper() == "ADMIN")
+                {
+                    HomeAdminView hav = new HomeAdminView();
+                    hav.ShowDialog();
+                }
+                else
+                {
+                    //Seller View (Diganti kalau sudah ada View)
+                    CustomerView cv = new CustomerView();
+                    cv.ShowDialog();
+                }
+                this.Show();
+            }
         }
     }
 }
