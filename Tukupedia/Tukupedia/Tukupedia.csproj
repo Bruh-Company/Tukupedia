@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -82,8 +82,10 @@
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
     <Compile Include="Helpers\Utils\Transition.cs" />
+    <Compile Include="Helpers\Utils\Session.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
+    <Compile Include="Models\DiskusiModel.cs" />
     <Compile Include="Models\D_Trans_ItemModel.cs" />
     <Compile Include="Models\H_Trans_ItemModel.cs" />
     <Compile Include="Models\ItemModel.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Models\PromoModel.cs" />
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
+    <Compile Include="Models\UlasanModel.cs" />
     <Compile Include="ViewModels\Admin\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Admin\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Admin\HomeViewModel.cs" />
@@ -104,10 +107,17 @@
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Customer\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\TestMaterial.xaml.cs">
       <DependentUpon>TestMaterial.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Admin\HomeAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
