@@ -1,3 +1,78 @@
+DROP TABLE CATEGORY CASCADE CONSTRAINT PURGE;
+DROP TABLE CUSTOMER CASCADE CONSTRAINT PURGE;
+DROP TABLE D_TRANS_ITEM CASCADE CONSTRAINT PURGE;
+DROP TABLE H_TRANS_ITEM CASCADE CONSTRAINT PURGE;
+DROP TABLE ITEM CASCADE CONSTRAINT PURGE;
+DROP TABLE JENIS_PROMO CASCADE CONSTRAINT PURGE;
+DROP TABLE KONTRAK_OS CASCADE CONSTRAINT PURGE;
+DROP TABLE KURIR CASCADE CONSTRAINT PURGE;
+DROP TABLE METODE_PEMBAYARAN CASCADE CONSTRAINT PURGE;
+DROP TABLE PROMO CASCADE CONSTRAINT PURGE;
+DROP TABLE SELLER CASCADE CONSTRAINT PURGE;
+DROP TABLE TRANS_OS CASCADE CONSTRAINT PURGE;
+create table DISKUSI
+(
+    ID          NUMBER        not null,
+    ID_CUSTOMER NUMBER,
+    ID_SELLER   NUMBER,
+    MESSAGE     VARCHAR2(255) not null,
+    ID_ITEM     NUMBER        not null
+)
+/
+
+create unique index DISKUSI_ID_UINDEX
+    on DISKUSI (ID)
+/
+
+alter table DISKUSI
+    add constraint DISKUSI_PK
+        primary key (ID)
+/
+
+create or replace trigger AUTO_ID_DISKUSI
+    before insert
+    on DISKUSI
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from DISKUSI;
+    :new.ID := new_id;
+END;
+/
+
+create table ULASAN
+(
+    ID          NUMBER not null,
+    ID_CUSTOMER NUMBER,
+    ID_SELLER   NUMBER,
+    ID_ITEM     NUMBER,
+    MESSAGE     VARCHAR2(255) default '',
+    RATING      NUMBER not null
+)
+/
+
+create unique index ULASAN_ID_UINDEX
+    on ULASAN (ID)
+/
+
+alter table ULASAN
+    add constraint ULASAN_PK
+        primary key (ID)
+/
+
+create or replace trigger AUTO_ID_ULASAN
+    before insert
+    on ULASAN
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from ULASAN;
+    :new.ID := new_id;
+END;
+/
+
 create table CUSTOMER
 (
     ID            NUMBER        not null
@@ -100,21 +175,22 @@ END;
 
 create table ITEM
 (
-    ID          NUMBER         not null
+    ID          NUMBER           not null
         constraint ITEM_PK
             primary key,
-    KODE        VARCHAR2(32)   not null,
+    KODE        VARCHAR2(32)     not null,
     ID_CATEGORY NUMBER
         constraint FK_KATEGORY_ITEM
             references CATEGORY,
-    HARGA       NUMBER         not null,
-    STATUS      CHAR default 1 not null,
-    NAMA        VARCHAR2(100)  not null,
+    HARGA       NUMBER           not null,
+    STATUS      CHAR   default 1 not null,
+    NAMA        VARCHAR2(100)    not null,
     DESKRIPSI   VARCHAR2(1000),
     ID_SELLER   NUMBER
         constraint FK_ID_SELLER
             references SELLER,
-    BERAT       NUMBER         not null
+    BERAT       NUMBER           not null,
+    STOK        NUMBER default 0 not null
 )
 /
 
@@ -406,83 +482,6 @@ DECLARE
     new_id number;
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
-    :new.ID := new_id;
-END;
-/
-
-create table DISKUSI
-(
-    ID          NUMBER         not null
-        constraint DISKUSI_CUSTOMER_ID_FK
-            references CUSTOMER,
-    ID_CUSTOMER NUMBER,
-    ID_SELLER   NUMBER
-        constraint DISKUSI_SELLER_ID_FK
-            references SELLER,
-    MESSAGE     VARCHAR2(255)  not null,
-    ID_ITEM     NUMBER         not null
-        constraint DISKUSI_ITEM_ID_FK
-            references ITEM,
-    STATUS      CHAR default 1 not null
-)
-/
-
-create unique index DISKUSI_ID_UINDEX
-    on DISKUSI (ID)
-/
-
-alter table DISKUSI
-    add constraint DISKUSI_PK
-        primary key (ID)
-/
-
-create or replace trigger AUTO_ID_DISKUSI
-    before insert
-    on DISKUSI
-    for each row
-DECLARE
-    new_id number;
-BEGIN
-    select nvl(max(id), 0) + 1 into new_id from DISKUSI;
-    :new.ID := new_id;
-END;
-/
-
-create table ULASAN
-(
-    ID          NUMBER                  not null,
-    ID_CUSTOMER NUMBER
-        constraint ULASAN_CUSTOMER_ID_FK
-            references CUSTOMER,
-    ID_SELLER   NUMBER
-        constraint ULASAN_SELLER_ID_FK
-            references SELLER,
-    ID_ITEM     NUMBER
-        constraint ULASAN_ITEM_ID_FK
-            references ITEM,
-    MESSAGE     VARCHAR2(255) default '',
-    RATING      NUMBER                  not null,
-    STATUS      CHAR          default 1 not null
-)
-/
-
-create unique index ULASAN_ID_UINDEX
-    on ULASAN (ID)
-/
-
-alter table ULASAN
-    add constraint ULASAN_PK
-        primary key (ID)
-/
-
-create or replace trigger AUTO_ID_ULASAN
-    before insert
-    on ULASAN
-    for each row
-DECLARE
-    new_id number;
-BEGIN
-    select nvl(max(id), 0) + 1 into new_id from ULASAN;
     :new.ID := new_id;
 END;
 /

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Helpers.Utils
 {
-    public class Session
+    public static class Session
     {
         public static DataRow User;
         public static bool isLogin = false;

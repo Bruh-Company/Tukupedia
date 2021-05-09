@@ -32,7 +32,6 @@ namespace Tukupedia.Views
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
             loadInit();
-
             LoginRegisterViewModel.InitializeView(this);
 
             Panel.SetZIndex(CardCustomer, 1);

@@ -4,9 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tukupedia.Views.Customer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
-        Title="CustomerView" Height="450" Width="800">
+        Title="CustomerView" Height="719.7" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1264" Background="#FF65C65B">
+            <Label Content="Welcome Bitches" Margin="14,10,0,10" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Left" Height="44" FontWeight="Bold"/>
+            <Button Content="Settings" HorizontalAlignment="Left" Margin="528,13,0,0" VerticalAlignment="Top" Width="100" Background="{x:Null}" FontSize="18" Height="38" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="-0.506,0.553"/>
+            <Button Content="Logout" HorizontalAlignment="Left" Margin="695,13,0,0" VerticalAlignment="Top" Width="89" Background="#FFE23434" FontSize="18" Height="38" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="0.472,0.466"/>
+            <Button Content="Cart" HorizontalAlignment="Left" Margin="293,13,0,0" VerticalAlignment="Top" Width="67" Background="{x:Null}" FontSize="18" Height="38" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="-0.506,0.553"/>
+            <Button Content="My Transactions" HorizontalAlignment="Left" Margin="365,13,0,0" VerticalAlignment="Top" Width="158" Background="{x:Null}" FontSize="18" Height="38" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="-0.506,0.553" Click="Button_Click"/>
+            <Button Content="Home" HorizontalAlignment="Left" Margin="214,13,0,0" VerticalAlignment="Top" Width="79" Background="{x:Null}" FontSize="18" Height="38" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="-0.506,0.553"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="611" Margin="10,69,0,0" VerticalAlignment="Top" Width="1254">
+            <Grid HorizontalAlignment="Left" Height="591" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF7D7171">
+                <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
+                <ComboBox HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="123"/>
+                <Slider HorizontalAlignment="Left" Margin="10,138,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="123" Foreground="#FF65C65B"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="13,111,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Background="#FFC4C4C4"/>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FF65C65B"/>
+                <Slider HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="123" Foreground="#FF65C65B"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="13,186,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Background="#FFC4C4C4"/>
+                <Label Content="Label" HorizontalAlignment="Left" Margin="10,161,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FF65C65B"/>
+                <Button Content="Filter" HorizontalAlignment="Left" Margin="13,236,0,0" VerticalAlignment="Top" Width="120" Height="27" Background="#FF65C65B"/>
+            </Grid>
+            <Grid HorizontalAlignment="Left" Height="591" Margin="208,10,0,0" VerticalAlignment="Top" Width="1036" Background="DimGray">
+                <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1016">
+                    <Button Content="Button" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" Width="148" Height="36"/>
+                    <TextBox HorizontalAlignment="Center" Height="36" Margin="9,10,354,10" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="653" FontSize="16"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="875,13,0,0" VerticalAlignment="Top" Width="131" Height="33"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="254" Margin="10,57,0,0" VerticalAlignment="Top" Width="586"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

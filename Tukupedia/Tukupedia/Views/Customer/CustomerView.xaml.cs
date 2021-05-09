@@ -22,6 +22,17 @@ namespace Tukupedia.Views.Customer
         public CustomerView()
         {
             InitializeComponent();
+            
+        }
+
+        private void flipper_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
