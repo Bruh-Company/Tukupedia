@@ -24,7 +24,16 @@ namespace Tukupedia.Views
         {
             InitializeComponent();
             cbMendaftarSebagai_DropDownClosed(null, null);
-            LoginRegisterViewModel.setView(this);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadInit();
+
+            LoginRegisterViewModel.InitializeView(this);
+
+            Panel.SetZIndex(CardCustomer, 1);
+            Panel.SetZIndex(CardSeller, 0);
         }
 
         private void loadInit()
@@ -125,16 +134,6 @@ namespace Tukupedia.Views
             {
                 tbSellerPasswordLogin.Password = "";
             }
-        }
-
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
-        {
-            loadInit();
-
-            LoginRegisterViewModel.InitializeView(this);
-
-            Panel.SetZIndex(CardCustomer, 1);
-            Panel.SetZIndex(CardSeller, 0);
         }
 
         private void swapCard(object sender, RoutedEventArgs e)

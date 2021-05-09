@@ -65,7 +65,7 @@
                         <StackPanel VerticalAlignment="Center" Margin="10,10,9.8,10" Height="393">
                             <Label Content="Login" FontSize="32" HorizontalContentAlignment="Center" Margin="0,0,-0.2,0" Height="49" VerticalContentAlignment="Bottom" Padding="4,0,4,4"/>
                             <Label Content="C u s t o m e r" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
-                            <Label Content="Customer Username / Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="347" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
+                            <Label Content="Customer Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="347" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                             <TextBox x:Name="tbCustomerUnameLogin" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                             <PasswordBox x:Name="tbCustomerPasswordLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="337" Height="39" FontSize="18" Margin="10,0,0,0"/>
