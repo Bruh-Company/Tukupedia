@@ -23,14 +23,14 @@
             <Label Content="Jumlah Toko Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="890" Canvas.Top="300"/>
             <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
         </Canvas>
-        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="1335,899,-1315,-834" VerticalAlignment="Top" Width="1252">
-            <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="546"/>
+        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="20,55,0,0" VerticalAlignment="Top" Width="1252">
+            <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640"/>
             <Label Content="Tukupedia Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
-            <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="621" Canvas.Top="84"/>
-            <TextBox Height="41" Canvas.Left="621" TextWrapping="Wrap" Canvas.Top="164" Width="621" FontSize="20"/>
-            <Button Content="Tambah Kategori" Canvas.Left="621" Canvas.Top="310" Width="143"/>
-            <Button Content="Update Kategori" Canvas.Left="778" Canvas.Top="310" Width="143"/>
-            <Button Content="Hapus Kategori" Canvas.Left="944" Canvas.Top="310" Width="143"/>
+            <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
+            <TextBox x:Name="tbNamaKategori" Height="41" Canvas.Left="681" TextWrapping="Wrap" Canvas.Top="214" Width="466" FontSize="20"/>
+            <Button x:Name="btTambahKategori" Content="Tambah Kategori" Canvas.Left="681" Canvas.Top="360" Width="143"/>
+            <Button x:Name="btUpdateKategori" Content="Update Kategori" Canvas.Left="838" Canvas.Top="360" Width="143"/>
+            <Button x:Name="btToogleKategori" Content="Hapus Kategori" Canvas.Left="1004" Canvas.Top="360" Width="143"/>
         </Canvas>
         <Canvas x:Name="CanvasrootCustomer" HorizontalAlignment="Left" Height="624" Margin="-68,899,0,-834" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgCustomer" Height="493" Canvas.Left="10" Canvas.Top="121" Width="849" MouseDoubleClick="dgCustomer_MouseDoubleClick" FontSize="16" SelectedCellsChanged="dgCustomer_SelectedCellsChanged"/>
@@ -56,7 +56,7 @@
                 <DatePicker x:Name="tbLahirCustomer" Canvas.Left="10" Canvas.Top="419" Width="300" FontSize="18"/>
             </Canvas>
         </Canvas>
-        <Canvas x:Name="CanvasrootSeller" HorizontalAlignment="Left" Height="624" Margin="10,65,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootSeller" HorizontalAlignment="Left" Height="624" Margin="-1524,-1,0,0" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgSeller" Height="559" Canvas.Left="10" Canvas.Top="55" Width="891" MouseDoubleClick="dgSeller_MouseDoubleClick" SelectedCellsChanged="dgSeller_SelectedCellsChanged"/>
             <Label Content="Tukupedia Seller Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Canvas x:Name="canvasSeller" Height="604" Canvas.Left="901" Canvas.Top="10" Width="341">
