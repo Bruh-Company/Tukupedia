@@ -185,7 +185,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 CommandText = statement,
                 Connection = App.connection
             };
-            MessageBox.Show(statement);
+            //MessageBox.Show(statement);
             App.openConnection();
             cmd.ExecuteNonQuery();
             App.closeConnection();

@@ -10,10 +10,12 @@ namespace Tukupedia.Models
 {
     public class CustomerModel : Model
     {
+
         public CustomerModel()
         {
             TableName = "Customer";
             init();
+
         }
     }
 }
