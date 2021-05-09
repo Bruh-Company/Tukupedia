@@ -26,11 +26,26 @@ namespace Tukupedia.Views
             cbMendaftarSebagai_DropDownClosed(null, null);
         }
 
+        private void loadInit()
+        {
+            imgLogo.Source =
+                new BitmapImage(new Uri(
+                    AppDomain.CurrentDomain.BaseDirectory +
+                    "Resource\\Logo\\TukupediaLogo.png"));
+
+            CardSeller.Margin = new Thickness(0, 100, 0, -100);
+            CardSeller.Opacity = 0;
+
+            CardCustomer.Margin = new Thickness(0, 0, 0, 0);
+            CardCustomer.Opacity = 1;
+        }
+
         private void BtRegisterLogin_Click(object sender, RoutedEventArgs e)
         {
             
 
         }
+
         public void closeThis()
         {
             this.Close();
@@ -44,14 +59,14 @@ namespace Tukupedia.Views
 
         private void btLoginLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (LoginRegisterViewModel.login(tbEmailLogin.Text.ToString(), tbPasswordLogin.Password.ToString()))
+            if (LoginRegisterViewModel.LoginCustomer(tbCustomerUnameLogin.Text.ToString(), tbCustomerPasswordLogin.Password.ToString()))
             {
-                tbEmailLogin.Text = "";
-                tbPasswordLogin.Password = "";
+                tbCustomerUnameLogin.Text = "";
+                tbCustomerPasswordLogin.Password = "";
             }
             else
             {
-                tbPasswordLogin.Password = "";
+                tbCustomerPasswordLogin.Password = "";
             }
         }
 
@@ -89,7 +104,7 @@ namespace Tukupedia.Views
                 }
                 else
                 {
-                    LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
+                    LoginRegisterViewModel.RegisterCustomer("","",DateTime.Now,null,null,null);
                 }
             }
             else if(cbMendaftarSebagai.SelectedIndex == 1)
@@ -100,15 +115,30 @@ namespace Tukupedia.Views
             {
                 
             }
-            if (LoginRegisterViewModel.login(tbEmailLogin.Text.ToString(), tbPasswordLogin.Password.ToString()))
+            if (LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text.ToString(), tbSellerPasswordLogin.Password.ToString()))
             {
-                tbEmailLogin.Text = "";
-                tbPasswordLogin.Password = "";
+                tbSellerEmailLogin.Text = "";
+                tbSellerPasswordLogin.Password = "";
             }
             else
             {
-                tbPasswordLogin.Password = "";
+                tbSellerPasswordLogin.Password = "";
             }
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadInit();
+
+            LoginRegisterViewModel.InitializeView(this);
+
+            Panel.SetZIndex(CardCustomer, 1);
+            Panel.SetZIndex(CardSeller, 0);
+        }
+
+        private void swapCard(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapCard();
         }
     }
 }

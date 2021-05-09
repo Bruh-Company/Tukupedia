@@ -32,7 +32,7 @@ namespace Tukupedia.View
             //    a += id.nextId() + "\n";
             //}
             //MessageBox.Show(a);
-            Views.LoginPage t = new Views.LoginPage();
+            Views.LoginRegisterView t = new Views.LoginRegisterView();
             this.Hide();
             t.ShowDialog();
             this.Close();

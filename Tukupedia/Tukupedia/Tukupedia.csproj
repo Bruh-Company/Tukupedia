@@ -94,6 +94,7 @@
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
+    <Compile Include="ViewModels\TransitionQueue.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
     </Compile>
