@@ -80,6 +80,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
+    <Compile Include="Helpers\Utils\ComponentHelper.cs" />
+    <Compile Include="Helpers\Utils\Transition.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\D_Trans_ItemModel.cs" />
@@ -99,7 +101,6 @@
     <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\TransitionQueue.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
     </Compile>

@@ -45,9 +45,13 @@ namespace Tukupedia.Views
 
             CardSeller.Margin = new Thickness(0, 100, 0, -100);
             CardSeller.Opacity = 0;
+            CardSeller.Width = 397;
+            CardSeller.Height = 433;
 
             CardCustomer.Margin = new Thickness(0, 0, 0, 0);
             CardCustomer.Opacity = 1;
+            CardCustomer.Width = 397;
+            CardCustomer.Height = 433;
         }
 
         private void BtRegisterLogin_Click(object sender, RoutedEventArgs e)

@@ -11,40 +11,43 @@ using Tukupedia.Models;
 using Tukupedia.Views.Admin;
 using Tukupedia.Views;
 using System.Windows.Controls;
+using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.ViewModels
 {
     public static class LoginRegisterViewModel
     {
-        private static class CustomerSellerStage
+        public enum CustomerSellerStage
         {
-            public static byte Customer = 1;
-            public static byte Seller = 2;
+            Customer,
+            Seller
         }
 
-        private static class LoginRegisterStage
+        public enum CardPage
         {
-            public static byte Login = 1;
-            public static byte Register = 2;
+            LoginPage,
+            RegisterFirstPage,
+            RegisterSecondPage,
+            RegisterThirdPage
         }
 
         //view component and stage status
         public static LoginRegisterView ViewComponent;
-        private static byte UserStage; //customer seller
-        private static byte CardStage; //login register
+        private static CustomerSellerStage UserStage; //customer seller
+        private static CardPage CardStage; //login register
 
-        //transition stuff
-        private static DispatcherTimer transitionTimer;
-        private static TransitionQueue transQueue;
+        //transition
+        private static Transition transition;
+        private const int transFPS = 100;
 
         public static void InitializeView(LoginRegisterView view)
         {
             ViewComponent = view;
 
             UserStage = CustomerSellerStage.Customer;
-            CardStage = LoginRegisterStage.Login;
+            CardStage = CardPage.LoginPage;
 
-            transitionTimer = new DispatcherTimer();
+            transition = new Transition(transFPS);
         }
 
         public static bool validateRegisterUser(DataTable table,string email)
@@ -174,58 +177,63 @@ namespace Tukupedia.ViewModels
 
         public static void swapCard()
         {
-            if (CardStage == CustomerSellerStage.Customer)
+            const double speedMargin = 0.3;
+            const double speedOpacity = 0.5;
+            const double multiplier = 80;
+
+            if (UserStage == CustomerSellerStage.Customer)
             {
-                CardStage = CustomerSellerStage.Seller;
+                UserStage = CustomerSellerStage.Seller;
 
-                transQueue = new TransitionQueue();
-                makeTransition(ViewComponent.CardCustomer, new Thickness(0, -100, 0, 100), 0);
-                makeTransition(ViewComponent.CardSeller, new Thickness(0, 0, 0, 0), 1);
+                transition.makeTransition(ViewComponent.CardCustomer,
+                    new Thickness(0, -100, 0, 100), 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.CardSeller,
+                    new Thickness(0, 0, 0, 0), 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
-                playTransition();
+                transition.playTransition();
 
-                Panel.SetZIndex(ViewComponent.CardCustomer, 0);
-                Panel.SetZIndex(ViewComponent.CardSeller, 1);
+                ComponentHelper.changeVisibilityComponent(
+                    ViewComponent.CardCustomer,
+                    Visibility.Hidden);
+                ComponentHelper.changeVisibilityComponent(
+                    ViewComponent.CardSeller,
+                    Visibility.Visible);
             }
             else
             {
-                CardStage = CustomerSellerStage.Customer;
+                UserStage = CustomerSellerStage.Customer;
+                
+                transition.makeTransition(ViewComponent.CardCustomer,
+                    new Thickness(0, 0, 0, 0), 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.CardSeller,
+                    new Thickness(0, 100, 0, -100), 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
-                transQueue = new TransitionQueue();
-                makeTransition(ViewComponent.CardCustomer, new Thickness(0, 0, 0, 0), 1);
-                makeTransition(ViewComponent.CardSeller, new Thickness(0, 100, 0, -100), 0);
+                transition.playTransition();
 
-                playTransition();
-
-                Panel.SetZIndex(ViewComponent.CardCustomer, 1);
-                Panel.SetZIndex(ViewComponent.CardSeller, 0);
+                ComponentHelper.changeVisibilityComponent(
+                    ViewComponent.CardSeller,
+                    Visibility.Hidden);
+                ComponentHelper.changeVisibilityComponent(
+                    ViewComponent.CardCustomer,
+                    Visibility.Visible);
             }
         }
 
-        //transition stuff <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        public static void makeTransition(Control element, Thickness targetMargin, double targetOpacity)
+        public static void swapPage()
         {
-            transQueue.addControlTransition(element, targetMargin, targetOpacity, "with previous");
+
         }
-
-        public static void playTransition()
-        {
-            transitionTimer.Interval = TimeSpan.FromMilliseconds(20);
-            transitionTimer.Tick += tickTransition;
-            transitionTimer.Start();
-        }
-
-        public static void tickTransition(object sender, EventArgs e)
-        {
-            bool finish = transQueue.tick();
-
-            if (finish)
-            {
-                transitionTimer.Stop();
-
-                transitionTimer = new DispatcherTimer();
-            }
-        }
-        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     }
 }
