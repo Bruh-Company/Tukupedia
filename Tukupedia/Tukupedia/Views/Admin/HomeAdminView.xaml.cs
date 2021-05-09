@@ -23,6 +23,7 @@ namespace Tukupedia.Views.Admin
     {
         CustomerViewModel cvm;
         SellerViewModel svm;
+        CategoryViewModel cavm;
         public HomeAdminView()
         {
             InitializeComponent();
@@ -47,6 +48,21 @@ namespace Tukupedia.Views.Admin
         private void btCategory_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        void reloadCategory()
+        {
+            DROP TABLE CATEGORY CASCADE CONSTRAINT PURGE;
+            DROP TABLE CUSTOMER CASCADE CONSTRAINT PURGE;
+            DROP TABLE D_TRANS_ITEM CASCADE CONSTRAINT PURGE;
+            DROP TABLE H_TRANS_ITEM CASCADE CONSTRAINT PURGE;
+            DROP TABLE ITEM CASCADE CONSTRAINT PURGE;
+            DROP TABLE JENIS_PROMO CASCADE CONSTRAINT PURGE;
+            DROP TABLE KONTRAK_OS CASCADE CONSTRAINT PURGE;
+            DROP TABLE KURIR CASCADE CONSTRAINT PURGE;
+            DROP TABLE METODE_PEMBAYARAN CASCADE CONSTRAINT PURGE;
+            DROP TABLE PROMO CASCADE CONSTRAINT PURGE;
+            DROP TABLE SELLER CASCADE CONSTRAINT PURGE;
+            DROP TABLE TRANS_OS CASCADE CONSTRAINT PURGE;
         }
 
         private void btCustomer_Click(object sender, RoutedEventArgs e)
