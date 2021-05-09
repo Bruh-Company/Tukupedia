@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Tukupedia.Models
 {
@@ -18,13 +19,24 @@ namespace Tukupedia.Models
 
         public Model()
         {
-            
+            TableName = "";
+            Table = new DataTable();
         }
         public void init()
         {
+            Table = new DataTable();
             statement = $"SELECT * FROM {TableName}";
             Adapter = new OracleDataAdapter(statement, App.connection);
             Builder = new OracleCommandBuilder(Adapter);
+            Adapter.Fill(Table);
+        }
+        public void initAdapter(string statement)
+        {
+            Table = new DataTable();
+            this.statement = statement;
+            Adapter = new OracleDataAdapter(statement, App.connection);
+            Builder = new OracleCommandBuilder(Adapter);
+            Adapter.Fill(Table);
         }
         public void update()
         {

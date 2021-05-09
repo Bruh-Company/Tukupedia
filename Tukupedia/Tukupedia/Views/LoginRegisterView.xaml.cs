@@ -24,6 +24,7 @@ namespace Tukupedia.Views
         {
             InitializeComponent();
             cbMendaftarSebagai_DropDownClosed(null, null);
+            LoginRegisterViewModel.setView(this);
         }
 
         private void loadInit()
@@ -104,7 +105,7 @@ namespace Tukupedia.Views
                 }
                 else
                 {
-                    LoginRegisterViewModel.RegisterCustomer("","",DateTime.Now,null,null,null);
+                    //LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
                 }
             }
             else if(cbMendaftarSebagai.SelectedIndex == 1)

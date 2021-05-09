@@ -68,17 +68,17 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         }
         /*
          * Cara Kerja Update
-         * new DB("user").update(["name","boodie"],["alamat","UKP"]).execute();
+         * new DB("user").update("name","boodie","alamat","UKP").execute();
          */
         public DB update(params object[] param)
         {
             resetStatement();
             string str = "";
-            for (int i = 0; i < param.Length; i++)
+            for (int i = 0; i < param.Length; i+=2)
             {
-                var item = param[i] as string[];
-                string comma = (i == param.Length - 1) ? "" : ",";
-                str +=$" {item[0]} = '{item[1]}' {comma}";
+                string comma = (i == param.Length - 2) ? "" : ",";
+                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                str +=$" {param[i]} = {petik}{param[i+1]}{petik} {comma}";
             }
             statement += $"UPDATE {table} SET {str} ";
 
@@ -185,7 +185,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 CommandText = statement,
                 Connection = App.connection
             };
-            MessageBox.Show(statement);
+            //MessageBox.Show(statement);
             App.openConnection();
             cmd.ExecuteNonQuery();
             App.closeConnection();

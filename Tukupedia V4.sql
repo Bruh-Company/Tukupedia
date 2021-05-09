@@ -2,11 +2,14 @@ DROP TABLE CATEGORY CASCADE CONSTRAINT PURGE;
 DROP TABLE CUSTOMER CASCADE CONSTRAINT PURGE;
 DROP TABLE D_TRANS_ITEM CASCADE CONSTRAINT PURGE;
 DROP TABLE H_TRANS_ITEM CASCADE CONSTRAINT PURGE;
-DROP TABLE H_TRANS_OS CASCADE CONSTRAINT PURGE;
 DROP TABLE ITEM CASCADE CONSTRAINT PURGE;
+DROP TABLE JENIS_PROMO CASCADE CONSTRAINT PURGE;
+DROP TABLE KONTRAK_OS CASCADE CONSTRAINT PURGE;
 DROP TABLE KURIR CASCADE CONSTRAINT PURGE;
 DROP TABLE METODE_PEMBAYARAN CASCADE CONSTRAINT PURGE;
+DROP TABLE PROMO CASCADE CONSTRAINT PURGE;
 DROP TABLE SELLER CASCADE CONSTRAINT PURGE;
+DROP TABLE TRANS_OS CASCADE CONSTRAINT PURGE;
 
 create table CUSTOMER
 (
@@ -69,18 +72,19 @@ END;
 
 create table SELLER
 (
-    ID          NUMBER        not null
+    ID            NUMBER        not null
         constraint SELLER_PK
             primary key,
-    KODE        VARCHAR2(32)  not null,
-    EMAIL       VARCHAR2(30),
-    NAMA        VARCHAR2(100) not null,
-    ALAMAT      VARCHAR2(30)  not null,
-    NO_TELP     VARCHAR2(30),
-    SALDO       NUMBER default 0,
-    IS_OFFICIAL CHAR,
-    STATUS      CHAR   default 1,
-    PASSWORD    VARCHAR2(100) not null
+    KODE          VARCHAR2(32)  not null,
+    EMAIL         VARCHAR2(30),
+    NAMA          VARCHAR2(100) not null,
+    ALAMAT        VARCHAR2(30)  not null,
+    NO_TELP       VARCHAR2(30),
+    SALDO         NUMBER default 0,
+    IS_OFFICIAL   CHAR,
+    STATUS        CHAR   default 1,
+    PASSWORD      VARCHAR2(100) not null,
+    TANGGAL_LAHIR DATE          not null
 )
 /
 
@@ -304,4 +308,132 @@ BEGIN
     :new.ID := new_id;
 END;
 /
+
+create table JENIS_PROMO
+(
+    ID                   NUMBER        not null,
+    NAMA                 VARCHAR2(255) not null,
+    ID_CATEGORY          NUMBER,
+    ID_KURIR             NUMBER,
+    ID_SELLER            NUMBER,
+    ID_METODE_PEMBAYARAN NUMBER
+)
+/
+
+create unique index JENIS_PROMO_ID_UINDEX
+    on JENIS_PROMO (ID)
+/
+
+alter table JENIS_PROMO
+    add constraint JENIS_PROMO_PK
+        primary key (ID)
+/
+
+create or replace trigger AUTO_ID_JENIS_PROMO
+    before insert
+    on JENIS_PROMO
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from JENIS_PROMO;
+    :new.ID := new_id;
+END;
+/
+
+create table PROMO
+(
+    ID             NUMBER       not null
+        constraint PROMO_JENIS_PROMO_ID_FK
+            references JENIS_PROMO,
+    KODE           VARCHAR2(32) not null,
+    POTONGAN       NUMBER       not null,
+    POTONGAN_MAKS  NUMBER,
+    HARGA_MIN      NUMBER       not null,
+    JENIS_POTONGAN CHAR         not null,
+    ID_JENIS_PROMO NUMBER       not null,
+    TANGGAL_AWAL   DATE         not null,
+    TANGGAL_AKHIR  DATE         not null
+)
+/
+
+create unique index PROMO_ID_UINDEX
+    on PROMO (ID)
+/
+
+create unique index PROMO_KODE_UINDEX
+    on PROMO (KODE)
+/
+
+alter table PROMO
+    add constraint PROMO_PK
+        primary key (ID)
+/
+
+create or replace trigger AUTO_ID_PROMO
+    before insert
+    on PROMO
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from PROMO;
+    :new.ID := new_id;
+END;
+/
+
+create table KONTRAK_OS
+(
+    ID           NUMBER not null,
+    ID_SELLER    NUMBER,
+    CREATED_AT   DATE,
+    JANGKA_WAKTU NUMBER not null,
+    STATUS       CHAR   not null
+)
+/
+
+create unique index KONTRAK_OS_ID_UINDEX
+    on KONTRAK_OS (ID)
+/
+
+alter table KONTRAK_OS
+    add constraint KONTRAK_OS_PK
+        primary key (ID)
+/
+
+create or replace trigger AUTO_ID_KONTRAK_OS
+    before insert
+    on KONTRAK_OS
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from KONTRAK_OS;
+    :new.ID := new_id;
+END;
+/
+
+create table TRANS_OS
+(
+    ID                NUMBER       not null
+        constraint TRANS_OS_KONTRAK_OS_ID_FK
+            references KONTRAK_OS,
+    KODE              VARCHAR2(32) not null,
+    TANGGAL_TRANSAKSI DATE         not null,
+    ID_KONTRAK        NUMBER       not null
+)
+/
+
+create or replace trigger AUTO_ID_TRANS_OS
+    before insert
+    on TRANS_OS
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
+    :new.ID := new_id;
+END;
+/
+
 commit;
