@@ -91,7 +91,7 @@
                                         </TransformGroup>
                                     </Button.RenderTransform>
                                 </Button>
-                                <Button x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnCustomerToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0" Foreground="#FF673AB7"/>
+                                <Button Style="{StaticResource btn-white}" x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnCustomerToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0"/>
                             </StackPanel>
                         </Grid>
                         <Grid x:Name="GridRegisterCustomer1" HorizontalAlignment="Center" Margin="418,10,-398,10" VerticalAlignment="Center" Height="413">
@@ -112,7 +112,7 @@
                                         </TransformGroup>
                                     </Button.RenderTransform>
                                 </Button>
-                                <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerToLogin" Content="I Have an Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10" HorizontalContentAlignment="Center" Width="300"  BorderThickness="0"  Click="btnCustomerToLogin_click"/>
+                                <Button Style="{StaticResource btn-white}" x:Name="btnCustomerToLogin" Content="I Have an Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10" HorizontalContentAlignment="Center" Width="300"  BorderThickness="0"  Click="btnCustomerToLogin_click"/>
                             </StackPanel>
                         </Grid>
                         <Grid x:Name="GridRegisterCustomer2" HorizontalAlignment="Center" Margin="822,10,-802,10" VerticalAlignment="Center" Height="413">
@@ -126,7 +126,7 @@
                                 <Label Content="Phone Number" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                                 <TextBox x:Name="tbCustomerPhoneNumberRegister" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                                 <Grid Height="72" Margin="0,0,-0.2,0">
-                                    <Button x:Name="btnCustomerRegisterBack" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0" Foreground="#FF673AB7" Click="btnCustomerToRegister1_click"/>
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
                                     <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegisterNext2" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0">
                                         <Button.RenderTransform>
                                             <TransformGroup>
@@ -142,23 +142,23 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
-                <Button x:Name="btnSwap" Content="I'm Seller" HorizontalAlignment="Left" Margin="619,611,0,0" VerticalAlignment="Top" Width="179" Click="swapCard" Height="49" RenderTransformOrigin="0.5,0.5" Background="#FF303030" BorderBrush="#FF303030" FontWeight="Normal" MouseEnter="btnSwap_MouseEnter" MouseLeave="btnSwap_MouseLeave"/>
-                <materialDesign:Card x:Name="CardSeller" HorizontalAlignment="Center" VerticalAlignment="Center" Height="433" Width="397" UniformCornerRadius="20" Margin="0,450,0,-450" Background="#FF2D223C">
+                <Button Style="{StaticResource btn-secondary}" x:Name="btnSwap" Content="I'm Seller" HorizontalAlignment="Left" Margin="619,611,0,0" VerticalAlignment="Top" Width="179" Click="swapCard" Height="49" RenderTransformOrigin="0.5,0.5" Background="#FF303030" BorderBrush="#FF303030" FontWeight="Normal" MouseEnter="btnSwap_MouseEnter" MouseLeave="btnSwap_MouseLeave"/>
+                <materialDesign:Card x:Name="CardSeller" HorizontalAlignment="Center" VerticalAlignment="Center" Height="433" Width="397" UniformCornerRadius="20" Margin="0,450,0,-450">
+                    <materialDesign:Card.Background>
+                        <RadialGradientBrush>
+                            <RadialGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleY="5" ScaleX="5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="18.435" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform X="0.7" Y="0.9"/>
+                                </TransformGroup>
+                            </RadialGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF75CD6C" Offset="0.494999"/>
+                            <GradientStop Color="#FF45993D" Offset="0.495"/>
+                        </RadialGradientBrush>
+                    </materialDesign:Card.Background>
                     <Grid HorizontalAlignment="Center" Margin="10,10,9.8,9.8" VerticalAlignment="Center" Height="413">
-                        <Grid.Background>
-                            <RadialGradientBrush>
-                                <RadialGradientBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5"/>
-                                        <SkewTransform CenterY="0.5" CenterX="0.5" AngleX="5" AngleY="5"/>
-                                        <RotateTransform CenterY="0.5" CenterX="0.5" Angle="177"/>
-                                        <TranslateTransform X="0.7" Y="0.9"/>
-                                    </TransformGroup>
-                                </RadialGradientBrush.RelativeTransform>
-                                <GradientStop Color="#FF45993D" Offset="0.495"/>
-                                <GradientStop Color="#FF75CD6C" Offset="0.495"/>
-                            </RadialGradientBrush>
-                        </Grid.Background>
                         <StackPanel VerticalAlignment="Center" Margin="10,10,9.8,10" Height="393">
                             <Label Content="Login" FontSize="32" HorizontalContentAlignment="Center" Margin="0,0,-0.2,0" Height="49" VerticalContentAlignment="Bottom" Padding="4,0,4,4"/>
                             <Label Content="S e l l e r" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
@@ -166,7 +166,7 @@
                             <TextBox x:Name="tbSellerEmailLogin" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                             <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                             <PasswordBox x:Name="tbSellerPasswordLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Width="337" Height="39" FontSize="18" Margin="10,0,0,0"/>
-                            <Button Click="btnSellerLogin_Click" x:Name="btnSellerLogin" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,40,10,10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0">
+                            <Button Style="{StaticResource btn-primary}" Click="btnSellerLogin_Click" x:Name="btnSellerLogin" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,40,10,10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0">
                                 <Button.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -176,7 +176,7 @@
                                     </TransformGroup>
                                 </Button.RenderTransform>
                             </Button>
-                            <Button x:Name="btnSellerToRegister" Content="Register New Shop" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0" Foreground="#FF673AB7"/>
+                            <Button Style="{StaticResource btn-white}" x:Name="btnSellerToRegister" Content="Register New Shop" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0" />
                         </StackPanel>
                     </Grid>
                 </materialDesign:Card>
