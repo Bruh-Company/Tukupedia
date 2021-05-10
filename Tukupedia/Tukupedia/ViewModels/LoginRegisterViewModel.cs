@@ -254,6 +254,8 @@ namespace Tukupedia.ViewModels
                 ComponentHelper.changeZIndexComponent(
                     ViewComponent.CardSeller,
                     Visibility.Visible);
+
+                ViewComponent.btnSwap.Content = "I'm Customer";
             }
             else
             {
@@ -279,6 +281,8 @@ namespace Tukupedia.ViewModels
                 ComponentHelper.changeZIndexComponent(
                     ViewComponent.CardCustomer,
                     Visibility.Visible);
+
+                ViewComponent.btnSwap.Content = "I'm Seller";
             }
         }
 
