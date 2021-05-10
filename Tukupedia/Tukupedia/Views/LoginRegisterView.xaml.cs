@@ -170,5 +170,15 @@ namespace Tukupedia.Views
         {
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
         }
+
+        private void btnSwap_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void btnSwap_MouseLeave(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }

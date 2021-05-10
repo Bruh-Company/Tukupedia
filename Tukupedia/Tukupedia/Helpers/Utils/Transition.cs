@@ -8,7 +8,6 @@ using System.Windows.Threading;
 
 namespace Tukupedia.Helpers.Utils
 {
-    // baru support Control sama Grid (JANGAN DIPAKE ANEH2 ANJIR)
     public class TransitionData
     {
         private FrameworkElement elem;
