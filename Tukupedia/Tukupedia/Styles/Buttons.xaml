@@ -170,5 +170,36 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+    <!--White Button-->
+    <Style BasedOn="{StaticResource MaterialDesignRaisedLightButton}"
+           TargetType="Button"
+           x:Key="btn-primary">
+        <Setter Property="Foreground" Value="#65C65B"/>
+        <Setter Property="BorderBrush" Value="#FFFFFF"/>
+        <Setter Property="Background" Value="#FFFFFF"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ColorAnimation
+                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                              From="#FFFFFF" To="#E2E2E2" Duration="0:0:0.2"
+                              RepeatBehavior="1x" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard >
+                            <ColorAnimation
+                              Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                              From="#E2E2E2" To="#FFFFFF" Duration="0:0:0.2"
+                              RepeatBehavior="1x" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
