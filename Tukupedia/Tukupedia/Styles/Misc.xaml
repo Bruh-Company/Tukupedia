@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Tukupedia.Styles">
 
     <Style TargetType="ComboBox"
-           BasedOn="{StaticResource MaterialDesignFilledComboBox}">
+           BasedOn="{StaticResource MaterialDesignComboBox}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#ffffff"/>
         <Setter Property="FontSize" Value="16"/>
@@ -11,11 +11,17 @@
         <Setter Property="BorderBrush" Value="#ffffff"/>
     </Style>
 
+    <Style TargetType="ComboBoxItem"
+            BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
+        <Setter Property="Foreground" Value="#ffffff"/>
+    </Style>
+
     <Style TargetType="ComboBox"
            x:Key="combobox-green"
            BasedOn="{StaticResource {x:Type ComboBox}}">
         <Setter Property="BorderBrush" Value="#65c65b"/>
     </Style>
+
 
     <Style TargetType="ListBox">
         <Setter Property="Background" Value="Transparent"/>
