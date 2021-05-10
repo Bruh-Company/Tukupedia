@@ -12,7 +12,7 @@ namespace Tukupedia.Helpers.Utils
     {
 
 
-        public static void changeZIndexComponent(Control component, Visibility vis)
+        public static void changeZIndexComponent(FrameworkElement component, Visibility vis)
         {
             if (vis == Visibility.Visible)
             {
@@ -26,7 +26,7 @@ namespace Tukupedia.Helpers.Utils
             }
         }
 
-        public static void changeVisibilityComponent(Control component, Visibility vis)
+        public static void changeVisibilityComponent(FrameworkElement component, Visibility vis)
         {
             if (vis == Visibility.Visible)
             {

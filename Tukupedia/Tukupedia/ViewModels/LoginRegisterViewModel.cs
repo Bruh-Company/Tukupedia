@@ -23,7 +23,7 @@ namespace Tukupedia.ViewModels
             Seller
         }
 
-        private enum CardPage
+        public enum CardPage
         {
             LoginPage,
             RegisterFirstPage,
@@ -77,19 +77,21 @@ namespace Tukupedia.ViewModels
         public static void InitializeState()
         {
             ViewComponent.GridLoginCustomer.Margin = Position.Middle;
-            ViewComponent.GridLoginCustomer.Opacity = 1;
             ViewComponent.GridLoginCustomer.Width = 376.8;
             ViewComponent.GridLoginCustomer.Height = 413;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.GridLoginCustomer, Visibility.Visible);
 
             ViewComponent.GridRegisterCustomer1.Margin = Position.Right;
             ViewComponent.GridRegisterCustomer1.Opacity = 0;
             ViewComponent.GridRegisterCustomer1.Width = 376.8;
             ViewComponent.GridRegisterCustomer1.Height = 413;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer1, Visibility.Hidden);
 
             ViewComponent.GridRegisterCustomer2.Margin = Position.Right;
             ViewComponent.GridRegisterCustomer2.Opacity = 0;
             ViewComponent.GridRegisterCustomer2.Width = 376.8;
             ViewComponent.GridRegisterCustomer2.Height = 413;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer2, Visibility.Hidden);
 
             //ViewComponent.GridLoginCustomer.Margin = Position.Middle;
             //ViewComponent.GridLoginCustomer.Opacity = 1;
@@ -302,9 +304,105 @@ namespace Tukupedia.ViewModels
             }
         }
 
-        public static void swapPage()
+        public static void swapPage(CardPage goTo)
         {
+            const double speedMargin = 0.3;
+            const double speedOpacity = 0.4;
+            const double multiplier = 80;
 
+            CardStage = goTo;
+
+            if (goTo == CardPage.LoginPage)
+            {
+                transition.makeTransition(ViewComponent.GridLoginCustomer,
+                    Position.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridLoginCustomer,
+                    Visibility.Visible);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer1,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer2,
+                    Visibility.Hidden);
+            }
+            else if (goTo == CardPage.RegisterFirstPage)
+            {
+                transition.makeTransition(ViewComponent.GridLoginCustomer,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                    Position.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridLoginCustomer,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer1,
+                    Visibility.Visible);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer2,
+                    Visibility.Hidden);
+            }
+            else if (goTo == CardPage.RegisterSecondPage)
+            {
+                transition.makeTransition(ViewComponent.GridLoginCustomer,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                    Position.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridLoginCustomer,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer1,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer2,
+                    Visibility.Visible);
+            }
+            else if (goTo == CardPage.RegisterThirdPage)
+            {
+
+            }
         }
     }
 }

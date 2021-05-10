@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace Tukupedia.Helpers.Utils
 {
+    // baru support Control sama Grid (JANGAN DIPAKE ANEH2 ANJIR)
     public class TransitionData
     {
-        private Control elem;
+        private FrameworkElement elem;
         private readonly Thickness targetMargin;
         private readonly double targetOpacity;
         private readonly double speedMargin;
@@ -20,7 +20,7 @@ namespace Tukupedia.Helpers.Utils
         private readonly double deltaOpacity;
 
         public TransitionData(
-            Control feedElem,
+            FrameworkElement feedElem,
             Thickness feedTargetMargin,
             double feedTargetOpacity,
             double feedSpeedMargin,
@@ -82,8 +82,8 @@ namespace Tukupedia.Helpers.Utils
         private List<List<TransitionData>> transQueue;
         private int idxNow = -1;
 
-        public void addControlTransition
-            (Control cons, Thickness targetMargin, double targetOpacity, double speedMargin, double speedOpacity, string order)
+        public void addElementTransition
+            (FrameworkElement cons, Thickness targetMargin, double targetOpacity, double speedMargin, double speedOpacity, string order)
         {
             if (order != "after previous" && order != "with previous")
             {
@@ -141,7 +141,7 @@ namespace Tukupedia.Helpers.Utils
         }
 
         public void makeTransition(
-            Control element,
+            FrameworkElement element,
             Thickness targetMargin,
             double targetOpacity,
             double speedMargin,
@@ -155,7 +155,7 @@ namespace Tukupedia.Helpers.Utils
                 reset = false;
             }
 
-            transQueue.addControlTransition(
+            transQueue.addElementTransition(
                 element,
                 targetMargin,
                 targetOpacity,

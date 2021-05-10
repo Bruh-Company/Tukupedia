@@ -109,7 +109,7 @@ namespace Tukupedia.Views
         {
             LoginRegisterViewModel.swapCard();
         }
-        //Button Customer Login
+        
         private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel
@@ -154,6 +154,21 @@ namespace Tukupedia.Views
                 }
                 this.Show();
             }
+        }
+
+        private void btnCustomerToRegister2_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
+        }
+
+        private void btnCustomerToLogin_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.LoginPage);
+        }
+
+        private void btnCustomerToRegister1_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
         }
     }
 }
