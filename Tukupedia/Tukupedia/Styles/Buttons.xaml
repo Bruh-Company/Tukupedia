@@ -173,7 +173,7 @@
     <!--White Button-->
     <Style BasedOn="{StaticResource MaterialDesignRaisedLightButton}"
            TargetType="Button"
-           x:Key="btn-primary">
+           x:Key="btn-white">
         <Setter Property="Foreground" Value="#65C65B"/>
         <Setter Property="BorderBrush" Value="#FFFFFF"/>
         <Setter Property="Background" Value="#FFFFFF"/>
