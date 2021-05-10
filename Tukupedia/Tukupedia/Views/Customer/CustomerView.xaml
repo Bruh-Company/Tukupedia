@@ -33,9 +33,8 @@
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="596" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
                     <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1036">
-                        <Button Content="Search" HorizontalAlignment="Left" Margin="677,10,0,0" VerticalAlignment="Top" Width="159" Height="36" Style="{StaticResource btn-primary}"/>
-                        <TextBox HorizontalAlignment="Center" Height="36" Margin="9,10,354,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="653" FontSize="16" CaretBrush="#FF65C65B"/>
-                        <ComboBox HorizontalAlignment="Left" Margin="865,13,0,0" VerticalAlignment="Top" Width="161" Height="33"/>
+                        <Button Content="Search" HorizontalAlignment="Left" Margin="832,10,0,0" VerticalAlignment="Top" Width="194" Height="36" Style="{StaticResource btn-primary}"/>
+                        <TextBox HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B"/>
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="254" Margin="10,57,0,0" VerticalAlignment="Top" Width="586"/>
                 </Grid>

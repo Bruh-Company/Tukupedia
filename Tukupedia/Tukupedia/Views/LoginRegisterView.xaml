@@ -91,7 +91,7 @@
                                         </TransformGroup>
                                     </Button.RenderTransform>
                                 </Button>
-                                <Button Style="{StaticResource btn-white}" x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnCustomerToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0"/>
+                                <Button Style="{StaticResource btn-white}" x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnCustomerToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0"/>
                             </StackPanel>
                         </Grid>
                         <Grid x:Name="GridRegisterCustomer1" HorizontalAlignment="Center" Margin="418,10,-398,10" VerticalAlignment="Center" Height="413">
@@ -126,7 +126,7 @@
                                 <Label Content="Phone Number" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                                 <TextBox x:Name="tbCustomerPhoneNumberRegister" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                                 <Grid Height="72" Margin="0,0,-0.2,0">
-                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
                                     <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegisterNext2" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0">
                                         <Button.RenderTransform>
                                             <TransformGroup>
@@ -176,7 +176,7 @@
                                     </TransformGroup>
                                 </Button.RenderTransform>
                             </Button>
-                            <Button Style="{StaticResource btn-white}" x:Name="btnSellerToRegister" Content="Register New Shop" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="10" HorizontalContentAlignment="Center" Width="300" Background="White" BorderThickness="0" />
+                            <Button Style="{StaticResource btn-white}" x:Name="btnSellerToRegister" Content="Register New Shop" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0" />
                         </StackPanel>
                     </Grid>
                 </materialDesign:Card>

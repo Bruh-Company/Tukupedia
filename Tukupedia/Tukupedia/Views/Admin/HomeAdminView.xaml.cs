@@ -24,6 +24,7 @@ namespace Tukupedia.Views.Admin
         CustomerViewModel cvm;
         SellerViewModel svm;
         CategoryViewModel cavm;
+        TransactionViewModel tvm;
         public HomeAdminView()
         {
             InitializeComponent();
@@ -72,7 +73,13 @@ namespace Tukupedia.Views.Admin
 
         private void btTransaction_Click(object sender, RoutedEventArgs e)
         {
-
+            reloadTransaction();
+            canvasD_Trans.Visibility = Visibility.Hidden;
+        }
+        void reloadTransaction()
+        {
+            tvm = new TransactionViewModel();
+            dgH_Trans.ItemsSource = tvm.getHtrans().DefaultView;
         }
 
         private void dgCustomer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -80,6 +87,7 @@ namespace Tukupedia.Views.Admin
             if (dgCustomer.SelectedIndex != -1)
             {
                 DataRow dr = cvm.selectData(dgCustomer.SelectedIndex);
+                if (dr == null) return;
                 tbNamaCustomer.Text = dr[2].ToString();
                 tbAlamatCustomer.Text = dr[3].ToString();
                 tbEmailCustomer.Text = dr[1].ToString();
@@ -88,14 +96,13 @@ namespace Tukupedia.Views.Admin
                 if (dr[6].ToString() == "Aktif")
                 {
                     btBanCustomer.Content = "Ban Customer";
-                    btBanCustomer.Background = Brushes.DarkRed; // Color.FromRgb(103, 58, 183);
-                    btBanCustomer.BorderBrush = Brushes.DarkRed;
+                    btBanCustomer.Style = (Style)Application.Current.Resources["btn-danger"];
+
                 }
                 else
                 {
                     btBanCustomer.Content = "unBan Customer";
-                    btBanCustomer.Background = Brushes.MediumPurple; // Color.FromRgb(103, 58, 183);
-                    btBanCustomer.BorderBrush = Brushes.MediumPurple;
+                    btBanCustomer.Style = (Style)Application.Current.Resources["btn-primary"];
 
                 }
 
@@ -161,6 +168,7 @@ namespace Tukupedia.Views.Admin
             if (dgSeller.SelectedIndex != -1)
             {
                 DataRow dr = svm.selectData(dgSeller.SelectedIndex);
+                if (dr == null) return;
                 tbNamaSeller.Text = dr[2].ToString();
                 tbAlamatSeller.Text = dr[3].ToString();
                 tbEmailSeller.Text = dr[1].ToString();
@@ -169,14 +177,14 @@ namespace Tukupedia.Views.Admin
                 if (dr[6].ToString() == "Aktif")
                 {
                     btBanSeller.Content = "Ban Seller";
-                    btBanSeller.Background = Brushes.DarkRed; // Color.FromRgb(103, 58, 183);
-                    btBanSeller.BorderBrush = Brushes.DarkRed;
+                    btBanSeller.Style = (Style)Application.Current.Resources["btn-danger"];
+
                 }
                 else
                 {
                     btBanSeller.Content = "unBan Seller";
-                    btBanSeller.Background = Brushes.MediumPurple; // Color.FromRgb(103, 58, 183);
-                    btBanSeller.BorderBrush = Brushes.MediumPurple;
+                    btBanSeller.Style = (Style)Application.Current.Resources["btn-primary"];
+
 
                 }
                 if (dr[7].ToString() == "Yes")
@@ -222,6 +230,7 @@ namespace Tukupedia.Views.Admin
         private void dgCategory_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DataRow dr = cavm.selectData(dgCategory.SelectedIndex);
+            if (dr == null) return;
             btTambahKategori.Visibility = Visibility.Hidden;
             btToggleKategori.Visibility = Visibility.Visible;
             btUpdateKategori.Visibility = Visibility.Visible;
@@ -256,6 +265,36 @@ namespace Tukupedia.Views.Admin
                 btTambahKategori.Visibility = Visibility.Visible;
                 btToggleKategori.Visibility = Visibility.Hidden;
                 btUpdateKategori.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void dgH_Trans_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgH_Trans.SelectedIndex != -1) {
+                canvasD_Trans.Visibility = Visibility.Visible;
+                DataRow dr = tvm.selectData(dgH_Trans.SelectedIndex);
+                if (dr == null) return;
+                lbTanggalTransaksi.Content = dr[4].ToString();
+                lbNamaUser.Content = dr[2].ToString();
+                DataTable dt = tvm.getDTrans();
+                int jumlah = 0, total = 0;
+                foreach(DataRow deer in dt.Rows)
+                {
+                    jumlah += Convert.ToInt32(deer[3].ToString());
+                    total += Convert.ToInt32(deer[4].ToString());
+                }
+                lbJumlah.Content = jumlah.ToString();
+                lbTotal.Content = total.ToString();
+
+
+            }
+        }
+
+        private void dgH_Trans_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if (dgH_Trans.SelectedIndex == -1)
+            {
+                canvasD_Trans.Visibility = Visibility.Hidden;
             }
         }
     }

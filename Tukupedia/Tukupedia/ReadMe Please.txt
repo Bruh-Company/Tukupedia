@@ -4,3 +4,8 @@
 		
 		Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+
+
+Status H_Trans	C = Canceled
+				P = Paid
+				W = Waiting Payment
