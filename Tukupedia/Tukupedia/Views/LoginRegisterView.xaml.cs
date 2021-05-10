@@ -15,6 +15,7 @@ using Tukupedia.ViewModels;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Views.Admin;
 using Tukupedia.Views.Customer;
+using Tukupedia.Views.Seller;
 
 namespace Tukupedia.Views
 {
@@ -149,8 +150,8 @@ namespace Tukupedia.Views
                 else
                 {
                     //Seller View (Diganti kalau sudah ada View)
-                    CustomerView cv = new CustomerView();
-                    cv.ShowDialog();
+                    SellerView sv = new SellerView();
+                    sv.ShowDialog();
                 }
                 this.Show();
             }

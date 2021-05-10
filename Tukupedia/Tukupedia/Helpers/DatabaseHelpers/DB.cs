@@ -198,7 +198,6 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             {
                 App.openConnection(out _);
                 OracleDataAdapter adapter = new OracleDataAdapter(statement, App.connection);
-                //MessageBox.Show(statement);
                 App.closeConnection(out _);
                 adapter.Fill(table);
             }
