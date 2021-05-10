@@ -24,13 +24,13 @@
             <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
         </Canvas>
         <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="20,55,0,0" VerticalAlignment="Top" Width="1252">
-            <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640"/>
+            <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
             <TextBox x:Name="tbNamaKategori" Height="41" Canvas.Left="681" TextWrapping="Wrap" Canvas.Top="214" Width="466" FontSize="20"/>
-            <Button x:Name="btTambahKategori" Content="Tambah Kategori" Canvas.Left="681" Canvas.Top="360" Width="143"/>
-            <Button x:Name="btUpdateKategori" Content="Update Kategori" Canvas.Left="838" Canvas.Top="360" Width="143"/>
-            <Button x:Name="btToogleKategori" Content="Hapus Kategori" Canvas.Left="1004" Canvas.Top="360" Width="143"/>
+            <Button x:Name="btTambahKategori" Content="Tambah Kategori" Canvas.Left="681" Canvas.Top="360" Width="143" Click="btTambahKategori_Click"/>
+            <Button x:Name="btUpdateKategori" Content="Update Kategori" Canvas.Left="838" Canvas.Top="360" Width="143" Click="btUpdateKategori_Click"/>
+            <Button x:Name="btToggleKategori" Content="Matikan Kategori" Canvas.Left="1004" Canvas.Top="360" Width="143" Click="btToogleKategori_Click"/>
         </Canvas>
         <Canvas x:Name="CanvasrootCustomer" HorizontalAlignment="Left" Height="624" Margin="-68,899,0,-834" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgCustomer" Height="493" Canvas.Left="10" Canvas.Top="121" Width="849" MouseDoubleClick="dgCustomer_MouseDoubleClick" FontSize="16" SelectedCellsChanged="dgCustomer_SelectedCellsChanged"/>
