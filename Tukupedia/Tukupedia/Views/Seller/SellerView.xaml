@@ -9,14 +9,14 @@
         Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
         <Canvas HorizontalAlignment="Left" Height="100" Width="1274" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#65c65b">
-            <Image Height="72" Width="72" Canvas.Left="30" Canvas.Top="14"/>
-            <Label Name="labelNamaToko" Content="NAMA TOKO" Canvas.Left="126" Canvas.Top="16" FontSize="36" FontWeight="Bold" FontFamily="Noto"/>
-            <Label Name="labelStatusToko" Content="STATUS TOKO" Canvas.Left="126" Canvas.Top="52" FontSize="20" FontWeight="Bold"/>
-            <Button Name="btnPesanan" Content="Pesanan" FontSize="20" Canvas.Left="586" Canvas.Top="14" Width="120" Height="72" Background="{x:Null}" BorderBrush="{x:Null}" ClipToBounds="True" FontWeight="Regular" BorderThickness="0"/>
-            <Button Name="btnProduk" Content="Produk" FontSize="20" Canvas.Left="706" Canvas.Top="14" Width="120" Height="72" Background="{x:Null}" BorderBrush="{x:Null}" ClipToBounds="True" FontWeight="Regular"/>
-            <Button Name="btnInfoToko" Content="Info Toko" FontSize="20" Canvas.Left="826" Canvas.Top="14" Width="120" Height="72" Background="{x:Null}" BorderBrush="{x:Null}" ClipToBounds="True" FontWeight="Regular"/>
-            <Button Name="btnStatistikToko" Content="Statistik Toko" FontSize="20" Canvas.Left="946" Canvas.Top="14" Width="150" Height="72" Background="{x:Null}" BorderBrush="{x:Null}" ClipToBounds="True" FontWeight="Regular"/>
-            <Button Name="btnLogout" Content="Logout" FontSize="20" Canvas.Left="1096" Canvas.Top="14" Width="120" Height="72" Background="{x:Null}" BorderBrush="{x:Null}" ClipToBounds="True" FontWeight="Bold" Foreground="#FFE23434"/>
+            <Image Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
+            <Label Name="labelNamaToko"     Content="NAMA TOKO"         Canvas.Left="125"   Canvas.Top="10" Style="{StaticResource h1}"/>
+            <Label Name="labelStatusToko"   Content="STATUS TOKO"       Canvas.Left="125"   Canvas.Top="50" Style="{StaticResource xl}"/>
+            <Button Name="btnPesanan"       Content="Pesanan"           Canvas.Left="580"   Canvas.Top="0"  Style="{StaticResource btn-navbar}"/>
+            <Button Name="btnProduk"        Content="Produk"            Canvas.Left="706"   Canvas.Top="0"  Style="{StaticResource btn-navbar}"/>
+            <Button Name="btnInfoToko"      Content="Info Toko"         Canvas.Left="826"   Canvas.Top="0"  Style="{StaticResource btn-navbar}"/>
+            <Button Name="btnStatistikToko" Content="Statistik Toko"    Canvas.Left="946"   Canvas.Top="0"  Style="{StaticResource btn-navbar}"/>
+            <Button Name="btnLogout"        Content="Logout"            Canvas.Left="1096"  Canvas.Top="0"  Style="{StaticResource btn-danger}"/>
         </Canvas>
         <Canvas x:Name="canvasPenjualan" Height="590" Margin="0,100,-0.4,0" VerticalAlignment="Top">
             <Button x:Name="btnSemuaPesanan" Content="Semua Pesanan" FontSize="20" Width="224" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" BorderThickness="0,0,0,1"/>
