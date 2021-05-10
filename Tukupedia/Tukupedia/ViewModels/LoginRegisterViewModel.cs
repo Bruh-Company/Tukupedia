@@ -169,23 +169,26 @@ namespace Tukupedia.ViewModels
                 validation= false;
             }
             //Check Username/Email Unique
-            validation &= validateRegisterUser(new CustomerModel().Table, email);
-            //Buat Kode Customer
-            if (validation)
-            {
-                new DB("customer").insert(
-                "nama", nama,
-                "email", email,
-                "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
-                "alamat", alamat,
-                "no_telp", notelp,
-                "password", password
-                ).execute();
-                MessageBox.Show("Berhasil Daftar");
-            }
             else
             {
-                MessageBox.Show("Gagal Daftar Customer");
+                validation &= validateRegisterUser(new CustomerModel().Table, email);
+                //Buat Kode Customer
+                if (validation)
+                {
+                    new DB("customer").insert(
+                    "nama", nama,
+                    "email", email,
+                    "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                    "alamat", alamat,
+                    "no_telp", notelp,
+                    "password", password
+                    ).execute();
+                    MessageBox.Show("Berhasil Daftar");
+                }
+                else
+                {
+                    MessageBox.Show("Gagal Daftar Customer");
+                }
             }
             return validation;
         }
@@ -199,24 +202,27 @@ namespace Tukupedia.ViewModels
                 MessageBox.Show("Dilarang jadi Admin");
                 validation = false;
             }
-            //Check Username/Email sama belum
-            validation &= validateRegisterUser(new SellerModel().Table,  email);
-            //Buat Kode Customer
-            if (validation)
-            {
-                new DB("seller").insert(
-                "nama", nama,
-                "email", email,
-                "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
-                "alamat", alamat,
-                "no_telp", notelp,
-                "password", password
-                ).execute();
-                MessageBox.Show("Berhasil Daftar Seller");
-            }
             else
             {
-                MessageBox.Show("Gagal Daftar Seller");
+                //Check Username/Email sama belum
+                validation &= validateRegisterUser(new SellerModel().Table, email);
+                //Buat Kode Customer
+                if (validation)
+                {
+                    new DB("seller").insert(
+                    "nama", nama,
+                    "email", email,
+                    "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                    "alamat", alamat,
+                    "no_telp", notelp,
+                    "password", password
+                    ).execute();
+                    MessageBox.Show("Berhasil Daftar Seller");
+                }
+                else
+                {
+                    MessageBox.Show("Gagal Daftar Seller");
+                }
             }
             return validation;
         }

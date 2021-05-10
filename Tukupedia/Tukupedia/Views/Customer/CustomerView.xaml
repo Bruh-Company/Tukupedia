@@ -20,7 +20,7 @@
         </Grid>
         <Grid HorizontalAlignment="Left" Height="621" Margin="0,69,-3860.4,0" VerticalAlignment="Top" Width="5134">
             <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274">
-                <Grid HorizontalAlignment="Left" Height="601" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
+                <Grid HorizontalAlignment="Left" Height="596" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
                     <ComboBox HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="173"/>
                     <Slider HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
@@ -31,7 +31,7 @@
                     <TextBox HorizontalAlignment="Left" Height="27" Margin="10,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Background="#FFC4C4C4" FontSize="16"/>
                     <Label Content="Minimum Price" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Height="601" Margin="208,10,0,0" VerticalAlignment="Top" Width="1056" Background="#FF404040">
+                <Grid HorizontalAlignment="Left" Height="596" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
                     <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1036">
                         <Button Content="Search" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" Width="148" Height="36" Background="#FF65C65B"/>
                         <TextBox HorizontalAlignment="Center" Height="36" Margin="9,10,354,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="653" FontSize="16" CaretBrush="#FF65C65B"/>

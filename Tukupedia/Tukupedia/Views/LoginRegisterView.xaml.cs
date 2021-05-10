@@ -103,20 +103,25 @@ namespace Tukupedia.Views
             {
                 
             }
-            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text.ToString(), tbSellerPasswordLogin.Password.ToString());
+            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
         }
 
         private void swapCard(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapCard();
         }
-        
+        private void resetInputLogin()
+        {
+            tbCustomerEmailLogin.Text = "";
+            tbCustomerPasswordLogin.Password = "";
+            tbSellerEmailLogin.Text = "";
+            tbSellerPasswordLogin.Password = "";
+        }
         private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel
                 .LoginCustomer
-                (tbCustomerEmailLogin.Text,
-                tbCustomerPasswordLogin.Password.ToString());
+                (tbCustomerEmailLogin.Text, tbCustomerPasswordLogin.Password);
             if (Session.isLogin)
             {
                 this.Hide();
@@ -138,7 +143,7 @@ namespace Tukupedia.Views
         {
             LoginRegisterViewModel
                 .LoginSeller
-                (tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password.ToString());
+                (tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
             if (Session.isLogin)
             {
                 this.Hide();
@@ -181,5 +186,6 @@ namespace Tukupedia.Views
         {
 
         }
+        
     }
 }
