@@ -84,6 +84,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
             return this;
         }
+        
         /*
          * Digunakan jika where harus "AND"
          */
@@ -223,6 +224,15 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             return row;
 
         }
-        
+        public string to_date(string date, string pattern)
+        {
+            return $"TO_DATE('{date}','{pattern}')";
+        }
+        public string to_char(string value, string pattern)
+        {
+            return $"TO_DATE('{value}','{pattern}')";
+        }
+
+
     }
 }
