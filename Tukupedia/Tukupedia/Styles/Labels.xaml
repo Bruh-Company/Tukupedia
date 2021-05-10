@@ -1,0 +1,343 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Tukupedia.Styles">
+
+    <!--
+        !! how to use :) !!
+    
+        COLOR LIST
+        secondary : light grey
+        success   : green
+        danger    : red
+        warning   : yellow
+    
+        Default - color : white
+        
+        Default with Color
+        -> StaticResource text-<COLOR>
+        
+        Headings & Normal Text
+        h1 -> 36 Bold
+        h2 -> 30 Bold
+        h3 -> 24 Bold
+        xl -> 20 SemiBold
+        lg -> 18 Regular
+        md -> 16 Regular
+        sm -> 14 Regular
+    
+        Headings & Normal Text with color
+        StaticResource h1-<COLOR>
+        StaticResource h2-<COLOR>
+        StaticResource h3-<COLOR>
+        StaticResource xl-<COLOR>
+        StaticResource lg-<COLOR>
+        StaticResource md-<COLOR>
+        StaticResource sm-<COLOR>
+    -->
+    
+    <!--Base-->
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="#ffffff"/>
+    </Style>
+
+    <!--text-success-->
+    <Style TargetType="Label" x:Key="text-success">
+        <Setter Property="Foreground" Value="#65c65b"/>
+    </Style>
+
+    <!--text-secondary-->
+    <Style TargetType="Label" x:Key="text-secondary">
+        <Setter Property="Foreground" Value="#E7E7E7"/>
+    </Style>
+
+    <!--text-danger-->
+    <Style TargetType="Label" x:Key="text-danger">
+        <Setter Property="Foreground" Value="#FFC548"/>
+    </Style>
+
+    <!--text-warning-->
+    <Style TargetType="Label" x:Key="text-warning">
+        <Setter Property="Foreground" Value="#E23434"/>
+    </Style>
+
+    <!--h1-->
+    <Style TargetType="Label"
+           x:Key="h1"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h1-secondary-->
+    <Style TargetType="Label"
+           x:Key="h1-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h1-success-->
+    <Style TargetType="Label"
+           x:Key="h1-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h1-danger-->
+    <Style TargetType="Label"
+           x:Key="h1-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h1-warning-->
+    <Style TargetType="Label"
+           x:Key="h1-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h2-->
+    <Style TargetType="Label"
+           x:Key="h2"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h2-secondary-->
+    <Style TargetType="Label"
+           x:Key="h2-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h2-success-->
+    <Style TargetType="Label"
+           x:Key="h2-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h2-danger-->
+    <Style TargetType="Label"
+           x:Key="h2-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h2-warning-->
+    <Style TargetType="Label"
+           x:Key="h2-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h3-->
+    <Style TargetType="Label"
+           x:Key="h3"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h3-secondary-->
+    <Style TargetType="Label"
+           x:Key="h3-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h3-success-->
+    <Style TargetType="Label"
+           x:Key="h3-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h3-danger-->
+    <Style TargetType="Label"
+           x:Key="h3-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--h3-warning-->
+    <Style TargetType="Label"
+           x:Key="h3-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <!--xl-->
+    <Style TargetType="Label"
+           x:Key="xl"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!--xl-secondary-->
+    <Style TargetType="Label"
+           x:Key="xl-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!--xl-success-->
+    <Style TargetType="Label"
+           x:Key="xl-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!--xl-danger-->
+    <Style TargetType="Label"
+           x:Key="xl-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!--xl-warning-->
+    <Style TargetType="Label"
+           x:Key="xl-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!--lg-->
+    <Style TargetType="Label"
+           x:Key="lg"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--lg-secondary-->
+    <Style TargetType="Label"
+           x:Key="lg-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--lg-success-->
+    <Style TargetType="Label"
+           x:Key="lg-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--lg-danger-->
+    <Style TargetType="Label"
+           x:Key="lg-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--lg-warning-->
+    <Style TargetType="Label"
+           x:Key="lg-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--md-->
+    <Style TargetType="Label"
+           x:Key="md"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--md-secondary-->
+    <Style TargetType="Label"
+           x:Key="md-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--md-success-->
+    <Style TargetType="Label"
+           x:Key="md-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--md-danger-->
+    <Style TargetType="Label"
+           x:Key="md-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--md-warning-->
+    <Style TargetType="Label"
+           x:Key="md-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--sm-->
+    <Style TargetType="Label"
+           x:Key="sm"
+           BasedOn="{StaticResource {x:Type Label}}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--sm-secondary-->
+    <Style TargetType="Label"
+           x:Key="sm-secondary"
+           BasedOn="{StaticResource text-secondary}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--sm-success-->
+    <Style TargetType="Label"
+           x:Key="sm-success"
+           BasedOn="{StaticResource text-success}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--sm-danger-->
+    <Style TargetType="Label"
+           x:Key="sm-danger"
+           BasedOn="{StaticResource text-danger}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+    <!--sm-warning-->
+    <Style TargetType="Label"
+           x:Key="sm-warning"
+           BasedOn="{StaticResource text-warning}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Regular"/>
+    </Style>
+
+</ResourceDictionary>
