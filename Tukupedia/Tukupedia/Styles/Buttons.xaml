@@ -186,6 +186,10 @@
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
                               From="#FFFFFF" To="#E2E2E2" Duration="0:0:0.2"
                               RepeatBehavior="1x" />
+                            <ColorAnimation
+                              Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
+                              From="#65C65B" To="#FFFFFF" Duration="0:0:0.3"
+                              RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
@@ -195,6 +199,10 @@
                             <ColorAnimation
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
                               From="#E2E2E2" To="#FFFFFF" Duration="0:0:0.2"
+                              RepeatBehavior="1x" />
+                            <ColorAnimation
+                              Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
+                              From="#FFFFFF" To="#65C65B" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
