@@ -22,5 +22,6 @@ namespace Tukupedia.Views.Seller {
             InitializeComponent();
 
         }
+
     }
 }

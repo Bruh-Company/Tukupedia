@@ -25,15 +25,38 @@
             <Button Name="btnDalamPengiriman" Content="Dalam Pengiriman" FontSize="20" Width="210" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" Canvas.Left="644" BorderThickness="0,0,0,1"/>
             <Button Name="btnPesananSelesai" Content="Pesanan Selesai" FontSize="20" Width="210" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" Canvas.Left="854" BorderThickness="0,0,0,1"/>
             <Button Name="btnPesananDibatalkan" Content="Pesanan Dibatalkan" FontSize="20" Width="210" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" Canvas.Left="1064" BorderThickness="0,0,0,1"/>
+            <TextBox Name="textboxCariPesanan" Text="Cari nama pembeli, produk, atau kode pesanan" Height="30" Width="350" FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B" Padding="5,2,5,5" Canvas.Left="25"  Canvas.Top="50" TextWrapping="NoWrap"/>
+            <Button Name="btnCariPesanan" Content="Cari" FontSize="18" Canvas.Left="375" Canvas.Top="50" Width="100" Height="30" Background="#FF65C65B" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
+            <ComboBox Name="comboboxFilterKurir" Canvas.Left="495" Canvas.Top="50" Width="200" Height="30"  FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B"/>
+            <ComboBox Name="comboboxSortPesanan" Canvas.Left="700" Canvas.Top="50" Width="150" Height="30"  FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B"/>
+            <DataGrid Name="datagridPesanan" Height="480" Width="840" Canvas.Left="9.6" Canvas.Top="92" Background="White"/>
+            <Label Content="Kode Pesanan" Canvas.Left="870.4" Canvas.Top="92" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxKodePesanan" Text="PE69420" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="92" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Status Pesanan" Canvas.Left="870" Canvas.Top="122" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxStatusPesanan" Text="Jomblo" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="122" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Tanggal Transaksi" Canvas.Left="870" Canvas.Top="152" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxTanggalTransaksi" Text="10 Mei 2021" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="152" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Kurir" Canvas.Left="870" Canvas.Top="182" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxKurir" Text="JEK_GO" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="182" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Nama Pembeli" Canvas.Left="870" Canvas.Top="212" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxNamaPembeli" Text="SHUE CHEN" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="212" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Alamat Tujuan" Canvas.Left="870" Canvas.Top="242" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Height="60" Width="391" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="870"  Canvas.Top="271" TextWrapping="Wrap" BorderThickness="0" IsEnabled="False"/>
+            <Label Content="Produk" Canvas.Left="870" Canvas.Top="331" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <ListBox Height="125" Width="390" Canvas.Left="871" Canvas.Top="361" FontSize="14" Foreground="#DD000000"/>
+            <Label Content="Total" Canvas.Left="870" Canvas.Top="486" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
+            <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1011"  Canvas.Top="487" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False" UseLayoutRounding="True" TextAlignment="Right"/>
+            <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="874" Canvas.Top="522" Width="196" Height="40" Background="#FFE23434" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
+            <Button Name="btnSuccessPesanan" Content="Terima" FontSize="18" Canvas.Left="1069" Canvas.Top="522" Width="195" Height="40" Background="#FF65C65B" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
         </Canvas>
-        <Canvas x:Name="canvasProduk" HorizontalAlignment="Left" Height="590" Margin="1322,100,-1322.4,0" VerticalAlignment="Top" Width="1274">
+        <Canvas Name="canvasProduk" HorizontalAlignment="Left" Height="590" Margin="1298,100,-1298.4,0" VerticalAlignment="Top" Width="1274">
             <Button Name="btnSemuaProduk" Content="Semua Produk" FontSize="20" Width="426" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular"/>
             <Button Name="btnProdukBelumTerjual" Content="Produk Belum Terjual" FontSize="20" Width="424" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" Canvas.Left="426"/>
             <Button Name="btnProdukTerjual" Content="Produk Terjual" FontSize="20" Width="424" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF65C65B" ClipToBounds="True" FontWeight="Regular" Canvas.Left="850"/>
             <TextBox Name="textboxCariProduk" Text="Cari Produk ..." Height="30" Width="299" FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B" Padding="5,2,5,5" Canvas.Left="25"  Canvas.Top="53" TextWrapping="NoWrap"/>
-            <ComboBox Name="comboboxSort" Canvas.Left="447" Canvas.Top="53" Width="350" Height="30"  FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B"/>
-            <Button Name="btnCari" Content="Cari" FontSize="18" Canvas.Left="324" Canvas.Top="53" Width="100" Height="30" Background="#FF65C65B" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
-            <DataGrid Height="480" Width="840" Canvas.Left="10" Canvas.Top="92" Background="White"/>
+            <ComboBox Name="comboboxSortProduk" Canvas.Left="447" Canvas.Top="53" Width="350" Height="30"  FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B"/>
+            <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="324" Canvas.Top="53" Width="100" Height="30" Background="#FF65C65B" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
+            <DataGrid Name="datagridProduk" Height="480" Width="840" Canvas.Left="10" Canvas.Top="92" Background="White"/>
             <Label Content="Nama Produk" Canvas.Left="870" Canvas.Top="92" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
             <TextBox Name="textboxNamaProduk" Text="Nama Produk" Height="35" Width="350" FontSize="18" FontWeight="SemiBold" Foreground="#FF65C65B" BorderBrush="#FF65C65B" Padding="5,2,5,5" Canvas.Left="872"  Canvas.Top="122" TextWrapping="NoWrap"/>
             <Label Content="Kategori Produk" Canvas.Left="870" Canvas.Top="162" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
@@ -51,5 +74,6 @@
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="130" Height="40" Background="#FF65C65B" BorderBrush="{x:Null}" Foreground="White" ClipToBounds="True" FontWeight="Regular" Canvas.Left="995" Canvas.Top="532"/>
             <Button Name="btnDelete" Content="Delete" FontSize="20" Width="130" Height="40" Background="#FF65C65B" BorderBrush="{x:Null}" Foreground="White" ClipToBounds="True" FontWeight="Regular" Canvas.Left="1125" Canvas.Top="532"/>
         </Canvas>
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Left" Height="590" Margin="2572,100,-2572.4,0" VerticalAlignment="Top" Width="1274" Background="White"/>
     </Grid>
 </Window>
