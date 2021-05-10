@@ -186,19 +186,20 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 Connection = App.connection
             };
             //MessageBox.Show(statement);
-            App.openConnection();
+            
+            App.openConnection(out _);
             cmd.ExecuteNonQuery();
-            App.closeConnection();
+            App.closeConnection(out _);
         }
         public DataTable get()
         {
             DataTable table = new DataTable();
             try
             {
-                App.openConnection();
+                App.openConnection(out _);
                 OracleDataAdapter adapter = new OracleDataAdapter(statement, App.connection);
                 //MessageBox.Show(statement);
-                App.closeConnection();
+                App.closeConnection(out _);
                 adapter.Fill(table);
             }
             catch (Exception ex)

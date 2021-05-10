@@ -17,18 +17,27 @@ namespace Tukupedia.ViewModels
 {
     public static class LoginRegisterViewModel
     {
-        public enum CustomerSellerStage
+        private enum CustomerSellerStage
         {
             Customer,
             Seller
         }
 
-        public enum CardPage
+        private enum CardPage
         {
             LoginPage,
             RegisterFirstPage,
             RegisterSecondPage,
             RegisterThirdPage
+        }
+
+        private static class Position
+        {
+            public static Thickness Up      = new Thickness(0, -100, 0, 100);
+            public static Thickness Left    = new Thickness(-100, 0, 100, 0);
+            public static Thickness Down   = new Thickness(0, 100, 0, -100);
+            public static Thickness Right    = new Thickness(100, 0, -100, 0);
+            public static Thickness Middle  = new Thickness(0, 0, 0, 0);
         }
 
         //view component and stage status
@@ -49,6 +58,46 @@ namespace Tukupedia.ViewModels
 
             transition = new Transition(transFPS);
         }
+
+        public static void InitializeCard()
+        {
+            ViewComponent.CardSeller.Margin = Position.Down;
+            ViewComponent.CardSeller.Width = 397;
+            ViewComponent.CardSeller.Height = 433;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.CardSeller,
+                Visibility.Hidden);
+
+            ViewComponent.CardCustomer.Margin = Position.Middle;
+            ViewComponent.CardCustomer.Width = 397;
+            ViewComponent.CardCustomer.Height = 433;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.CardCustomer,
+                Visibility.Visible);
+        }
+
+        public static void InitializeState()
+        {
+            ViewComponent.GridLoginCustomer.Margin = Position.Middle;
+            ViewComponent.GridLoginCustomer.Opacity = 1;
+            ViewComponent.GridLoginCustomer.Width = 376.8;
+            ViewComponent.GridLoginCustomer.Height = 413;
+
+            ViewComponent.GridRegisterCustomer1.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer1.Opacity = 0;
+            ViewComponent.GridRegisterCustomer1.Width = 376.8;
+            ViewComponent.GridRegisterCustomer1.Height = 413;
+
+            ViewComponent.GridRegisterCustomer2.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer2.Opacity = 0;
+            ViewComponent.GridRegisterCustomer2.Width = 376.8;
+            ViewComponent.GridRegisterCustomer2.Height = 413;
+
+            //ViewComponent.GridLoginCustomer.Margin = Position.Middle;
+            //ViewComponent.GridLoginCustomer.Opacity = 1;
+            //ViewComponent.GridLoginCustomer.Width = 376.8;
+            //ViewComponent.GridLoginCustomer.Height = 413;
+        }
+
+        // DATABASE STUFF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         public static bool validateRegisterUser(DataTable table,string email)
         {
@@ -170,10 +219,13 @@ namespace Tukupedia.ViewModels
             return validation;
         }
 
+        // END OF DATABASE STUFF <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
         public static void swapCard()
         {
-            const double speedMargin = 0.3;
-            const double speedOpacity = 0.5;
+            const double speedMargin = 0.2;
+            const double speedOpacity = 0.3;
             const double multiplier = 80;
 
             if (UserStage == CustomerSellerStage.Customer)
@@ -181,18 +233,57 @@ namespace Tukupedia.ViewModels
                 UserStage = CustomerSellerStage.Seller;
 
                 transition.makeTransition(ViewComponent.CardCustomer,
-                    new Thickness(0, -100, 0, 100), 0,
+                    Position.Up, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.CardSeller,
-                    new Thickness(0, 0, 0, 0), 1,
+                    Position.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
 
+                transition.setCallback(swapCardCallback);
                 transition.playTransition();
 
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.CardCustomer,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.CardSeller,
+                    Visibility.Visible);
+            }
+            else
+            {
+                UserStage = CustomerSellerStage.Customer;
+                
+                transition.makeTransition(ViewComponent.CardCustomer,
+                    Position.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.CardSeller,
+                    Position.Down, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+
+                transition.setCallback(swapCardCallback);
+                transition.playTransition();
+
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.CardSeller,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.CardCustomer,
+                    Visibility.Visible);
+            }
+        }
+
+        public static void swapCardCallback()
+        {
+            if (UserStage == CustomerSellerStage.Seller)
+            {
                 ComponentHelper.changeVisibilityComponent(
                     ViewComponent.CardCustomer,
                     Visibility.Hidden);
@@ -202,27 +293,12 @@ namespace Tukupedia.ViewModels
             }
             else
             {
-                UserStage = CustomerSellerStage.Customer;
-                
-                transition.makeTransition(ViewComponent.CardCustomer,
-                    new Thickness(0, 0, 0, 0), 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.CardSeller,
-                    new Thickness(0, 100, 0, -100), 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.playTransition();
-
-                ComponentHelper.changeVisibilityComponent(
-                    ViewComponent.CardSeller,
-                    Visibility.Hidden);
                 ComponentHelper.changeVisibilityComponent(
                     ViewComponent.CardCustomer,
                     Visibility.Visible);
+                ComponentHelper.changeVisibilityComponent(
+                    ViewComponent.CardSeller,
+                    Visibility.Hidden);
             }
         }
 

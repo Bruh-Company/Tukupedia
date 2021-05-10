@@ -31,8 +31,8 @@ namespace Tukupedia.Views
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            loadInit();
             LoginRegisterViewModel.InitializeView(this);
+            loadInit();
 
             Panel.SetZIndex(CardCustomer, 1);
             Panel.SetZIndex(CardSeller, 0);
@@ -45,15 +45,10 @@ namespace Tukupedia.Views
                     AppDomain.CurrentDomain.BaseDirectory +
                     "Resource\\Logo\\TukupediaLogo.png"));
 
-            CardSeller.Margin = new Thickness(0, 100, 0, -100);
-            CardSeller.Opacity = 0;
-            CardSeller.Width = 397;
-            CardSeller.Height = 433;
+            LoginRegisterViewModel.InitializeCard();
+            LoginRegisterViewModel.InitializeState();
 
-            CardCustomer.Margin = new Thickness(0, 0, 0, 0);
-            CardCustomer.Opacity = 1;
-            CardCustomer.Width = 397;
-            CardCustomer.Height = 433;
+            dpCustomerBornDateRegister.DisplayDateEnd = DateTime.Now;
         }
 
         public void closeThis()

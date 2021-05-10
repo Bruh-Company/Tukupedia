@@ -14,12 +14,16 @@ namespace Tukupedia
     /// </summary>
     public partial class App : Application
     {
+        private const string ErrCapt = "Oracle Connection Error";
+
         public static bool gagal = false;
         public static string datasource, username, password;
+
         public static OracleConnection connection = new OracleConnection()
         {
             ConnectionString = $"Data Source=ORCL;User Id=projectpcs;Password=pcs;"
         };
+
         public static void initConnectionString(string datasource, string username, string password)
         {
             App.datasource = datasource;
@@ -27,42 +31,66 @@ namespace Tukupedia
             App.password = password;
             connection.ConnectionString = $"Data Source={datasource};User Id={username};Password={password};";
         }
-        public static void openConnection()
+
+        public static void testConnection(out bool status)
         {
-            try
+            bool st;
+
+            openConnection(out st);
+            if (!st)
             {
-                if (App.connection.State == ConnectionState.Open)
-                {
-                    App.connection.Close();
-                    App.connection.Open();
-                }
-                else
-                {
-                    App.connection.Open();
-                }
-                //MessageBox.Show("Koneksi Sukses");
-                gagal = false;
+                status = false;
+                return;
             }
-            catch (Exception ex)
+            closeConnection(out st);
+            if (!st)
             {
-                gagal = true;
-                MessageBox.Show("Gagal Login Oracle");
+                status = false;
+                return;
             }
+
+            status = true;
+            return;
         }
 
-        public static void closeConnection()
+        public static void openConnection(out bool status)
+        {
+            bool st;
+
+            try
+            {
+                closeConnection(out st);
+                if (st) connection.Open();
+
+                status = true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error opening connection\n" +
+                                $"Err:\n" +
+                                $"{e}",
+                                ErrCapt, MessageBoxButton.OK, MessageBoxImage.Error);
+                status = false;
+            }
+
+        }
+
+        public static void closeConnection(out bool status)
         {
             try
             {
-                if (App.connection.State == ConnectionState.Open)
-                {
-                    App.connection.Close();
-                }
-                //MessageBox.Show("Koneksi Tertutup");
+                if (connection.State == ConnectionState.Open)
+                    connection.Close();
+
+                status = true;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show($"Error opening connection\n" +
+                                $"Err:\n" +
+                                $"{e}",
+                                ErrCapt, MessageBoxButton.OK, MessageBoxImage.Error);
+                status = false;
             }
         }
     }
