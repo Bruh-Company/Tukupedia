@@ -23,5 +23,9 @@ namespace Tukupedia.Helpers.Utils
             }
             return maxNumber;
         }
+        public static string translate(int val, int len)
+        {
+            return string.Format("{0:D" + len + "}", val);
+        }
     }
 }
