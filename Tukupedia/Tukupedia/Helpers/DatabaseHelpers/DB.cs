@@ -22,6 +22,8 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         }
         public DB(string table)
         {
+            table = sanitize(table);
+
             statement = "";
             this.table = table;
         }
@@ -37,6 +39,8 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string values = "(";
             for (int i = 0; i < param.Length; i+=2)
             {
+                param[i] = sanitize(param[i].ToString());
+                param[i + 1] = sanitize(param[i + 1].ToString());
                 string comma = (i == param.Length - 2) ? ")" : ",";
                 columns += $" {param[i]} {comma} ";
                 string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
@@ -52,7 +56,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB insertRAW(string statement)
         {
             resetStatement();
-            this.statement = statement;
+            this.statement = sanitize(statement);
             return this;
         }
         /*
@@ -76,6 +80,9 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string str = "";
             for (int i = 0; i < param.Length; i+=2)
             {
+                param[i] = sanitize(param[i].ToString());
+                param[i + 1] = sanitize(param[i + 1].ToString());
+
                 string comma = (i == param.Length - 2) ? "" : ",";
                 string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
                 str +=$" {param[i]} = {petik}{param[i+1]}{petik} {comma}";
@@ -90,7 +97,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB where(string column, string value, string Operator="=")
         {
             string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
-            statement += $" {where} {column} {Operator} '{value}' ";
+            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{sanitize(value)}' ";
             return this;
         }
         /*
@@ -99,7 +106,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB orWhere(string column, string value, string Operator = "=")
         {
             string where = statement.Contains("WHERE") ? " OR " : " WHERE ";
-            statement += $" {where} {column} {Operator} '{value}' ";
+            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{sanitize(value)}' ";
             return this;
         }
         /*
@@ -128,6 +135,8 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 statement += $"SELECT * FROM {table} ";
                 for (int i = 0; i < param.Length; i++)
                 {
+                    param[i] = sanitize(param[i].ToString());
+
                     string temp = param[i].ToString();
                     string comma = (i == param.Length - 1) ? "" : ",";
                     statement += $" {temp} {comma} ";
@@ -143,17 +152,17 @@ namespace Tukupedia.Helpers.DatabaseHelpers
          */
         public DB join(string table, string id ,string Operator, string foreignKey)
         {
-            statement += $" join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
+            statement += $" join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
             return this;
         }
         public DB leftJoin(string table, string id, string Operator, string foreignKey)
         {
-            statement += $" left join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
+            statement += $" left join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
             return this;
         }
         public DB rightJoin(string table, string id, string Operator, string foreignKey)
         {
-            statement += $" right join {table} on {this.table}.{id} {Operator} {table}.{foreignKey} ";
+            statement += $" right join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
             return this;
         }
         /**
@@ -161,17 +170,17 @@ namespace Tukupedia.Helpers.DatabaseHelpers
          * */
         public DB having(string column ,string Operator, string value)
         {
-            statement += $" having {column} {Operator} {value} ";
+            statement += $" having {sanitize(column)} {opSanitize(Operator)} {value} ";
             return this;
         }
         public DB groupBy(string group)
         {
-            statement += $" group by {group} ";
+            statement += $" group by {sanitize(group)} ";
             return this;
         }
         public DB orderBy(string ordered)
         {
-            statement += $" order by {ordered} ";
+            statement += $" order by {sanitize(ordered)} ";
             return this;
         }
         public int count()
@@ -224,5 +233,16 @@ namespace Tukupedia.Helpers.DatabaseHelpers
 
         }
         
+        private static string sanitize(string str)
+        {
+            return str.Replace("'", "").Replace("\"", "").Replace("`", "");
+        }
+
+        private static string opSanitize(string op)
+        {
+            string[] known = { "<", ">", "<=", ">=", "=", "<>", "!=" };
+            if (known.Contains(op)) return op;
+            return "";
+        }
     }
 }
