@@ -16,6 +16,8 @@ namespace Tukupedia.Helpers.Utils
         private readonly double targetOpacity;
         private readonly double speedMargin;
         private readonly double speedOpacity;
+        private readonly double deltaMargin;
+        private readonly double deltaOpacity;
 
         public TransitionData(
             Control feedElem,
@@ -29,6 +31,14 @@ namespace Tukupedia.Helpers.Utils
             targetOpacity = feedTargetOpacity;
             speedMargin = feedSpeedMargin;
             speedOpacity = feedSpeedOpacity;
+
+            deltaMargin = (
+                Math.Abs(elem.Margin.Top - targetMargin.Top) +
+                Math.Abs(elem.Margin.Left - targetMargin.Left) +
+                Math.Abs(elem.Margin.Right - targetMargin.Right) +
+                Math.Abs(elem.Margin.Bottom - targetMargin.Bottom)
+                ) / 4 * (1.0 / 100.0);
+            deltaOpacity = Math.Abs(elem.Opacity - targetOpacity) * 1.0 / 100.0;
         }
 
         public bool move()
@@ -39,11 +49,11 @@ namespace Tukupedia.Helpers.Utils
             if (Math.Abs(tmp.Top - targetMargin.Top) +
                 Math.Abs(tmp.Left - targetMargin.Left) +
                 Math.Abs(tmp.Right - targetMargin.Right) +
-                Math.Abs(tmp.Bottom - targetMargin.Bottom) < 1)
+                Math.Abs(tmp.Bottom - targetMargin.Bottom) < deltaMargin)
             {
                 elem.Margin = targetMargin;
             }
-            if (Math.Abs(elem.Opacity - targetOpacity) < 0.5)
+            if (Math.Abs(elem.Opacity - targetOpacity) < deltaOpacity)
             {
                 elem.Opacity = targetOpacity;
             }
@@ -116,9 +126,12 @@ namespace Tukupedia.Helpers.Utils
 
     public class Transition
     {
+        public delegate void transitionCallbackDelegate();
+
         private readonly int transitionFPS;
         private DispatcherTimer transitionTimer;
         private TransitionQueue transQueue;
+        private transitionCallbackDelegate transCallback;
         bool reset = true;
 
         public Transition(int FPS)
@@ -151,6 +164,11 @@ namespace Tukupedia.Helpers.Utils
                 order);
         }
 
+        public void setCallback(transitionCallbackDelegate callback)
+        {
+            transCallback = callback;
+        }
+
         public void playTransition()
         {
             transitionTimer.Interval = TimeSpan.FromMilliseconds(1000.0 / transitionFPS);
@@ -166,8 +184,11 @@ namespace Tukupedia.Helpers.Utils
             if (finish)
             {
                 breakTimer();
-
-                //transitionTimer = new DispatcherTimer();
+                if (transCallback != null)
+                {
+                    transCallback();
+                    transCallback = null;
+                }
             }
         }
 

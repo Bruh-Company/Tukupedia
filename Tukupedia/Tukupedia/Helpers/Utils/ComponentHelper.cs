@@ -12,7 +12,7 @@ namespace Tukupedia.Helpers.Utils
     {
 
 
-        public static void changeVisibilityComponent(Control component, Visibility vis)
+        public static void changeZIndexComponent(Control component, Visibility vis)
         {
             if (vis == Visibility.Visible)
             {
@@ -24,6 +24,19 @@ namespace Tukupedia.Helpers.Utils
                 Panel.SetZIndex(component, 0);
                 component.IsEnabled = false;
             }
+        }
+
+        public static void changeVisibilityComponent(Control component, Visibility vis)
+        {
+            if (vis == Visibility.Visible)
+            {
+                component.Opacity = 1;
+            }
+            else if (vis == Visibility.Hidden)
+            {
+                component.Opacity = 0;
+            }
+            changeZIndexComponent(component, vis);
         }
     }
 }
