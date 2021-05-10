@@ -31,8 +31,15 @@ namespace Tukupedia.ViewModels.Admin
         }
         public DataRow selectData(int pos)
         {
-            selected = pos;
-            return sm.Table.Rows[pos];
+            try
+            {
+                selected = pos;
+                return sm.Table.Rows[pos];
+
+            }catch(Exception ex)
+            {
+                return null;
+            }
         }
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir, int official)
         {

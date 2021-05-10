@@ -245,11 +245,11 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             if (known.Contains(op)) return op;
             return "";
         }
-        public string to_date(string date, string pattern)
+        public static string to_date(string date, string pattern)
         {
             return $"TO_DATE('{date}','{pattern}')";
         }
-        public string to_char(string value, string pattern)
+        public static string to_char(string value, string pattern)
         {
             return $"TO_DATE('{value}','{pattern}')";
         }
