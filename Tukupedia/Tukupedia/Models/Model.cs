@@ -16,6 +16,7 @@ namespace Tukupedia.Models
         public OracleDataAdapter Adapter { get; set; }
         public OracleCommandBuilder Builder { get; set; }
         public string statement { get; set; }
+        public string where { get; set; }
 
         public Model()
         {
@@ -80,5 +81,16 @@ namespace Tukupedia.Models
             }
             update();
         }
+
+        public void resetWhere()
+        {
+            where = "";
+        }
+        public void addWhere(string column, string val,string opera="=", bool apostrophe=true)
+        {
+            string apos = apostrophe ? "'" : "";
+            where += $"{column} {opera} {apos}{val}{apos}";
+        }
+        
     }
 }

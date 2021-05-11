@@ -20,12 +20,12 @@
 
     <!--textblock-danger-->
     <Style TargetType="TextBlock" x:Key="textblock-danger">
-        <Setter Property="Foreground" Value="#FFC548"/>
+        <Setter Property="Foreground" Value="#E23434"/>
     </Style>
 
     <!--textblock-warning-->
     <Style TargetType="TextBlock" x:Key="textblock-warning">
-        <Setter Property="Foreground" Value="#E23434"/>
+        <Setter Property="Foreground" Value="#FFC548"/>
     </Style>
 
     <!--textblock-h1-->

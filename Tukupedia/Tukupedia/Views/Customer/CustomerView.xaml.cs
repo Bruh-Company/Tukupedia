@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.Helpers.Utils;
 using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
@@ -34,9 +35,23 @@ namespace Tukupedia.Views.Customer
         private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
             CustomerViewModel.loadItems(PanelItems);
-            Label l = new Label();
-            l.Content = "test";
-            PanelItems.Children.Add(l);
+            CustomerViewModel.loadCategory(cbCategory);
+        }
+        
+        private void SliderMax_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            tbMaxPrice.Text = Utility.formatNumber(Convert.ToInt32(SliderMax.Value));
+        }
+
+        private void SliderMin_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            tbMinPrice.Text = Utility.formatNumber(Convert.ToInt32(SliderMin.Value));
+        }
+
+        private void BtnLogout_OnClick(object sender, RoutedEventArgs e)
+        {
+            Session.Logout();
+            this.Close();
         }
     }
 }

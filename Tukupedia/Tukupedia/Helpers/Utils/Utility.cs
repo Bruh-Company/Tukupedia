@@ -35,7 +35,7 @@ namespace Tukupedia.Helpers.Utils
         }
         public static string formatNumber(int val)
         {
-            return val.ToString("C2");
+            return val.ToString("N");
         }
     }
 }
