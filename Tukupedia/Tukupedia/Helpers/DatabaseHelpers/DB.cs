@@ -245,15 +245,13 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             if (known.Contains(op)) return op;
             return "";
         }
-        public string to_date(string date, string pattern)
+        public string to_date(string date, string pattern = "dd-mm-yyyy")
         {
-            return $"TO_DATE('{date}','{pattern}')";
+            return $"TO_DATE('{sanitize(date)}','{pattern}')";
         }
-        public string to_char(string value, string pattern)
+        public string to_char(string value, string pattern = "dd-mm-yyyy")
         {
-            return $"TO_DATE('{value}','{pattern}')";
+            return $"TO_DATE('{sanitize(value)}','{pattern}')";
         }
-
-
     }
 }
