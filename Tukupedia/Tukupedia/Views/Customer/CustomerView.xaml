@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        mc:Ignorable="d"
+        mc:Ignorable="d" Loaded="CustomerView_OnLoaded"
         Title="CustomerView" Height="719.7" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1274" Background="#FF65C65B" Margin="0,0,-0.4,0">
@@ -15,7 +15,7 @@
             <Button Style="{StaticResource btn-navbar}" Content="Settings" HorizontalAlignment="Left" Margin="623,0,0,0" VerticalAlignment="Top" Width="103" FontSize="18" Height="64" FontWeight="Normal"  RenderTransformOrigin="-0.506,0.553"/>
             <Button Style="{StaticResource btn-danger}" Content="Logout" HorizontalAlignment="Left" Margin="1175,10,0,0" VerticalAlignment="Top" Width="89" Background="#FFE23434" FontSize="18" Height="44" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="0.472,0.466"/>
             <Button Style="{StaticResource btn-navbar}" Content="Cart" HorizontalAlignment="Left" Margin="386,0,0,0" VerticalAlignment="Top" Width="78" FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553"/>
-            <Button Style="{StaticResource btn-navbar}" Content="My Transactions" HorizontalAlignment="Left" Margin="464,0,0,0" VerticalAlignment="Top" Width="159"  FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553" Click="Button_Click"/>
+            <Button Style="{StaticResource btn-navbar}" Content="My Transactions" HorizontalAlignment="Left" Margin="464,0,0,0" VerticalAlignment="Top" Width="159"  FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553"/>
             <Button Style="{StaticResource btn-navbar}" Content="Home" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Top" Width="82" FontSize="18" Height="64" FontWeight="Normal"  RenderTransformOrigin="-0.506,0.553"/>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="621" Margin="0,69,-3860.4,0" VerticalAlignment="Top" Width="5134">
@@ -24,19 +24,22 @@
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
                     <ComboBox HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="173"/>
                     <Slider HorizontalAlignment="Left" Margin="10,241,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
-                    <TextBox HorizontalAlignment="Left" Height="27" Margin="10,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Background="#FFC4C4C4" FontSize="16"/>
+                    <TextBox HorizontalAlignment="Left" Height="27" Margin="10,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173"  FontSize="16"/>
                     <Label Content="Maximum Price" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
                     <Button Style="{StaticResource btn-primary}" Content="Filter" HorizontalAlignment="Left" Margin="10,263,0,0" VerticalAlignment="Top" Width="173" Height="32" BorderBrush="#FF404040"/>
                     <Slider HorizontalAlignment="Left" Margin="10,152,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
-                    <TextBox HorizontalAlignment="Left" Height="27" Margin="10,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" Background="#FFC4C4C4" FontSize="16"/>
+                    <TextBox HorizontalAlignment="Left" Height="27" Margin="10,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" FontSize="16"/>
                     <Label Content="Minimum Price" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="596" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
                     <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1036">
-                        <Button Content="Search" HorizontalAlignment="Left" Margin="832,10,0,0" VerticalAlignment="Top" Width="194" Height="36" Style="{StaticResource btn-primary}"/>
-                        <TextBox HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B"/>
+                        <Button Content="Search" HorizontalAlignment="Left" Margin="786,10,0,0" VerticalAlignment="Top" Width="240" Height="36" Style="{StaticResource btn-primary}"/>
+                        <TextBox Style="{StaticResource tb-border-1}" HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B"/>
                     </Grid>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="254" Margin="10,57,0,0" VerticalAlignment="Top" Width="586"/>
+                    <ScrollViewer HorizontalAlignment="Left" Height="515" Margin="10,71,0,0" VerticalAlignment="Top" Width="1032">
+                        <StackPanel x:Name="PanelItems" Orientation="Horizontal" HorizontalAlignment="Left" Height="505" VerticalAlignment="Top" Width="1022"/>
+                    </ScrollViewer>
+
                 </Grid>
             </Grid>
             <Grid x:Name="grid_Cart" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="1279,0,0,0" Background="#FF695CAB">

@@ -79,6 +79,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\ItemCard.cs" />
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
     <Compile Include="Helpers\Utils\Transition.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="ViewModels\Admin\HomeViewModel.cs" />
     <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
@@ -116,9 +118,6 @@
     </Compile>
     <Compile Include="Views\Seller\SellerView.xaml.cs">
       <DependentUpon>SellerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TestMaterial.xaml.cs">
-      <DependentUpon>TestMaterial.xaml</DependentUpon>
     </Compile>
     <Page Include="Styles\Buttons.xaml">
       <SubType>Designer</SubType>
@@ -176,10 +175,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\TestMaterial.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -208,7 +203,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="ReadMe Please.txt" />
   </ItemGroup>

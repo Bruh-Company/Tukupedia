@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,15 @@ namespace Tukupedia.Helpers.Utils
         public static string translate(int val, int len)
         {
             return string.Format("{0:D" + len + "}", val);
+        }
+
+        public static string formatMoney(int money)
+        {
+            return money.ToString("C2", CultureInfo.CurrentCulture);
+        }
+        public static string formatNumber(int val)
+        {
+            return val.ToString("C2");
         }
     }
 }

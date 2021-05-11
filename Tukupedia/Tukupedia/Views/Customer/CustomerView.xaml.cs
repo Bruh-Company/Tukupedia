@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
 {
@@ -30,9 +31,12 @@ namespace Tukupedia.Views.Customer
             
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
-
+            CustomerViewModel.loadItems(PanelItems);
+            Label l = new Label();
+            l.Content = "test";
+            PanelItems.Children.Add(l);
         }
     }
 }

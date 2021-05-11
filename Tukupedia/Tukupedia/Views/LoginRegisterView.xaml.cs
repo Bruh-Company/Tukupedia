@@ -89,7 +89,7 @@ namespace Tukupedia.Views
                 this.Show();
             }
         }
-        //Butoon Seller Login
+        //Button Seller Login
         private void btnSellerLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel
