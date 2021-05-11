@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
+        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
     <Grid>
         <Canvas HorizontalAlignment="Left" Height="100" Width="1274" VerticalAlignment="Top" Margin="0,0,-0.4,0" Background="#65c65b">
             <Image Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
@@ -52,7 +52,7 @@
             <TextBox Name="textboxNamaPembeli" Text="SHUE CHEN" Canvas.Left="1015" Canvas.Top="210" Width="250" Height="30" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Center" IsReadOnly="True"/>
 
             <Label      Content="Alamat Tujuan"     Canvas.Left="870" Canvas.Top="240"    Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="870" Canvas.Top="270" Width="394" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsReadOnly="True"/>
+            <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="870" Canvas.Top="270" Width="320" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsReadOnly="True"/>
             
             <Label      Content="Produk"            Canvas.Left="870" Canvas.Top="330"    Style="{StaticResource md-secondary}"/>
             <ListBox Name="listboxProdukPesanan" Canvas.Left="871" Canvas.Top="361" Width="390" Height="125" FontSize="14" Foreground="#FFFFFF" BorderBrush="Transparent"/>
@@ -63,7 +63,7 @@
             <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="875" Canvas.Top="520" Width="190" Height="40" Style="{StaticResource btn-danger}"/>
             <Button Name="btnSuccessPesanan" Content="Terima" FontSize="18" Canvas.Left="1070" Canvas.Top="520" Width="190" Height="40" Style="{StaticResource btn-primary}"/>
         </Canvas>
-        <Canvas Name="canvasProduk" HorizontalAlignment="Left" Height="590" Margin="1298,100,-1298.4,0" VerticalAlignment="Top" Width="1274">
+        <Canvas Name="canvasProduk" HorizontalAlignment="Left" Height="590" Margin="1279,100,-1279.4,0" VerticalAlignment="Top" Width="1274">
             <Button Name="btnSemuaProduk" Content="Semua Produk" FontSize="20" Width="426" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#65c65b" ClipToBounds="True" FontWeight="Regular"/>
             <Button Name="btnProdukBelumTerjual" Content="Produk Belum Terjual" FontSize="20" Width="424" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#65c65b" ClipToBounds="True" FontWeight="Regular" Canvas.Left="420"/>
             <Button Name="btnProdukTerjual" Content="Produk Terjual" FontSize="20" Width="424" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#65c65b" ClipToBounds="True" FontWeight="Regular" Canvas.Left="850"/>
@@ -97,7 +97,7 @@
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="125" Height="40" Canvas.Left="1000" Canvas.Top="530" Style="{StaticResource btn-primary}"/>
             <Button Name="btnDelete" Content="Delete" FontSize="20" Width="125" Height="40" Canvas.Left="1130" Canvas.Top="530" Style="{StaticResource btn-danger}"/>
         </Canvas>
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Left" Margin="2572,100,-2572.4,0.4" Width="1274">
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Left" Margin="2558,100,-2558.4,0.4" Width="1274">
             <Label Content="INFO TOKO" Canvas.Left="200" Canvas.Top="40" Style="{StaticResource h2-success}"/>
             <Label Name="labelNamaTokoInfo" Content="NAMA TOKO" Canvas.Left="200" Canvas.Top="95" Style="{StaticResource h2}"/>
 
