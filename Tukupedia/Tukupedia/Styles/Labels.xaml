@@ -37,27 +37,27 @@
     
     <!--Base-->
     <Style TargetType="Label">
-        <Setter Property="Foreground" Value="#ffffff"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
     </Style>
 
     <!--text-success-->
     <Style TargetType="Label" x:Key="text-success">
-        <Setter Property="Foreground" Value="#65c65b"/>
+        <Setter Property="Foreground" Value="#65C65B"/>
     </Style>
 
     <!--text-secondary-->
     <Style TargetType="Label" x:Key="text-secondary">
-        <Setter Property="Foreground" Value="#E7E7E7"/>
+        <Setter Property="Foreground" Value="#9A9A9A"/>
     </Style>
 
     <!--text-danger-->
     <Style TargetType="Label" x:Key="text-danger">
-        <Setter Property="Foreground" Value="#FFC548"/>
+        <Setter Property="Foreground" Value="#E23434"/>
     </Style>
 
     <!--text-warning-->
     <Style TargetType="Label" x:Key="text-warning">
-        <Setter Property="Foreground" Value="#E23434"/>
+        <Setter Property="Foreground" Value="#FFC548"/>
     </Style>
 
     <!--h1-->
