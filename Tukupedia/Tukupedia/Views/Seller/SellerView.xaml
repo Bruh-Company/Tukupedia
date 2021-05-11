@@ -49,15 +49,17 @@
             <TextBox Name="textboxKurir" Text="JEK_GO" Canvas.Left="1015" Canvas.Top="180" Width="250" Height="30" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Center" IsEnabled="False"/>
 
             <Label      Content="Nama Pembeli"      Canvas.Left="870" Canvas.Top="210"    Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxNamaPembeli" Text="SHUE CHEN" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1014"  Canvas.Top="212" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False"/>
+            <TextBox Name="textboxNamaPembeli" Text="SHUE CHEN" Canvas.Left="1015" Canvas.Top="210" Width="250" Height="30" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Center" IsEnabled="False"/>
+
+            <Label      Content="Alamat Tujuan"     Canvas.Left="870" Canvas.Top="240"    Style="{StaticResource md-secondary}"/>
+            <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="870" Canvas.Top="270" Width="394" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsEnabled="False"/>
             
-            <Label Content="Alamat Tujuan" Canvas.Left="870" Canvas.Top="242" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
-            <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Height="60" Width="391" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="870"  Canvas.Top="271" TextWrapping="Wrap" BorderThickness="0" IsEnabled="False"/>
+            <Label      Content="Produk"            Canvas.Left="870" Canvas.Top="330"    Style="{StaticResource md-secondary}"/>
+            <ListBox Name="listboxProdukPesanan" Canvas.Left="871" Canvas.Top="361" Width="390" Height="125" FontSize="14" Foreground="#FFFFFF" BorderBrush="Transparent"/>
+
+            <Label      Content="Total"             Canvas.Left="870" Canvas.Top="486"    Style="{StaticResource xl-secondary}"/>
+            <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Canvas.Left="1011" Canvas.Top="487" Width="250"  Height="30" FontSize="20" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Center" TextAlignment="Right"/>
             
-            <Label Content="Produk" Canvas.Left="870" Canvas.Top="331" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
-            <ListBox Height="125" Width="390" Canvas.Left="871" Canvas.Top="361" FontSize="14" Foreground="#DD000000"/>
-            <Label Content="Total" Canvas.Left="870" Canvas.Top="486" FontSize="16" FontWeight="Regular" Foreground="#9A9A9A"/>
-            <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Height="30" Width="250" FontSize="18" FontWeight="SemiBold" Foreground="Black" BorderBrush="{x:Null}" Padding="5,2,5,5" Canvas.Left="1011"  Canvas.Top="487" TextWrapping="NoWrap" BorderThickness="0" IsEnabled="False" UseLayoutRounding="True" TextAlignment="Right"/>
             <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="874" Canvas.Top="522" Width="196" Height="40" Background="#FFE23434" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
             <Button Name="btnSuccessPesanan" Content="Terima" FontSize="18" Canvas.Left="1069" Canvas.Top="522" Width="195" Height="40" Background="#FF65C65B" BorderBrush="#FF65C65B" BorderThickness="1" ClipToBounds="True" Foreground="White"/>
         </Canvas>
