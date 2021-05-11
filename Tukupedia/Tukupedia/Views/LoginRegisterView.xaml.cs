@@ -27,7 +27,6 @@ namespace Tukupedia.Views
         public LoginRegisterView()
         {
             InitializeComponent();
-            cbMendaftarSebagai_DropDownClosed(null, null);
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
@@ -57,54 +56,6 @@ namespace Tukupedia.Views
             this.Close();
         }
 
-
-        private void cbMendaftarSebagai_DropDownClosed(object sender, EventArgs e)
-        {
-            if(cbMendaftarSebagai.SelectedIndex == 0)
-            {
-                lbTanggalLahir.Visibility = Visibility.Visible;
-                dpTanggalLahir.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                lbTanggalLahir.Visibility = Visibility.Hidden;
-                dpTanggalLahir.Visibility = Visibility.Hidden;
-            }
-        }
-        //Untuk Register (Diganti saat sudah ganti nama Button)
-        private void btRegisterRegister_Click(object sender, RoutedEventArgs e)
-        {
-            if(tbEmailRegister.Text == "" || tbPasswordRegister.Password == "" || tbAlamatRegister.Text == "" || tbNoTelpRegister.Text == "")
-            {
-                MessageBox.Show("Pastikan anda sudah mengisi semua data :)");
-            }
-            else if(tbPasswordRegister.Password != tbConfirmRegister.Password)
-            {
-                MessageBox.Show("Password dan Confirm Password tidak sama :(");
-            }
-            //0 = user
-            //1 = Seller
-            if(cbMendaftarSebagai.SelectedIndex == 0)
-            {
-                if(dpTanggalLahir.SelectedDate == null)
-                {
-                    MessageBox.Show("Tanggal Lahir tidak boleh kosong");
-                }
-                else
-                {
-                    //LoginRegisterViewModel.registerUser("","",DateTime.Now,null,null,null);
-                }
-            }
-            else if(cbMendaftarSebagai.SelectedIndex == 1)
-            {
-
-            }
-            else
-            {
-                
-            }
-            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
-        }
 
         private void swapCard(object sender, RoutedEventArgs e)
         {
@@ -191,6 +142,24 @@ namespace Tukupedia.Views
         {
 
         }
+        private bool validateCustomerRegister()
+        {
+            bool valid = true;
+            if (
+                tbCustomerAddressRegister.Text == "" &&
+                tbCustomerConfirmPasswordRegister.Password == "" &&
+                tbCustomerEmailRegister.Text == "" &&
+                tbCustomerFullNameRegister.Text == "" &&
+                tbCustomerPasswordRegister.Password == "" &&
+                tbCustomerPhoneNumberRegister.Text == ""
+                )
+                valid = false;
 
+            return valid;
+        }
+        private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
+        }
     }
 }
