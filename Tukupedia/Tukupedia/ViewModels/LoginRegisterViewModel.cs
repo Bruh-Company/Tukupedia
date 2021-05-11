@@ -93,10 +93,11 @@ namespace Tukupedia.ViewModels
             ViewComponent.GridRegisterCustomer2.Height = 413;
             ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer2, Visibility.Hidden);
 
-            //ViewComponent.GridLoginCustomer.Margin = Position.Middle;
-            //ViewComponent.GridLoginCustomer.Opacity = 1;
-            //ViewComponent.GridLoginCustomer.Width = 376.8;
-            //ViewComponent.GridLoginCustomer.Height = 413;
+            ViewComponent.GridRegisterCustomer3.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer3.Opacity = 0;
+            ViewComponent.GridRegisterCustomer3.Width = 376.8;
+            ViewComponent.GridRegisterCustomer3.Height = 413;
+            ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer3, Visibility.Hidden);
         }
 
         // DATABASE STUFF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -339,6 +340,11 @@ namespace Tukupedia.ViewModels
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(
@@ -349,6 +355,9 @@ namespace Tukupedia.ViewModels
                     Visibility.Hidden);
                 ComponentHelper.changeZIndexComponent(
                     ViewComponent.GridRegisterCustomer2,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer3,
                     Visibility.Hidden);
             }
             else if (goTo == CardPage.RegisterFirstPage)
@@ -368,6 +377,11 @@ namespace Tukupedia.ViewModels
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(
@@ -378,6 +392,9 @@ namespace Tukupedia.ViewModels
                     Visibility.Visible);
                 ComponentHelper.changeZIndexComponent(
                     ViewComponent.GridRegisterCustomer2,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer3,
                     Visibility.Hidden);
             }
             else if (goTo == CardPage.RegisterSecondPage)
@@ -397,6 +414,11 @@ namespace Tukupedia.ViewModels
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                    Position.Right, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(
@@ -408,10 +430,46 @@ namespace Tukupedia.ViewModels
                 ComponentHelper.changeZIndexComponent(
                     ViewComponent.GridRegisterCustomer2,
                     Visibility.Visible);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer3,
+                    Visibility.Hidden);
             }
             else if (goTo == CardPage.RegisterThirdPage)
             {
+                transition.makeTransition(ViewComponent.GridLoginCustomer,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                    Position.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                    Position.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
 
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridLoginCustomer,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer1,
+                    Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer2,
+                    Visibility.Visible);
+                ComponentHelper.changeZIndexComponent(
+                    ViewComponent.GridRegisterCustomer3,
+                    Visibility.Visible);
             }
         }
     }
