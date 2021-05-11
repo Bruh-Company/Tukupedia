@@ -52,11 +52,12 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         /*
          * Cara Kerja Insert Raw
          * new DB().insertRAW($"INSERT INTO CUSTOMER(ID,NAME) VALUES ('1','BRUH')").execute();
+         * !! unsanitize, jangan dipake klo nerima input dari user
          */
         public DB insertRAW(string statement)
         {
             resetStatement();
-            this.statement = sanitize(statement);
+            this.statement = statement;
             return this;
         }
         /*
@@ -64,10 +65,10 @@ namespace Tukupedia.Helpers.DatabaseHelpers
          * new DB("user").delete().where("id","1").execute();
          * new DB("user").delete().where("id","1",">").execute();
          */
-        public DB delete()
+        public DB delete(string id)
         {
             resetStatement();
-            statement += $"DELETE {table} ";
+            statement += $"DELETE {table} WHERE `{table}`.ID = '{sanitize(id)}'";
             return this;
         }
         /*
@@ -80,12 +81,19 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string str = "";
             for (int i = 0; i < param.Length; i+=2)
             {
-                param[i] = sanitize(param[i].ToString());
-                param[i + 1] = sanitize(param[i + 1].ToString());
+                if (param[i + 1] is DateTime)
+                {
+                    // tolong dibikin, saya blm lanjutin bwt yg insert hrs nya sama
+                }
+                else
+                {
+                    param[i] = sanitize(param[i].ToString());
+                    param[i + 1] = sanitize(param[i + 1].ToString());
 
-                string comma = (i == param.Length - 2) ? "" : ",";
-                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
-                str +=$" {param[i]} = {petik}{param[i+1]}{petik} {comma}";
+                    string comma = (i == param.Length - 2) ? "" : ",";
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    str += $" {param[i]} = {petik}{param[i + 1]}{petik} {comma}";
+                }
             }
             statement += $"UPDATE {table} SET {str} ";
 
@@ -98,16 +106,31 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB where(string column, string value, string Operator="=")
         {
             string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
-            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{sanitize(value)}' ";
+            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{opSanitize(value)}' ";
             return this;
         }
+
+        public DB where(string column, DateTime value, string Operator = "=", string dateFormatSQL = "dd-mm-yyyy", string dateFormatCS = "dd-MM-yyyy")
+        {
+            string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
+            statement += $" {where} to_date('{sanitize(column)}', '{dateFormatSQL}') {opSanitize(Operator)} to_date('{value.ToString(dateFormatCS)}', '{dateFormatSQL}') ";
+            return this;
+        }
+
         /*
          * Digunakan jika where harus "OR"
          */
         public DB orWhere(string column, string value, string Operator = "=")
         {
             string where = statement.Contains("WHERE") ? " OR " : " WHERE ";
-            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{sanitize(value)}' ";
+            statement += $" {where} {sanitize(column)} {opSanitize(Operator)} '{sanitize(value)}' ";
+            return this;
+        }
+
+        public DB orWhere(string column, DateTime value, string Operator = "=", string dateFormatSQL = "dd-mm-yyyy", string dateFormatCS = "dd-MM-yyyy")
+        {
+            string where = statement.Contains("WHERE") ? " OR " : " WHERE ";
+            statement += $" {where} to_date('{sanitize(column)}', '{dateFormatSQL}') {opSanitize(Operator)} to_date('{value.ToString(dateFormatCS)}', '{dateFormatSQL}') ";
             return this;
         }
         /*
