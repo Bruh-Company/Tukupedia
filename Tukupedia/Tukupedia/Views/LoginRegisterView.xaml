@@ -126,8 +126,8 @@
                                 <Label Content="Phone Number" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
                                 <TextBox x:Name="tbCustomerPhoneNumberRegister" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                                 <Grid Height="72" Margin="0,0,-0.2,0">
-                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
-                                    <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegisterNext2" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0">
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack1" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
+                                    <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegisterNext2" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0" Click="btnCustomerToRegister3_click">
                                         <Button.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleY="1" ScaleX="1"/>
@@ -140,19 +140,17 @@
                                 </Grid>
                             </StackPanel>
                         </Grid>
-                        <Grid x:Name="GridRegisterCustomer2_Copy" HorizontalAlignment="Center" Margin="1260,10,-1240,10" VerticalAlignment="Center" Height="413">
+                        <Grid x:Name="GridRegisterCustomer3" HorizontalAlignment="Center" Margin="1260,10,-1240,10" VerticalAlignment="Center" Height="413">
                             <StackPanel VerticalAlignment="Center" Margin="10,10,9.8,10" Height="393">
                                 <Label Content="Register" FontSize="32" HorizontalContentAlignment="Center" Margin="0,0,-0.2,0" Height="49" VerticalContentAlignment="Bottom" Padding="4,0,4,4"/>
                                 <Label Content="C u s t o m e r    (3  o f  3)" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
-                                <Label Content="Born Date" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Width="347" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <DatePicker x:Name="dpCustomerBornDateRegister1" VerticalAlignment="Top" Width="337" Height="40" Margin="10,0,0,0" HorizontalAlignment="Left" FontSize="18"/>
-                                <Label Content="Address" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <TextBox x:Name="tbCustomerAddressRegister1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
-                                <Label Content="Phone Number" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <TextBox x:Name="tbCustomerPhoneNumberRegister1" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
+                                <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
+                                <TextBox x:Name="tbCustomerPasswordRegister" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
+                                <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
+                                <TextBox x:Name="tbCustomerConfirmPasswordRegister" HorizontalAlignment="Left" Height="40" TextWrapping="Wrap" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
                                 <Grid Height="72" Margin="0,0,-0.2,0">
-                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack1" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0"  Click="btnCustomerToRegister1_click"/>
-                                    <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegisterNext3" Content="Next" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0">
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack2" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0" Click="btnCustomerToRegister2_click"/>
+                                    <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegister" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0" Click="btRegisterRegister_Click">
                                         <Button.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleY="1" ScaleX="1"/>

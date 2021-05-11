@@ -177,6 +177,11 @@ namespace Tukupedia.Views
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
         }
 
+        private void btnCustomerToRegister3_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterThirdPage);
+        }
+
         private void btnSwap_MouseEnter(object sender, MouseEventArgs e)
         {
 
@@ -186,6 +191,6 @@ namespace Tukupedia.Views
         {
 
         }
-        
+
     }
 }
