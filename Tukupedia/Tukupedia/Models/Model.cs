@@ -62,14 +62,16 @@ namespace Tukupedia.Models
             Table.Rows.Remove(row);
             update();
         }
+        //Cara Pakai.. .insert("ID",1,"Column 2","Hello World")
         public void insert(params object[] param)
         {
             DataRow row = Table.NewRow();
 
-            for (int i = 0; i < Table.Columns.Count; i++)
+            for (int i = 0; i < param.Length/2; i++)
             {
-                var item = param[i] as string[];
-                row[item[0]] = item[1];
+                var col = param[i].ToString();
+                var val = param[i + 1].ToString();
+                row[col] = val;
             }
             Table.Rows.Add(row);
             update();
@@ -81,10 +83,11 @@ namespace Tukupedia.Models
         }
         public void updateRow(DataRow row,params object[] param)
         {
-            for (int i = 0; i < Table.Columns.Count; i++)
+            for (int i = 0; i < param.Length/2; i++)
             {
-                var item = param[i] as string[];
-                row[item[0]] = item[1];
+                var col = param[i].ToString();
+                var val = param[i + 1].ToString();
+                row[col] = val;
             }
             update();
         }

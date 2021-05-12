@@ -189,7 +189,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             else
             {
-                statement += $"SELECT * FROM {table} ";
+                statement += $"SELECT * ";
                 for (int i = 0; i < param.Length; i++)
                 {
                     param[i] = sanitize(param[i].ToString());
@@ -198,6 +198,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                     string comma = (i == param.Length - 1) ? "" : ",";
                     statement += $" {temp} {comma} ";
                 }
+                statement += $" FROM {table} ";
             }
             return this;
         }
@@ -207,19 +208,19 @@ namespace Tukupedia.Helpers.DatabaseHelpers
          * new DB("user").select().join("barang","barang_id","=","ID").where("price","1000",">").get();
          * 
          */
-        public DB join(string table, string id ,string Operator, string foreignKey)
+        public DB join(string table,string joinTable, string id ,string Operator, string reference)
         {
-            statement += $" join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
+            statement += $" join {sanitize(table)} on {sanitize(joinTable)}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(reference)} ";
             return this;
         }
-        public DB leftJoin(string table, string id, string Operator, string foreignKey)
+        public DB leftJoin(string table,string joinTable, string id, string Operator, string reference)
         {
-            statement += $" left join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
+            statement += $" left join {sanitize(table)} on {sanitize(joinTable)}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(reference)} ";
             return this;
         }
-        public DB rightJoin(string table, string id, string Operator, string foreignKey)
+        public DB rightJoin(string table,string joinTable, string id, string Operator, string reference)
         {
-            statement += $" right join {sanitize(table)} on {this.table}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(foreignKey)} ";
+            statement += $" right join {sanitize(table)} on {sanitize(joinTable)}.{sanitize(id)} {opSanitize(Operator)} {sanitize(table)}.{sanitize(reference)} ";
             return this;
         }
         /**
