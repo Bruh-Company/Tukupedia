@@ -49,10 +49,6 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                     string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
                     values += $" {petik}{param[i + 1]}{petik} {comma} ";
                 }
-                else if (param[i + 1] is int)
-                {
-                    // kerjoan marmar
-                }
                 else
                 {
                     param[i] = sanitize(param[i].ToString());
@@ -189,7 +185,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             else
             {
-                statement += $"SELECT * ";
+                statement += $"SELECT ";
                 for (int i = 0; i < param.Length; i++)
                 {
                     param[i] = sanitize(param[i].ToString());
@@ -204,8 +200,9 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         }
         /*
          * Cara Kerja Join
-         * 
-         * new DB("user").select().join("barang","barang_id","=","ID").where("price","1000",">").get();
+         *
+         * Catatan :                     Table Join  Join dgn siapa   Reference
+         * new DB("barang").select().join("category","barang","id","=","ID").where("price","1000",">").get();
          * 
          */
         public DB join(string table,string joinTable, string id ,string Operator, string reference)
@@ -252,7 +249,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 CommandText = statement,
                 Connection = App.connection
             };
-            //MessageBox.Show(statement);
+            MessageBox.Show(statement);
 
             App.openConnection(out _);
             cmd.ExecuteNonQuery();

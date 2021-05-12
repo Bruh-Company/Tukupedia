@@ -29,7 +29,7 @@ namespace Tukupedia.ViewModels {
         private static SellerModel sellerModel = new SellerModel();
 
         public static void InitializeView(SellerView view) {
-            TESTING();
+            //TESTING();
             ViewComponent = view;
             transition = new Transition(transFPS);
             initState();

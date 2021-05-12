@@ -38,7 +38,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Tukupedia/Views/LoginRegisterView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" />
@@ -49,11 +48,14 @@
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/ReviewCard.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Models/Model.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/DatabaseHelpers/DB.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/LoginRegisterView.xaml.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/LoginRegisterView.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/LoginRegisterViewModel.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -101,7 +103,7 @@
       <workItem from="1620737216204" duration="12818000" />
       <workItem from="1620794515537" duration="1779000" />
       <workItem from="1620798301764" duration="578000" />
-      <workItem from="1620798915011" duration="22828000" />
+      <workItem from="1620798915011" duration="25698000" />
     </task>
     <servers />
   </component>

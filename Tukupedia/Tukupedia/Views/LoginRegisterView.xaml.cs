@@ -255,7 +255,7 @@ namespace Tukupedia.Views
 
         private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
         {
-            //not done
+            
             LoginRegisterViewModel.RegisterSeller(
                 namaSeller: tbSellerFullNameRegister.Text,
                 namaToko: tbSellerShopNameRegister.Text,

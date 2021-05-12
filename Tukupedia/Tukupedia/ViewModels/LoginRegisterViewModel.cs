@@ -162,7 +162,7 @@ namespace Tukupedia.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
+                    MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA_TOKO"].ToString());
                     Session.Login(seller, "Seller");
                     Session.isLogin = true;
                 }
@@ -183,17 +183,16 @@ namespace Tukupedia.ViewModels
             else
             {
                 validation &= validateRegisterUser(new CustomerModel().Table, email);
-                //Buat Kode Customer
                 if (validation)
                 {
-                    new DB("customer").insert(
-                    "nama", nama,
-                    "email", email,
-                    "tanggal_lahir", lahir,
-                    "alamat", alamat,
-                    "no_telp", notelp,
-                    "password", password,
-                    "kode", generateCode(new CustomerModel().Table, nama)
+                    new DB("CUSTOMER").insert(
+                    "ID",0,
+                    "NAMA", nama,
+                    "EMAIL", email,
+                    "TANGGAL_LAHIR", lahir,
+                    "ALAMAT", alamat,
+                    "NO_TELP", notelp,
+                    "PASSWORD", password
                     ).execute();
                     MessageBox.Show("Berhasil Daftar");
                 }
@@ -218,17 +217,19 @@ namespace Tukupedia.ViewModels
             {
                 //Check Username/Email sama belum
                 validation &= validateRegisterUser(new SellerModel().Table, email);
-                //Buat Kode Customer
+                //Buat Kode Seller
                 if (validation)
                 {
-                    //new DB("seller").insert(
-                    //"nama", nama,
-                    //"email", email,
-                    //"tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
-                    //"alamat", alamat,
-                    //"no_telp", notelp,
-                    //"password", password
-                    //).execute();
+                    new DB("SELLER").insert(
+                        "ID", 0,
+                        "EMAIL",email,
+                        "NAMA_TOKO",namaToko,
+                        "ALAMAT",alamat,
+                        "NO_TELP",notelp,
+                        "PASSWORD",password,
+                        "NAMA_SELLER",namaSeller,
+                        "NIK",nikSeller
+                    ).execute();
 
                     //blm selesai
                     MessageBox.Show("Berhasil Daftar Seller");
