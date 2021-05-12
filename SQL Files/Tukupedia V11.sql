@@ -76,12 +76,8 @@ create table CUSTOMER
     SALDO         NUMBER default 0,
     KODE          VARCHAR2(32)  not null,
     STATUS        CHAR   default 1,
-<<<<<<< Updated upstream
-    PASSWORD      VARCHAR2(64)  not null
-=======
     PASSWORD      VARCHAR2(64)  not null,
     IMAGE         VARCHAR2(255)
->>>>>>> Stashed changes
 )
 /
 
@@ -135,11 +131,7 @@ create table SELLER
             primary key,
     KODE          VARCHAR2(32)  not null,
     EMAIL         VARCHAR2(30),
-<<<<<<< Updated upstream
-    NAMA          VARCHAR2(100) not null,
-=======
     NAMA_TOKO     VARCHAR2(100) not null,
->>>>>>> Stashed changes
     ALAMAT        VARCHAR2(30)  not null,
     NO_TELP       VARCHAR2(30),
     SALDO         NUMBER default 0,
@@ -147,11 +139,7 @@ create table SELLER
     STATUS        CHAR   default 1,
     PASSWORD      VARCHAR2(64)  not null,
     TANGGAL_LAHIR DATE          not null,
-<<<<<<< Updated upstream
-    NAMA_PENJUAL  VARCHAR2(100) not null,
-=======
     NAMA_SELLER   VARCHAR2(100) not null,
->>>>>>> Stashed changes
     NIK           NUMBER        not null
 )
 /
@@ -193,13 +181,9 @@ create table ITEM
         constraint FK_ID_SELLER
             references SELLER,
     BERAT       NUMBER           not null,
-<<<<<<< Updated upstream
-    STOK        NUMBER default 0 not null
-=======
     STOK        NUMBER default 0 not null,
     RATING      NUMBER default 0,
     IMAGE       VARCHAR2(255)
->>>>>>> Stashed changes
 )
 /
 
@@ -217,7 +201,6 @@ END;
 
 create table KURIR
 (
-<<<<<<< Updated upstream
     ID     NUMBER         not null,
     KODE   VARCHAR2(32)   not null,
     NAMA   VARCHAR2(30)   not null,
@@ -227,17 +210,6 @@ create table KURIR
 /
 
 comment on column KURIR.HARGA is 'Harga/KM'
-=======
-    ID      NUMBER         not null,
-    KODE    VARCHAR2(32)   not null,
-    NAMA    VARCHAR2(30)   not null,
-    "Harga" NUMBER         not null,
-    STATUS  CHAR default 1 not null
-)
-/
-
-comment on column KURIR."Harga" is 'Harga/KM'
->>>>>>> Stashed changes
 /
 
 create unique index KURIR_ID_UINDEX
@@ -296,26 +268,16 @@ END;
 
 create table H_TRANS_ITEM
 (
-<<<<<<< Updated upstream
-    ID                NUMBER         not null,
-    KODE              VARCHAR2(32)   not null,
-    TANGGAL_TRANSAKSI DATE           not null,
-=======
     ID                NUMBER           not null,
     KODE              VARCHAR2(32)     not null,
     TANGGAL_TRANSAKSI DATE             not null,
->>>>>>> Stashed changes
     ID_CUSTOMER       NUMBER
         constraint H_TRANS_ITEM_CUSTOMER_ID_FK
             references CUSTOMER,
     ID_KURIR          NUMBER
         constraint H_TRANS_ITEM_KURIR_ID_FK
             references KURIR,
-<<<<<<< Updated upstream
-    STATUS            CHAR default 1 not null
-=======
     STATUS            CHAR default 'W' not null
->>>>>>> Stashed changes
 )
 /
 
@@ -346,17 +308,6 @@ END;
 
 create table D_TRANS_ITEM
 (
-<<<<<<< Updated upstream
-    ID        NUMBER         not null,
-    ID_HTRANS NUMBER         not null
-        constraint DTRANS_ITEM_H_TRANS_ITEM
-            references H_TRANS_ITEM,
-    ID_ITEM   NUMBER         not null
-        constraint D_TRANS_ITEM_ITEM_ID_FK
-            references ITEM,
-    JUMLAH    NUMBER         not null,
-    STATUS    CHAR default 0 not null
-=======
     ID        NUMBER           not null,
     ID_HTRANS NUMBER           not null
         constraint DTRANS_ITEM_H_TRANS_ITEM
@@ -366,7 +317,6 @@ create table D_TRANS_ITEM
             references ITEM,
     JUMLAH    NUMBER           not null,
     STATUS    CHAR default 'W' not null
->>>>>>> Stashed changes
 )
 /
 
