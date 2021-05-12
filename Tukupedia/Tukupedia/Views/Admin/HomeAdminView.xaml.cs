@@ -125,7 +125,6 @@ namespace Tukupedia.Views.Admin
             tbEmailSeller.Text = "";
             tbAlamatSeller.Text = "";
             tbNotelpSeller.Text = "";
-            tbLahirSeller.SelectedDate = null;
             cbisOfficialSeller.SelectedIndex = -1;
         }
         void reloadCustomer()
@@ -175,7 +174,6 @@ namespace Tukupedia.Views.Admin
                 tbAlamatSeller.Text = dr[3].ToString();
                 tbEmailSeller.Text = dr[1].ToString();
                 tbNotelpSeller.Text = dr[4].ToString();
-                tbLahirSeller.SelectedDate = DateTime.Parse(dr[5].ToString());
                 if (dr[6].ToString() == "Aktif")
                 {
                     btBanSeller.Content = "Ban Seller";
