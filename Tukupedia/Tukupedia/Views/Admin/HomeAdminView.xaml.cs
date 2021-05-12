@@ -217,7 +217,7 @@ namespace Tukupedia.Views.Admin
 
         private void btUpdateSeller_Click(object sender, RoutedEventArgs e)
         {
-            svm.update(tbNamaSeller.Text, tbEmailSeller.Text, tbAlamatSeller.Text, tbNotelpSeller.Text, tbLahirSeller.SelectedDate.Value, cbisOfficialSeller.SelectedIndex);
+            svm.update(tbNamaSeller.Text, tbEmailSeller.Text, tbAlamatSeller.Text, tbNotelpSeller.Text, cbisOfficialSeller.SelectedIndex);
             resetInput();
             reloadSeller();
         }

@@ -21,7 +21,7 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            sm.initAdapter($"select KODE as \"Kode\", EMAIL as \"Email\", NAMA as \"Nama User\", ALAMAT as \"Alamat\", NO_TELP as \"Nomor Telepon\", to_char(TANGGAL_LAHIR,'dd-mm-yyyy') as \"Tanggal Lahir\", case STATUS when '1' then 'Aktif' when '0' then 'Banned' end as \"Status\", case IS_OFFICIAL when '1' then 'Yes' when '0' then 'No' end as \"is Official\" from SELLER order by KODE");
+            sm.initAdapter($"select KODE as \"Kode\", EMAIL as \"Email\", NAMA as \"Nama User\", ALAMAT as \"Alamat\", NO_TELP as \"Nomor Telepon\", to_char(CREATED_AT,'dd-mm-yyyy') as \"Mendaftar Sejak\", case STATUS when '1' then 'Aktif' when '0' then 'Banned' end as \"Status\", case IS_OFFICIAL when '1' then 'Yes' when '0' then 'No' end as \"is Official\" from SELLER order by KODE");
         }
 
         public DataTable getDataTable()
@@ -41,10 +41,10 @@ namespace Tukupedia.ViewModels.Admin
                 return null;
             }
         }
-        public void update(string nama, string email, string alamat, string notelp, DateTime lahir, int official)
+        public void update(string nama, string email, string alamat, string notelp, int official)
         {
             DataRow dr = sm.Table.Rows[selected];
-            new DB("seller").update("TANGGAL_LAHIR", lahir).where("KODE", dr[0].ToString()).execute();
+            //new DB("seller").update("TANGGAL_LAHIR", lahir).where("KODE", dr[0].ToString()).execute();
             new DB("seller").update("IS_OFFICIAL", $"{official}").where("KODE", dr[0].ToString()).execute();
             dr[1] = email;
             dr[2] = nama;
