@@ -25,7 +25,7 @@ namespace Tukupedia.ViewModels
 
     public static class LoginRegisterViewModel
     {
-        private enum CustomerSellerStage
+        public enum CustomerSellerStage
         {
             Customer,
             Seller
@@ -63,14 +63,12 @@ namespace Tukupedia.ViewModels
             ViewComponent.CardSeller.Margin = MarginPosition.Down;
             ViewComponent.CardSeller.Width = 397;
             ViewComponent.CardSeller.Height = 433;
-            ComponentHelper.changeVisibilityComponent(ViewComponent.CardSeller,
-                Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(ViewComponent.CardSeller, Visibility.Hidden);
 
             ViewComponent.CardCustomer.Margin = MarginPosition.Middle;
             ViewComponent.CardCustomer.Width = 397;
             ViewComponent.CardCustomer.Height = 433;
-            ComponentHelper.changeVisibilityComponent(ViewComponent.CardCustomer,
-                Visibility.Visible);
+            ComponentHelper.changeVisibilityComponent(ViewComponent.CardCustomer, Visibility.Visible);
         }
 
         public static void InitializeState()
@@ -101,7 +99,7 @@ namespace Tukupedia.ViewModels
 
         // DATABASE STUFF >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-        public static bool validateRegisterUser(DataTable table,string email)
+        public static bool validateRegisterUser(DataTable table, string email)
         {
             int counter = table.Select($"email = '{email}'").Length;
             return counter == 0;
@@ -172,7 +170,7 @@ namespace Tukupedia.ViewModels
 
         }
 
-        public static bool RegisterCustomer(string email,string nama, DateTime lahir, string alamat, string notelp, string password)
+        public static bool RegisterCustomer(string email, string nama, DateTime lahir, string alamat, string notelp, string password)
         {
             //Validasi
             bool validation = true;
@@ -207,11 +205,11 @@ namespace Tukupedia.ViewModels
             return validation;
         }
 
-        public static bool RegisterSeller(string username, string nama, string alamat, string notelp, string password, string email, DateTime lahir)
+        public static bool RegisterSeller(string namaSeller, string namaToko, string alamat, string notelp, string password, string email, string nikSeller)
         {
             //Validasi
             bool validation = true;
-            if (username == "admin")
+            if (email == "admin")
             {
                 MessageBox.Show("Dilarang jadi Admin");
                 validation = false;
@@ -223,14 +221,16 @@ namespace Tukupedia.ViewModels
                 //Buat Kode Customer
                 if (validation)
                 {
-                    new DB("seller").insert(
-                    "nama", nama,
-                    "email", email,
-                    "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
-                    "alamat", alamat,
-                    "no_telp", notelp,
-                    "password", password
-                    ).execute();
+                    //new DB("seller").insert(
+                    //"nama", nama,
+                    //"email", email,
+                    //"tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                    //"alamat", alamat,
+                    //"no_telp", notelp,
+                    //"password", password
+                    //).execute();
+
+                    //blm selesai
                     MessageBox.Show("Berhasil Daftar Seller");
                 }
                 else
@@ -335,154 +335,309 @@ namespace Tukupedia.ViewModels
             const double multiplier = 80;
 
             CardStage = goTo;
-
-            if (goTo == CardPage.LoginPage)
+            
+            if (UserStage == CustomerSellerStage.Customer)
             {
-                transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
 
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridLoginCustomer,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer1,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer2,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer3,
-                    Visibility.Hidden);
+                if (goTo == CardPage.LoginPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginCustomer,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginCustomer,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer2,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterFirstPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginCustomer,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginCustomer,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer1,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer2,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterSecondPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginCustomer,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginCustomer,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer2,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterThirdPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginCustomer,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer1,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer2,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterCustomer3,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginCustomer,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer2,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterCustomer3,
+                        Visibility.Visible);
+                }
             }
-            else if (goTo == CardPage.RegisterFirstPage)
+            else
             {
-                transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
+                if (goTo == CardPage.LoginPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginSeller,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller1,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller2,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
 
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridLoginCustomer,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer1,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer2,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer3,
-                    Visibility.Hidden);
-            }
-            else if (goTo == CardPage.RegisterSecondPage)
-            {
-                transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginSeller,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller2,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterFirstPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginSeller,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller1,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller2,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
 
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridLoginCustomer,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer1,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer2,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer3,
-                    Visibility.Hidden);
-            }
-            else if (goTo == CardPage.RegisterThirdPage)
-            {
-                transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    MarginPosition.Left, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-                transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginSeller,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller1,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller2,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterSecondPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginSeller,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller1,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller2,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller3,
+                        MarginPosition.Right, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
 
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridLoginCustomer,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer1,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer2,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.GridRegisterCustomer3,
-                    Visibility.Visible);
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginSeller,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller2,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller3,
+                        Visibility.Hidden);
+                }
+                else if (goTo == CardPage.RegisterThirdPage)
+                {
+                    transition.makeTransition(ViewComponent.GridLoginSeller,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller1,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller2,
+                        MarginPosition.Left, 0,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+                    transition.makeTransition(ViewComponent.GridRegisterSeller3,
+                        MarginPosition.Middle, 1,
+                        speedMargin * multiplier / transFPS,
+                        speedOpacity * multiplier / transFPS,
+                        "with previous");
+
+                    transition.playTransition();
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridLoginSeller,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller1,
+                        Visibility.Hidden);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller2,
+                        Visibility.Visible);
+                    ComponentHelper.changeZIndexComponent(
+                        ViewComponent.GridRegisterSeller3,
+                        Visibility.Visible);
+                }
             }
         }
     }
