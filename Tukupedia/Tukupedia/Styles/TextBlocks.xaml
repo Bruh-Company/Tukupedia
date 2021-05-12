@@ -193,7 +193,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-lg"
            BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -201,7 +201,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-lg-secondary"
            BasedOn="{StaticResource textblock-secondary}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -209,7 +209,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-lg-success"
            BasedOn="{StaticResource textblock-success}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -217,7 +217,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-lg-danger"
            BasedOn="{StaticResource textblock-danger}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -225,7 +225,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-lg-warning"
            BasedOn="{StaticResource textblock-warning}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -233,7 +233,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-md"
            BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -241,7 +241,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-md-secondary"
            BasedOn="{StaticResource textblock-secondary}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -249,7 +249,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-md-success"
            BasedOn="{StaticResource textblock-success}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -257,7 +257,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-md-danger"
            BasedOn="{StaticResource textblock-danger}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -265,7 +265,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-md-warning"
            BasedOn="{StaticResource textblock-warning}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -273,7 +273,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-sm"
            BasedOn="{StaticResource {x:Type TextBlock}}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -281,7 +281,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-sm-secondary"
            BasedOn="{StaticResource textblock-secondary}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -289,7 +289,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-sm-success"
            BasedOn="{StaticResource textblock-success}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -297,7 +297,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-sm-danger"
            BasedOn="{StaticResource textblock-danger}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
@@ -305,7 +305,7 @@
     <Style TargetType="TextBlock"
            x:Key="textblockblock-sm-warning"
            BasedOn="{StaticResource textblock-warning}">
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 

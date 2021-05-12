@@ -4,7 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
+using SAPBusinessObjects.WPF.Viewer;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.Views.Customer;
 
 namespace Tukupedia.Components
 {
@@ -17,6 +19,8 @@ namespace Tukupedia.Components
         private RatingBar rating;
         private TextBlock terjual;
         private Button lihatItem;
+        private StackPanel spRating;
+        private TextBlock tbRating;
         public ItemCard()
         {
             this.UniformCornerRadius = 5;
@@ -40,12 +44,22 @@ namespace Tukupedia.Components
             harga.Style = Application.Current.TryFindResource("textblockblock-md-danger") as Style;
             harga.FontSize = 16;
             harga.Foreground = new SolidColorBrush(Color.FromRgb(232,112,89));
-            // Label Rating
+            //Stack Panel untuk rating
+            spRating = new StackPanel();
+            // Label + Bintang Rating
             rating = new RatingBar();
             rating.Foreground = new SolidColorBrush(Colors.Yellow);
             rating.IsReadOnly = true;
             rating.Min = 1;
             rating.Max = 5;
+            tbRating = new MyTextBlock();
+            tbRating.Text = Utility.formatNumber(0);
+            tbRating.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            tbRating.VerticalAlignment = VerticalAlignment.Center;
+            tbRating.Margin = new Thickness(3, 0, 0, 0);
+            spRating.Children.Add(rating);
+            spRating.Children.Add(tbRating);
+            spRating.Orientation = Orientation.Horizontal;
             // Label Tejual 
             terjual = new TextBlock();
             terjual.Style = Application.Current.TryFindResource("textblockblock-md-danger") as Style;
@@ -56,9 +70,18 @@ namespace Tukupedia.Components
             lihatItem.Style = Application.Current.TryFindResource("btn-primary") as Style;
             lihatItem.Content = "Lihat Item";
             lihatItem.Margin = new Thickness(0, 10, 0, 0);
+            lihatItem.Click+=LihatItemOnClick;
             //TODO Kasih Handler untuk buat form detail page (Boleh 1 form ato pakai window baru)
             
 
+        }
+        private void LihatItemOnClick(object sender, RoutedEventArgs e)
+        {
+            ItemDetailView itemDetailView = new ItemDetailView();
+            //Berguna supaya tidak bisa di alt tab
+            itemDetailView.Owner = Window.GetWindow((Window)PresentationSource.FromVisual(this).RootVisual);
+            itemDetailView.initDetail("");
+            itemDetailView.ShowDialog();
         }
 
         public void setImage(string url)
@@ -78,6 +101,7 @@ namespace Tukupedia.Components
         public void setRating(int rating)
         {
             this.rating.Value = rating;
+            tbRating.Text = Utility.formatNumber(rating);
         }
         public void setJual(string jual)
         {
@@ -89,7 +113,7 @@ namespace Tukupedia.Components
             _stackPanel.Children.Add(_image);
             _stackPanel.Children.Add(namaBarang);
             _stackPanel.Children.Add(harga);
-            _stackPanel.Children.Add(rating);
+            _stackPanel.Children.Add(spRating);
             _stackPanel.Children.Add(terjual);
             _stackPanel.Children.Add(lihatItem);
             this.AddChild(_stackPanel);

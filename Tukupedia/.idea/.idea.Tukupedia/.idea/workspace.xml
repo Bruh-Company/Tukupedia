@@ -23,6 +23,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0C285EE5-6767-4513-BB6D-88C242FEC00E/c2/1bcbfd66/Button.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E81851A0-DC73-4A79-AFA9-F5B7273162BE/2d/e55d234b/CultureInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -31,13 +39,16 @@
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Tukupedia/Views/LoginRegisterView.xaml.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Styles/TextBlocks.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Models/Model.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" />
-      <option value="$PROJECT_DIR$/Tukupedia/Components/ItemCard.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CustomerViewModel.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Styles/TextBlocks.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Styles/Buttons.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/ItemCard.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -52,7 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
   <component name="RunManager">
     <configuration name="Tukupedia" type="DotNetProject" factoryName=".NET Project">
@@ -82,7 +93,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1620737212336</updated>
-      <workItem from="1620737216204" duration="12523000" />
+      <workItem from="1620737216204" duration="12818000" />
+      <workItem from="1620794515537" duration="1779000" />
+      <workItem from="1620798301764" duration="578000" />
+      <workItem from="1620798915011" duration="9735000" />
     </task>
     <servers />
   </component>
@@ -96,6 +110,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

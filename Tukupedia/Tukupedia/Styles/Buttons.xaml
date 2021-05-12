@@ -171,9 +171,10 @@
         </Style.Triggers>
     </Style>
     <!--White Button-->
-    <Style BasedOn="{StaticResource MaterialDesignRaisedLightButton}"
+    <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"
            TargetType="Button"
            x:Key="btn-white">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="Foreground" Value="#65C65B"/>
         <Setter Property="BorderBrush" Value="#FFFFFF"/>
         <Setter Property="Background" Value="#FFFFFF"/>
