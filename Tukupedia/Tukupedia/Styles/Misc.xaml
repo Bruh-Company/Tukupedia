@@ -37,7 +37,7 @@
         <Setter Property="Foreground" Value="#FFFFFF"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
-    <Style TargetType="{x:Type DataGridColumnHeader}">
+    <Style TargetType="DataGridColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Foreground" Value="#65C65B" />
     </Style>

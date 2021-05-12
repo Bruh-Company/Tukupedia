@@ -85,7 +85,7 @@ namespace Tukupedia.ViewModels {
             }
 
             if (a == page.Produk) {
-                transition.setCallback(initProdukPage);
+                transition.setCallback(initPageProduk);
 
                 transition.makeTransition(ViewComponent.canvasProduk,
                     MarginPosition.Middle, 1,

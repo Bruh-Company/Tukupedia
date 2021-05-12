@@ -27,7 +27,7 @@ namespace Tukupedia.Models
             }
             if (p == page.Produk) {
                 Table = new DataTable();
-                statement = $"SELECT * FROM 'ITEM' WHERE ID_SELLER = '{idSeller}'";
+                statement = $"SELECT * FROM ITEM WHERE ID_SELLER = '{idSeller}'";
                 Adapter = new OracleDataAdapter(statement, App.connection);
                 Builder = new OracleCommandBuilder(Adapter);
                 Adapter.Fill(Table);
