@@ -21,8 +21,8 @@ namespace Tukupedia.ViewModels.Customer
         public static void loadReviews(FrameworkElement elem, int ItemID)
         {
             DataTable table = new DB("ULASAN").@select()
-                .@join("D_TRANS_ITEM", "ULASAN.ID_D_TRANS_ITEM", "=", "D_TRANS_ITEM.ID")
-                .@join("ITEM", "ID_ITEM", "=", "ID")
+                //.@join("D_TRANS_ITEM", "ULASAN.ID_D_TRANS_ITEM", "=", "D_TRANS_ITEM.ID")
+                //.@join("ITEM", "ID_ITEM", "=", "ID")
                 .@where("ITEM.ID",ItemID.ToString()).get();
             foreach (DataRow row in table.Rows)
             {
