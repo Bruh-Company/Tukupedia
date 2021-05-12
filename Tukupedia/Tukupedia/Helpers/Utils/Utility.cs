@@ -37,5 +37,21 @@ namespace Tukupedia.Helpers.Utils
         {
             return val.ToString("N");
         }
+
+        public static string kodegenerator(string nama)
+        {
+            string[] kotak = nama.Split(' ');
+            string kode = "";
+            if (kotak.Length == 1)
+            {
+                kode += kotak[0].Substring(0, 2);
+            }
+            else
+            {
+                kode += kotak[0].Substring(0, 1) + kotak[1].Substring(0, 1);
+            }
+            return kode;
+        }
+
     }
 }

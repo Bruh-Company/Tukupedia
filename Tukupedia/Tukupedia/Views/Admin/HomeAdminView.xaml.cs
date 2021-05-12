@@ -25,10 +25,12 @@ namespace Tukupedia.Views.Admin
         SellerViewModel svm;
         CategoryViewModel cavm;
         TransactionViewModel tvm;
+        CourierViewModel covm;
+        JenisPembayaranViewModel jvm;
         public HomeAdminView()
         {
             InitializeComponent();
-
+            
         }
         void hideall()
         {
@@ -296,6 +298,148 @@ namespace Tukupedia.Views.Admin
             {
                 canvasD_Trans.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void btKurir_Click(object sender, RoutedEventArgs e)
+        {
+            reloadCourier();
+            btUpdateCourier.Visibility = Visibility.Hidden;
+            btBanCourier.Visibility = Visibility.Hidden;
+            btInsertCourier.Visibility = Visibility.Visible;
+            resetCourier();
+        }
+        void reloadCourier()
+        {
+            covm = new CourierViewModel();
+            
+            dgCourier.ItemsSource = covm.getDataTable().DefaultView;
+        }
+
+        private void btInsertCourier_Click(object sender, RoutedEventArgs e)
+        {
+            if (covm.insert(tbNamaKurir.Text, tbHargaKurir.Text))
+            {
+                resetCourier();
+                reloadCourier();
+            }
+        }
+
+        private void btBanCourier_Click(object sender, RoutedEventArgs e)
+        {
+            covm.delete();
+            reloadCourier();
+        }
+
+        private void btUpdateCourier_Click(object sender, RoutedEventArgs e)
+        {
+            covm.update(tbNamaKurir.Text, tbHargaKurir.Text);
+            reloadCourier();
+            resetCourier();
+        }
+        void resetCourier()
+        {
+            tbHargaKurir.Text = "";
+            tbNamaKurir.Text = "";
+        }
+
+        private void dgCourier_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (dgCourier.SelectedIndex != -1)
+            {
+                DataRow dr = covm.selectData(dgCourier.SelectedIndex);
+                if (dr == null) return;
+                tbNamaKurir.Text = dr[1].ToString();
+                tbHargaKurir.Text = dr[2].ToString();
+                btBanCourier.Visibility = Visibility.Visible;
+                btInsertCourier.Visibility = Visibility.Hidden;
+                btUpdateCourier.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void dgCourier_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if(dgCourier.SelectedIndex == -1)
+            {
+                btUpdateCourier.Visibility = Visibility.Hidden;
+                btBanCourier.Visibility = Visibility.Hidden;
+                btInsertCourier.Visibility = Visibility.Visible;
+                //resetCourier();
+            }
+        }
+
+        private void tbHargaKurir_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string temp = tbHargaKurir.Text;
+            tbHargaKurir.Text = temp.All(char.IsDigit) ? tbHargaKurir.Text : tbHargaKurir.Text.Remove(tbHargaKurir.Text.Length - 1); ;
+            //notelp.Text = notelp.Text.Remove(notelp.Text.Length - 1);
+        }
+
+        private void btTambahJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            if (jvm.insert(tbNamaJenisPembayaran.Text))
+            {
+                reloadJenisPembayaran();
+                tbNamaJenisPembayaran.Text = "";
+            }
+        }
+
+        private void btUpdateJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            jvm.update(tbNamaJenisPembayaran.Text);
+            reloadJenisPembayaran();
+            tbNamaJenisPembayaran.Text = "";
+
+        }
+
+        private void btToggleJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            jvm.delete();
+            reloadJenisPembayaran();
+            tbNamaJenisPembayaran.Text = "";
+
+        }
+
+        private void dgJenisPembayaran_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(dgJenisPembayaran.SelectedIndex != -1)
+            {
+                DataRow dr = jvm.selectData(dgJenisPembayaran.SelectedIndex);
+                if (dr == null) return;
+                tbNamaJenisPembayaran.Text = dr[0].ToString();
+                btToggleJenisPembayaran.Visibility = Visibility.Visible;
+                btUpdateJenisPembayaran.Visibility = Visibility.Visible;
+                btTambahJenisPembayaran.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void dgJenisPembayaran_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            if(dgJenisPembayaran.SelectedIndex == -1)
+            {
+                tbNamaJenisPembayaran.Text = "";
+                btToggleJenisPembayaran.Visibility = Visibility.Hidden;
+                btUpdateJenisPembayaran.Visibility = Visibility.Hidden;
+                btTambahJenisPembayaran.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            reloadJenisPembayaran();
+            tbNamaJenisPembayaran.Text = "";
+            btToggleJenisPembayaran.Visibility = Visibility.Hidden;
+            btUpdateJenisPembayaran.Visibility = Visibility.Hidden;
+            btTambahJenisPembayaran.Visibility = Visibility.Visible;
+        }
+        void reloadJenisPembayaran()
+        {
+            jvm = new JenisPembayaranViewModel();
+            dgJenisPembayaran.ItemsSource = jvm.getDataTable().DefaultView;
         }
     }
 }

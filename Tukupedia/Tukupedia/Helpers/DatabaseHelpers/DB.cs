@@ -83,7 +83,25 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             {
                 if (param[i + 1] is DateTime)
                 {
+
                     // tolong dibikin, saya blm lanjutin bwt yg insert hrs nya sama
+                    param[i] = sanitize(param[i].ToString());
+                    DateTime dt = (DateTime) param[i + 1];
+                    param[i + 1] = $"TO_DATE('{dt.ToString("dd-MM-yyyy")}','dd-mm-yyyy')";//sanitize(param[i + 1].ToString());
+
+                    string comma = (i == param.Length - 2) ? "" : ",";
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    str += $" {param[i]} = {petik}{param[i + 1]}{petik} {comma}";
+                }
+                else if (param[i + 1] is int)
+                {
+
+                    // tolong dibikin, saya blm lanjutin bwt yg insert hrs nya sama
+                    param[i] = sanitize(param[i].ToString());
+                    //sanitize(param[i + 1].ToString());
+
+                    string comma = (i == param.Length - 2) ? "" : ",";
+                    str += $" {param[i]} = {param[i + 1]} {comma}";
                 }
                 else
                 {
@@ -96,6 +114,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 }
             }
             statement += $"UPDATE {table} SET {str} ";
+            //MessageBox.Show(statement);
 
             return this;
         }
@@ -106,7 +125,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB where(string column, string value, string Operator="=")
         {
             string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
-            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{opSanitize(value)}' ";
+            statement += $" {where} {sanitize(column)} {opSanitize(Operator)} '{sanitize(value)}' ";
             return this;
         }
 
@@ -219,7 +238,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 Connection = App.connection
             };
             //MessageBox.Show(statement);
-            
+
             App.openConnection(out _);
             cmd.ExecuteNonQuery();
             App.closeConnection(out _);
