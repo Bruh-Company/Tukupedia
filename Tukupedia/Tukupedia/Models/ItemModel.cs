@@ -10,7 +10,7 @@ namespace Tukupedia.Models
 {
     public class ItemModel : Model
     {
-        private DataTable datagridTable;
+        public DataTable datagridTable;
 
         public ItemModel()
         {
