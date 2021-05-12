@@ -206,12 +206,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-<<<<<<< Updated upstream
-=======
   <ItemGroup>
     <Folder Include="ViewModels\Seller\" />
   </ItemGroup>
->>>>>>> Stashed changes
   <ItemGroup>
     <Resource Include="ReadMe Please.txt" />
   </ItemGroup>
