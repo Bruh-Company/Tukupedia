@@ -45,7 +45,8 @@ namespace Tukupedia.ViewModels.Admin
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir)
         {
             DataRow dr = cm.Table.Rows[selected];
-            new DB("customer").update("TANGGAL_LAHIR", $"TO_DATE('{lahir.ToString("dd-MM-yyyy")}','dd-mm-yyyy')").where("KODE",dr[0].ToString()).execute();
+            new DB("customer").update("TANGGAL_LAHIR", lahir).where("KODE",dr[0].ToString()).execute();
+            //MessageBox.Show(dr[0].ToString());
             dr[1] = email;
             dr[2] = nama;
             dr[3] = alamat;

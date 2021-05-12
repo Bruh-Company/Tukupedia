@@ -27,6 +27,8 @@
            BasedOn="{StaticResource MaterialDesignTextBox}">
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="5,0,0,0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
 

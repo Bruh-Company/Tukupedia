@@ -10,8 +10,6 @@ namespace Tukupedia.Helpers.Utils
 {
     static class ComponentHelper
     {
-
-
         public static void changeZIndexComponent(FrameworkElement component, Visibility vis)
         {
             if (vis == Visibility.Visible)
@@ -38,5 +36,6 @@ namespace Tukupedia.Helpers.Utils
             }
             changeZIndexComponent(component, vis);
         }
+
     }
 }

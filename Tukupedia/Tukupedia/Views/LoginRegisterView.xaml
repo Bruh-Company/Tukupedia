@@ -28,7 +28,7 @@
             <Label Content="WELCOME TO TUKUPEDIA" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="150" Height="192" Width="1645" Canvas.Left="1012" Opacity="0.05" FontStyle="Italic"/>
             <Label Content="WELCOME TO TUKUPEDIA" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="150" Height="192" Width="2068" Canvas.Left="539" Canvas.Top="115" Opacity="0.05" FontStyle="Italic"/>
         </Canvas>
-        <Canvas x:Name="PanelRegister" HorizontalAlignment="Left" Height="669" Margin="1353,578,-617.4,-556.6" VerticalAlignment="Top" Width="538">
+        <Canvas x:Name="PanelRegister" HorizontalAlignment="Left" Height="669" Margin="1346,1151,-612,-1131" VerticalAlignment="Top" Width="538">
             <Label Content="Welcome to Tukupedia" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Canvas.Left="160" Canvas.Top="10"/>
             <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="56"/>
             <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="262"/>

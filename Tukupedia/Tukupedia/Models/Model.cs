@@ -33,11 +33,18 @@ namespace Tukupedia.Models
         }
         public void initAdapter(string statement)
         {
-            Table = new DataTable();
-            this.statement = statement;
-            Adapter = new OracleDataAdapter(statement, App.connection);
-            Builder = new OracleCommandBuilder(Adapter);
-            Adapter.Fill(Table);
+            try
+            {
+                Table = new DataTable();
+                this.statement = statement;
+                Adapter = new OracleDataAdapter(statement, App.connection);
+                Builder = new OracleCommandBuilder(Adapter);
+                Adapter.Fill(Table);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         public void update()
         {

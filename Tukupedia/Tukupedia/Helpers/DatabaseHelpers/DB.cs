@@ -39,12 +39,30 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string values = "(";
             for (int i = 0; i < param.Length; i+=2)
             {
-                param[i] = sanitize(param[i].ToString());
-                param[i + 1] = sanitize(param[i + 1].ToString());
-                string comma = (i == param.Length - 2) ? ")" : ",";
-                columns += $" {param[i]} {comma} ";
-                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
-                values += $" {petik}{param[i+1]}{petik} {comma} ";
+                if (param[i + 1] is DateTime)
+                {
+                    param[i] = sanitize(param[i].ToString());
+                    param[i + 1] = $" TO_DATE('{(DateTime)param[i + 1]:ddMMyyyy}', 'ddmmyyyy') ";
+
+                    string comma = (i == param.Length - 2) ? ")" : ",";
+                    columns += $" {param[i]} {comma} ";
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    values += $" {petik}{param[i + 1]}{petik} {comma} ";
+                }
+                else if (param[i + 1] is int)
+                {
+                    // kerjoan marmar
+                }
+                else
+                {
+                    param[i] = sanitize(param[i].ToString());
+                    param[i + 1] = sanitize(param[i + 1].ToString());
+                    string comma = (i == param.Length - 2) ? ")" : ",";
+                    columns += $" {param[i]} {comma} ";
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    values += $" {petik}{param[i + 1]}{petik} {comma} ";
+                }
+
             }
             statement += $"INSERT INTO {table} {columns} VALUES {values} ";
             return this;
@@ -81,21 +99,36 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string str = "";
             for (int i = 0; i < param.Length; i+=2)
             {
+                string comma = (i == param.Length - 2) ? "" : ",";
+
                 if (param[i + 1] is DateTime)
                 {
-                    // tolong dibikin, saya blm lanjutin bwt yg insert hrs nya sama
+
+                    param[i] = sanitize(param[i].ToString());
+                    DateTime dt = (DateTime)param[i + 1];
+                    param[i + 1] = $"TO_DATE('{dt:dd-MM-yyyy}','dd-mm-yyyy')";
+
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    str += $" {param[i]} = {petik}{param[i + 1]}{petik} {comma}";
+                }
+                else if (param[i + 1] is int)
+                {
+
+                    param[i] = sanitize(param[i].ToString());
+
+                    str += $" {param[i]} = {param[i + 1]} {comma}";
                 }
                 else
                 {
                     param[i] = sanitize(param[i].ToString());
                     param[i + 1] = sanitize(param[i + 1].ToString());
 
-                    string comma = (i == param.Length - 2) ? "" : ",";
                     string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
                     str += $" {param[i]} = {petik}{param[i + 1]}{petik} {comma}";
                 }
             }
             statement += $"UPDATE {table} SET {str} ";
+            //MessageBox.Show(statement);
 
             return this;
         }
@@ -106,7 +139,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB where(string column, string value, string Operator="=")
         {
             string where = statement.Contains("WHERE") ? " AND " : " WHERE ";
-            statement += $" {where} {sanitize(column)} {sanitize(Operator)} '{opSanitize(value)}' ";
+            statement += $" {where} {sanitize(column)} {opSanitize(Operator)} '{sanitize(value)}' ";
             return this;
         }
 
@@ -219,7 +252,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 Connection = App.connection
             };
             //MessageBox.Show(statement);
-            
+
             App.openConnection(out _);
             cmd.ExecuteNonQuery();
             App.closeConnection(out _);

@@ -104,12 +104,15 @@
       <DependentUpon>ResourceTesting.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Admin\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Admin\CourierViewModel.cs" />
     <Compile Include="ViewModels\Admin\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Admin\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Admin\JenisPembayaranViewModel.cs" />
     <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
+    <Compile Include="ViewModels\Seller\SellerViewModel.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="ReadMe Please.txt" />
   </ItemGroup>

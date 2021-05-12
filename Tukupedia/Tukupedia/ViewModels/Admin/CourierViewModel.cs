@@ -4,26 +4,31 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tukupedia.Models;
-using Tukupedia.Helpers.Utils;
-using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
+using Tukupedia.Helpers.DatabaseHelpers;
+using Tukupedia.Helpers.Utils;
+using Tukupedia.Models;
 
 namespace Tukupedia.ViewModels.Admin
 {
-    class CategoryViewModel
+    class CourierViewModel
     {
-        CategoryModel cm;
+        KurirModel cm;
         int selected = -1;
-        public CategoryViewModel()
+        public CourierViewModel()
         {
-            cm = new CategoryModel();
+            cm = new KurirModel();
             reload();
         }
 
         void reload()
         {
-            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kategori\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kategori\" from CATEGORY where STATUS = '1' order by KODE");
+            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kurir\", HARGA as \"Harga /KM\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kurir\" from KURIR where STATUS = '1' order by KODE");
+            //foreach(DataRow dr in cm.Table.Rows)
+            //{
+            //    dr[2] = dr[2].ToString();
+            //}
+            //MessageBox.Show(cm.Table.Rows[0][2].ToString());
         }
 
         public DataTable getDataTable()
@@ -38,16 +43,16 @@ namespace Tukupedia.ViewModels.Admin
                 selected = pos;
                 return cm.Table.Rows[pos];
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
-            
+
         }
-        public void update(string nama)
+        public void update(string nama,string harga)
         {
             DataRow dr = cm.Table.Rows[selected];
-            new DB("category").update("NAMA", nama).where("KODE", dr[0].ToString()).execute();
+            new DB("kurir").update("NAMA", nama,"HARGA", Convert.ToInt32(harga)).where("KODE", dr[0].ToString()).execute();
             //dr[1] = nama;
             //dr[2] = nama;
             //dr[3] = alamat;
@@ -55,7 +60,7 @@ namespace Tukupedia.ViewModels.Admin
             //dr[5] = lahir.ToString("dd-MM-yyyy");
             //cm.update();
         }
-        public bool insert(string nama)
+        public bool insert(string nama, string harga)
         {
             if (nama == "")
             {
@@ -71,12 +76,13 @@ namespace Tukupedia.ViewModels.Admin
             {
                 string kode = Utility.kodeGenerator(nama);
                 int konter = 1;
-                foreach(DataRow dr in cm.Table.Rows){
-                    if (dr[0].ToString().Contains(kode.ToUpper()))konter++ ;
+                foreach (DataRow dr in cm.Table.Rows)
+                {
+                    if (dr[0].ToString().Contains(kode.ToUpper())) konter++;
                 }
                 kode += Utility.translate(konter, 3);
                 DB cmd = new DB();
-                cmd.statement = $"insert into CATEGORY(ID, KODE, NAMA) VALUES (100,'{kode.ToUpper()}','{nama}')";
+                cmd.statement = $"insert into KURIR(ID, KODE, NAMA, HARGA) VALUES (100,'{kode.ToUpper()}','{nama}',{harga})";
                 cmd.execute();
                 return true;
             }
@@ -86,16 +92,16 @@ namespace Tukupedia.ViewModels.Admin
             DataRow dr = cm.Table.Rows[selected];
             if (dr["Status"].ToString() == "Aktif")
             {
-                new DB("customer").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
+                new DB("KURIR").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
             }
             else
             {
-                new DB("customer").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
+                new DB("KURIR").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
             }
         }
         public int nice(DataTable nice, string kode)
         {
-            int wow = Utility.checkMax(nice, "Kode", 1, 3, $"Kode like'%{kode}%'")+1;
+            int wow = Utility.checkMax(nice, "Kode", 1, 3, $"Kode like'%{kode}%'") + 1;
             return wow;
         }
     }

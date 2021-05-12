@@ -15,6 +15,14 @@ using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.ViewModels
 {
+    public static class MarginPosition {
+        public static Thickness Up = new Thickness(0, -100, 0, 100);
+        public static Thickness Left = new Thickness(-100, 0, 100, 0);
+        public static Thickness Down = new Thickness(0, 100, 0, -100);
+        public static Thickness Right = new Thickness(100, 0, -100, 0);
+        public static Thickness Middle = new Thickness(0, 0, 0, 0);
+    }
+
     public static class LoginRegisterViewModel
     {
         private enum CustomerSellerStage
@@ -29,15 +37,6 @@ namespace Tukupedia.ViewModels
             RegisterFirstPage,
             RegisterSecondPage,
             RegisterThirdPage
-        }
-
-        private static class Position
-        {
-            public static Thickness Up      = new Thickness(0, -100, 0, 100);
-            public static Thickness Left    = new Thickness(-100, 0, 100, 0);
-            public static Thickness Down   = new Thickness(0, 100, 0, -100);
-            public static Thickness Right    = new Thickness(100, 0, -100, 0);
-            public static Thickness Middle  = new Thickness(0, 0, 0, 0);
         }
 
         //view component and stage status
@@ -61,13 +60,13 @@ namespace Tukupedia.ViewModels
 
         public static void InitializeCard()
         {
-            ViewComponent.CardSeller.Margin = Position.Down;
+            ViewComponent.CardSeller.Margin = MarginPosition.Down;
             ViewComponent.CardSeller.Width = 397;
             ViewComponent.CardSeller.Height = 433;
             ComponentHelper.changeVisibilityComponent(ViewComponent.CardSeller,
                 Visibility.Hidden);
 
-            ViewComponent.CardCustomer.Margin = Position.Middle;
+            ViewComponent.CardCustomer.Margin = MarginPosition.Middle;
             ViewComponent.CardCustomer.Width = 397;
             ViewComponent.CardCustomer.Height = 433;
             ComponentHelper.changeVisibilityComponent(ViewComponent.CardCustomer,
@@ -76,24 +75,24 @@ namespace Tukupedia.ViewModels
 
         public static void InitializeState()
         {
-            ViewComponent.GridLoginCustomer.Margin = Position.Middle;
+            ViewComponent.GridLoginCustomer.Margin = MarginPosition.Middle;
             ViewComponent.GridLoginCustomer.Width = 376.8;
             ViewComponent.GridLoginCustomer.Height = 413;
             ComponentHelper.changeVisibilityComponent(ViewComponent.GridLoginCustomer, Visibility.Visible);
 
-            ViewComponent.GridRegisterCustomer1.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer1.Margin = MarginPosition.Right;
             ViewComponent.GridRegisterCustomer1.Opacity = 0;
             ViewComponent.GridRegisterCustomer1.Width = 376.8;
             ViewComponent.GridRegisterCustomer1.Height = 413;
             ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer1, Visibility.Hidden);
 
-            ViewComponent.GridRegisterCustomer2.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer2.Margin = MarginPosition.Right;
             ViewComponent.GridRegisterCustomer2.Opacity = 0;
             ViewComponent.GridRegisterCustomer2.Width = 376.8;
             ViewComponent.GridRegisterCustomer2.Height = 413;
             ComponentHelper.changeVisibilityComponent(ViewComponent.GridRegisterCustomer2, Visibility.Hidden);
 
-            ViewComponent.GridRegisterCustomer3.Margin = Position.Right;
+            ViewComponent.GridRegisterCustomer3.Margin = MarginPosition.Right;
             ViewComponent.GridRegisterCustomer3.Opacity = 0;
             ViewComponent.GridRegisterCustomer3.Width = 376.8;
             ViewComponent.GridRegisterCustomer3.Height = 413;
@@ -108,6 +107,13 @@ namespace Tukupedia.ViewModels
             return counter == 0;
         }
 
+        public static string generateCode(DataTable table, string nama)
+        {
+            string kode = Utility.kodeGenerator(nama);
+            int counter = table.Select($"nama = '{kode}'").Length;
+            return kode.ToUpper() + Utility.translate(counter, 3);
+        }
+
         public static void LoginCustomer(string username, string password)
         {
             if (username == "admin" && password == "admin")
@@ -116,20 +122,23 @@ namespace Tukupedia.ViewModels
                 Session.isLogin = true;
                 Session.Login(null, "Admin");
             }
-            DataRow customer = new DB("customer").select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-
-            if (customer == null)
-            {
-                MessageBox.Show("Gagal Login Customer");
-            }
             else
             {
-                MessageBox.Show("Berhasil Login Customer \n Selamat Datang "+customer["NAMA"].ToString());
-                Session.Login(customer,"customer");
-                Session.isLogin = true;
+                DataRow customer = new DB("customer").select()
+                    .where("email", username)
+                    .where("password", password)
+                    .getFirst();
+
+                if (customer == null)
+                {
+                    MessageBox.Show("Gagal Login Customer");
+                }
+                else
+                {
+                    MessageBox.Show("Berhasil Login Customer \n Selamat Datang " + customer["NAMA"].ToString());
+                    Session.Login(customer, "customer");
+                    Session.isLogin = true;
+                }
             }
 
         }
@@ -142,29 +151,32 @@ namespace Tukupedia.ViewModels
                 Session.isLogin = true;
                 Session.Login(null, "Admin");
             }
-            DataRow seller = new DB("seller").select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-
-            if (seller == null)
-            {
-                MessageBox.Show("Gagal Login Seller");
-            }
             else
             {
-                MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
-                Session.Login(seller, "Seller");
-                Session.isLogin = true;
+                DataRow seller = new DB("seller").select()
+                    .where("email", username)
+                    .where("password", password)
+                    .getFirst();
+
+                if (seller == null)
+                {
+                    MessageBox.Show("Gagal Login Seller");
+                }
+                else
+                {
+                    MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
+                    Session.Login(seller, "Seller");
+                    Session.isLogin = true;
+                }
             }
 
         }
 
-        public static bool RegisterCustomer(string username,string nama, DateTime lahir, string alamat, string notelp, string password, string email)
+        public static bool RegisterCustomer(string email,string nama, DateTime lahir, string alamat, string notelp, string password)
         {
             //Validasi
             bool validation = true;
-            if (username == "admin")
+            if (email == "admin")
             {
                 MessageBox.Show("Dilarang jadi Admin");
                 validation= false;
@@ -179,10 +191,11 @@ namespace Tukupedia.ViewModels
                     new DB("customer").insert(
                     "nama", nama,
                     "email", email,
-                    "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                    "tanggal_lahir", lahir,
                     "alamat", alamat,
                     "no_telp", notelp,
-                    "password", password
+                    "password", password,
+                    "kode", generateCode(new CustomerModel().Table, nama)
                     ).execute();
                     MessageBox.Show("Berhasil Daftar");
                 }
@@ -242,12 +255,12 @@ namespace Tukupedia.ViewModels
                 UserStage = CustomerSellerStage.Seller;
 
                 transition.makeTransition(ViewComponent.CardCustomer,
-                    Position.Up, 0,
+                    MarginPosition.Up, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.CardSeller,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
@@ -269,12 +282,12 @@ namespace Tukupedia.ViewModels
                 UserStage = CustomerSellerStage.Customer;
                 
                 transition.makeTransition(ViewComponent.CardCustomer,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.CardSeller,
-                    Position.Down, 0,
+                    MarginPosition.Down, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
@@ -326,22 +339,22 @@ namespace Tukupedia.ViewModels
             if (goTo == CardPage.LoginPage)
             {
                 transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
@@ -363,22 +376,22 @@ namespace Tukupedia.ViewModels
             else if (goTo == CardPage.RegisterFirstPage)
             {
                 transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
@@ -400,22 +413,22 @@ namespace Tukupedia.ViewModels
             else if (goTo == CardPage.RegisterSecondPage)
             {
                 transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    Position.Right, 0,
+                    MarginPosition.Right, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
@@ -437,22 +450,22 @@ namespace Tukupedia.ViewModels
             else if (goTo == CardPage.RegisterThirdPage)
             {
                 transition.makeTransition(ViewComponent.GridLoginCustomer,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer1,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer2,
-                    Position.Left, 0,
+                    MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
                 transition.makeTransition(ViewComponent.GridRegisterCustomer3,
-                    Position.Middle, 1,
+                    MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
