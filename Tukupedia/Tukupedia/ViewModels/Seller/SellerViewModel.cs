@@ -14,6 +14,7 @@ using System.Data;
 namespace Tukupedia.ViewModels {
     public static class SellerViewModel {
         public enum page { Pesanan, Produk, InfoToko }
+
         private static SellerView ViewComponent;
         private static Transition transition;
         private const int transFPS = 50;
@@ -21,8 +22,11 @@ namespace Tukupedia.ViewModels {
         private const double speedOpacity = 0.4;
         private const double multiplier = 80;
 
-        private static SellerModel model = new SellerModel();
         private static DataRow seller = Session.User;
+
+        private static CategoryModel categoryModel = new CategoryModel();
+        private static ItemModel itemModel = new ItemModel();
+        private static SellerModel sellerModel = new SellerModel();
 
         public static void InitializeView(SellerView view) {
             TESTING();
@@ -155,17 +159,47 @@ namespace Tukupedia.ViewModels {
             new LoginRegisterView().Show();
             ViewComponent.Close();
         }
+        // Page Pesanan
         public static void initPagePesanan() {
-            model.loadData(SellerModel.page.Pesanan, Convert.ToInt32(seller["ID"].ToString()));
-            ViewComponent.datagridProduk.ItemsSource = "";
-            ViewComponent.datagridProduk.ItemsSource = model.Table.DefaultView;
+
         }
 
-        // Produk Page
+        // Page Produk
         public static void initPageProduk() {
-            model.loadData(SellerModel.page.Produk, Convert.ToInt32(seller["ID"].ToString()));
+            itemModel.loadDataProduk(Convert.ToInt32(seller["ID"].ToString()));
             ViewComponent.datagridProduk.ItemsSource = "";
-            ViewComponent.datagridProduk.ItemsSource = model.Table.DefaultView;
+            ViewComponent.datagridProduk.ItemsSource = itemModel.datagridTable.DefaultView;
+
+            foreach (DataRow item in categoryModel.Table.Rows) {
+                ViewComponent.comboboxKategori.Items.Add(item);
+            }
+            ViewComponent.comboboxKategori.DisplayMemberPath = "NAMA";
+            ViewComponent.comboboxKategori.SelectedValuePath = "ID";
+        }
+
+        private static bool inputValidation(string[] data) {
+            foreach (string item in data) {
+                if (item == "") return false;
+            }
+            return true;
+        }
+
+        private static string[] getInputDataProduk() {
+            string nama = ViewComponent.textboxNamaProduk.Text;
+            string kategori = ViewComponent.comboboxKategori.SelectedItem.ToString();
+            string harga = ViewComponent.textboxHarga.Text;
+            string stok = ViewComponent.textboxStok.Text;
+            string berat = ViewComponent.textboxBerat.Text;
+            string deskripsi = ViewComponent.textboxDeskripsi.Text;
+
+            string[] data = { "0", "", kategori, harga, "1", nama, deskripsi, seller["ID"] + "", berat, stok, "0", "", DateTime.Now + "" };
+            return data;
+        }
+        
+        public static void insertProduk() {
+            string[] data = getInputDataProduk();
+            inputValidation(data);
+            itemModel.insert(data);
         }
 
     }
