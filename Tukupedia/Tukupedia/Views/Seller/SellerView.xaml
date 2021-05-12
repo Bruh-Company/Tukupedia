@@ -67,31 +67,31 @@
             <Button Name="btnSuccessPesanan" Content="Terima" FontSize="18" Canvas.Left="1070" Canvas.Top="520" Width="190" Height="40" Style="{StaticResource btn-primary}" Click="btnSuccessPesanan_Click"/>
         </Canvas>
         <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280">
-            <TextBox Name="textboxCariProduk" Text="Cari Produk atau Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="18" FontWeight="SemiBold" Foreground="#65c65b" BorderBrush="#65c65b" />
+            <TextBox Name="textboxCariProduk" Text="Cari Produk atau Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
             <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="350" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
 
             <DataGrid Name="datagridProduk" Height="500" Width="840" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 
             <Label Content="Nama Produk" Canvas.Left="870" Canvas.Top="70" Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxNamaProduk" Text="Nama Produk" Canvas.Left="870"  Canvas.Top="100" Height="35" Width="350" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+            <TextBox Name="textboxNamaProduk" Canvas.Left="870"  Canvas.Top="100" Height="35" Width="350" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
             <Label Content="Kategori Produk" Canvas.Left="870" Canvas.Top="140" Style="{StaticResource md-secondary}"/>
-            <ComboBox Name="comboboxKategori"  Canvas.Left="870" Canvas.Top="170" Height="36" Width="350" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF"/>
+            <ComboBox Name="comboboxKategori"  Canvas.Left="870" Canvas.Top="170" Height="36" Width="350" BorderBrush="#FFFFFF"/>
 
             <Label Content="Harga" Canvas.Left="870" Canvas.Top="210" Style="{StaticResource md-secondary}"/>
             <Label Content="Rp" Canvas.Left="870" Canvas.Top="240" Style="{StaticResource md}"/>
-            <TextBox Name="textboxHarga" Text="69.000" Canvas.Left="920"  Canvas.Top="240" Height="35" Width="300" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+            <TextBox Name="textboxHarga" Canvas.Left="920"  Canvas.Top="240" Height="35" Width="300" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
             <Label Content="Stok" Canvas.Left="870" Canvas.Top="310" Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxStok" Text="2" Canvas.Left="970"  Canvas.Top="310"  Height="30" Width="250" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+            <TextBox Name="textboxStok" Canvas.Left="970"  Canvas.Top="310"  Height="30" Width="250" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
             <Label Content="Berat" Canvas.Left="870" Canvas.Top="350" Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxBerat" Text="69" Canvas.Left="970"  Canvas.Top="350" Height="30" Width="200" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+            <TextBox Name="textboxBerat" Canvas.Left="970"  Canvas.Top="350" Height="30" Width="200" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
             <Label Name="labelSatuanBerat" Content="gram" Canvas.Left="1170" Canvas.Top="350" Style="{StaticResource md-secondary}"/>
 
             <Label Content="Deskripsi" Canvas.Left="870" Canvas.Top="390" Style="{StaticResource md-secondary}"/>
-            <TextBox Name="textboxDeskripsi" Text="Hehehehe" Canvas.Left="890"  Canvas.Top="425"  Height="80" Width="350" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF" BorderBrush="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
+            <TextBox Name="textboxDeskripsi" Canvas.Left="890"  Canvas.Top="425"  Height="80" Width="350" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF" BorderBrush="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
             <Button Name="btnInsert" Content="Insert" FontSize="20" Width="135" Height="40" Canvas.Left="860" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="125" Height="40" Canvas.Left="1000" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
