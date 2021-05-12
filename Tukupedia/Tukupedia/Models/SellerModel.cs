@@ -13,5 +13,6 @@ namespace Tukupedia.Models
             TableName = "SELLER";
             init();
         }
+
     }
 }
