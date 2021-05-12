@@ -13,11 +13,7 @@ using System.Data;
 
 namespace Tukupedia.ViewModels {
     public static class SellerViewModel {
-
-        public enum page {
-            Pesanan, Produk, InfoToko
-        }
-
+        public enum page { Pesanan, Produk, InfoToko }
         private static SellerView ViewComponent;
         private static Transition transition;
         private const int transFPS = 50;
@@ -89,6 +85,8 @@ namespace Tukupedia.ViewModels {
             }
 
             if (a == page.Produk) {
+                transition.setCallback(initProdukPage);
+
                 transition.makeTransition(ViewComponent.canvasProduk,
                     MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
@@ -106,6 +104,7 @@ namespace Tukupedia.ViewModels {
                     speedMargin * multiplier / transFPS,
                     speedOpacity * multiplier / transFPS,
                     "with previous");
+
 
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(
@@ -156,5 +155,18 @@ namespace Tukupedia.ViewModels {
             new LoginRegisterView().Show();
             ViewComponent.Close();
         }
+        public static void initPagePesanan() {
+            model.loadData(SellerModel.page.Pesanan, Convert.ToInt32(seller["ID"].ToString()));
+            ViewComponent.datagridProduk.ItemsSource = "";
+            ViewComponent.datagridProduk.ItemsSource = model.Table.DefaultView;
+        }
+
+        // Produk Page
+        public static void initPageProduk() {
+            model.loadData(SellerModel.page.Produk, Convert.ToInt32(seller["ID"].ToString()));
+            ViewComponent.datagridProduk.ItemsSource = "";
+            ViewComponent.datagridProduk.ItemsSource = model.Table.DefaultView;
+        }
+
     }
 }

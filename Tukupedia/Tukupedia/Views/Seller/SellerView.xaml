@@ -73,7 +73,7 @@
 
             <TextBox Name="textboxCariProduk" Text="Cari Produk ..." Canvas.Left="25"  Canvas.Top="50"  Height="30" Width="300" FontSize="18" FontWeight="SemiBold" Foreground="#65c65b" BorderBrush="#65c65b" />
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="50" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
-            <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="50" Width="350" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged_1"/>
+            <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="50" Width="350" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
 
             <DataGrid Name="datagridProduk" Height="480" Width="840" Canvas.Left="10" Canvas.Top="90" SelectedCellsChanged="datagridProduk_SelectedCellsChanged"/>
 
