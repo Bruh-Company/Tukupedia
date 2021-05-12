@@ -95,8 +95,20 @@ namespace Tukupedia.Models
         }
         public void addWhere(string column, string val,string opera="=", bool apostrophe=true)
         {
+            string and = where == "" ? "" : "AND";
             string apos = apostrophe ? "'" : "";
-            where += $"{column} {opera} {apos}{val}{apos}";
+            where += $" {and} {column} {opera} {apos}{val}{apos} ";
+        }
+        public void addOrWhere(string column, string val,string opera="=", bool apostrophe=true)
+        {
+            string or = where == "" ? "" : "OR";
+            string apos = apostrophe ? "'" : "";
+            where += $" {or} {column} {opera} {apos}{val}{apos} ";
+        }
+
+        public DataRow[] get()
+        {
+            return Table.Select(statement);
         }
         
     }

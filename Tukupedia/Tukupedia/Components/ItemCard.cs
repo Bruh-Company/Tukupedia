@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,6 +22,7 @@ namespace Tukupedia.Components
         private Button lihatItem;
         private StackPanel spRating;
         private TextBlock tbRating;
+        private DataRow item;
         public ItemCard()
         {
             this.UniformCornerRadius = 5;
@@ -71,19 +73,24 @@ namespace Tukupedia.Components
             lihatItem.Content = "Lihat Item";
             lihatItem.Margin = new Thickness(0, 10, 0, 0);
             lihatItem.Click+=LihatItemOnClick;
-            //TODO Kasih Handler untuk buat form detail page (Boleh 1 form ato pakai window baru)
-            
-
         }
         private void LihatItemOnClick(object sender, RoutedEventArgs e)
         {
             ItemDetailView itemDetailView = new ItemDetailView();
             //Berguna supaya tidak bisa di alt tab
             itemDetailView.Owner = Window.GetWindow((Window)PresentationSource.FromVisual(this).RootVisual);
-            itemDetailView.initDetail("");
+            itemDetailView.initDetail(
+                urlImage: "",
+                item:this.item
+                );
             itemDetailView.ShowDialog();
         }
 
+        public void setItem(DataRow item)
+        {
+            this.item = item;
+        }
+        
         public void setImage(string url)
         {
             _image.Source =

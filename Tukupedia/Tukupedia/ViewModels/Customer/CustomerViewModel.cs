@@ -49,6 +49,7 @@ namespace Tukupedia.ViewModels.Customer
                     card.setNamaBarang(item["NAMA"].ToString());
                     card.setRating(5);
                     card.setJual($"Terjual : {jml}");
+                    card.setItem(item);
                     card.deploy();
                     wp.Children.Add(card);
                 }

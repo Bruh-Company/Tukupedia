@@ -26,7 +26,7 @@
         <Grid Grid.Column="1"  Grid.Row="0" >
             <StackPanel Margin="0,10,0,0" Orientation="Vertical">
                 <TextBlock Style="{StaticResource textblockblock-h2}" x:Name="tbNamaItem" Text="Nama Item yang Keren"></TextBlock>
-                <materialDesign:RatingBar Foreground="Yellow" Min="1" Max="5"/>
+                <materialDesign:RatingBar x:Name="RatingBar" IsReadOnly="True" Foreground="Yellow" Min="1" Max="5"/>
                 <TextBlock Style="{StaticResource textblockblock-sm}" x:Name="tbTerjual" Text="Terjual : " Foreground="#C8C8C8"></TextBlock>
                 <TextBlock Style="{StaticResource textblockblock-lg}" x:Name="tbHarga" Text="Rp69.000,00" Foreground="#E87059"></TextBlock>
                 <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="276" Margin="0,0,0.4,0" >
@@ -52,19 +52,18 @@
                         </StackPanel>
                     </TabItem>
                 </TabControl>
-
-
+                
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="0" >
             <StackPanel>
                 <TextBlock Margin="10,43,0,0" Style="{StaticResource textblockblock-md}" x:Name="tbJumlah" Text="Jumlah"></TextBlock>
                 <StackPanel HorizontalAlignment="Center" Width="auto" Height="50" Orientation="Horizontal">
-                    <Button x:Name="btnMin" Width="40" Content="-" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="btnPlus" Margin="10,0,10,0" Style="{StaticResource textblockblock-md}" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Button Width="40" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Click="BtnMin_OnClick" x:Name="btnMin" Width="40" Content="-" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="tbQuantity" Margin="10,0,10,0" Style="{StaticResource textblockblock-md}" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Button Click="BtnPlus_OnClick" x:Name="btnPlus" Width="40" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
-                <Button x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-white}"/>
+                <Button Click="BtnAddCart_OnClick" x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-white}"/>
                 <Button x:Name="btnBeliLangsung" Margin="0,5,0,0" Width="169" Content="Buy Now" Style="{StaticResource btn-warning}"/>
             </StackPanel>
 
