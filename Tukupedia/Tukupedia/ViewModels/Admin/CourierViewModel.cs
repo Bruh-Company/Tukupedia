@@ -74,7 +74,7 @@ namespace Tukupedia.ViewModels.Admin
             }
             else
             {
-                string kode = Utility.kodegenerator(nama);
+                string kode = Utility.kodeGenerator(nama);
                 int konter = 1;
                 foreach (DataRow dr in cm.Table.Rows)
                 {

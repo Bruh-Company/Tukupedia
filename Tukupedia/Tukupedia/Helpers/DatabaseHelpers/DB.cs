@@ -39,12 +39,24 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             string values = "(";
             for (int i = 0; i < param.Length; i+=2)
             {
-                param[i] = sanitize(param[i].ToString());
-                param[i + 1] = sanitize(param[i + 1].ToString());
-                string comma = (i == param.Length - 2) ? ")" : ",";
-                columns += $" {param[i]} {comma} ";
-                string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
-                values += $" {petik}{param[i+1]}{petik} {comma} ";
+                if (param[i + 1] is DateTime)
+                {
+                    param[i] = sanitize(param[i].ToString());
+                    DateTime dt = (DateTime) param[i + 1];
+                    param[i + 1] = $"TO_DATE('{dt.ToString("dd-MM-yyyy")}','dd-mm-yyyy')";
+                    string comma = (i == param.Length - 2) ? ")" : ",";
+                    columns += $" {param[i]} {comma} ";
+                    values += $" {param[i + 1]} {comma} ";
+                }
+                else
+                {
+                    param[i] = sanitize(param[i].ToString());
+                    param[i + 1] = sanitize(param[i + 1].ToString());
+                    string comma = (i == param.Length - 2) ? ")" : ",";
+                    columns += $" {param[i]} {comma} ";
+                    string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
+                    values += $" {petik}{param[i + 1]}{petik} {comma} ";
+                }
             }
             statement += $"INSERT INTO {table} {columns} VALUES {values} ";
             return this;
