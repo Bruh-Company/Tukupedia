@@ -107,6 +107,13 @@ namespace Tukupedia.ViewModels
             return counter == 0;
         }
 
+        public static string generateCode(DataTable table, string nama)
+        {
+            string kode = Utility.kodeGenerator(nama);
+            int counter = table.Select($"nama = '{kode}'").Length;
+            return kode.ToUpper() + Utility.translate(counter, 3);
+        }
+
         public static void LoginCustomer(string username, string password)
         {
             if (username == "admin" && password == "admin")
@@ -115,20 +122,23 @@ namespace Tukupedia.ViewModels
                 Session.isLogin = true;
                 Session.Login(null, "Admin");
             }
-            DataRow customer = new DB("customer").select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-
-            if (customer == null)
-            {
-                MessageBox.Show("Gagal Login Customer");
-            }
             else
             {
-                MessageBox.Show("Berhasil Login Customer \n Selamat Datang "+customer["NAMA"].ToString());
-                Session.Login(customer,"customer");
-                Session.isLogin = true;
+                DataRow customer = new DB("customer").select()
+                    .where("email", username)
+                    .where("password", password)
+                    .getFirst();
+
+                if (customer == null)
+                {
+                    MessageBox.Show("Gagal Login Customer");
+                }
+                else
+                {
+                    MessageBox.Show("Berhasil Login Customer \n Selamat Datang " + customer["NAMA"].ToString());
+                    Session.Login(customer, "customer");
+                    Session.isLogin = true;
+                }
             }
 
         }
@@ -141,29 +151,32 @@ namespace Tukupedia.ViewModels
                 Session.isLogin = true;
                 Session.Login(null, "Admin");
             }
-            DataRow seller = new DB("seller").select()
-                .where("email", username)
-                .where("password", password)
-                .getFirst();
-
-            if (seller == null)
-            {
-                MessageBox.Show("Gagal Login Seller");
-            }
             else
             {
-                MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
-                Session.Login(seller, "Seller");
-                Session.isLogin = true;
+                DataRow seller = new DB("seller").select()
+                    .where("email", username)
+                    .where("password", password)
+                    .getFirst();
+
+                if (seller == null)
+                {
+                    MessageBox.Show("Gagal Login Seller");
+                }
+                else
+                {
+                    MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA"].ToString());
+                    Session.Login(seller, "Seller");
+                    Session.isLogin = true;
+                }
             }
 
         }
 
-        public static bool RegisterCustomer(string username,string nama, DateTime lahir, string alamat, string notelp, string password, string email)
+        public static bool RegisterCustomer(string email,string nama, DateTime lahir, string alamat, string notelp, string password)
         {
             //Validasi
             bool validation = true;
-            if (username == "admin")
+            if (email == "admin")
             {
                 MessageBox.Show("Dilarang jadi Admin");
                 validation= false;
@@ -178,10 +191,11 @@ namespace Tukupedia.ViewModels
                     new DB("customer").insert(
                     "nama", nama,
                     "email", email,
-                    "tanggal_lahir", $"TO_DATE('{lahir.Month}{lahir.Day}{lahir.Year}', 'MMDDYYYY')",
+                    "tanggal_lahir", lahir,
                     "alamat", alamat,
                     "no_telp", notelp,
-                    "password", password
+                    "password", password,
+                    "kode", generateCode(new CustomerModel().Table, nama)
                     ).execute();
                     MessageBox.Show("Berhasil Daftar");
                 }

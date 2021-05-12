@@ -61,13 +61,7 @@ namespace Tukupedia.Views
         {
             LoginRegisterViewModel.swapCard();
         }
-        private void resetInputLogin()
-        {
-            tbCustomerEmailLogin.Text = "";
-            tbCustomerPasswordLogin.Password = "";
-            tbSellerEmailLogin.Text = "";
-            tbSellerPasswordLogin.Password = "";
-        }
+        
         private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel
@@ -159,7 +153,49 @@ namespace Tukupedia.Views
         }
         private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
+            //LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
+            int checkpassword = passwordCustomerCheck();
+            // 0 = Masih kosong
+            // 1 = Sudah benar
+            // -1 = Salah
+            if(checkpassword == 0)
+            {
+                MessageBox.Show("Password masih kosong");
+            }
+            else if(checkpassword == 1)
+            {
+                if(LoginRegisterViewModel.RegisterCustomer(tbCustomerEmailRegister.Text, tbCustomerFullNameRegister.Text, dpCustomerBornDateRegister.SelectedDate.Value, tbCustomerAddressRegister.Text, tbCustomerPhoneNumberRegister.Text, tbCustomerPasswordRegister.Password))
+                {
+                    resetInputRegister();
+                    btnCustomerToLogin_click(null, null);
+                }
+            }
+            else if(checkpassword == -1)
+            {
+                MessageBox.Show("Password dan confirm password tidak cocok");
+            }
+        }
+        private void resetInputLogin()
+        {
+            tbCustomerEmailLogin.Text = "";
+            tbCustomerPasswordLogin.Password = "";
+            tbSellerEmailLogin.Text = "";
+            tbSellerPasswordLogin.Password = "";
+        }
+        private void resetInputRegister()
+        {
+            tbCustomerEmailRegister.Text = "";
+            tbCustomerFullNameRegister.Text = "";
+            dpCustomerBornDateRegister.SelectedDate = null;
+            tbCustomerAddressRegister.Text = "";
+            tbCustomerPhoneNumberRegister.Text = "";
+            tbCustomerPasswordRegister.Password = "";
+            tbCustomerConfirmPasswordRegister.Password = "";
+        }
+        int passwordCustomerCheck()
+        {
+            int balek = tbCustomerPasswordRegister.Password == "" ? 0 : tbCustomerPasswordRegister.Password == tbCustomerConfirmPasswordRegister.Password ? 1 : -1;
+            return balek;
         }
     }
 }

@@ -60,7 +60,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                     string comma = (i == param.Length - 2) ? ")" : ",";
                     columns += $" {param[i]} {comma} ";
                     string petik = param[i + 1].ToString().Contains("TO_") ? "" : "'";
-                    values += $" {petik}{param[i+1]}{petik} {comma} ";
+                    values += $" {petik}{param[i + 1]}{petik} {comma} ";
                 }
 
             }

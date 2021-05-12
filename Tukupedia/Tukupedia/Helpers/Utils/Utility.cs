@@ -41,7 +41,7 @@ namespace Tukupedia.Helpers.Utils
             return val.ToString("N");
         }
 
-        public static string kodegenerator(string nama)
+        public static string kodeGenerator(string nama)
         {
             string[] kotak = nama.Split(' ');
             string kode = "";
