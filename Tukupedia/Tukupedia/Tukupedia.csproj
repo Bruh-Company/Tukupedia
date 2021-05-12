@@ -112,7 +112,7 @@
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\SellerViewModel.cs" />
+    <Compile Include="ViewModels\Seller\SellerViewModel.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
     </Compile>

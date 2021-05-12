@@ -72,11 +72,11 @@ namespace Tukupedia.Helpers.Utils
             }
         }
 
-        public static DateTime Str2Date(string date, string patt = "dd-MM-yyyy", string cultureInfo = "en-US")
+        public static DateTime Str2Date(string date, string patt = "dd-MM-yyyy")
         {
             try
             {
-                CultureInfo provider = new CultureInfo(cultureInfo);
+                CultureInfo provider = CultureInfo.InvariantCulture;
                 return DateTime.ParseExact(date, patt, provider);
             }
             catch (Exception e)

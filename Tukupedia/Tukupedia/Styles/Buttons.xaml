@@ -171,12 +171,12 @@
         </Style.Triggers>
     </Style>
     <!--White Button-->
-    <Style BasedOn="{StaticResource MaterialDesignRaisedLightButton}"
+    <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"
            TargetType="Button"
            x:Key="btn-white">
-        <Setter Property="Foreground" Value="#65C65B"/>
         <Setter Property="BorderBrush" Value="#FFFFFF"/>
         <Setter Property="Background" Value="#FFFFFF"/>
+        <Setter Property="Foreground" Value="#65C65B"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
@@ -188,7 +188,7 @@
                               RepeatBehavior="1x" />
                             <ColorAnimation
                               Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#65C65B" To="#FFFFFF" Duration="0:0:0.3"
+                              From="#65C65B" To="#65C65B" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -202,7 +202,7 @@
                               RepeatBehavior="1x" />
                             <ColorAnimation
                               Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#FFFFFF" To="#65C65B" Duration="0:0:0.3"
+                              From="#65C65B" To="#65C65B" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>

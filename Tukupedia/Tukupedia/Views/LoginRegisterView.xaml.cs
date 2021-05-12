@@ -107,11 +107,6 @@ namespace Tukupedia.Views
             }
         }
 
-        private void btnCustomerToRegister2_click(object sender, RoutedEventArgs e)
-        {
-            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
-        }
-
         private void btnCustomerToLogin_click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.LoginPage);
@@ -122,8 +117,15 @@ namespace Tukupedia.Views
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
         }
 
+        private void btnCustomerToRegister2_click(object sender, RoutedEventArgs e)
+        {
+            bool valid = validateCustomerRegister(sender);
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
+        }
+
         private void btnCustomerToRegister3_click(object sender, RoutedEventArgs e)
         {
+            bool valid = validateCustomerRegister(sender);
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterThirdPage);
         }
 
@@ -136,25 +138,36 @@ namespace Tukupedia.Views
         {
 
         }
-        private bool validateCustomerRegister()
-        {
-            bool valid = true;
-            if (
-                tbCustomerAddressRegister.Text == "" &&
-                tbCustomerConfirmPasswordRegister.Password == "" &&
-                tbCustomerEmailRegister.Text == "" &&
-                tbCustomerFullNameRegister.Text == "" &&
-                tbCustomerPasswordRegister.Password == "" &&
-                tbCustomerPhoneNumberRegister.Text == ""
-                )
-                valid = false;
 
-            return valid;
+        //not done
+        private bool validateCustomerRegister(object sender)
+        {
+            bool invalid = false;
+            
+            if (sender == btnCustomerRegisterNext1)
+            {
+                invalid |= tbCustomerFullNameRegister.Text.ToString() == "";
+                invalid |= tbCustomerEmailRegister.Text.ToString() == "";
+            }
+            else if (sender == btnCustomerRegisterNext2)
+            {
+                invalid |= tbCustomerPhoneNumberRegister.Text.ToString() == "";
+                //invalid |= dpCustomerBornDateRegister.SelectedDate.Value;
+                //invalid |= 
+            }
+            else if (sender == btnCustomerRegister)
+            {
+
+            }
+
+            return !invalid;
         }
+
         private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            //LoginRegisterViewModel.LoginCustomer(tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
-            int checkpassword = passwordCustomerCheck();
+            bool valid = validateCustomerRegister(sender);
+
+            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
             // 0 = Masih kosong
             // 1 = Sudah benar
             // -1 = Salah
@@ -164,10 +177,21 @@ namespace Tukupedia.Views
             }
             else if(checkpassword == 1)
             {
-                if(LoginRegisterViewModel.RegisterCustomer(tbCustomerEmailRegister.Text, tbCustomerFullNameRegister.Text, dpCustomerBornDateRegister.SelectedDate.Value, tbCustomerAddressRegister.Text, tbCustomerPhoneNumberRegister.Text, tbCustomerPasswordRegister.Password))
+                bool success = LoginRegisterViewModel.RegisterCustomer(
+                    nama    : tbCustomerFullNameRegister.Text,
+                    email   : tbCustomerEmailRegister.Text,
+                    lahir   : dpCustomerBornDateRegister.SelectedDate.Value,
+                    alamat  : tbCustomerAddressRegister.Text,
+                    notelp  : tbCustomerPhoneNumberRegister.Text,
+                    password: tbCustomerPasswordRegister.Password
+                    );
+
+                if (success)
                 {
                     resetInputRegister();
-                    btnCustomerToLogin_click(null, null);
+                    LoginRegisterViewModel.swapPage(
+                        LoginRegisterViewModel.CardPage.LoginPage
+                        );
                 }
             }
             else if(checkpassword == -1)
@@ -175,6 +199,7 @@ namespace Tukupedia.Views
                 MessageBox.Show("Password dan confirm password tidak cocok");
             }
         }
+
         private void resetInputLogin()
         {
             tbCustomerEmailLogin.Text = "";
@@ -182,6 +207,7 @@ namespace Tukupedia.Views
             tbSellerEmailLogin.Text = "";
             tbSellerPasswordLogin.Password = "";
         }
+
         private void resetInputRegister()
         {
             tbCustomerEmailRegister.Text = "";
@@ -192,10 +218,56 @@ namespace Tukupedia.Views
             tbCustomerPasswordRegister.Password = "";
             tbCustomerConfirmPasswordRegister.Password = "";
         }
-        int passwordCustomerCheck()
+
+        int passwordCheck(LoginRegisterViewModel.CustomerSellerStage stage)
         {
-            int balek = tbCustomerPasswordRegister.Password == "" ? 0 : tbCustomerPasswordRegister.Password == tbCustomerConfirmPasswordRegister.Password ? 1 : -1;
-            return balek;
+            if (stage == LoginRegisterViewModel.CustomerSellerStage.Customer)
+            {
+                int balek = tbCustomerPasswordRegister.Password == "" ? 0 : tbCustomerPasswordRegister.Password == tbCustomerConfirmPasswordRegister.Password ? 1 : -1;
+                return balek;
+            }
+            else
+            {
+                int balek = tbSellerPasswordRegister.Password == "" ? 0 : tbSellerPasswordRegister.Password == tbSellerConfirmPasswordRegister.Password ? 1 : -1;
+                return balek;
+            }
+        }
+
+        private void btnSellerToLogin_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.LoginPage);
+        }
+
+        private void btnSellerToRegister1_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
+        }
+
+        private void btnSellerToRegister2_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
+        }
+
+        private void btnSellerToRegister3_click(object sender, RoutedEventArgs e)
+        {
+            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterThirdPage);
+        }
+
+        private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
+        {
+            //not done
+            LoginRegisterViewModel.RegisterSeller(
+                namaSeller: tbSellerFullNameRegister.Text,
+                namaToko: tbSellerShopNameRegister.Text,
+                alamat: tbSellerAddressRegister.Text,
+                notelp: tbShopPhoneNumberRegister.Text,
+                password: tbSellerPasswordRegister.Password,
+                email: tbSellerShopEmailRegister.Text,
+                nikSeller: tbSellerIdentityNumberRegister.Text
+                );
+            LoginRegisterViewModel.swapPage(
+                        LoginRegisterViewModel.CardPage.LoginPage
+                        );
         }
     }
 }
