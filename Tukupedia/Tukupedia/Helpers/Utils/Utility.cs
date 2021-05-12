@@ -4,8 +4,10 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Tukupedia.Helpers.Utils
 {
@@ -87,6 +89,11 @@ namespace Tukupedia.Helpers.Utils
                                 ErrCapt, MessageBoxButton.OK, MessageBoxImage.Error);
                 return DateTime.Now;
             }
+        }
+
+        private static void NumberValidationTextBox(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }

@@ -105,17 +105,7 @@ namespace Tukupedia.Views.Seller {
         // Pesanan
 
         // Produk
-        private void btnSemuaProduk_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnProdukBelumTerjual_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnProdukTerjual_Click(object sender, RoutedEventArgs e) {
-
-        }
+        // Produk Header
 
         private void btnCariProduk_Click(object sender, RoutedEventArgs e) {
 
@@ -125,16 +115,12 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void comboboxSortProduk_SelectionChanged_1(object sender, SelectionChangedEventArgs e) {
-
-        }
-
         private void datagridProduk_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
 
         }
 
         private void btnInsert_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.insertProduk();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e) {
