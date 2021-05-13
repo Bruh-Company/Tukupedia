@@ -31,9 +31,19 @@ namespace Tukupedia.ViewModels.Admin
             cm.initAdapter($"select p.KODE as \"Kode\", p.POTONGAN as \"Potongan\", p.POTONGAN_MAKS as \"Potongan Maximal\", p.HARGA_MIN as \"Harga Minimal\", case p.JENIS_POTONGAN when 'D' then 'Discount' else 'Potongan' end as \"Jenis Potongan\", j.NAMA as \"Nama Promo\", to_char(p.TANGGAL_AWAL,'dd-mm-yyyy') || 's/d' || to_char(p.TANGGAL_AKHIR,'dd-mm-yyyy') as \"Masa Berlaku\", case p.STATUS when '1' then 'Aktif' else 'Mati' end as \"Status\", to_char(p.CREATED_AT,'dd-mm-yyyy') as \"Dibuat Pada\" from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID and p.STATUS = '1' order by KODE");
             forid.initAdapter("select p.id from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID and p.STATUS = '1' order by KODE");
             forcb.initAdapter("select ID, NAMA from JENIS_PROMO order by NAMA");
-            forcb.initAdapter("select to_char(p.TANGGAL_AWAL,'dd-mm-yyyy'), to_char(p.TANGGAL_AKHIR,'dd-mm-yyyy') as \"Masa Berlaku\", case p.STATUS when '1' then 'Aktif' else 'Mati' end as \"Status\", to_char(p.CREATED_AT,'dd-mm-yyyy') as \"Dibuat Pada\" from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID and p.STATUS = '1' order by KODE");
+            masaberlaku.initAdapter("select to_char(p.TANGGAL_AWAL,'dd-mm-yyyy'), to_char(p.TANGGAL_AKHIR,'dd-mm-yyyy') from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID and p.STATUS = '1' order by KODE");
         }
-
+        public DataRow getMasaBerlaku()
+        {
+            try
+            {
+                return masaberlaku.Table.Rows[selected];
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
         public DataTable getDataTable()
         {
             //MessageBox.Show(cm.statement);
@@ -100,14 +110,15 @@ namespace Tukupedia.ViewModels.Admin
         }
         public void delete()
         {
-            DataRow dr = forid.Table.Rows[selected];
+            DataRow dr = cm.Table.Rows[selected];
+            DataRow id = forid.Table.Rows[selected];
             if (dr["Status"].ToString() == "Aktif")
             {
-                new DB("PROMO").update("STATUS", "0").where("ID", dr[0].ToString()).execute();
+                new DB("PROMO").update("STATUS", "0").where("ID", id[0].ToString()).execute();
             }
             else
             {
-                new DB("PROMO").update("STATUS", "1").where("ID", dr[0].ToString()).execute();
+                new DB("PROMO").update("STATUS", "1").where("ID", id[0].ToString()).execute();
             }
         }
     }

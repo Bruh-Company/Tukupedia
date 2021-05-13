@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Tukupedia.Helpers.Utils
@@ -94,6 +95,12 @@ namespace Tukupedia.Helpers.Utils
         public static void NumberValidationTextBox(object sender, TextCompositionEventArgs e) {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
+        }
+
+        public static void TextBoxNumeric(TextBox tb)
+        {
+            string temp = tb.Text;
+            tb.Text = temp.All(char.IsDigit) ? temp : temp.Remove(temp.Length - 1);
         }
 
     }

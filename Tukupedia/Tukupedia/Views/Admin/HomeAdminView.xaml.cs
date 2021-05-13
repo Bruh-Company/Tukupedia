@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.Helpers.Utils;
 using Tukupedia.ViewModels.Admin;
 
 namespace Tukupedia.Views.Admin
@@ -375,7 +376,7 @@ namespace Tukupedia.Views.Admin
         private void tbHargaKurir_TextChanged(object sender, TextChangedEventArgs e)
         {
             string temp = tbHargaKurir.Text;
-            tbHargaKurir.Text = temp.All(char.IsDigit) ? tbHargaKurir.Text : tbHargaKurir.Text.Remove(tbHargaKurir.Text.Length - 1); ;
+            tbHargaKurir.Text = temp.All(char.IsDigit) ? tbHargaKurir.Text : tbHargaKurir.Text.Remove(tbHargaKurir.Text.Length - 1);
             //notelp.Text = notelp.Text.Remove(notelp.Text.Length - 1);
         }
 
@@ -487,16 +488,128 @@ namespace Tukupedia.Views.Admin
                 // 0 = Discount
                 // 1 = Cashback
                 cbJenisPotongan.SelectedIndex = dr["Jenis Potongan"].ToString() == "Discount" ? 0 : 1;
-                //foreach(DataRow dr1 in pvm.getForCb().Rows)
-                //{
-                //    if(dr["Nama Promo"].ToString() == dr1[1].ToString())
-                //    {
-                        cbJenisPromo.SelectedItem = dr["Nama Promo"].ToString();
+                int konter = 0;
+                foreach (DataRow dr1 in pvm.getForCb().Rows)
+                {
+                    if (dr["Nama Promo"].ToString() == dr1[1].ToString())
+                    {
+                        cbJenisPromo.SelectedIndex = konter;
+                        break;
+                        //MessageBox.Show(dr1[0].ToString());
 
-                //}
-                //}
-                dpAwalPromo.SelectedDate = DateTime.Parse(dr[5].ToString());
+                    }
+                    konter++;
+                }
+                DataRow drdate = pvm.getMasaBerlaku();
+                dpAwalPromo.SelectedDate = DateTime.Parse(drdate[0].ToString());
+                dpAkhirPromo.SelectedDate = DateTime.Parse(drdate[1].ToString());
+                btTambahPromo.Visibility = Visibility.Hidden;
+                btUpdatePromo.Visibility = Visibility.Visible;
+                btHapusPromo.Visibility = Visibility.Visible;
+
             }
+        }
+
+        private void btTambahPromo_Click(object sender, RoutedEventArgs e)
+        {
+            string kode = tbKodePromo.Text;
+            string potongan = tbPotongan.Text;
+            string potonganmax = tbPotonganMax.Text;
+            string hargamin = tbHargaMin.Text;
+            
+            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "D" : "C";
+            string id_jenis_promo = cbJenisPromo.SelectedValue.ToString();
+            if (cbJenisPotongan.SelectedIndex == -1)
+            {
+                MessageBox.Show("Mohon isi jenis potongan");
+            }
+            else if (dpAwalPromo.SelectedDate == null)
+            {
+                MessageBox.Show("Tanggal awal masih kosong");
+            }
+            else if(dpAkhirPromo.SelectedDate == null)
+            {
+                MessageBox.Show("Tanggal akhir masih kosong");
+            }
+            else
+            {
+                if(pvm.insert(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value))
+                {
+                    btPromo_Click(null, null);
+                }
+
+            }
+        }
+
+        private void tbPotongan_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Utility.TextBoxNumeric(tbPotongan);
+        }
+
+        private void btUpdatePromo_Click(object sender, RoutedEventArgs e)
+        {
+            string kode = tbKodePromo.Text;
+            string potongan = tbPotongan.Text;
+            string potonganmax = tbPotonganMax.Text;
+            string hargamin = tbHargaMin.Text;
+
+            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "D" : "C";
+            string id_jenis_promo = cbJenisPromo.SelectedValue.ToString();
+            if (cbJenisPotongan.SelectedIndex == -1)
+            {
+                MessageBox.Show("Mohon isi jenis potongan");
+            }
+            else if (dpAwalPromo.SelectedDate == null)
+            {
+                MessageBox.Show("Tanggal awal masih kosong");
+            }
+            else if (dpAkhirPromo.SelectedDate == null)
+            {
+                MessageBox.Show("Tanggal akhir masih kosong");
+            }
+            else
+            {
+                pvm.update(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value);
+                btPromo_Click(null, null);
+                
+
+            }
+        }
+
+        private void btHapusPromo_Click(object sender, RoutedEventArgs e)
+        {
+            pvm.delete();
+            btPromo_Click(null, null);
+        }
+
+        private void dgPromo_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+
+        }
+
+        private void dgJenisPromo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(dgJenisPromo.SelectedIndex != -1)
+            {
+                DataRow dr = jpvm.selectData(dgJenisPromo.SelectedIndex);
+                if (dr == null) return;
+            }
+        }
+
+        private void btJenisPromo_Click(object sender, RoutedEventArgs e)
+        {
+            reloadJenisPromo();
+        }
+        void reloadJenisPromo()
+        {
+            jpvm = new JenisPromoViewModel();
+            dgJenisPromo.ItemsSource = jpvm.getDataTable().DefaultView;
+            
+            cbKategori.ItemsSource = jpvm.getCategory().DefaultView;
+            cbKategori.DisplayMemberPath = "NAMA";
+            cbKategori.SelectedValuePath = "ID";
+
+
         }
     }
 }

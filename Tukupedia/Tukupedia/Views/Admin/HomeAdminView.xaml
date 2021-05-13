@@ -14,7 +14,7 @@
         <Button Style="{StaticResource btn-primary}" x:Name="btCategory" Content="Category" HorizontalAlignment="Left" Margin="300,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCategory_Click"/>
         <Button Style="{StaticResource btn-primary}" x:Name="btCustomer" Content="Customer" HorizontalAlignment="Left" Margin="412,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCustomer_Click"/>
         <Button Style="{StaticResource btn-primary}" x:Name="btSeller" Content="Seller" HorizontalAlignment="Left" Margin="528,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btSeller_Click"/>
-        <Canvas  x:Name="CanvasHome" HorizontalAlignment="Left" Height="624" Margin="1335,10,-1315,0" VerticalAlignment="Top" Width="1252">
+        <Canvas  x:Name="CanvasHome" HorizontalAlignment="Left" Height="624" Margin="2999,86,-2979,-21" VerticalAlignment="Top" Width="1252">
             <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="35"/>
             <Label Content="Jumlah Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="30" Canvas.Top="313"/>
             <Label Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="119" Canvas.Top="204" FontWeight="Bold"/>
@@ -115,9 +115,9 @@
         </Canvas>
         <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="999,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click"/>
         <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="0,65,0,0" VerticalAlignment="Top" Width="1252">
-            <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="1018" Canvas.Top="-1048" Width="1232">
+            <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">
                 <Label Content="Tukupedia Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="48"/>
-                <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseDoubleClick="dgJenisPembayaran_MouseDoubleClick" SelectedCellsChanged="dgJenisPembayaran_SelectedCellsChanged"/>
+                <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseDoubleClick="dgJenisPromo_MouseDoubleClick"/>
                 <Label Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="679" Canvas.Top="59"/>
                 <TextBox x:Name="tbJenisPromo" Height="41" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="132" Width="466" FontSize="20"/>
                 <Button Style="{StaticResource btn-primary}" x:Name="btTambahJenisPromo" Content="Tambah Jenis Promo" Canvas.Left="682" Canvas.Top="418" Width="291" Click="btTambahJenisPembayaran_Click"/>
@@ -132,19 +132,19 @@
                 <ComboBox x:Name="cbSeller" Canvas.Left="946" Canvas.Top="281" Width="199"/>
                 <ComboBox x:Name="cbMetodePembayaran" Canvas.Left="946" Canvas.Top="320" Width="199"/>
             </Canvas>
-            <Button Style="{StaticResource btn-primary}" x:Name="btJenisPromo" Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btJenisPembayaran_Click" Canvas.Left="10" Canvas.Top="10"/>
+            <Button Style="{StaticResource btn-primary}" x:Name="btJenisPromo" Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" FontSize="18" Canvas.Left="10" Canvas.Top="10" Click="btJenisPromo_Click"/>
             <Button Style="{StaticResource btn-primary}" x:Name="btPromo" Content="Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" FontSize="18" Canvas.Left="146" Canvas.Top="10" Click="btPromo_Click"/>
-            <Canvas x:Name="CanvasPromo" Height="554" Canvas.Left="10" Canvas.Top="70" Width="1232">
+            <Canvas x:Name="CanvasPromo" Height="554" Canvas.Left="1426" Canvas.Top="10" Width="1232">
                 <Label Content="Tukupedia Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="10"/>
-                <DataGrid x:Name="dgPromo" Height="475" Canvas.Left="8" Canvas.Top="59" Width="640" MouseDoubleClick="dgPromo_MouseDoubleClick" SelectedCellsChanged="dgJenisPembayaran_SelectedCellsChanged"/>
+                <DataGrid x:Name="dgPromo" Height="475" Canvas.Left="8" Canvas.Top="59" Width="640" MouseDoubleClick="dgPromo_MouseDoubleClick" SelectedCellsChanged="dgPromo_SelectedCellsChanged"/>
                 <Label Content="Kode Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="12"/>
                 <TextBox x:Name="tbKodePromo" Height="32" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="46" Width="466" FontSize="14"/>
-                <Button Style="{StaticResource btn-primary}" x:Name="btTambahPromo" Content="Tambah Jenis Promo" Canvas.Left="682" Canvas.Top="452" Width="291" Click="btTambahJenisPembayaran_Click"/>
-                <Button Style="{StaticResource btn-primary}" x:Name="btUpdatePromo" Content="Update" Canvas.Left="682" Canvas.Top="490" Width="143" Click="btUpdateJenisPembayaran_Click"/>
-                <Button Style="{StaticResource btn-danger}" x:Name="btHapusPromo" Content="Hapus" Canvas.Left="830" Canvas.Top="490" Width="143" Click="btToggleJenisPembayaran_Click"/>
+                <Button Style="{StaticResource btn-primary}" x:Name="btTambahPromo" Content="Tambah Jenis Promo" Canvas.Left="682" Canvas.Top="452" Width="291" Click="btTambahPromo_Click"/>
+                <Button Style="{StaticResource btn-primary}" x:Name="btUpdatePromo" Content="Update" Canvas.Left="682" Canvas.Top="490" Width="143" Click="btUpdatePromo_Click"/>
+                <Button Style="{StaticResource btn-danger}" x:Name="btHapusPromo" Content="Hapus" Canvas.Left="830" Canvas.Top="490" Width="143" Click="btHapusPromo_Click"/>
                 <Label Content="Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="82"/>
                 <Label Content="Potongan Max" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="148"/>
-                <TextBox x:Name="tbPotongan" Height="30" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="112" Width="466" FontSize="14"/>
+                <TextBox x:Name="tbPotongan" Height="30" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="112" Width="466" FontSize="14" TextChanged="tbPotongan_TextChanged"/>
                 <TextBox x:Name="tbPotonganMax" Height="30" Canvas.Left="682" TextWrapping="Wrap" Canvas.Top="182" Width="466" FontSize="14"/>
                 <Label Content="Harga Min" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="218"/>
                 <TextBox x:Name="tbHargaMin" Height="32" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="252" Width="466" FontSize="14"/>
