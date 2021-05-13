@@ -188,8 +188,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
                 statement += $"SELECT ";
                 for (int i = 0; i < param.Length; i++)
                 {
-                    param[i] = sanitize(param[i].ToString());
-
+                    param[i] = param[i].ToString().Contains("TO_") ? param[i].ToString() : sanitize(param[i].ToString());
                     string temp = param[i].ToString();
                     string comma = (i == param.Length - 1) ? "" : ",";
                     statement += $" {temp} {comma} ";
@@ -255,11 +254,12 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             cmd.ExecuteNonQuery();
             App.closeConnection(out _);
         }
-        public DataTable get()
+        public DataTable get( bool debug =false)
         {
             DataTable table = new DataTable();
             try
             {
+                if (debug) Console.WriteLine(statement);
                 App.openConnection(out _);
                 OracleDataAdapter adapter = new OracleDataAdapter(statement, App.connection);
                 App.closeConnection(out _);

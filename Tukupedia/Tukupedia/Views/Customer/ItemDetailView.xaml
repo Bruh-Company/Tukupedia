@@ -41,9 +41,11 @@
                     </TabItem>
                     <TabItem MouseUp="TabReview_OnMouseUp" Name="tabReview" Foreground="Black" Header="Review">
                         <!-- Review Cards-->
-                        <StackPanel x:Name="spanelReview">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <StackPanel x:Name="spanelReview">
                             
-                        </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
                     </TabItem>
                     <TabItem MouseUp="TabDiscussion_OnMouseUp" Name="tabDiscussion" Foreground="Black" Header="Discussion">
                         <!-- Discussion Cards-->

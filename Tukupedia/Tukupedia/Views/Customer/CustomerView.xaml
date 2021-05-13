@@ -11,7 +11,7 @@
         Title="CustomerView" Height="719.7" Width="1280" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1274" Background="#FF65C65B" Margin="0,0,-0.4,0">
-            <Label Content="Welcome Customer" Margin="14,10,0,10" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Left" Height="44" FontWeight="Bold"/>
+            <Label Name="labelWelcome" Content="Welcome Customer" Margin="14,10,0,10" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Left" Height="44" FontWeight="Bold"/>
             <Button Style="{StaticResource btn-navbar}" Content="Settings" HorizontalAlignment="Left" Margin="623,0,0,0" VerticalAlignment="Top" Width="103" FontSize="18" Height="64" FontWeight="Normal"  RenderTransformOrigin="-0.506,0.553"/>
             <Button Style="{StaticResource btn-danger}" Click="BtnLogout_OnClick" x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="1175,10,0,0" VerticalAlignment="Top" Width="89" Background="#FFE23434" FontSize="18" Height="44" FontWeight="Normal" BorderBrush="#00673AB7" RenderTransformOrigin="0.472,0.466"/>
             <Button Style="{StaticResource btn-navbar}" Content="Cart" HorizontalAlignment="Left" Margin="386,0,0,0" VerticalAlignment="Top" Width="78" FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553"/>

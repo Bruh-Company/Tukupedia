@@ -276,8 +276,6 @@
                 </materialDesign:Card>
             </Grid>
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="478" Margin="446,0,0,0" Stroke="White" VerticalAlignment="Center" Width="2" d:IsLocked="True"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="253,93,0,0" VerticalAlignment="Top" Width="75"/>
-
         </Grid>
     </Grid>
 </Window>

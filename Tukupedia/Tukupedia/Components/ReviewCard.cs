@@ -53,6 +53,7 @@ namespace Tukupedia.Components
             stackPanelSellerKeterangan.Children.Add(tbKeteranganPenjual);
             tbReplyUlasan = new TextBlock();
             tbDateSeller = new TextBlock();
+
             stackPanelSellerProfile = new StackPanel();
             stackPanelSeller.Children.Add(stackPanelSellerKeterangan);
             stackPanelSeller.Children.Add(tbDateSeller);
@@ -83,7 +84,8 @@ namespace Tukupedia.Components
             stackPanelCustProfile.Children.Add(stackPanelCust);//End
 
             stackPanelMain.Children.Add(stackPanelCustProfile);
-            stackPanelMain.Children.Add(stackPanelSellerProfile);
+            stackPanelMain.Children.Add(stackPanelContent);
+            this.AddChild(stackPanelMain);
         }
         public void setCust(string cust)
         {

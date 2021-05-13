@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.Models;
 using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
@@ -36,6 +37,14 @@ namespace Tukupedia.Views.Customer
         {
             CustomerViewModel.loadItems(PanelItems);
             CustomerViewModel.loadCategory(cbCategory);
+            debugMode();
+            labelWelcome.Content = "Welcome "+ Session.User["NAMA"].ToString();
+
+        }
+
+        void debugMode()
+        {
+            Session.Login(new CustomerModel().Table.Rows[0],"Customer");
         }
         
         private void SliderMax_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
 {
@@ -28,6 +29,7 @@ namespace Tukupedia.Views.Customer
             InitializeComponent();
             qty = 0;
             maxQty = 10;
+            
         }
 
         public void initDetail(string urlImage, DataRow item)
@@ -37,6 +39,7 @@ namespace Tukupedia.Views.Customer
                 AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
             this.item = item;
             loadDetails();
+            
         }
 
         public void loadDetails()
@@ -47,6 +50,7 @@ namespace Tukupedia.Views.Customer
             tbNamaItem.Text = item["NAMA"].ToString();
             //Load Rating TODO Ganti setelah sudah ganti DB
             // RatingBar.Value = Convert.ToInt32(item["RATING"]);
+
         }
 
         private void TabDescription_OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -56,7 +60,7 @@ namespace Tukupedia.Views.Customer
 
         private void TabReview_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            
+            ItemDetailViewModel.loadReviews(spanelReview, Convert.ToInt32(item["ID"]));
         }
 
         private void TabDiscussion_OnMouseUp(object sender, MouseButtonEventArgs e)
