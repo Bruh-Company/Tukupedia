@@ -36,7 +36,7 @@ namespace Tukupedia.ViewModels.Admin
             forid.initAdapter("select jp.ID from JENIS_PROMO jp left join CATEGORY c on jp.ID_CATEGORY = c.ID left join KURIR k on k.ID = jp.ID_KURIR left join SELLER s on s.ID = jp.ID_SELLER left join METODE_PEMBAYARAN m on jp.ID_METODE_PEMBAYARAN = m.ID");
             category.initAdapter("select ID, NAMA from CATEGORY where STATUS = '1'");
             kurir.initAdapter("select ID, NAMA from KURIR where STATUS = '1'");
-            seller.initAdapter("select ID, NAMA_TOKO from CATEGORY where STATUS = '1'");
+            seller.initAdapter("select ID, NAMA_TOKO from SELLER where STATUS = '1'");
             metode_pembayaran.initAdapter("select ID, NAMA from METODE_PEMBAYARAN where STATUS = '1'");
         }
 

@@ -591,14 +591,92 @@ namespace Tukupedia.Views.Admin
         {
             if(dgJenisPromo.SelectedIndex != -1)
             {
+                int konter = 0;
                 DataRow dr = jpvm.selectData(dgJenisPromo.SelectedIndex);
+                
                 if (dr == null) return;
+                tbJenisPromo.Text = dr[0].ToString();
+                if (dr["Kategori"].ToString() != "-")
+                {
+                    foreach (DataRow dr1 in jpvm.getCategory().Rows)
+                    {
+                        if (dr["Kategori"].ToString() == dr1[1].ToString())
+                        {
+                            cbKategori.SelectedIndex = konter;
+                            cebeKategori.IsChecked = true;
+                            cbKategori.Visibility = Visibility.Visible;
+                            break;
+                            //MessageBox.Show(dr1[0].ToString());
+
+                        }
+                        konter++;
+                    }
+                }
+                konter = 0;
+
+                if (dr["Kurir"].ToString() != "-")
+                {
+                    foreach (DataRow dr1 in jpvm.getCourier().Rows)
+                    {
+                        if (dr["Kurir"].ToString() == dr1[1].ToString())
+                        {
+                            cbKurir.SelectedIndex = konter;
+                            cebeKurir.IsChecked = true;
+                            cbKurir.Visibility = Visibility.Visible;
+                            break;
+                            //MessageBox.Show(dr1[0].ToString());
+
+                        }
+                        konter++;
+                    }
+                }
+                konter = 0;
+
+                if (dr["Seller"].ToString() != "-")
+                {
+                    foreach (DataRow dr1 in jpvm.getSeller().Rows)
+                    {
+                        if (dr["Seller"].ToString() == dr1[1].ToString())
+                        {
+                            cbSeller.SelectedIndex = konter;
+                            cebeSeller.IsChecked = true;
+                            cbSeller.Visibility = Visibility.Visible;
+                            break;
+                            //MessageBox.Show(dr1[0].ToString());
+
+                        }
+                        konter++;
+                    }
+                }
+                konter = 0;
+                if (dr["Metode Pembayaran"].ToString() != "-")
+                {
+                    foreach (DataRow dr1 in jpvm.getMetode_Pembayaran().Rows)
+                    {
+                        if (dr["Metode Pembayaran"].ToString() == dr1[1].ToString())
+                        {
+                            cbMetodePembayaran.SelectedIndex = konter;
+                            cebeMetodePembayaran.IsChecked = true;
+                            cbMetodePembayaran.Visibility = Visibility.Visible;
+                            break;
+                            //MessageBox.Show(dr1[0].ToString());
+
+                        }
+                        konter++;
+                    }
+                }
+                konter = 0;
+                btTambahJenisPromo.Visibility = Visibility.Hidden;
+                btUpdateJenisPromo.Visibility = Visibility.Visible;
+                btHapusJenisPromo.Visibility = Visibility.Visible;
+
             }
         }
 
         private void btJenisPromo_Click(object sender, RoutedEventArgs e)
         {
             reloadJenisPromo();
+            resetJenisPromo();
         }
         void reloadJenisPromo()
         {
@@ -609,7 +687,199 @@ namespace Tukupedia.Views.Admin
             cbKategori.DisplayMemberPath = "NAMA";
             cbKategori.SelectedValuePath = "ID";
 
+            cbKurir.ItemsSource = jpvm.getCourier().DefaultView;
+            cbKurir.DisplayMemberPath = "NAMA";
+            cbKurir.SelectedValuePath = "ID";
 
+            cbSeller.ItemsSource = jpvm.getSeller().DefaultView;
+            cbSeller.DisplayMemberPath = "NAMA_TOKO";
+            cbSeller.SelectedValuePath = "ID";
+
+            cbMetodePembayaran.ItemsSource = jpvm.getMetode_Pembayaran().DefaultView;
+            cbMetodePembayaran.DisplayMemberPath = "NAMA";
+            cbMetodePembayaran.SelectedValuePath = "ID";
+
+
+        }
+        void resetJenisPromo()
+        {
+            cbKurir.Visibility = Visibility.Hidden;
+            cbKategori.Visibility = Visibility.Hidden;
+            cbSeller.Visibility = Visibility.Hidden;
+            cbMetodePembayaran.Visibility = Visibility.Hidden;
+            tbJenisPromo.Text = "";
+
+            btTambahJenisPromo.Visibility = Visibility.Visible;
+            btUpdateJenisPromo.Visibility = Visibility.Hidden;
+            btHapusJenisPromo.Visibility = Visibility.Hidden;
+
+            cebeKurir.IsChecked = false;
+            cebeKategori.IsChecked = false;
+            cebeSeller.IsChecked = false;
+            cebeMetodePembayaran.IsChecked = false;
+        }
+
+        private void cebeKategori_Click(object sender, RoutedEventArgs e)
+        {
+            if(cebeKategori.IsChecked == true)
+            {
+                cbKategori.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbKategori.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void cebeKurir_Click(object sender, RoutedEventArgs e)
+        {
+            if (cebeKurir.IsChecked == true)
+            {
+                cbKurir.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbKurir.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void cebeSeller_Click(object sender, RoutedEventArgs e)
+        {
+            if (cebeSeller.IsChecked == true)
+            {
+                cbSeller.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbSeller.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void cebeMetodePembayaran_Checked(object sender, RoutedEventArgs e)
+        {
+            if(cebeMetodePembayaran.IsChecked == true)
+            {
+                cbMetodePembayaran.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbMetodePembayaran.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btTambahJenisPromo_Click(object sender, RoutedEventArgs e)
+        {
+            string jenispromo = tbJenisPromo.Text, kategori = "", kurir = "", seller = "", metodepembayaran = "";
+            if(cebeKategori.IsChecked == true)
+            {
+                if(cbKategori.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi kategori");
+                    return;
+                }
+                else
+                {
+                    kategori = cbKategori.SelectedValue.ToString();
+                }
+            }
+            if (cebeKurir.IsChecked == true)
+            {
+                if (cbKurir.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi kurir");
+                    return;
+                }
+                else
+                {
+                    kurir = cbKurir.SelectedValue.ToString();
+                }
+            }
+            if (cebeSeller.IsChecked == true)
+            {
+                if (cbSeller.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi seller");
+                    return;
+                }
+                else
+                {
+                    seller = cbSeller.SelectedValue.ToString();
+                }
+            }
+            if (cebeMetodePembayaran.IsChecked == true)
+            {
+                if (cbMetodePembayaran.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi metode pembayaran");
+                    return;
+                }
+                else
+                {
+                    metodepembayaran = cbMetodePembayaran.SelectedValue.ToString();
+                }
+            }
+            if(jpvm.insert(jenispromo, kategori, kurir, seller, metodepembayaran))
+            {
+                reloadJenisPromo();
+                resetJenisPromo();
+            }
+        }
+
+        private void btUpdateJenisPromo_Click(object sender, RoutedEventArgs e)
+        {
+            string jenispromo = tbJenisPromo.Text, kategori = "", kurir = "", seller = "", metodepembayaran = "";
+            if (cebeKategori.IsChecked == true)
+            {
+                if (cbKategori.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi kategori");
+                    return;
+                }
+                else
+                {
+                    kategori = cbKategori.SelectedValue.ToString();
+                }
+            }
+            if (cebeKurir.IsChecked == true)
+            {
+                if (cbKurir.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi kurir");
+                    return;
+                }
+                else
+                {
+                    kurir = cbKurir.SelectedValue.ToString();
+                }
+            }
+            if (cebeSeller.IsChecked == true)
+            {
+                if (cbSeller.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi seller");
+                    return;
+                }
+                else
+                {
+                    seller = cbSeller.SelectedValue.ToString();
+                }
+            }
+            if (cebeMetodePembayaran.IsChecked == true)
+            {
+                if (cbMetodePembayaran.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Mohon isi metode pembayaran");
+                    return;
+                }
+                else
+                {
+                    metodepembayaran = cbMetodePembayaran.SelectedValue.ToString();
+                }
+            }
+            jpvm.update(jenispromo, kategori, kurir, seller, metodepembayaran);
+            reloadJenisPromo();
+            resetJenisPromo();
+            
         }
     }
 }
