@@ -16,7 +16,6 @@ using System.Windows.Controls;
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModelProduk {
         private static SellerView ViewComponent;
-        private static Transition transition;
         private static ItemModel itemModel;
         private static bool toggleBtnInsertProduk = true;
         private static DataRow seller;
@@ -205,12 +204,12 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public static void checkStok(DataGridRow dgRow) {
-            //DataRow data = dgRow.DataContext;
-            //DataRow row = new DB("ITEM").select().where("KODE", data[0].ToString()).getFirst();
-            //int stok = Convert.ToInt32(row["STOK"].ToString());
+            DataRow data = ((DataRowView)dgRow.DataBoundItem).Row;
+            DataRow row = new DB("ITEM").select().where("KODE", data[0].ToString()).getFirst();
+            int stok = Convert.ToInt32(row["STOK"].ToString());
 
-            //Color color = (Color)ColorConverter.ConvertFromString("#E23434");
-            //if (stok == 0) dgRow.Background = new SolidColorBrush(color);
+            Color color = (Color)ColorConverter.ConvertFromString("#E23434");
+            if (stok == 0) dgRow.Background = new SolidColorBrush(color);
         }
 
 

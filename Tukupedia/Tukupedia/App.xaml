@@ -3,11 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:Tukupedia"
-<<<<<<< Updated upstream
-             StartupUri="Views/Admin/HomeAdminView.xaml">
-=======
-             StartupUri="Views/Seller/SellerView.xaml">
->>>>>>> Stashed changes
+             StartupUri="Views/-Views/Seller/SellerView.xaml.xaml">
     <!--Views/Seller/SellerView.xaml -Untuk Bryan-->
     <!--Views/Customer/CustomerView.xaml -Untuk Chen-->
     <!--Views/LoginRegisterView.xaml -Untuk Main-->
