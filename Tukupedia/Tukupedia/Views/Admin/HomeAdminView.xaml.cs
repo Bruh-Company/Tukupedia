@@ -27,6 +27,8 @@ namespace Tukupedia.Views.Admin
         TransactionViewModel tvm;
         CourierViewModel covm;
         JenisPembayaranViewModel jvm;
+        PromoViewModel pvm;
+        JenisPromoViewModel jpvm;
         public HomeAdminView()
         {
             InitializeComponent();
@@ -438,6 +440,63 @@ namespace Tukupedia.Views.Admin
         {
             jvm = new JenisPembayaranViewModel();
             dgJenisPembayaran.ItemsSource = jvm.getDataTable().DefaultView;
+        }
+
+        private void btPromoroot_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        void reloadPromo()
+        {
+            pvm = new PromoViewModel();
+            dgPromo.ItemsSource = pvm.getDataTable().DefaultView;
+            cbJenisPromo.ItemsSource = pvm.getForCb().DefaultView;
+            cbJenisPromo.DisplayMemberPath = "NAMA";
+            cbJenisPromo.SelectedValuePath = "ID";
+        }
+        private void btPromo_Click(object sender, RoutedEventArgs e)
+        {
+            reloadPromo();
+            btTambahPromo.Visibility = Visibility.Visible;
+            btUpdatePromo.Visibility = Visibility.Hidden;
+            btHapusPromo.Visibility = Visibility.Hidden;
+            resetPromo();
+        }
+        void resetPromo()
+        {
+            tbKodePromo.Text = "";
+            tbPotongan.Text = "";
+            tbPotonganMax.Text = "";
+            tbHargaMin.Text = "";
+            cbJenisPotongan.SelectedIndex = -1;
+            cbJenisPromo.SelectedIndex = -1;
+            dpAkhirPromo.SelectedDate = null;
+            dpAwalPromo.SelectedDate = null;
+        }
+
+        private void dgPromo_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(dgPromo.SelectedIndex != -1)
+            {
+                DataRow dr = pvm.selectData(dgPromo.SelectedIndex);
+                if (dr == null) return;
+                tbKodePromo.Text = dr["Kode"].ToString();
+                tbPotongan.Text = dr["Potongan"].ToString();
+                tbPotonganMax.Text = dr["Potongan Maximal"].ToString();
+                tbHargaMin.Text = dr["Harga Minimal"].ToString();
+                // 0 = Discount
+                // 1 = Cashback
+                cbJenisPotongan.SelectedIndex = dr["Jenis Potongan"].ToString() == "Discount" ? 0 : 1;
+                //foreach(DataRow dr1 in pvm.getForCb().Rows)
+                //{
+                //    if(dr["Nama Promo"].ToString() == dr1[1].ToString())
+                //    {
+                        cbJenisPromo.SelectedItem = dr["Nama Promo"].ToString();
+
+                //}
+                //}
+                dpAwalPromo.SelectedDate = DateTime.Parse(dr[5].ToString());
+            }
         }
     }
 }
