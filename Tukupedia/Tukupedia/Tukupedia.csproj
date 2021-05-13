@@ -84,6 +84,7 @@
     <Compile Include="Components\ReviewCard.cs" />
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
+    <Compile Include="Helpers\Utils\EmptyAnimation.cs" />
     <Compile Include="Helpers\Utils\Transition.cs" />
     <Compile Include="Helpers\Utils\Session.cs" />
     <Compile Include="Helpers\Utils\Utility.cs" />
