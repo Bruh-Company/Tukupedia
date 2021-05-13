@@ -8,76 +8,76 @@ using System.Windows.Threading;
 
 namespace Tukupedia.Helpers.Utils
 {
-    public class TransitionData
-    {
-        private FrameworkElement elem;
-        private readonly Thickness targetMargin;
-        private readonly double targetOpacity;
-        private readonly double speedMargin;
-        private readonly double speedOpacity;
-        private readonly double deltaMargin;
-        private readonly double deltaOpacity;
-
-        public TransitionData(
-            FrameworkElement feedElem,
-            Thickness feedTargetMargin,
-            double feedTargetOpacity,
-            double feedSpeedMargin,
-            double feedSpeedOpacity)
-        {
-            elem = feedElem;
-            targetMargin = feedTargetMargin;
-            targetOpacity = feedTargetOpacity;
-            speedMargin = feedSpeedMargin;
-            speedOpacity = feedSpeedOpacity;
-
-            deltaMargin = (
-                Math.Abs(elem.Margin.Top - targetMargin.Top) +
-                Math.Abs(elem.Margin.Left - targetMargin.Left) +
-                Math.Abs(elem.Margin.Right - targetMargin.Right) +
-                Math.Abs(elem.Margin.Bottom - targetMargin.Bottom)
-                ) / 4 * (1.0 / 100.0);
-            deltaOpacity = Math.Abs(elem.Opacity - targetOpacity) * 1.0 / 100.0;
-        }
-
-        public bool move()
-        {
-            Thickness tmp = elem.Margin;
-
-            //base case
-            if (Math.Abs(tmp.Top - targetMargin.Top) +
-                Math.Abs(tmp.Left - targetMargin.Left) +
-                Math.Abs(tmp.Right - targetMargin.Right) +
-                Math.Abs(tmp.Bottom - targetMargin.Bottom) < deltaMargin)
-            {
-                elem.Margin = targetMargin;
-            }
-            if (Math.Abs(elem.Opacity - targetOpacity) < deltaOpacity)
-            {
-                elem.Opacity = targetOpacity;
-            }
-            if (elem.Margin == targetMargin &&
-                elem.Opacity == targetOpacity)
-            {
-                return true;
-            }
-
-            //margin
-            tmp.Top = (tmp.Top + speedMargin * targetMargin.Top) / (1 + speedMargin);
-            tmp.Left = (tmp.Left + speedMargin * targetMargin.Left) / (1 + speedMargin);
-            tmp.Right = (tmp.Right + speedMargin * targetMargin.Right) / (1 + speedMargin);
-            tmp.Bottom = (tmp.Bottom + speedMargin * targetMargin.Bottom) / (1 + speedMargin);
-            elem.Margin = tmp;
-
-            //opacity
-            elem.Opacity = (elem.Opacity + speedOpacity * targetOpacity) / (1 + speedOpacity);
-
-            return false;
-        }
-    }
-
     public class TransitionQueue
     {
+        private class TransitionData
+        {
+            private FrameworkElement elem;
+            private readonly Thickness targetMargin;
+            private readonly double targetOpacity;
+            private readonly double speedMargin;
+            private readonly double speedOpacity;
+            private readonly double deltaMargin;
+            private readonly double deltaOpacity;
+
+            public TransitionData(
+                FrameworkElement feedElem,
+                Thickness feedTargetMargin,
+                double feedTargetOpacity,
+                double feedSpeedMargin,
+                double feedSpeedOpacity)
+            {
+                elem = feedElem;
+                targetMargin = feedTargetMargin;
+                targetOpacity = feedTargetOpacity;
+                speedMargin = feedSpeedMargin;
+                speedOpacity = feedSpeedOpacity;
+
+                deltaMargin = (
+                    Math.Abs(elem.Margin.Top - targetMargin.Top) +
+                    Math.Abs(elem.Margin.Left - targetMargin.Left) +
+                    Math.Abs(elem.Margin.Right - targetMargin.Right) +
+                    Math.Abs(elem.Margin.Bottom - targetMargin.Bottom)
+                    ) / 4 * (1.0 / 100.0);
+                deltaOpacity = Math.Abs(elem.Opacity - targetOpacity) * 1.0 / 100.0;
+            }
+
+            public bool move()
+            {
+                Thickness tmp = elem.Margin;
+
+                //base case
+                if (Math.Abs(tmp.Top - targetMargin.Top) +
+                    Math.Abs(tmp.Left - targetMargin.Left) +
+                    Math.Abs(tmp.Right - targetMargin.Right) +
+                    Math.Abs(tmp.Bottom - targetMargin.Bottom) < deltaMargin)
+                {
+                    elem.Margin = targetMargin;
+                }
+                if (Math.Abs(elem.Opacity - targetOpacity) < deltaOpacity)
+                {
+                    elem.Opacity = targetOpacity;
+                }
+                if (elem.Margin == targetMargin &&
+                    elem.Opacity == targetOpacity)
+                {
+                    return true;
+                }
+
+                //margin
+                tmp.Top = (tmp.Top + speedMargin * targetMargin.Top) / (1 + speedMargin);
+                tmp.Left = (tmp.Left + speedMargin * targetMargin.Left) / (1 + speedMargin);
+                tmp.Right = (tmp.Right + speedMargin * targetMargin.Right) / (1 + speedMargin);
+                tmp.Bottom = (tmp.Bottom + speedMargin * targetMargin.Bottom) / (1 + speedMargin);
+                elem.Margin = tmp;
+
+                //opacity
+                elem.Opacity = (elem.Opacity + speedOpacity * targetOpacity) / (1 + speedOpacity);
+
+                return false;
+            }
+        }
+
         private List<List<TransitionData>> transQueue;
         private int idxNow = -1;
 
