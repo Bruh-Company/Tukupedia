@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tukupedia.Models;
+﻿using Tukupedia.Models;
 using Tukupedia.Views;
 using Tukupedia.Views.Seller;
 using Tukupedia.Helpers.Utils;
@@ -12,17 +7,22 @@ using System.Windows;
 using System.Data;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System;
 
 namespace Tukupedia.ViewModels.Seller {
-    public static class SellerViewModelProduk {
-        private static SellerView ViewComponent;
-        private static ItemModel itemModel;
-        private static bool toggleBtnInsertProduk = true;
-        private static DataRow seller;
+    public class PageProduk {
+        private SellerView ViewComponent;
+        private ItemModel itemModel;
+        private DataRow seller;
+        private bool toggleBtnInsertProduk = true;
+
+        public PageProduk(SellerView viewComponent, DataRow seller) {
+            ViewComponent = viewComponent;
+            this.seller = seller;
+        }
 
         // PAGE PRODUK
-        public static void initPageProduk() {
-            seller = Session.User;
+        public void initPageProduk() {
             fillCmbSort();
             fillCmbKategori();
             fillDgvProduk();
@@ -30,7 +30,7 @@ namespace Tukupedia.ViewModels.Seller {
             switchBtnInsert();
         }
 
-        public static void fillCmbKategori() {
+        public void fillCmbKategori() {
             CategoryModel categoryModel = new CategoryModel();
             ViewComponent.comboboxKategori.ItemsSource = "";
             ViewComponent.comboboxKategori.ItemsSource = categoryModel.Table.DefaultView;
@@ -38,7 +38,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxKategori.SelectedValuePath = "ID";
         }
 
-        public static void fillCmbSort() {
+        public void fillCmbSort() {
             ViewComponent.comboboxSortProduk.Items.Clear();
             ViewComponent.comboboxSortProduk.Items.Add("Harga Tertinggi");
             ViewComponent.comboboxSortProduk.Items.Add("Harga Terendah");
@@ -48,14 +48,14 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxSortProduk.Items.Add("Stok Terbanyak");
         }
 
-        public static void fillCmbBerat() {
+        public void fillCmbBerat() {
             ViewComponent.comboboxBerat.Items.Clear();
             ViewComponent.comboboxBerat.Items.Add("Gram");
             ViewComponent.comboboxBerat.Items.Add("KG");
             ViewComponent.comboboxBerat.SelectedIndex = 0;
         }
 
-        public static void fillDgvProduk() {
+        public void fillDgvProduk() {
             string statement = $"SELECT " +
                 $"i.KODE as \"KODE BARANG\", " +
                 $"i.NAMA as \"NAMA BARANG\", " +
@@ -65,7 +65,7 @@ namespace Tukupedia.ViewModels.Seller {
                 $"FROM ITEM i, CATEGORY c " +
                 $"WHERE i.ID_SELLER = '{seller["ID"]}' " +
                 $"and i.ID_CATEGORY = c.ID";
-            //MessageBox.Show(statement);
+
             itemModel = new ItemModel();
             itemModel.initAdapter(statement);
 
@@ -73,7 +73,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.datagridProduk.ItemsSource = itemModel.Table.DefaultView;
         }
 
-        public static void fillDgvProduk(string keyword) {
+        public void fillDgvProduk(string keyword) {
             string statement = $"SELECT " +
                 $"i.KODE as \"KODE BARANG\", " +
                 $"i.NAMA as \"NAMA BARANG\", " +
@@ -94,13 +94,13 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.datagridProduk.ItemsSource = itemModel.Table.DefaultView;
         }
 
-        public static void searchProduk() {
+        public void searchProduk() {
             string keyword = ViewComponent.textboxCariProduk.Text.ToUpper();
             if (keyword == "") return;
             fillDgvProduk(keyword);
         }
 
-        public static void sortProduk() {
+        public void sortProduk() {
             int selectedIndex = ViewComponent.comboboxSortProduk.SelectedIndex;
 
             if (selectedIndex == 0) itemModel.Table.DefaultView.Sort = "HARGA desc";
@@ -111,7 +111,7 @@ namespace Tukupedia.ViewModels.Seller {
             if (selectedIndex == 5) itemModel.Table.DefaultView.Sort = "STOK desc";
         }
 
-        public static void selectProduk() {
+        public void selectProduk() {
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
             if (selectedIndex == -1)
                 return;
@@ -133,12 +133,12 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.textboxDeskripsi.Text = row["DESKRIPSI"].ToString();
         }
 
-        public static void cancelProduk() {
+        public void cancelProduk() {
             toggleBtnInsertProduk = true;
             switchBtnInsert();
         }
 
-        public static void insertProduk() {
+        public void insertProduk() {
             string[] data = getData();
             if (!dataValidation(data)) return;
 
@@ -168,7 +168,7 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-        public static void updateProduk() {
+        public void updateProduk() {
             string[] data = getData();
             if (!dataValidation(data)) return;
 
@@ -191,7 +191,7 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-        public static void deleteProduk() {
+        public void deleteProduk() {
             ItemModel model = new ItemModel();
             model.init();
 
@@ -203,19 +203,11 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-        public static void checkStok(DataGridRow dgRow) {
-            DataRow data = ((DataRowView)dgRow.DataBoundItem).Row;
-            DataRow row = new DB("ITEM").select().where("KODE", data[0].ToString()).getFirst();
-            int stok = Convert.ToInt32(row["STOK"].ToString());
-
-            Color color = (Color)ColorConverter.ConvertFromString("#E23434");
-            if (stok == 0) dgRow.Background = new SolidColorBrush(color);
-        }
 
 
         // PRIVATE METHODS
 
-        private static void switchBtnInsert() {
+        private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;
                 ViewComponent.btnInsert.Visibility = Visibility.Hidden;
@@ -227,7 +219,7 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-        private static string[] getData() {
+        private string[] getData() {
 
             string nama = ViewComponent.textboxNamaProduk.Text,
                 idCategory = (ViewComponent.comboboxKategori.SelectedIndex + 1) + "",
@@ -243,7 +235,7 @@ namespace Tukupedia.ViewModels.Seller {
             return data;
         }
 
-        private static bool dataValidation(string[] data) {
+        private bool dataValidation(string[] data) {
             if (data.Length < 5) return false;
             foreach (string item in data) {
                 if (item == "") {
@@ -254,7 +246,7 @@ namespace Tukupedia.ViewModels.Seller {
             return true;
         }
 
-        private static void resetPageProduk() {
+        private void resetPageProduk() {
             ViewComponent.textboxNamaProduk.Text = "";
             ViewComponent.textboxHarga.Text = "";
             ViewComponent.textboxStok.Text = "";

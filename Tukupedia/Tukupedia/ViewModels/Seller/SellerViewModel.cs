@@ -14,9 +14,10 @@ using System.Data;
 using System.Windows.Media;
 using System.Windows.Controls;
 
-namespace Tukupedia.ViewModels {
-    public static class SellerViewModelMain {
+namespace Tukupedia.ViewModels.Seller {
+    public static class SellerViewModel {
         public enum page { Pesanan, Produk, InfoToko }
+        public static PageProduk pageProduk;
 
         private static SellerView ViewComponent;
         private static Transition transition;
@@ -30,6 +31,8 @@ namespace Tukupedia.ViewModels {
         public static void InitializeView(SellerView view) {
             seller = Session.User;
             ViewComponent = view;
+            TESTING();
+            pageProduk = new PageProduk(view, seller);
             transition = new Transition(transFPS);
             initState();
             initHeader();
@@ -50,7 +53,6 @@ namespace Tukupedia.ViewModels {
         }
 
         public static void initHeader() {
-            TESTING();
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
             ViewComponent.labelNamaPenjual.Content = seller["NAMA_SELLER"].ToString();
             ViewComponent.labelSaldo.Content = "Rp " + seller["SALDO"].ToString();
@@ -89,7 +91,7 @@ namespace Tukupedia.ViewModels {
             }
 
             if (p == page.Produk) {
-                transition.setCallback(SellerViewModelProduk.initPageProduk);
+                transition.setCallback(pageProduk.initPageProduk);
 
                 transition.makeTransition(ViewComponent.canvasProduk,
                     MarginPosition.Middle, 1,

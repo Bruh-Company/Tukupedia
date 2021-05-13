@@ -26,20 +26,20 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            SellerViewModelMain.InitializeView(this);
+            SellerViewModel.InitializeView(this);
         }
 
         // Header
         private void btnPesanan_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelMain.swapTo(SellerViewModelMain.page.Pesanan);
+            SellerViewModel.swapTo(SellerViewModel.page.Pesanan);
         }
 
         private void btnProduk_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelMain.swapTo(SellerViewModelMain.page.Produk);
+            SellerViewModel.swapTo(SellerViewModel.page.Produk);
         }
 
         private void btnInfoToko_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelMain.swapTo(SellerViewModelMain.page.InfoToko);
+            SellerViewModel.swapTo(SellerViewModel.page.InfoToko);
         }
 
         private void btnStatistikToko_Click(object sender, RoutedEventArgs e) {
@@ -109,39 +109,36 @@ namespace Tukupedia.Views.Seller {
         // Produk Header
 
         private void btnCariProduk_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelProduk.searchProduk();
+            SellerViewModel.pageProduk.searchProduk();
         }
 
         private void comboboxSortProduk_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            SellerViewModelProduk.sortProduk();
+            SellerViewModel.pageProduk.sortProduk();
         }
 
         private void datagridProduk_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
-            SellerViewModelProduk.selectProduk();
+            SellerViewModel.pageProduk.selectProduk();
         }
 
-        private void datagridProduk_LoadingRow(object sender, DataGridRowEventArgs e) {
-            SellerViewModelProduk.checkStok(e.Row);
-        }
 
         private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {
 
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelProduk.cancelProduk();
+            SellerViewModel.pageProduk.cancelProduk();
         }
 
         private void btnInsert_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelProduk.insertProduk();
+            SellerViewModel.pageProduk.insertProduk();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelProduk.updateProduk();
+            SellerViewModel.pageProduk.updateProduk();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e) {
-            SellerViewModelProduk.deleteProduk();
+            SellerViewModel.pageProduk.deleteProduk();
         }
 
         private void textboxHarga_PreviewTextInput(object sender, TextCompositionEventArgs e) {
