@@ -16,6 +16,7 @@ using Tukupedia.Helpers.Utils;
 using Tukupedia.Views.Admin;
 using Tukupedia.Views.Customer;
 using Tukupedia.Views.Seller;
+using System.Text.RegularExpressions;
 
 namespace Tukupedia.Views
 {
@@ -24,6 +25,8 @@ namespace Tukupedia.Views
     /// </summary>
     public partial class LoginRegisterView : Window
     {
+        EmptyAnimation ea;
+
         public LoginRegisterView()
         {
             InitializeComponent();
@@ -33,6 +36,8 @@ namespace Tukupedia.Views
         {
             LoginRegisterViewModel.InitializeView(this);
             loadInit();
+
+            ea = new EmptyAnimation(100);
 
             Panel.SetZIndex(CardCustomer, 1);
             Panel.SetZIndex(CardSeller, 0);
@@ -107,25 +112,51 @@ namespace Tukupedia.Views
             }
         }
 
-        private void btnCustomerToLogin_click(object sender, RoutedEventArgs e)
+        private void btnToLogin_click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.LoginPage);
         }
 
-        private void btnCustomerToRegister1_click(object sender, RoutedEventArgs e)
+        private void btnToRegister1_click(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
         }
 
-        private void btnCustomerToRegister2_click(object sender, RoutedEventArgs e)
+        private void btnToRegister2_click(object sender, RoutedEventArgs e)
         {
-            bool valid = validateCustomerRegister(sender);
+            List<Control> comp = validateRegister(sender);
+
+            if (comp.Count > 0)
+            {
+                foreach (Control nn in comp)
+                {
+                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                }
+                ea.makeAnimation(comp);
+                ea.playAnim();
+
+                return;
+            }
+
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
         }
 
-        private void btnCustomerToRegister3_click(object sender, RoutedEventArgs e)
+        private void btnToRegister3_click(object sender, RoutedEventArgs e)
         {
-            bool valid = validateCustomerRegister(sender);
+            List<Control> comp = validateRegister(sender);
+
+            if (comp.Count > 0)
+            {
+                foreach (Control nn in comp)
+                {
+                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                }
+                ea.makeAnimation(comp);
+                ea.playAnim();
+
+                return;
+            }
+
             LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterThirdPage);
         }
 
@@ -140,32 +171,102 @@ namespace Tukupedia.Views
         }
 
         //not done
-        private bool validateCustomerRegister(object sender)
+        private List<Control> validateRegister(object sender)
         {
-            bool invalid = false;
+            List<Control> FE = new List<Control>();
             
             if (sender == btnCustomerRegisterNext1)
             {
-                invalid |= tbCustomerFullNameRegister.Text.ToString() == "";
-                invalid |= tbCustomerEmailRegister.Text.ToString() == "";
+                if (tbCustomerFullNameRegister.Text.ToString() == "")
+                    FE.Add(tbCustomerFullNameRegister);
+                if (tbCustomerEmailRegister.Text.ToString() == "")
+                    FE.Add(tbCustomerEmailRegister);
             }
             else if (sender == btnCustomerRegisterNext2)
             {
-                invalid |= tbCustomerPhoneNumberRegister.Text.ToString() == "";
-                //invalid |= dpCustomerBornDateRegister.SelectedDate.Value;
-                //invalid |= 
+                if (tbCustomerPhoneNumberRegister.Text.ToString() == "")
+                    FE.Add(tbCustomerPhoneNumberRegister);
+                if (dpCustomerBornDateRegister.SelectedDate.ToString() == "")
+                    FE.Add(dpCustomerBornDateRegister);
+                if (tbCustomerAddressRegister.Text.ToString() == "") 
+                    FE.Add(tbCustomerAddressRegister);
             }
             else if (sender == btnCustomerRegister)
             {
-
+                if (!validatePasswordAndConfirmPassword(LoginRegisterViewModel.CustomerSellerStage.Customer))
+                    FE.Add(tbCustomerConfirmPasswordRegister);
+                if (!stronkPassword(tbCustomerPasswordRegister.Password.ToString()))
+                    FE.Add(tbCustomerPasswordRegister);
+            }
+            else if (sender == btnSellerRegisterNext1)
+            {
+                if (tbSellerShopEmailRegister.Text.ToString() == "")
+                    FE.Add(tbSellerShopEmailRegister);
+                if (tbSellerShopNameRegister.Text.ToString() == "")
+                    FE.Add(tbSellerShopEmailRegister);
+                if (tbShopPhoneNumberRegister.Text.ToString() == "")
+                    FE.Add(tbShopPhoneNumberRegister);
+            }
+            else if (sender == btnSellerRegisterNext2)
+            {
+                if (tbSellerIdentityNumberRegister.Text.ToString() == "")
+                    FE.Add(tbSellerIdentityNumberRegister);
+                if (tbSellerFullNameRegister.Text.ToString() == "")
+                    FE.Add(tbSellerFullNameRegister);
+                if (tbSellerAddressRegister.Text.ToString() == "")
+                    FE.Add(tbSellerAddressRegister);
+            }
+            else if (sender == btnSellerRegister)
+            {
+                if (!validatePasswordAndConfirmPassword(LoginRegisterViewModel.CustomerSellerStage.Seller))
+                    FE.Add(tbSellerConfirmPasswordRegister);
+                if (!stronkPassword(tbSellerPasswordRegister.Password.ToString()))
+                    FE.Add(tbSellerPasswordRegister);
             }
 
-            return !invalid;
+            return FE;
         }
+
+        private bool validatePasswordAndConfirmPassword(LoginRegisterViewModel.CustomerSellerStage e)
+        {
+            string pass, conpass;
+            if (e == LoginRegisterViewModel.CustomerSellerStage.Customer)
+            {
+                pass = tbCustomerPasswordRegister.Password;
+                conpass = tbCustomerConfirmPasswordRegister.Password;
+            }
+            else
+            {
+                pass = tbSellerPasswordRegister.Password;
+                conpass = tbSellerConfirmPasswordRegister.Password;
+            }
+            return pass == conpass;
+        }
+
+        //private bool validatePassword(object sender)
+        //{
+
+        //}
 
         private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            bool valid = validateCustomerRegister(sender);
+            List<Control> comp = validateRegister(sender);
+
+            if (comp.Count > 0)
+            {
+                foreach (Control nn in comp)
+                {
+                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                }
+                ea.makeAnimation(comp);
+                ea.playAnim();
+
+                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblCustomerPasswordCommenter.Opacity = 100;
+
+                return;
+            }
 
             int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
             // 0 = Masih kosong
@@ -233,26 +334,6 @@ namespace Tukupedia.Views
             }
         }
 
-        private void btnSellerToLogin_click(object sender, RoutedEventArgs e)
-        {
-            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.LoginPage);
-        }
-
-        private void btnSellerToRegister1_click(object sender, RoutedEventArgs e)
-        {
-            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterFirstPage);
-        }
-
-        private void btnSellerToRegister2_click(object sender, RoutedEventArgs e)
-        {
-            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterSecondPage);
-        }
-
-        private void btnSellerToRegister3_click(object sender, RoutedEventArgs e)
-        {
-            LoginRegisterViewModel.swapPage(LoginRegisterViewModel.CardPage.RegisterThirdPage);
-        }
-
         private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
         {
             
@@ -268,6 +349,44 @@ namespace Tukupedia.Views
             LoginRegisterViewModel.swapPage(
                         LoginRegisterViewModel.CardPage.LoginPage
                         );
+        }
+
+        private void dataChanged(object sender, EventArgs e)
+        {
+            ((Control)sender).BorderBrush = new SolidColorBrush(Color.FromArgb(138, 255, 255, 255));
+        }
+
+        private bool stronkPassword(string pass)
+        {
+            bool valid = true;
+            valid &= pass.Length >= 8;
+
+            Regex rgx = new Regex(@"^(?=.*[a-zA-Z])(?=.*[0-9])");
+            valid &= rgx.Matches(pass).Count > 0;
+
+            return valid;
+        }
+
+        private void validatePassword(object sender, RoutedEventArgs e)
+        {
+            string pass = tbCustomerPasswordRegister.Password;
+            if (!stronkPassword(pass))
+            {
+                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblCustomerPasswordCommenter.Content = "password kok lemah amat";
+                lblCustomerPasswordCommenter.Opacity = 100;
+                return;
+            }
+
+            passwordChanged(sender, e);
+        }
+
+        private void passwordChanged(object sender, RoutedEventArgs e)
+        {
+            dataChanged(sender, e);
+
+            lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 0, 255, 0));
+            lblCustomerPasswordCommenter.Content = "Hidup anda tenang";
         }
     }
 }
