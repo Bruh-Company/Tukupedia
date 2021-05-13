@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using Tukupedia.ViewModels;
+using Tukupedia.ViewModels.Seller;
 using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.Views.Seller {
@@ -25,20 +26,20 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            SellerViewModel.InitializeView(this);
+            SellerViewModelMain.InitializeView(this);
         }
 
         // Header
         private void btnPesanan_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.swapTo(SellerViewModel.page.Pesanan);
+            SellerViewModelMain.swapTo(SellerViewModelMain.page.Pesanan);
         }
 
         private void btnProduk_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.swapTo(SellerViewModel.page.Produk);
+            SellerViewModelMain.swapTo(SellerViewModelMain.page.Produk);
         }
 
         private void btnInfoToko_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.swapTo(SellerViewModel.page.InfoToko);
+            SellerViewModelMain.swapTo(SellerViewModelMain.page.InfoToko);
         }
 
         private void btnStatistikToko_Click(object sender, RoutedEventArgs e) {
@@ -108,35 +109,39 @@ namespace Tukupedia.Views.Seller {
         // Produk Header
 
         private void btnCariProduk_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.searchProduk();
+            SellerViewModelProduk.searchProduk();
         }
 
         private void comboboxSortProduk_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            SellerViewModel.sortProduk();
-        }
-
-        private void comboboxBerat_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            SellerViewModel.cbBeratSelectionChanged();
+            SellerViewModelProduk.sortProduk();
         }
 
         private void datagridProduk_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
-            SellerViewModel.selectProduk();
+            SellerViewModelProduk.selectProduk();
+        }
+
+        private void datagridProduk_LoadingRow(object sender, DataGridRowEventArgs e) {
+            SellerViewModelProduk.checkStok(e.Row);
         }
 
         private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {
 
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e) {
+            SellerViewModelProduk.cancelProduk();
+        }
+
         private void btnInsert_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.insert();
+            SellerViewModelProduk.insertProduk();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModelProduk.updateProduk();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModelProduk.deleteProduk();
         }
 
         private void textboxHarga_PreviewTextInput(object sender, TextCompositionEventArgs e) {
@@ -172,6 +177,7 @@ namespace Tukupedia.Views.Seller {
         private void btnKurangKurirInfo_Click(object sender, RoutedEventArgs e) {
 
         }
+
         // Info
     }
 }

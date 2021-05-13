@@ -10,6 +10,7 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
     <Grid Width="1280" Height="690">
+        <!--HEADER-->
         <Canvas HorizontalAlignment="Left" Height="100" Width="1280" VerticalAlignment="Top" Background="#65c65b">
             <Image Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
             <Label  Name="labelNamaToko"    Content="NAMA TOKO"       Canvas.Left="125"   Canvas.Top="5" Style="{StaticResource h1}"/>
@@ -23,7 +24,9 @@
             <Button Name="btnStatistikToko" Content="Statistik Toko"    Canvas.Left="1000"  Canvas.Top="0"  Width="120" Height="100" Style="{StaticResource btn-navbar}" Click="btnStatistikToko_Click"/>
             <Button Name="btnLogout"        Content="Logout"            Canvas.Left="1130"  Canvas.Top="30" Width="100" Height="40"  Style="{StaticResource btn-danger}" Click="btnLogout_Click"/>
         </Canvas>
-        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Hidden">
+        
+        <!--PAGE PESANAN-->
+        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280">
             <Button     Name="btnSemuaPesanan"      Content="Semua Pesanan"      Canvas.Left="0"    Width="224" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnSemuaPesanan_Click"/>
             <Button     Name="btnPesananBaru"       Content="Pesanan Baru"       Canvas.Left="224"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananBaru_Click"/>
             <Button     Name="btnSiapKirim"         Content="Siap Kirim"         Canvas.Left="434"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnSiapKirim_Click"/>
@@ -66,12 +69,14 @@
             <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="875" Canvas.Top="520" Width="190" Height="40" Style="{StaticResource btn-danger}" Click="btnBatalPesanan_Click"/>
             <Button Name="btnSuccessPesanan" Content="Terima" FontSize="18" Canvas.Left="1070" Canvas.Top="520" Width="190" Height="40" Style="{StaticResource btn-primary}" Click="btnSuccessPesanan_Click"/>
         </Canvas>
+
+        <!--PAGE PRODUK-->
         <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280">
-            <TextBox Name="textboxCariProduk" Text="Cari Produk atau Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
+            <TextBox Name="textboxCariProduk" Text="Cari Kode Produk, Produk, Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
             <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
 
-            <DataGrid Name="datagridProduk" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
+            <DataGrid Name="datagridProduk" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" LoadingRow="datagridProduk_LoadingRow" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 
             <Label Content="Info Produk" Canvas.Left="765" Canvas.Top="24" Style="{StaticResource xl-secondary}"/>
 
@@ -92,7 +97,7 @@
             <TextBox Name="textboxStok" Canvas.Left="1020"  Canvas.Top="240"  Height="30" Width="230" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxStok_PreviewTextInput"/>
 
             <Label Content="Berat" Canvas.Left="930" Canvas.Top="290" Style="{StaticResource md-secondary}"/>
-            <ComboBox Name="comboboxBerat" Canvas.Left="1020" Canvas.Top="290" Height="35" Width="50" BorderBrush="#FFFFFF" FontSize="14" Foreground="#9A9A9A" SelectionChanged="comboboxBerat_SelectionChanged"/>
+            <ComboBox Name="comboboxBerat" Canvas.Left="1020" Canvas.Top="290" Height="35" Width="50" BorderBrush="#FFFFFF" FontSize="14" Foreground="#9A9A9A"/>
             <TextBox Name="textboxBerat" Canvas.Left="1075"  Canvas.Top="290" Height="35" Width="175" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxBerat_PreviewTextInput"/>
 
             <Label Content="Status Produk" Canvas.Left="930" Canvas.Top="340" Style="{StaticResource md-secondary}"/>
@@ -101,11 +106,14 @@
             <Label Content="Deskripsi" Canvas.Left="765" Canvas.Top="380" Style="{StaticResource md-secondary}"/>
             <TextBox Name="textboxDeskripsi" Canvas.Left="765"  Canvas.Top="410"  Height="100" Width="480" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF" BorderBrush="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
+            <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="160" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
             <Button Name="btnInsert" Content="Insert" FontSize="20" Width="160" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="155" Height="40" Canvas.Left="930" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
             <Button Name="btnDelete" Content="Delete" FontSize="20" Width="155" Height="40" Canvas.Left="1090" Canvas.Top="530" Style="{StaticResource btn-danger}" Click="btnDelete_Click"/>
         </Canvas>
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Hidden">
+
+        <!--PAGE INFO TOKO-->
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280">
             <Label Content="INFO TOKO" Canvas.Left="200" Canvas.Top="40" Style="{StaticResource h2-success}"/>
             <Label Name="labelNamaTokoInfo" Content="NAMA TOKO" Canvas.Left="200" Canvas.Top="95" Style="{StaticResource h2}"/>
 
