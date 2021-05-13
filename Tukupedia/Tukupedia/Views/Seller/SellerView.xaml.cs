@@ -112,15 +112,23 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void comboboxSortProduk_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            SellerViewModel.sortProduk();
+        }
 
+        private void comboboxBerat_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            SellerViewModel.cbBeratSelectionChanged();
         }
 
         private void datagridProduk_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+            SellerViewModel.selectProduk();
+        }
+
+        private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {
 
         }
 
         private void btnInsert_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.insert();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e) {
@@ -129,6 +137,18 @@ namespace Tukupedia.Views.Seller {
 
         private void btnDelete_Click(object sender, RoutedEventArgs e) {
 
+        }
+
+        private void textboxHarga_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void textboxStok_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void textboxBerat_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
         }
         // Produk
 
@@ -152,7 +172,6 @@ namespace Tukupedia.Views.Seller {
         private void btnKurangKurirInfo_Click(object sender, RoutedEventArgs e) {
 
         }
-
         // Info
     }
 }
