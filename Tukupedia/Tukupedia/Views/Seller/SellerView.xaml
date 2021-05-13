@@ -71,12 +71,12 @@
         </Canvas>
 
         <!--PAGE PRODUK-->
-        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280">
+        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280" >
             <TextBox Name="textboxCariProduk" Text="Cari Kode Produk, Produk, Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
             <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
 
-            <DataGrid Name="datagridProduk" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
+            <DataGrid Name="datagridProduk" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" LoadingRow="datagridProduk_LoadingRow" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 
             <Label Content="Info Produk" Canvas.Left="765" Canvas.Top="24" Style="{StaticResource xl-secondary}"/>
 

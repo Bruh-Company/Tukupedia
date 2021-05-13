@@ -21,7 +21,6 @@ namespace Tukupedia.ViewModels.Seller {
             this.seller = seller;
         }
 
-        // PAGE PRODUK
         public void initPageProduk() {
             fillCmbSort();
             fillCmbKategori();
@@ -203,7 +202,18 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-
+        public void checkStok(DataGridRow dgRow) {
+            DataRowView item = dgRow.Item as DataRowView;
+            if (item != null) {
+                DataRow row = item.Row;
+                DataRow data = new DB("ITEM").select().where("KODE", row["KODE BARANG"].ToString()).getFirst();
+                int stok = Convert.ToInt32(data["STOK"].ToString());
+                if (stok <= 0) {
+                    Color color = (Color)ColorConverter.ConvertFromString("#E23434");
+                    dgRow.Background = new SolidColorBrush(color);
+                }
+            }
+        }
 
         // PRIVATE METHODS
 

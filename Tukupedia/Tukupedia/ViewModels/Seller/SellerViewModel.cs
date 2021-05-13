@@ -18,6 +18,7 @@ namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
         public enum page { Pesanan, Produk, InfoToko }
         public static PageProduk pageProduk;
+        public static PagePesanan pagePesanan;
 
         private static SellerView ViewComponent;
         private static Transition transition;
@@ -60,6 +61,8 @@ namespace Tukupedia.ViewModels.Seller {
 
         public static void swapTo(page p) {
             if (p == page.Pesanan) {
+                transition.setCallback(pagePesanan.initPagePesanan);
+
                 transition.makeTransition(ViewComponent.canvasPesanan,
                     MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,
