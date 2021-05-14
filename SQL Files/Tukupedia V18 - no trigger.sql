@@ -40,12 +40,12 @@ create table CUSTOMER
     TANGGAL_LAHIR DATE          not null,
     ALAMAT        VARCHAR2(100),
     NO_TELP       VARCHAR2(20)  not null,
-    SALDO         NUMBER default 0,
+    SALDO         NUMBER        default 0,
     KODE          VARCHAR2(32),
-    STATUS        CHAR   default 1,
+    STATUS        CHAR          default 1,
     PASSWORD      VARCHAR2(64)  not null,
-    IMAGE         VARCHAR2(255),
-    CREATED_AT    DATE   default sysdate
+    IMAGE         VARCHAR2(255) default '',
+    CREATED_AT    DATE          default sysdate
 )
 /
 
@@ -199,21 +199,22 @@ END BEFORE STATEMENT;
 
 create table SELLER
 (
-    ID          NUMBER                 not null
+    ID          NUMBER                        not null
         constraint SELLER_PK
             primary key,
     KODE        VARCHAR2(32),
     EMAIL       VARCHAR2(30),
-    NAMA_TOKO   VARCHAR2(100)          not null,
-    ALAMAT      VARCHAR2(30)           not null,
+    NAMA_TOKO   VARCHAR2(100)                 not null,
+    ALAMAT      VARCHAR2(30)                  not null,
     NO_TELP     VARCHAR2(30),
-    SALDO       NUMBER default 0,
+    SALDO       NUMBER        default 0,
     IS_OFFICIAL CHAR,
-    STATUS      CHAR   default 1,
-    PASSWORD    VARCHAR2(64)           not null,
-    CREATED_AT  DATE   default sysdate not null,
-    NAMA_SELLER VARCHAR2(100)          not null,
-    NIK         VARCHAR2(30)           not null
+    STATUS      CHAR          default 1,
+    PASSWORD    VARCHAR2(64)                  not null,
+    CREATED_AT  DATE          default sysdate not null,
+    NAMA_SELLER VARCHAR2(100)                 not null,
+    NIK         VARCHAR2(30)                  not null,
+    IMAGE       VARCHAR2(255) default ''
 )
 /
 
@@ -293,25 +294,25 @@ END BEFORE STATEMENT;
 
 create table ITEM
 (
-    ID          NUMBER           not null
+    ID          NUMBER                  not null
         constraint ITEM_PK
             primary key,
     KODE        VARCHAR2(32),
     ID_CATEGORY NUMBER
         constraint FK_KATEGORY_ITEM
             references CATEGORY,
-    HARGA       NUMBER           not null,
-    STATUS      CHAR   default 1 not null,
-    NAMA        VARCHAR2(100)    not null,
+    HARGA       NUMBER                  not null,
+    STATUS      CHAR          default 1 not null,
+    NAMA        VARCHAR2(100)           not null,
     DESKRIPSI   VARCHAR2(1000),
     ID_SELLER   NUMBER
         constraint FK_ID_SELLER
             references SELLER,
-    BERAT       NUMBER           not null,
-    STOK        NUMBER default 0 not null,
-    RATING      NUMBER default 0,
-    IMAGE       VARCHAR2(255),
-    CREATED_AT  DATE   default sysdate
+    BERAT       NUMBER                  not null,
+    STOK        NUMBER        default 0 not null,
+    RATING      NUMBER        default 0,
+    IMAGE       VARCHAR2(255) default '',
+    CREATED_AT  DATE          default sysdate
 )
 /
 
@@ -407,7 +408,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from H_DISKUSI;
     :new.ID := new_id;
-END;
+END AUTO_ID_H_DISKUSI;
 /
 
 create table KURIR
@@ -526,7 +527,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from METODE_PEMBAYARAN;
     :new.ID := new_id;
-END;
+END AUTO_ID_METODE_PEMBAYARAN;
 /
 
 create table H_TRANS_ITEM
@@ -574,7 +575,7 @@ BEGIN
     select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
     :new.ID := new_id;
     :new.kode := new_code;
-END;
+END AUTO_ID_H_TRANS_ITEM;
 /
 
 create table D_TRANS_ITEM
@@ -609,7 +610,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from D_TRANS_ITEM;
     :new.ID := new_id;
-END;
+END AUTO_ID_D_TRANS_ITEM;
 /
 
 create table ULASAN
@@ -651,7 +652,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from ULASAN;
     :new.ID := new_id;
-END;
+END AUTO_ID_ULASAN;
 /
 
 create table JENIS_PROMO
@@ -693,7 +694,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from JENIS_PROMO;
     :new.ID := new_id;
-END;
+END AUTO_ID_JENIS_PROMO;
 /
 
 create table PROMO
@@ -736,7 +737,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from PROMO;
     :new.ID := new_id;
-END;
+END AUTO_ID_PROMO;
 /
 
 create table KONTRAK_OS
@@ -769,7 +770,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from KONTRAK_OS;
     :new.ID := new_id;
-END;
+END AUTO_ID_KONTRAK_OS;
 /
 
 create table TRANS_OS
@@ -802,10 +803,10 @@ BEGIN
     into jumlah
     from TRANS_OS
     where KODE like '%' || new_code || '%';
-    select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
+    select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
     :new.ID := new_id;
     :new.kode := new_code;
-END;
+END AUTO_ID_TRANS_OS;
 /
 
 create table D_DISKUSI
@@ -849,7 +850,7 @@ DECLARE
 BEGIN
     select nvl(max(id), 0) + 1 into new_id from D_DISKUSI;
     :new.ID := new_id;
-END;
+END AUTO_ID_D_DISKUSI;
 /
 
 create table KURIR_SELLER
@@ -872,6 +873,18 @@ create unique index KURIR_SELLER_ID_UINDEX
 alter table KURIR_SELLER
     add constraint KURIR_SELLER_PK
         primary key (ID)
+/
+
+create or replace trigger AUTO_ID_KURIR_SELLER
+    before insert
+    on KURIR_SELLER
+    for each row
+DECLARE
+    new_id number;
+BEGIN
+    select nvl(max(id), 0) + 1 into new_id from KURIR_SELLER;
+    :new.ID := new_id;
+END AUTO_ID_KURIR_SELLER;
 /
 
 

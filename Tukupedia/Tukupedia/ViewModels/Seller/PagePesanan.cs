@@ -165,6 +165,10 @@ namespace Tukupedia.ViewModels.Seller
             int tidakterima = 0;
             
             if (terimasemua) {
+               for(int i = 0; i<dtrans_helper.Table.Rows.Count; i++)
+                {
+
+                }
                 
             }
             else
