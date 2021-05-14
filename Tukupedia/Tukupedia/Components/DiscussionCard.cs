@@ -12,16 +12,19 @@ namespace Tukupedia.Components
     {
         private StackPanel spMain;
         private StackPanel spComments;
+        private StackPanel spReply;
         private Comment mainComment;
 
         public DiscussionCard()
         {
             spMain = new StackPanel();
             spComments = new StackPanel();
+            spReply = new StackPanel();
             mainComment = new Comment(false);
 
             spMain.Children.Add(mainComment);
             spMain.Children.Add(spComments);
+            spMain.Children.Add(spReply);
             this.AddChild(spMain);
         }
 

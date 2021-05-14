@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Tukupedia/Components/InputDiscussion.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +55,11 @@
       <option value="$PROJECT_DIR$/Tukupedia/Components/Comment.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Models/Model.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/InputDiscussion.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -104,7 +109,7 @@
       <workItem from="1620798301764" duration="578000" />
       <workItem from="1620798915011" duration="26402000" />
       <workItem from="1620892847144" duration="10617000" />
-      <workItem from="1620972608264" duration="13961000" />
+      <workItem from="1620972608264" duration="15745000" />
     </task>
     <servers />
   </component>
