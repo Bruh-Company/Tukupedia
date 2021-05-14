@@ -243,16 +243,24 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         }
         public void execute()
         {
-            OracleCommand cmd = new OracleCommand()
+            try
             {
-                CommandText = statement,
-                Connection = App.connection
-            };
-            MessageBox.Show(statement);
+                OracleCommand cmd = new OracleCommand()
+                {
+                    CommandText = statement,
+                    Connection = App.connection
+                };
+                //MessageBox.Show(statement);
 
-            App.openConnection(out _);
-            cmd.ExecuteNonQuery();
-            App.closeConnection(out _);
+                App.openConnection(out _);
+                cmd.ExecuteNonQuery();
+                App.closeConnection(out _);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+
+            }
         }
         public DataTable get( bool debug =false)
         {

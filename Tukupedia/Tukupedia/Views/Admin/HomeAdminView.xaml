@@ -23,7 +23,7 @@
             <Label Content="Jumlah Toko Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="890" Canvas.Top="300"/>
             <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
         </Canvas>
-        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="128,-1493,-108,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="20,65,0,0" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
@@ -114,7 +114,7 @@
             <Button Style="{StaticResource btn-danger}" x:Name="btToggleJenisPembayaran" Content="Matikan" Canvas.Left="829" Canvas.Top="397" Width="143" Click="btToggleJenisPembayaran_Click"/>
         </Canvas>
         <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="999,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click"/>
-        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="0,65,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="10,1769,0,-1704" VerticalAlignment="Top" Width="1252">
             <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">
                 <Label Content="Tukupedia Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="48"/>
                 <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseDoubleClick="dgJenisPromo_MouseDoubleClick"/>

@@ -76,6 +76,7 @@ namespace Tukupedia.ViewModels.Admin
                 }
                 kode += Utility.translate(konter, 3);
                 DB cmd = new DB();
+                //cmd.statement = $"insert into CATEGORY(NAMA) VALUES ('{nama}')";
                 cmd.statement = $"insert into CATEGORY(ID, KODE, NAMA) VALUES (100,'{kode.ToUpper()}','{nama}')";
                 cmd.execute();
                 return true;

@@ -21,7 +21,7 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            sm.initAdapter($"select KODE as \"Kode\", EMAIL as \"Email\", NAMA as \"Nama User\", ALAMAT as \"Alamat\", NO_TELP as \"Nomor Telepon\", to_char(CREATED_AT,'dd-mm-yyyy') as \"Mendaftar Sejak\", case STATUS when '1' then 'Aktif' when '0' then 'Banned' end as \"Status\", case IS_OFFICIAL when '1' then 'Yes' when '0' then 'No' end as \"is Official\" from SELLER order by KODE");
+            sm.initAdapter($"select KODE as \"Kode\", EMAIL as \"Email\", NAMA_TOKO as \"Nama User\", ALAMAT as \"Alamat\", NO_TELP as \"Nomor Telepon\", to_char(CREATED_AT,'dd-mm-yyyy') as \"Mendaftar Sejak\", case STATUS when '1' then 'Aktif' when '0' then 'Banned' end as \"Status\", case IS_OFFICIAL when '1' then 'Yes' when '0' then 'No' end as \"is Official\" from SELLER order by KODE");
         }
 
         public DataTable getDataTable()
