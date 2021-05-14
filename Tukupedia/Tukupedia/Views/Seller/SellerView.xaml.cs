@@ -92,7 +92,8 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+        private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
 
         }
 
