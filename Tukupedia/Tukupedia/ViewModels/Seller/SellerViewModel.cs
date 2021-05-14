@@ -55,7 +55,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         public static void initHeader() {
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            ViewComponent.labelNamaPenjual.Content = seller["NAMA_SELLER"].ToString();
+            ViewComponent.labelStatusPesanan.Content = seller["IS_OFFICIAL"].ToString();
             ViewComponent.labelSaldo.Content = "Rp " + seller["SALDO"].ToString();
         }
 

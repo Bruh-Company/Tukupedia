@@ -170,23 +170,23 @@ namespace Tukupedia.Views.Seller {
         // Produk
 
         // Info
-        private void btnUbahDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnSimpanDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnBatalDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
         private void btnTambahKurirInfo_Click(object sender, RoutedEventArgs e) {
 
         }
 
         private void btnKurangKurirInfo_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnUbahInfoPenjual_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnSimpanInfo_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnBatalInfo_Click(object sender, RoutedEventArgs e) {
 
         }
 
