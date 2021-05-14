@@ -15,7 +15,7 @@ namespace Tukupedia.Components
         private StackPanel spReply;
         private Comment mainComment;
 
-        public DiscussionCard()
+        public DiscussionCard(double fullwidth)
         {
             spMain = new StackPanel();
             spComments = new StackPanel();
@@ -25,7 +25,10 @@ namespace Tukupedia.Components
             spMain.Children.Add(mainComment);
             spMain.Children.Add(spComments);
             spMain.Children.Add(spReply);
+            spMain.Width = fullwidth;
             this.AddChild(spMain);
+            this.Margin = new Thickness(5, 5, 5, 5);
+
         }
 
         public void initMainComment(string message, string commenterName, string date, string url)
@@ -37,10 +40,11 @@ namespace Tukupedia.Components
             D_DiskusiModel ddm = new D_DiskusiModel();
             ddm.addWhere("ID_H_DISKUSI",id_h_diskusi.ToString());
             // Dapatkan semua comment dengan id header diskusi yang diminta
+            bool exist = false;
             foreach (DataRow row in ddm.get())
             {
+                exist = true;
                 bool isPenjual;
-                MessageBox.Show(row["ID_SELLER"].ToString());
                 isPenjual = row["SENDER"].ToString() == "C" ? false : true;
                 Comment com = new Comment(isPenjual);
                 string date;
@@ -56,9 +60,13 @@ namespace Tukupedia.Components
                 spComments.Children.Add(com);
             }
 
-            ReplyCard rc = new ReplyCard();
-            rc.initCard(id_h_diskusi);
-            spComments.Children.Add(rc);
+            if (exist)
+            {
+                ReplyCard rc = new ReplyCard();
+                rc.initCard(id_h_diskusi);
+                spComments.Children.Add(rc);
+            }
+            
         }
     }
 }

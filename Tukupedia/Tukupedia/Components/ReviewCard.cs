@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaterialDesignColors;
 using MaterialDesignThemes.Wpf;
+using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.Components
 {
@@ -105,7 +106,7 @@ namespace Tukupedia.Components
             imgCust.VerticalAlignment = VerticalAlignment.Top;
             imgCust.Source =
                 new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
+                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
             stackPanelCustProfile.Children.Add(imgCust);
             stackPanelCustProfile.Children.Add(stackPanelCust);//End
 
@@ -119,7 +120,7 @@ namespace Tukupedia.Components
             
             //Init Styles
             tbNamaCust.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
-            tbDateCust.FontSize = 14;
+            tbDateCust.FontSize = 12;
             tbUlasan.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
             tbUlasan.Margin = new Thickness(0, 5, 0, 2);
             sellerCard.Margin = new Thickness(0,4,0,7);
@@ -127,7 +128,7 @@ namespace Tukupedia.Components
             contentCard.Padding = new Thickness(6, 4, 6, 4);
             contentCard.Width = fullWidth-200;
             tbNamaToko.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
-            tbDateSeller.FontSize = 14;
+            tbDateSeller.FontSize = 12;
             tbReplyUlasan.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
             tbReplyUlasan.Margin = new Thickness(0, 5, 0, 5);
             tbKeteranganPenjual.Padding = new Thickness(4, 3, 4, 3);

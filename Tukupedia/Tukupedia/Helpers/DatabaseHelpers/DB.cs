@@ -279,13 +279,13 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             return table;
         }
-        public DataRow getFirst()
+        public DataRow getFirst(bool debug = false)
         {
             DataRow row = null;
             try
             {
                 //MessageBox.Show(get().Rows.Count.ToString());
-                row = get().Rows[0];
+                row = get(debug).Rows[0];
                 
             }
             catch(Exception ex)

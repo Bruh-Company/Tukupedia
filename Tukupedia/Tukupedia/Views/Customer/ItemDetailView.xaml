@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
             <StackPanel VerticalAlignment="Top">
-                <Image Margin="0,100,0,0" x:Name="ImageItem" Height="270" Width="240"></Image>
+                <Image Margin="0,100,10.2,0" x:Name="ImageItem" Height="270"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Column="1"  Grid.Row="0" >
@@ -31,7 +31,7 @@
                 <materialDesign:RatingBar x:Name="RatingBar" IsReadOnly="True" Foreground="Yellow" Min="1" Max="5"/>
                 <TextBlock Style="{StaticResource textblockblock-sm}" x:Name="tbTerjual" Text="Terjual : " Foreground="#C8C8C8"></TextBlock>
                 <TextBlock Style="{StaticResource textblockblock-lg}" x:Name="tbHarga" Text="Rp69.000,00" Foreground="#E87059"></TextBlock>
-                <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="400" Margin="0,0,0.4,0" >
+                <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="360" FontSize="16" FontWeight="Bold" >
                     <TabItem MouseUp="TabDescription_OnMouseUp" Name="tabDescription" Foreground="Black" Header="Description">
                         <!-- Berat, Kategori, Desc-->
                         <StackPanel>
@@ -45,20 +45,28 @@
                         <!-- Review Cards-->
                         <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="spanelReview">
-                            
+
                             </StackPanel>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem MouseUp="TabDiscussion_OnMouseUp" Name="tabDiscussion" Foreground="Black" Header="Discussion">
                         <!-- Discussion Cards-->
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                            <StackPanel x:Name="spanelDiscussion">
-                            
+                        <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <StackPanel Margin="5,5,5,10" Width="618" VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="spanelDiscussion">
+
                             </StackPanel>
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
-                
+                <RichTextBox x:Name="rtbDiskusi" Height="74" BorderThickness="1,1,1,1" FontSize="16">
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="Tanya disini :D"/>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <Button x:Name="btnKirimDiskusi" Click="btnKirimDiskusi_Click" Content="Kirim" Style="{StaticResource btn-primary}" HorizontalAlignment="Right" Width="150" d:LayoutOverrides="Height"/>
+
             </StackPanel>
         </Grid>
         <Grid Grid.Column="2" Grid.Row="0" >

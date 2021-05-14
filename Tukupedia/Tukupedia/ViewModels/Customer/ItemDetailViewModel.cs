@@ -16,17 +16,18 @@ namespace Tukupedia.ViewModels.Customer
         {
             H_DiskusiModel hdm = new H_DiskusiModel();
             hdm.addWhere("ID_ITEM",ItemID.ToString());
+            hdm.addOrderBy("CREATED_AT ASC");
             foreach (DataRow row in hdm.get())
             {
-                DiscussionCard dc = new DiscussionCard();
-                DataRow customer = new DB("CUSTOMER").@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
+                DiscussionCard dc = new DiscussionCard(elem.ActualWidth);
+                DataRow customer = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
                 dc.initMainComment(
                     message:row["MESSAGE"].ToString(),
                     commenterName:customer["NAMA"].ToString(),
                     date: Utility.formatDate(row["CREATED_AT"].ToString()),
                     url:customer["IMAGE"].ToString()
                     );
-                dc.initComments(Convert.ToInt32(row["ID_H_DISKUSI"]));
+                dc.initComments(Convert.ToInt32(row["ID"]));
                 elem.Children.Add(dc);
             }
         }
@@ -70,6 +71,20 @@ namespace Tukupedia.ViewModels.Customer
                 }
                 elem.Children.Add(rc);
             }
+        }
+
+        public static void kirimDiskusi(string message,int id_item)
+        {
+            H_DiskusiModel hd = new H_DiskusiModel();
+            MessageBox.Show(message);
+            hd.insert(
+                "ID",0,
+                "ID_CUSTOMER",Session.User["ID"].ToString(),
+                "MESSAGE", message,
+                "ID_ITEM",id_item,
+                "STATUS",1,
+                "CREATED_AT",DateTime.Now.ToString()
+                );
         }
     }
 }

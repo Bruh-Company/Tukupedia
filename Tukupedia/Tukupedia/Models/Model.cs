@@ -17,12 +17,14 @@ namespace Tukupedia.Models
         public OracleCommandBuilder Builder { get; set; }
         public string statement { get; set; }
         public string where { get; set; }
+        public string Sort { get; set; }
 
         public Model()
         {
             TableName = "";
             Table = new DataTable();
             resetWhere();
+            resetSort();
         }
         public void init()
         {
@@ -68,7 +70,7 @@ namespace Tukupedia.Models
         {
             DataRow row = Table.NewRow();
 
-            for (int i = 0; i < param.Length/2; i+=2)
+            for (int i = 0; i < param.Length; i+=2)
             {
                 var col = param[i].ToString();
                 var val = param[i + 1].ToString();
@@ -84,7 +86,7 @@ namespace Tukupedia.Models
         }
         public void updateRow(DataRow row,params object[] param)
         {
-            for (int i = 0; i < param.Length/2; i+=2)
+            for (int i = 0; i < param.Length; i+=2)
             {
                 var col = param[i].ToString();
                 var val = param[i + 1].ToString();
@@ -96,6 +98,11 @@ namespace Tukupedia.Models
         public void resetWhere()
         {
             where = "";
+        }
+
+        public void resetSort()
+        {
+            this.Sort = "";
         }
         public void addWhere(string column, string val,string opera="=", bool apostrophe=true)
         {
@@ -110,10 +117,15 @@ namespace Tukupedia.Models
             where += $" {or} {column} {opera} {apos}{val}{apos} ";
         }
 
+        public void addOrderBy(string OrderBy)
+        {
+            string comma = "";
+            if (this.Sort != "") comma = ",";
+            this.Sort += $" {comma} {OrderBy} ";
+        }
         public DataRow[] get()
         {
-            MessageBox.Show(where);
-            return Table.Select(where);
+            return Table.Select(where,Sort);
         }
         
     }

@@ -83,7 +83,6 @@
     <Compile Include="Components\Comment.cs" />
     <Compile Include="Components\CustomCard.cs" />
     <Compile Include="Components\DiscussionCard.cs" />
-    <Compile Include="Components\InputDiscussion.cs" />
     <Compile Include="Components\ItemCard.cs" />
     <Compile Include="Components\ReplyCard.cs" />
     <Compile Include="Components\ReviewCard.cs" />

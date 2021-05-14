@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.Helpers.Utils;
 using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
@@ -97,6 +98,20 @@ namespace Tukupedia.Views.Customer
         private void BtnAddCart_OnClick(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        private void btnKirimDiskusi_Click(object sender, RoutedEventArgs e)
+        {
+            string message = Utility.StringFromRichTextBox(rtbDiskusi);
+            int id_item = Convert.ToInt32(item["ID"]);
+            ItemDetailViewModel.kirimDiskusi(message, id_item);
+            resetDiskusi();
+        }
+        public void resetDiskusi()
+        {
+            spanelDiscussion.Children.Clear();
+            ItemDetailViewModel.loadDiscussions(spanelDiscussion, Convert.ToInt32(item["ID"]));
+
         }
     }
 }
