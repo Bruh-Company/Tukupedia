@@ -14,6 +14,7 @@ namespace Tukupedia.Components
         private StackPanel spComments;
         private StackPanel spReply;
         private Comment mainComment;
+        bool exist = false;
 
         public DiscussionCard(double fullwidth)
         {
@@ -21,6 +22,7 @@ namespace Tukupedia.Components
             spComments = new StackPanel();
             spReply = new StackPanel();
             mainComment = new Comment(false);
+            spComments.Margin = new Thickness(20, 0, 0, 0);
 
             spMain.Children.Add(mainComment);
             spMain.Children.Add(spComments);
@@ -34,13 +36,14 @@ namespace Tukupedia.Components
         public void initMainComment(string message, string commenterName, string date, string url)
         {
             mainComment.init(message,commenterName,date,url);
+            exist = true;
         }
         public void initComments(int id_h_diskusi)
         {
             D_DiskusiModel ddm = new D_DiskusiModel();
             ddm.addWhere("ID_H_DISKUSI",id_h_diskusi.ToString());
             // Dapatkan semua comment dengan id header diskusi yang diminta
-            bool exist = false;
+            
             foreach (DataRow row in ddm.get())
             {
                 exist = true;
@@ -49,8 +52,8 @@ namespace Tukupedia.Components
                 Comment com = new Comment(isPenjual);
                 string date;
                 DataRow user;
-                if (isPenjual) user = new DB("SELLER").@where("ID", row["ID_SELLER"].ToString()).getFirst();
-                else user = new DB("CUSTOMER").@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
+                if (isPenjual) user = new DB("SELLER").select().@where("ID", row["ID_SELLER"].ToString()).getFirst();
+                else user = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
                 com.init(
                     message:row["MESSAGE"].ToString(),
                     commenterName:user["NAMA"].ToString(),

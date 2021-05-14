@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\Admin\PromoViewModel.cs" />
     <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CartViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Customer\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />

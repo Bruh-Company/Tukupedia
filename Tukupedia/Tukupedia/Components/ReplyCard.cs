@@ -5,6 +5,7 @@ using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
+using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Components
 {
@@ -18,6 +19,7 @@ namespace Tukupedia.Components
         public ReplyCard()
         {
             spMain = new StackPanel();
+            spMain.Orientation = Orientation.Horizontal;
             profilePic = new Image();
             richTextBox = new RichTextBox();
             btnKirim = new Button();
@@ -30,14 +32,25 @@ namespace Tukupedia.Components
             //Add event
             btnKirim.Click+=BtnKirimOnClick;
             
+            //Add to Cart
+            this.AddChild(spMain);
+            
             //Init Style
             profilePic.Width = 50;
             profilePic.Height = 50;
+            profilePic.VerticalAlignment = VerticalAlignment.Top;
+            profilePic.HorizontalAlignment = HorizontalAlignment.Center;
             profilePic.Source =
                 new BitmapImage(new Uri(
                     AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
             btnKirim.Content = "Send";
             btnKirim.Style = Application.Current.TryFindResource("btn-primary") as Style;
+            btnKirim.Width = 75;
+            btnKirim.VerticalAlignment = VerticalAlignment.Center;
+            btnKirim.HorizontalAlignment = HorizontalAlignment.Center;
+            btnKirim.Margin = new Thickness(15,0,0,0);
+            richTextBox.Width = 450;
+            richTextBox.Height = 100;
 
 
         }
@@ -45,14 +58,18 @@ namespace Tukupedia.Components
         public void initCard(int id_h_diskusi, string url="")
         {
             this.id_h_diskusi = id_h_diskusi;
-            profilePic.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + url));
+            if (url != "")
+            {
+                profilePic.Source =
+                    new BitmapImage(new Uri(
+                        AppDomain.CurrentDomain.BaseDirectory + url));
+            }
+            
         }
         private void BtnKirimOnClick(object sender, RoutedEventArgs e)
         {
             // Kirim Diskusi
-            D_Trans_ItemModel dti = new D_Trans_ItemModel();
+            D_DiskusiModel dti = new D_DiskusiModel();
             string col, id,Sender;
             if (Session.role.ToUpper() == "SELLER")
             {
@@ -71,8 +88,10 @@ namespace Tukupedia.Components
                 col,id,
                 "MESSAGE",message,
                 "SENDER",Sender,
-                "ID_H_DISKUSI",id_h_diskusi
+                "ID_H_DISKUSI",id_h_diskusi,
+                "CREATED_AT",DateTime.Now.ToString()
             );
+            ItemDetailViewModel.resetDiscussion();
         }
     }
 }

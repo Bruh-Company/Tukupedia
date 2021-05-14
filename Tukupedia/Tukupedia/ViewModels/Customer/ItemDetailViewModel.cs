@@ -12,8 +12,18 @@ namespace Tukupedia.ViewModels.Customer
 {
     public class ItemDetailViewModel
     {
+        public static StackPanel spDiscussion;
+        public static int ItemId;
+        public static void resetDiscussion()
+        {
+            spDiscussion.Children.Clear();
+            loadDiscussions(spDiscussion, ItemId);
+
+        }
         public static void loadDiscussions(StackPanel elem, int ItemID)
         {
+            spDiscussion = elem;
+            ItemId = ItemID;
             H_DiskusiModel hdm = new H_DiskusiModel();
             hdm.addWhere("ID_ITEM",ItemID.ToString());
             hdm.addOrderBy("CREATED_AT ASC");

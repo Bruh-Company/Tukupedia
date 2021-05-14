@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/App.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/Components/Comment.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/Comment.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/InputDiscussion.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/ReviewCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/ReviewCard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Helpers/DatabaseHelpers/DB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Helpers/DatabaseHelpers/DB.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Models/Model.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Models/Model.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,13 +59,14 @@
       <option value="$PROJECT_DIR$/Tukupedia/Models/H_DiskusiModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/InputDiscussion.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Models/Model.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/ReviewCard.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/Comment.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/ItemDetailViewModel.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -119,7 +116,7 @@
       <workItem from="1620798301764" duration="578000" />
       <workItem from="1620798915011" duration="26402000" />
       <workItem from="1620892847144" duration="10617000" />
-      <workItem from="1620972608264" duration="24633000" />
+      <workItem from="1620972608264" duration="28032000" />
     </task>
     <servers />
   </component>

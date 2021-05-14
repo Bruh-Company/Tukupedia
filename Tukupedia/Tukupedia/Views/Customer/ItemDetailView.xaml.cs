@@ -53,12 +53,13 @@ namespace Tukupedia.Views.Customer
             tbNamaItem.Text = item["NAMA"].ToString();
             //Load Rating TODO Ganti setelah sudah ganti DB
             // RatingBar.Value = Convert.ToInt32(item["RATING"]);
+            hideInputReply();
 
         }
 
         private void TabDescription_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            
+            hideInputReply();
         }
 
         private void TabReview_OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -68,6 +69,7 @@ namespace Tukupedia.Views.Customer
                 ItemDetailViewModel.loadReviews(spanelReview, Convert.ToInt32(item["ID"]),cdContent.ActualWidth);
                 reviewLoaded = true;
             }
+            hideInputReply();
         }
 
         private void TabDiscussion_OnMouseUp(object sender, MouseButtonEventArgs e)
@@ -78,6 +80,7 @@ namespace Tukupedia.Views.Customer
                 ItemDetailViewModel.loadDiscussions(spanelDiscussion,Convert.ToInt32(item["ID"]));
                 discussionLoaded = true;
             }
+            showInputReply();
         }
         
         private void BtnMin_OnClick(object sender, RoutedEventArgs e)
@@ -105,13 +108,18 @@ namespace Tukupedia.Views.Customer
             string message = Utility.StringFromRichTextBox(rtbDiskusi);
             int id_item = Convert.ToInt32(item["ID"]);
             ItemDetailViewModel.kirimDiskusi(message, id_item);
-            resetDiskusi();
+            ItemDetailViewModel.resetDiscussion();
         }
-        public void resetDiskusi()
+        private void hideInputReply()
         {
-            spanelDiscussion.Children.Clear();
-            ItemDetailViewModel.loadDiscussions(spanelDiscussion, Convert.ToInt32(item["ID"]));
-
+            rtbDiskusi.Visibility = Visibility.Hidden;
+            btnKirimDiskusi.Visibility = Visibility.Hidden;
         }
+        private void showInputReply()
+        {
+            rtbDiskusi.Visibility = Visibility.Visible;
+            btnKirimDiskusi.Visibility = Visibility.Visible;
+        }
+        
     }
 }

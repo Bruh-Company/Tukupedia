@@ -53,9 +53,12 @@ namespace Tukupedia.Components
             this.message.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
             this.message.Margin = new Thickness(0, 5, 0, 2);
             this.commenterName.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
+            this.commenterName.VerticalAlignment = VerticalAlignment.Center;
             this.date.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
             this.date.Foreground = new SolidColorBrush(Colors.DarkGray);
             this.date.FontSize = 12;
+            this.date.VerticalAlignment = VerticalAlignment.Center;
+            this.date.Margin = new Thickness(4, 2, 0, 0);
 
 
         }
