@@ -47,9 +47,7 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
-            Session.Logout();
-            new LoginRegisterView().Show();
-            this.Close();
+            SellerViewModel.logout();
         }
         // Header
 
@@ -97,13 +95,26 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
+        private void datagridProdukPesanan_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
 
         }
 
-        private void btnSuccessPesanan_Click(object sender, RoutedEventArgs e) {
+        private void datagridProdukPesanan_LoadingRow(object sender, DataGridRowEventArgs e) {
 
         }
+
+        private void checkboxTerimaSemua_Checked(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnBatalPesanan_Click_1(object sender, RoutedEventArgs e) {
+
+        }
+
         // Pesanan
 
         // Produk
@@ -159,23 +170,23 @@ namespace Tukupedia.Views.Seller {
         // Produk
 
         // Info
-        private void btnUbahDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnSimpanDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnBatalDeskripsi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
         private void btnTambahKurirInfo_Click(object sender, RoutedEventArgs e) {
 
         }
 
         private void btnKurangKurirInfo_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnUbahInfoPenjual_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnSimpanInfo_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnBatalInfo_Click(object sender, RoutedEventArgs e) {
 
         }
 

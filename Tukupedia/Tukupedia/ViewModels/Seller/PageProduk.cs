@@ -1,7 +1,5 @@
 ﻿using Tukupedia.Models;
-using Tukupedia.Views;
 using Tukupedia.Views.Seller;
-using Tukupedia.Helpers.Utils;
 using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
 using System.Data;
