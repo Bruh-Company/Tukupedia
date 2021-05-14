@@ -41,8 +41,6 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxSortProduk.Items.Add("Harga Terendah");
             ViewComponent.comboboxSortProduk.Items.Add("Nama: A-Z");
             ViewComponent.comboboxSortProduk.Items.Add("Nama: Z-A");
-            ViewComponent.comboboxSortProduk.Items.Add("Stok Tersedikit");
-            ViewComponent.comboboxSortProduk.Items.Add("Stok Terbanyak");
         }
 
         public void fillCmbBerat() {
@@ -102,10 +100,8 @@ namespace Tukupedia.ViewModels.Seller {
 
             if (selectedIndex == 0) itemModel.Table.DefaultView.Sort = "HARGA desc";
             if (selectedIndex == 1) itemModel.Table.DefaultView.Sort = "HARGA asc";
-            if (selectedIndex == 2) itemModel.Table.DefaultView.Sort = "NAMA asc";
-            if (selectedIndex == 3) itemModel.Table.DefaultView.Sort = "NAMA desc";
-            if (selectedIndex == 4) itemModel.Table.DefaultView.Sort = "STOK asc";
-            if (selectedIndex == 5) itemModel.Table.DefaultView.Sort = "STOK desc";
+            if (selectedIndex == 2) itemModel.Table.DefaultView.Sort = "NAMA BARANG asc";
+            if (selectedIndex == 3) itemModel.Table.DefaultView.Sort = "NAMA BARANG desc";
         }
 
         public void selectProduk() {
@@ -169,6 +165,10 @@ namespace Tukupedia.ViewModels.Seller {
             string[] data = getData();
             if (!dataValidation(data)) return;
 
+            int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
+            if (selectedIndex == -1)
+                return;
+
             string nama = data[0],
                 deskripsi = data[5];
             int idCategory = Convert.ToInt32(data[1]),
@@ -179,24 +179,23 @@ namespace Tukupedia.ViewModels.Seller {
 
             ItemModel model = new ItemModel();
             model.init();
-
-            int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
-            if (selectedIndex == -1)
-                return;
-            DataRow rowTarget = new DB("ITEM").select().where("KODE", itemModel.Table.Rows[selectedIndex][0].ToString()).getFirst();
-            model.updateRow(rowTarget, "NAMA", nama, "DESKRIPSI", deskripsi, "ID_CATEGORY", idCategory, "STOK", stok, "BERAT", berat, "HARGA", harga, "STATUS", status);
+            model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
+            foreach (DataRow row in model.get()) {
+                model.updateRow(row, "NAMA", nama, "DESKRIPSI", deskripsi, "ID_CATEGORY", idCategory, "STOK", stok, "BERAT", berat, "HARGA", harga, "STATUS", status);
+            }
             resetPageProduk();
         }
 
         public void deleteProduk() {
-            ItemModel model = new ItemModel();
-            model.init();
-
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
             if (selectedIndex == -1)
                 return;
-            DataRow rowTarget = new DB("ITEM").select().where("KODE", itemModel.Table.Rows[selectedIndex][0].ToString()).getFirst();
-            model.delete(rowTarget);
+            ItemModel model = new ItemModel();
+            model.init();
+            model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
+            foreach (DataRow row in model.get()) {
+                model.delete(row);
+            }
             resetPageProduk();
         }
 
@@ -212,17 +211,20 @@ namespace Tukupedia.ViewModels.Seller {
                 }
             }
         }
-
         // PRIVATE METHODS
 
         private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;
                 ViewComponent.btnInsert.Visibility = Visibility.Hidden;
+                ViewComponent.btnUpdate.IsEnabled = true;
+                ViewComponent.btnDelete.IsEnabled = true;
             }
             else {
                 ViewComponent.btnInsert.Visibility = Visibility.Visible;
                 ViewComponent.btnCancel.Visibility = Visibility.Hidden;
+                ViewComponent.btnUpdate.IsEnabled = false;
+                ViewComponent.btnDelete.IsEnabled = false;
             }
             resetPageProduk();
         }

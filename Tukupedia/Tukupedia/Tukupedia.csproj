@@ -102,6 +102,7 @@
     <Compile Include="Models\Jenis_PromoModel.cs" />
     <Compile Include="Models\Kontrak_OSModel.cs" />
     <Compile Include="Models\KurirModel.cs" />
+    <Compile Include="Models\Kurir_SellerModel.cs" />
     <Compile Include="Models\Metode_PembayaranModel.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Models\PromoModel.cs" />

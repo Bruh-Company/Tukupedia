@@ -12,6 +12,7 @@ namespace Tukupedia.ViewModels.Seller {
         private SellerView ViewComponent;
         private SellerModel sellerModel;
         private DataRow seller;
+        private DataTable layananKurirTable;
         private bool toggleChange = false;
 
         public PageInfoToko(SellerView viewComponent, DataRow seller) {
@@ -28,11 +29,24 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void addKurir() {
-
+            int id = ViewComponent.comboboxKurirInfo.SelectedIndex;
+            if (id == -1) return;
+            string idKurir = ViewComponent.comboboxKurirInfo.SelectedValue.ToString();
+            KurirModel model = new KurirModel();
+            model.init();
+            model.addWhere("ID", idKurir, "=", false);
+            foreach (DataRow row in model.get()) {
+                DataRow newKurir = layananKurirTable.NewRow();
+                newKurir["ID"] = row["ID"];
+                newKurir["NAMA"] = row["NAMA"];
+                layananKurirTable.Rows.Add(newKurir);
+            }
         }
 
         public void deleteKurir() {
-
+            int id = ViewComponent.listboxListKurirInfo.SelectedIndex;
+            if (id == -1) return;
+            layananKurirTable.Rows.RemoveAt(id);
         }
 
         public void toggleState() {
@@ -44,26 +58,45 @@ namespace Tukupedia.ViewModels.Seller {
             string[] data = getData();
             if (!dataValidation(data)) return;
 
-            string id = seller["ID"].ToString();
-            SellerModel model = new SellerModel();
-            model.init();
+            string idSeller = seller["ID"].ToString();
 
-            DataRow rowTarget = new DB("SELLER").select().where("ID", id).getFirst();
-            MessageBox.Show(rowTarget + "");
-            model.updateRow(rowTarget, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4]);
+            SellerModel sellerModel = new SellerModel();
+            sellerModel.init();
+            sellerModel.addWhere("ID", idSeller, "=", false);
+            foreach (DataRow row in sellerModel.get()) {
+                sellerModel.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4]);
+            }
+
+            Kurir_SellerModel ksModel = new Kurir_SellerModel();
+            ksModel.init();
+            ksModel.addWhere("ID_SELLER", idSeller, "=", false);
+            foreach (DataRow row in ksModel.get()) {
+                ksModel.delete(row);
+            }
+            ksModel.resetWhere();
+
+            foreach (DataRow row in layananKurirTable.Rows) {
+                ksModel.insert("ID_SELLER", idSeller, "ID_KURIR", row["ID"]);
+            }
+
+            toggleState();
             resetInfo();
         }
 
-        public void resetInfo() {
+        public void cancelInfo() {
+            toggleState();
+            resetInfo();
+        }
+
+        // Private Void
+        private void resetInfo() {
             string id = seller["ID"].ToString();
             seller = new DB("SELLER").select().where("ID", id).getFirst();
             fillTextbox();
             fillCmbKurir();
             fillLbKurir();
-            toggleState();
         }
 
-        // Private Void
         private void changeState() {
             if (toggleChange) {
                 ViewComponent.textboxNamaToko.IsReadOnly = false;
@@ -105,9 +138,21 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         private void fillLbKurir() {
-
+            layananKurirTable = new DataTable();
+            layananKurirTable.Columns.Add("ID");
+            layananKurirTable.Columns.Add("NAMA");
+            Kurir_SellerModel model = new Kurir_SellerModel();
+            model.init();
+            model.addWhere("ID_SELLER", seller["ID"].ToString());
+            foreach (DataRow row in model.get()) {
+                DataRow data = new DB("KURIR").select("ID", "NAMA").where("ID", row["ID_KURIR"].ToString()).getFirst();
+                layananKurirTable.Rows.Add(data);
+            }
+            ViewComponent.listboxListKurirInfo.ItemsSource = "";
+            ViewComponent.listboxListKurirInfo.ItemsSource = layananKurirTable.DefaultView;
+            ViewComponent.listboxListKurirInfo.DisplayMemberPath = "NAMA";
+            ViewComponent.listboxListKurirInfo.SelectedValuePath = "ID";
         }
-
 
         private string[] getData() {
             string

@@ -95,7 +95,7 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void btnBatalPesanan_Click_1(object sender, RoutedEventArgs e) {
+        private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
 
         }
 
@@ -171,7 +171,7 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void btnBatalInfo_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.pageInfoToko.resetInfo();
+            SellerViewModel.pageInfoToko.cancelInfo();
         }
 
         // Info
