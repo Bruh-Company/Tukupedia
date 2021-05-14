@@ -5,7 +5,7 @@
 --  DDL for Trigger AUTO_ID_CATEGORY
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_CATEGORY"
+CREATE OR REPLACE TRIGGER "AUTO_ID_CATEGORY"
     FOR insert or update
     ON CATEGORY
     COMPOUND TRIGGER
@@ -30,7 +30,10 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from CATEGORY where KODE like '%' || new_code || '%';
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from CATEGORY
+            where KODE like '%' || new_code || '%';
             new_code := 'CAT' || new_code || lpad(jumlah, 3, '0');
             :new.ID := new_id;
             :new.KODE := new_code;
@@ -49,12 +52,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from CATEGORY where KODE like '%' || new_code || '%';
+        if (old_id <> -1) then
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from CATEGORY
+            where KODE like '%' || new_code || '%';
             new_code := 'CAT' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update CATEGORY set KODE = new_code where id = old_id;
-            end if;
+            update CATEGORY set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_CATEGORY;
@@ -65,7 +69,7 @@ END BEFORE STATEMENT;
 --  DDL for Trigger AUTO_ID_CUSTOMER
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_CUSTOMER"
+CREATE OR REPLACE TRIGGER "AUTO_ID_CUSTOMER"
     FOR insert or update
     ON CUSTOMER
     COMPOUND TRIGGER
@@ -90,7 +94,10 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from CUSTOMER where KODE like '%' || new_code || '%';
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from CUSTOMER
+            where KODE like '%' || new_code || '%';
             new_code := 'CU' || new_code || lpad(jumlah, 3, '0');
             :new.ID := new_id;
             :new.KODE := new_code;
@@ -109,12 +116,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from CUSTOMER where KODE like '%' || new_code || '%';
+        if (old_id <> -1) then
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from CUSTOMER
+            where KODE like '%' || new_code || '%';
             new_code := 'CU' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update CUSTOMER set KODE = new_code where id = old_id;
-            end if;
+            update CUSTOMER set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_CUSTOMER;
@@ -124,7 +132,7 @@ END BEFORE STATEMENT;
 --  DDL for Trigger AUTO_ID_D_DISKUSI
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER AUTO_ID_D_DISKUSI
+CREATE OR REPLACE TRIGGER AUTO_ID_D_DISKUSI
     before insert
     on D_DISKUSI
     for each row
@@ -140,7 +148,7 @@ END AUTO_ID_D_DISKUSI;
 --  DDL for Trigger AUTO_ID_D_TRANS_ITEM
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_D_TRANS_ITEM"
+CREATE OR REPLACE TRIGGER "AUTO_ID_D_TRANS_ITEM"
     before insert
     on D_TRANS_ITEM
     for each row
@@ -156,7 +164,7 @@ END AUTO_ID_D_TRANS_ITEM;
 --  DDL for Trigger AUTO_ID_H_DISKUSI
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_H_DISKUSI"
+CREATE OR REPLACE TRIGGER "AUTO_ID_H_DISKUSI"
     before insert
     on H_DISKUSI
     for each row
@@ -172,17 +180,20 @@ END AUTO_ID_H_DISKUSI;
 --  DDL for Trigger AUTO_ID_H_TRANS_ITEM
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_H_TRANS_ITEM"
+CREATE OR REPLACE TRIGGER "AUTO_ID_H_TRANS_ITEM"
     before insert
     on H_TRANS_ITEM
     for each row
 DECLARE
-    new_id number;
+    new_id   number;
     new_code varchar2(30);
-    jumlah number;
+    jumlah   number;
 BEGIN
-    new_code := 'HTI' || to_char(sysdate,'ddmmyyyy') || lpad(jumlah,5,'0');
-    select NVL(MAX(ltrim(substr(KODE,12),'0')),0) + 1 into jumlah from H_TRANS_ITEM where KODE like '%' || new_code || '%';
+    new_code := 'HTI' || to_char(sysdate, 'ddmmyyyy') || lpad(jumlah, 5, '0');
+    select NVL(MAX(ltrim(substr(KODE, 12), '0')), 0) + 1
+    into jumlah
+    from H_TRANS_ITEM
+    where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
     :new.ID := new_id;
     :new.kode := new_code;
@@ -193,7 +204,7 @@ END AUTO_ID_H_TRANS_ITEM;
 --  DDL for Trigger AUTO_ID_ITEM
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_ITEM"
+CREATE OR REPLACE TRIGGER "AUTO_ID_ITEM"
     FOR insert or update
     ON ITEM
     COMPOUND TRIGGER
@@ -218,7 +229,10 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from ITEM where KODE like '%' || new_code || '%';
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from ITEM
+            where KODE like '%' || new_code || '%';
             new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
             :new.ID := new_id;
             :new.KODE := new_code;
@@ -237,12 +251,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from ITEM where KODE like '%' || new_code || '%';
+        if (old_id <> -1) then
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from ITEM
+            where KODE like '%' || new_code || '%';
             new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update ITEM set KODE = new_code where id = old_id;
-            end if;
+            update ITEM set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_ITEM;
@@ -252,7 +267,7 @@ END BEFORE STATEMENT;
 --  DDL for Trigger AUTO_ID_JENIS_PROMO
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_JENIS_PROMO"
+CREATE OR REPLACE TRIGGER "AUTO_ID_JENIS_PROMO"
     before insert
     on JENIS_PROMO
     for each row
@@ -268,7 +283,7 @@ END AUTO_ID_JENIS_PROMO;
 --  DDL for Trigger AUTO_ID_KONTRAK_OS
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_KONTRAK_OS"
+CREATE OR REPLACE TRIGGER "AUTO_ID_KONTRAK_OS"
     before insert
     on KONTRAK_OS
     for each row
@@ -284,7 +299,7 @@ END AUTO_ID_KONTRAK_OS;
 --  DDL for Trigger AUTO_ID_KURIR
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR"
+CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR"
     FOR insert or update
     ON KURIR
     COMPOUND TRIGGER
@@ -309,7 +324,10 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from KURIR where KODE like '%' || new_code || '%';
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from KURIR
+            where KODE like '%' || new_code || '%';
             new_code := 'KR' || new_code || lpad(jumlah, 3, '0');
             :new.ID := new_id;
             :new.KODE := new_code;
@@ -328,12 +346,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from KURIR where KODE like '%' || new_code || '%';
+        if (old_id <> -1) then
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from KURIR
+            where KODE like '%' || new_code || '%';
             new_code := 'KR' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update KURIR set KODE = new_code where id = old_id;
-            end if;
+            update KURIR set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_KURIR;
@@ -343,7 +362,7 @@ END BEFORE STATEMENT;
 --  DDL for Trigger AUTO_ID_METODE_PEMBAYARAN
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_METODE_PEMBAYARAN"
+CREATE OR REPLACE TRIGGER "AUTO_ID_METODE_PEMBAYARAN"
     before insert
     on METODE_PEMBAYARAN
     for each row
@@ -359,7 +378,7 @@ END AUTO_ID_METODE_PEMBAYARAN;
 --  DDL for Trigger AUTO_ID_PROMO
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_PROMO"
+CREATE OR REPLACE TRIGGER "AUTO_ID_PROMO"
     before insert
     on PROMO
     for each row
@@ -375,7 +394,7 @@ END AUTO_ID_PROMO;
 --  DDL for Trigger AUTO_ID_SELLER
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_SELLER"
+CREATE OR REPLACE TRIGGER "AUTO_ID_SELLER"
     FOR insert or update
     ON SELLER
     COMPOUND TRIGGER
@@ -400,7 +419,10 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from SELLER where KODE like '%' || new_code || '%';
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from SELLER
+            where KODE like '%' || new_code || '%';
             new_code := 'SE' || new_code || lpad(jumlah, 3, '0');
             :new.ID := new_id;
             :new.KODE := new_code;
@@ -419,12 +441,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
-            select NVL(MAX(ltrim(substr(KODE,5),'0')),0) + 1 into jumlah from SELLER where KODE like '%' || new_code || '%';
+        if (old_id <> -1) then
+            select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from SELLER
+            where KODE like '%' || new_code || '%';
             new_code := 'SE' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update SELLER set KODE = new_code where id = old_id;
-            end if;
+            update SELLER set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_SELLER;
@@ -434,17 +457,20 @@ END BEFORE STATEMENT;
 --  DDL for Trigger AUTO_ID_TRANS_OS
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_TRANS_OS"
+CREATE OR REPLACE TRIGGER "AUTO_ID_TRANS_OS"
     before insert
     on TRANS_OS
     for each row
 DECLARE
-    new_id number;
+    new_id   number;
     new_code varchar2(30);
-    jumlah number;
+    jumlah   number;
 BEGIN
-    new_code := 'TOS' || to_char(sysdate,'ddmmyyyy') || lpad(jumlah,5,'0');
-    select NVL(MAX(ltrim(substr(KODE,12),'0')),0) + 1 into jumlah from TRANS_OS where KODE like '%' || new_code || '%';
+    new_code := 'TOS' || to_char(sysdate, 'ddmmyyyy') || lpad(jumlah, 5, '0');
+    select NVL(MAX(ltrim(substr(KODE, 12), '0')), 0) + 1
+    into jumlah
+    from TRANS_OS
+    where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
     :new.ID := new_id;
     :new.kode := new_code;
@@ -455,7 +481,7 @@ END AUTO_ID_TRANS_OS;
 --  DDL for Trigger AUTO_ID_ULASAN
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_ULASAN"
+CREATE OR REPLACE TRIGGER "AUTO_ID_ULASAN"
     before insert
     on ULASAN
     for each row
@@ -468,7 +494,7 @@ END AUTO_ID_ULASAN;
 /
 --ALTER TRIGGER "AUTO_ID_ULASAN" ENABLE
 
-  CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR_SELLER"
+CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR_SELLER"
     before insert
     on KURIR_SELLER
     for each row
