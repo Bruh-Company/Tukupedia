@@ -24,6 +24,8 @@ namespace Tukupedia.Views.Customer
         private int qty;
         private int maxQty;
         private DataRow item;
+        private bool reviewLoaded = false;
+        private bool discussionLoaded = false;
         public ItemDetailView()
         {
             InitializeComponent();
@@ -60,12 +62,21 @@ namespace Tukupedia.Views.Customer
 
         private void TabReview_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            ItemDetailViewModel.loadReviews(spanelReview, Convert.ToInt32(item["ID"]));
+            if (!reviewLoaded)
+            {
+                ItemDetailViewModel.loadReviews(spanelReview, Convert.ToInt32(item["ID"]),cdContent.ActualWidth);
+                reviewLoaded = true;
+            }
         }
 
         private void TabDiscussion_OnMouseUp(object sender, MouseButtonEventArgs e)
         {
-            
+            if (!discussionLoaded)
+            {
+                //Load Discussion
+                ItemDetailViewModel.loadDiscussions(spanelDiscussion,Convert.ToInt32(item["ID"]));
+                discussionLoaded = true;
+            }
         }
         
         private void BtnMin_OnClick(object sender, RoutedEventArgs e)

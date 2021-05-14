@@ -14,22 +14,24 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Name="cdContent" Width="3*"></ColumnDefinition>
             <ColumnDefinition Width="1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Column="0" Grid.Row="0">
-            <Image Grid.Column="0" Grid.Row="0" x:Name="ImageItem" Height="330" Width="300"></Image>
+            <StackPanel VerticalAlignment="Top">
+                <Image Margin="0,100,0,0" x:Name="ImageItem" Height="270" Width="240"></Image>
+            </StackPanel>
         </Grid>
         <Grid Grid.Column="1"  Grid.Row="0" >
-            <StackPanel Margin="0,10,0,0" Orientation="Vertical">
+            <StackPanel Margin="0,50,0,0" Orientation="Vertical">
                 <TextBlock Style="{StaticResource textblockblock-h2}" x:Name="tbNamaItem" Text="Nama Item yang Keren"></TextBlock>
                 <materialDesign:RatingBar x:Name="RatingBar" IsReadOnly="True" Foreground="Yellow" Min="1" Max="5"/>
                 <TextBlock Style="{StaticResource textblockblock-sm}" x:Name="tbTerjual" Text="Terjual : " Foreground="#C8C8C8"></TextBlock>
                 <TextBlock Style="{StaticResource textblockblock-lg}" x:Name="tbHarga" Text="Rp69.000,00" Foreground="#E87059"></TextBlock>
-                <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="276" Margin="0,0,0.4,0" >
+                <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="400" Margin="0,0,0.4,0" >
                     <TabItem MouseUp="TabDescription_OnMouseUp" Name="tabDescription" Foreground="Black" Header="Description">
                         <!-- Berat, Kategori, Desc-->
                         <StackPanel>
@@ -41,17 +43,19 @@
                     </TabItem>
                     <TabItem MouseUp="TabReview_OnMouseUp" Name="tabReview" Foreground="Black" Header="Review">
                         <!-- Review Cards-->
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                            <StackPanel x:Name="spanelReview">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="spanelReview">
                             
                             </StackPanel>
                         </ScrollViewer>
                     </TabItem>
                     <TabItem MouseUp="TabDiscussion_OnMouseUp" Name="tabDiscussion" Foreground="Black" Header="Discussion">
                         <!-- Discussion Cards-->
-                        <StackPanel x:Name="spanelDiscussion">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <StackPanel x:Name="spanelDiscussion">
                             
-                        </StackPanel>
+                            </StackPanel>
+                        </ScrollViewer>
                     </TabItem>
                 </TabControl>
                 

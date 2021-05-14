@@ -79,6 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\Comment.cs" />
+    <Compile Include="Components\CustomCard.cs" />
     <Compile Include="Components\DiscussionCard.cs" />
     <Compile Include="Components\ItemCard.cs" />
     <Compile Include="Components\ReviewCard.cs" />
@@ -90,7 +92,8 @@
     <Compile Include="Helpers\Utils\Utility.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
-    <Compile Include="Models\DiskusiModel.cs" />
+    <Compile Include="Models\D_DiskusiModel.cs" />
+    <Compile Include="Models\H_DiskusiModel.cs" />
     <Compile Include="Models\D_Trans_ItemModel.cs" />
     <Compile Include="Models\H_Trans_ItemModel.cs" />
     <Compile Include="Models\ItemModel.cs" />

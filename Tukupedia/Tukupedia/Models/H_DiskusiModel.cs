@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Models
 {
-    public class DiskusiModel : Model
+    public class H_DiskusiModel : Model
     {
-        public DiskusiModel()
+        public H_DiskusiModel()
         {
-            TableName = "DISKUSI";
+            TableName = "H_DISKUSI";
             init();
         }
     }

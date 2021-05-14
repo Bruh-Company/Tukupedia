@@ -103,5 +103,21 @@ namespace Tukupedia.Helpers.Utils
             tb.Text = temp.All(char.IsDigit) ? temp : temp.Remove(temp.Length - 1);
         }
 
+        public static string defaultPicture = "Resource\\Logo\\TukupediaLogo.png";
+        public static string tokopediaLogo = "Resource\\Logo\\TukupediaLogo.png";
+
+        public static DateTime dateParse(string date)
+        {
+            return DateTime.Parse(date);
+        }
+        public static string formatDate(DateTime date)
+        {
+            return $"{date:dd-MM-yyyy}";
+        }
+        public static string formatDate(string date)
+        {
+            return dateParse(date).ToString("dd-MM-yyyy");
+        }
+
     }
 }

@@ -67,7 +67,7 @@ namespace Tukupedia.Models
         {
             DataRow row = Table.NewRow();
 
-            for (int i = 0; i < param.Length/2; i++)
+            for (int i = 0; i < param.Length/2; i+=2)
             {
                 var col = param[i].ToString();
                 var val = param[i + 1].ToString();
@@ -83,7 +83,7 @@ namespace Tukupedia.Models
         }
         public void updateRow(DataRow row,params object[] param)
         {
-            for (int i = 0; i < param.Length/2; i++)
+            for (int i = 0; i < param.Length/2; i+=2)
             {
                 var col = param[i].ToString();
                 var val = param[i + 1].ToString();
