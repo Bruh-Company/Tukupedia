@@ -60,7 +60,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.nama <> :new.nama then
+            if :old.nama <> :new.nama and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -73,15 +73,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
+        if (old_id <> -1) then
             select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
             into jumlah
             from CUSTOMER
             where KODE like '%' || new_code || '%';
             new_code := 'CU' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update CUSTOMER set KODE = new_code where id = old_id;
-            end if;
+            update CUSTOMER set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_CUSTOMER;
@@ -138,7 +136,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 1, 2) <> new_code then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 4, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -231,7 +229,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA_TOKO <> :new.NAMA_TOKO then
+            if :old.NAMA_TOKO <> :new.NAMA_TOKO and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -244,15 +242,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
+        if (old_id <> -1) then
             select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
             into jumlah
             from SELLER
             where KODE like '%' || new_code || '%';
             new_code := 'SE' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update SELLER set KODE = new_code where id = old_id;
-            end if;
+            update SELLER set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_SELLER;
@@ -321,7 +317,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA <> :new.NAMA then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -334,15 +330,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
+        if (old_id <> -1) then
             select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
             into jumlah
             from ITEM
             where KODE like '%' || new_code || '%';
             new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update ITEM set KODE = new_code where id = old_id;
-            end if;
+            update ITEM set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_ITEM;
@@ -439,7 +433,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA <> :new.NAMA then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -452,15 +446,13 @@ END BEFORE STATEMENT;
 
     AFTER STATEMENT IS
     BEGIN
-        if updating then
+        if (old_id <> -1) then
             select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
             into jumlah
             from KURIR
             where KODE like '%' || new_code || '%';
             new_code := 'KR' || new_code || lpad(jumlah, 3, '0');
-            if (old_id <> -1) and updating then
-                update KURIR set KODE = new_code where id = old_id;
-            end if;
+            update KURIR set KODE = new_code where id = old_id;
         end if;
     END AFTER STATEMENT;
     END AUTO_ID_KURIR;
@@ -546,15 +538,15 @@ END AUTO_ID_H_TRANS_ITEM;
 
 create table D_TRANS_ITEM
 (
-    ID         NUMBER           not null,
-    ID_H_TRANS NUMBER           not null
+    ID              NUMBER           not null,
+    ID_H_TRANS_ITEM NUMBER           not null
         constraint DTRANS_ITEM_H_TRANS_ITEM
             references H_TRANS_ITEM,
-    ID_ITEM    NUMBER           not null
+    ID_ITEM         NUMBER           not null
         constraint D_TRANS_ITEM_ITEM_ID_FK
             references ITEM,
-    JUMLAH     NUMBER           not null,
-    STATUS     CHAR default 'W' not null
+    JUMLAH          NUMBER           not null,
+    STATUS          CHAR default 'W' not null
 )
 /
 
@@ -581,22 +573,22 @@ END AUTO_ID_D_TRANS_ITEM;
 
 create table ULASAN
 (
-    ID          NUMBER                  not null,
-    ID_CUSTOMER NUMBER
+    ID              NUMBER                  not null,
+    ID_CUSTOMER     NUMBER
         constraint H_ULASAN_CUSTOMER_ID_FK
             references CUSTOMER,
-    REPLY       VARCHAR2(255),
-    MESSAGE     VARCHAR2(255) default '',
-    RATING      NUMBER                  not null,
-    STATUS      CHAR          default 1 not null,
-    CREATED_AT  DATE          default sysdate,
-    ID_D_TRANS  NUMBER
+    REPLY           VARCHAR2(255),
+    MESSAGE         VARCHAR2(255) default '',
+    RATING          NUMBER                  not null,
+    STATUS          CHAR          default 1 not null,
+    CREATED_AT      DATE          default sysdate,
+    ID_D_TRANS_ITEM NUMBER
         constraint ULASAN_D_TRANS_ITEM_ID_FK
             references D_TRANS_ITEM,
-    ID_SELLER   NUMBER
+    ID_SELLER       NUMBER
         constraint ULASAN_SELLER_ID_FK
             references SELLER,
-    REPLY_AT    DATE
+    REPLY_AT        DATE
 )
 /
 

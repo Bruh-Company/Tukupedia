@@ -4,13 +4,7 @@
     <projectFile>Tukupedia/Tukupedia.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tukupedia/Components/InputDiscussion.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tukupedia/Components/ReplyCard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/DiscussionCard.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" afterDir="false" />
-    </list>
+    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +103,7 @@
       <workItem from="1620798301764" duration="578000" />
       <workItem from="1620798915011" duration="26402000" />
       <workItem from="1620892847144" duration="10617000" />
-      <workItem from="1620972608264" duration="15745000" />
+      <workItem from="1620972608264" duration="16362000" />
     </task>
     <servers />
   </component>
