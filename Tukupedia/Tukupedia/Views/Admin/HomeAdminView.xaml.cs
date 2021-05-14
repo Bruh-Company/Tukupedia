@@ -54,9 +54,9 @@ namespace Tukupedia.Views.Admin
         private void btCategory_Click(object sender, RoutedEventArgs e)
         {
             reloadCategory();
-            btTambahKategori.Visibility = Visibility.Hidden;
+            btTambahKategori.Visibility = Visibility.Visible;
             btToggleKategori.Visibility = Visibility.Hidden;
-            btUpdateKategori.Visibility = Visibility.Visible;
+            btUpdateKategori.Visibility = Visibility.Hidden;
         }
         void reloadCategory()
         {

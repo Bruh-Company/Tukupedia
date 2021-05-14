@@ -163,13 +163,25 @@ namespace Tukupedia.ViewModels.Seller
         public void confirm(bool terimasemua)
         {
             int tidakterima = 0;
-            
-            if (terimasemua) {
-               for(int i = 0; i<dtrans_helper.Table.Rows.Count; i++)
+            //check stock
+            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
+            {
+                DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
+                //2 = Stock
+                //3 = Barang Yang dibeli
+                if (Convert.ToInt32(drHelper[2].ToString()) < Convert.ToInt32(dr[3].ToString()))
                 {
-
+                    MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
+                    return;
                 }
-                
+            }
+            if (terimasemua) 
+            {
+                foreach (DataRow dr in dtrans_helper.Table.Rows)
+                {
+                    dr[1] = "SC";
+                }
+
             }
             else
             {
@@ -181,11 +193,12 @@ namespace Tukupedia.ViewModels.Seller
             if (tidakterima != 0)
             {
                 DialogResult d = MessageBox.Show($"Ada {tidakterima} pesanan yang belum diterima, Yakin lanjut ?", "Pesanan Blom di terima", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (d == DialogResult.Yes)
+                if (d == DialogResult.No)
                 {
-
+                    return;
                 }
             }
+            //foreach(DataRow dr in dtrans_helper)
         }
 
         public void checkStok(DataGridRow dgRow)
