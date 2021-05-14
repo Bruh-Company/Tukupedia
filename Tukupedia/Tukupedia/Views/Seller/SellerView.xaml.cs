@@ -47,9 +47,7 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
-            Session.Logout();
-            new LoginRegisterView().Show();
-            this.Close();
+            SellerViewModel.logout();
         }
         // Header
 
@@ -97,13 +95,26 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
+        private void datagridProdukPesanan_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+
+        }
+
+        private void datagridProdukPesanan_LoadingRow(object sender, DataGridRowEventArgs e) {
+
+        }
+
+        private void btnSelectAll_Click(object sender, RoutedEventArgs e) {
 
         }
 
         private void btnSuccessPesanan_Click(object sender, RoutedEventArgs e) {
 
         }
+
+        private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
+
+        }
+
         // Pesanan
 
         // Produk
