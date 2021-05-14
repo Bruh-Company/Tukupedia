@@ -103,15 +103,15 @@ namespace Tukupedia.Views.Seller {
 
         }
 
-        private void btnSelectAll_Click(object sender, RoutedEventArgs e) {
+        private void checkboxTerimaSemua_Checked(object sender, RoutedEventArgs e) {
 
         }
 
-        private void btnSuccessPesanan_Click(object sender, RoutedEventArgs e) {
+        private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
 
         }
 
-        private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
+        private void btnBatalPesanan_Click_1(object sender, RoutedEventArgs e) {
 
         }
 
