@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
-using Tukupedia.ViewModels;
 using Tukupedia.ViewModels.Seller;
 using Tukupedia.Helpers.Utils;
 
@@ -58,10 +46,6 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void btnPesananBaru_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnSiapKirim_Click(object sender, RoutedEventArgs e) {
 
         }
 
@@ -171,23 +155,23 @@ namespace Tukupedia.Views.Seller {
 
         // Info
         private void btnTambahKurirInfo_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageInfoToko.addKurir();
         }
 
         private void btnKurangKurirInfo_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageInfoToko.deleteKurir();
         }
 
         private void btnUbahInfoPenjual_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageInfoToko.toggleState();
         }
 
         private void btnSimpanInfo_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageInfoToko.saveInfo();
         }
 
         private void btnBatalInfo_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageInfoToko.resetInfo();
         }
 
         // Info

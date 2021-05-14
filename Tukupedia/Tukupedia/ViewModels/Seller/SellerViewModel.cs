@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tukupedia.Models;
-using Tukupedia.Views;
+﻿using Tukupedia.Views;
 using Tukupedia.Views.Seller;
-using Tukupedia.ViewModels.Seller;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
 using System.Data;
-using System.Windows.Media;
-using System.Windows.Controls;
 
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
         public enum page { Pesanan, Produk, InfoToko }
         public static PageProduk pageProduk;
         public static PagePesanan pagePesanan;
+        public static PageInfoToko pageInfoToko;
 
         private static SellerView ViewComponent;
         private static Transition transition;
@@ -33,7 +25,9 @@ namespace Tukupedia.ViewModels.Seller {
             seller = Session.User;
             ViewComponent = view;
             TESTING();
+            pagePesanan = new PagePesanan(view, seller);
             pageProduk = new PageProduk(view, seller);
+            pageInfoToko = new PageInfoToko(view, seller);
             transition = new Transition(transFPS);
             initState();
             initHeader();
@@ -55,8 +49,10 @@ namespace Tukupedia.ViewModels.Seller {
 
         public static void initHeader() {
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            ViewComponent.labelStatusPesanan.Content = seller["IS_OFFICIAL"].ToString();
             ViewComponent.labelSaldo.Content = "Rp " + seller["SALDO"].ToString();
+
+            if (seller["IS_OFFICIAL"].ToString() == "1") ViewComponent.labelStatusToko.Content = "OFFICIAL STORE";
+            else ViewComponent.labelStatusToko.Content = "MERCHANT";
         }
 
         public static void swapTo(page p) {
@@ -128,6 +124,8 @@ namespace Tukupedia.ViewModels.Seller {
             }
 
             if (p == page.InfoToko) {
+                transition.setCallback(pageInfoToko.initPageInfoToko);
+
                 transition.makeTransition(ViewComponent.canvasInfoToko,
                     MarginPosition.Middle, 1,
                     speedMargin * multiplier / transFPS,

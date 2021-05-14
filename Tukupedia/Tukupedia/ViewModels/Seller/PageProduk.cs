@@ -228,7 +228,6 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         private string[] getData() {
-
             string nama = ViewComponent.textboxNamaProduk.Text,
                 idCategory = (ViewComponent.comboboxKategori.SelectedIndex + 1) + "",
                 harga = ViewComponent.textboxHarga.Text,
