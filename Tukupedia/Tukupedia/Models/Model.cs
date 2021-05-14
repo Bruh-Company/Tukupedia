@@ -22,6 +22,7 @@ namespace Tukupedia.Models
         {
             TableName = "";
             Table = new DataTable();
+            resetWhere();
         }
         public void init()
         {
@@ -111,7 +112,8 @@ namespace Tukupedia.Models
 
         public DataRow[] get()
         {
-            return Table.Select(statement);
+            MessageBox.Show(where);
+            return Table.Select(where);
         }
         
     }

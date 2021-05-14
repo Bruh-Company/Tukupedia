@@ -55,6 +55,10 @@ namespace Tukupedia.Components
                     );
                 spComments.Children.Add(com);
             }
+
+            ReplyCard rc = new ReplyCard();
+            rc.initCard(id_h_diskusi);
+            spComments.Children.Add(rc);
         }
     }
 }
