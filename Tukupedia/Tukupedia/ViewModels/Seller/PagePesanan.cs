@@ -120,6 +120,7 @@ namespace Tukupedia.ViewModels.Seller
                 dtrans_helper = new D_Trans_ItemModel();
                 dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
                 ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
+                ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Visible;
             }
         }
 
@@ -154,6 +155,8 @@ namespace Tukupedia.ViewModels.Seller
         }
         public void toggleDtrans()
         {
+            d_trans_selected = ViewComponent.datagridProdukPesanan.SelectedIndex;
+            if (d_trans_selected == -1) return;
             DataRow dr = dtrans.Table.Rows[d_trans_selected];
             ViewComponent.labelStatusPesanan.Content = dr[4].ToString();
             DataRow drHelper = dtrans_helper.Table.Rows[d_trans_selected];
@@ -176,7 +179,9 @@ namespace Tukupedia.ViewModels.Seller
             //- D = Pesanan Selesai
             //- [//baru](//baru) untuk admin
             //-C = Pesanan Dibatalkan
-            
+            ViewComponent.datagridProdukPesanan.ItemsSource = "";
+            ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
+
         }
         public void terimasemua(bool ya)
         {
@@ -188,8 +193,10 @@ namespace Tukupedia.ViewModels.Seller
             foreach (DataRow dr in dtrans.Table.Rows)
             {
                 if (ya) dr[4] = "Dalam Pengiriman *";
-                else dr[5] = "Pesanan Baru";
+                else dr[4] = "Pesanan Baru";
             }
+            ViewComponent.datagridProdukPesanan.ItemsSource = "";
+            ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
         }
         public void confirm()
         {
@@ -226,18 +233,27 @@ namespace Tukupedia.ViewModels.Seller
             }
         }
 
-        public void checkStok(DataGridRow dgRow)
+        public void checkStatus(DataGridRow dgRow)
         {
             DataRowView item = dgRow.Item as DataRowView;
             if (item != null)
             {
+                //dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when
+                //'W' then 'Pesanan Baru' when
+                //'P' then 'Siap Kirim' when
+                //'S' then 'Dalam Pengiriman' when
+                //'D' then 'Pesanan Selesai' when
+                //'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
                 DataRow row = item.Row;
-                DataRow data = new DB("ITEM").select().where("KODE", row["KODE BARANG"].ToString()).getFirst();
-                int stok = Convert.ToInt32(data["STOK"].ToString());
-                if (stok <= 0)
+                string status = row["Status"].ToString();
+                if (status == "Pesanan Baru" || status == "Pesanan Dibatalkan")
                 {
                     Color color = (Color)ColorConverter.ConvertFromString("#E23434");
                     dgRow.Background = new SolidColorBrush(color);
+                }
+                else
+                {
+                    Color color = (Color)ColorConverter.ConvertFromString("#65C65B");
                 }
             }
         }
