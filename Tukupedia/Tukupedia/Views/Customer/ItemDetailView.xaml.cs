@@ -117,8 +117,15 @@ namespace Tukupedia.Views.Customer
         //TODO Add Cart
         private void BtnAddCart_OnClick(object sender, RoutedEventArgs e)
         {
+            if (qty < 0)
+            {
+                MessageBox.Show("Minimal Pembelian barang adalah 1!");
+                return;
+            }
             CartViewModel.addtoCart(item,qty,true);
             CartViewModel.loadCartItem(CartViewModel.spCart);
+            CartViewModel.countSubTotal();
+            
             MessageBox.Show($"{item["NAMA"]} berhasil di tambah ke cart!");
             this.Close();
         }
@@ -140,7 +147,6 @@ namespace Tukupedia.Views.Customer
             rtbDiskusi.Visibility = Visibility.Visible;
             btnKirimDiskusi.Visibility = Visibility.Visible;
         }
-
         private void BtnBeliLangsung_OnClick(object sender, RoutedEventArgs e)
         {
             //TODO Beli Langsung ke Checkout

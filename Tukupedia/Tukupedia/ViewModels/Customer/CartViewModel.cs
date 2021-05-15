@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Oracle.DataAccess.Client;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 using Tukupedia.Components;
@@ -15,6 +16,10 @@ namespace Tukupedia.ViewModels.Customer
         private static DataTable cart = new D_Trans_ItemModel().Table.Clone();
         private static int id_h_trans_item;
         public static StackPanel spCart;
+        public static Label labelHarga;
+        public static TextBlock tbSubTotal;
+        
+        
 
         public static void initCart()
         {
@@ -43,7 +48,7 @@ namespace Tukupedia.ViewModels.Customer
                     {
                         prev = Convert.ToInt32(itemCart["JUMLAH"]);
                     }   
-                    itemCart["JUMLAH"] = prev + jumlah;
+                    itemCart["JUMLAH"] = Math.Min(prev + jumlah,Convert.ToInt32(item["STOK"]));
                 }
             }
             else
@@ -91,7 +96,8 @@ namespace Tukupedia.ViewModels.Customer
 
         public static void loadCartItem(StackPanel sp)
         {
-            spCart = sp;
+            if(spCart==null)spCart = sp;
+            sp.Children.Clear();
             foreach (DataRow row in cart.Rows)
             {
                 CartComponent cc = new CartComponent();
@@ -99,6 +105,69 @@ namespace Tukupedia.ViewModels.Customer
                 cc.iniComponent(item,Convert.ToInt32(row["JUMLAH"]));
                 sp.Children.Add(cc);
             }
+        }
+
+        public static void initHargaCart(Label total, TextBlock tbHarga)
+        {
+            labelHarga = total;
+            tbSubTotal = tbHarga;
+        }
+
+        public static void countSubTotal()
+        {
+            int total = 0;
+            int qty = 0;
+            foreach (DataRow row in cart.Rows)
+            {
+                DataRow item = new DB("ITEM").@select().@where("ID", row["ID_ITEM"].ToString()).getFirst();
+                total += (Convert.ToInt32(item["HARGA"]) * Convert.ToInt32(row["JUMLAH"]));
+                qty += Convert.ToInt32(row["JUMLAH"]);
+            }
+            updateHarga(qty,total);
+        }
+        public static void updateHarga(int qty, int harga)
+        {
+            string desc = qty > 0 ? "Items" : "Item";
+            labelHarga.Content = $"Total Price ({qty} {desc})";
+            tbSubTotal.Text = Utility.formatMoney(harga);
+        }
+
+        public static void updateJumlah(int id_item, int jml)
+        {
+            DataRow row = cart.Select($"ID_ITEM='{id_item}'").FirstOrDefault();
+            if (row != null)
+            {
+                row["JUMLAH"] = jml;
+            }
+        }
+
+        public static void deleteItemFromCart(int id_item)
+        {
+            DataRow row = cart.Select($"ID_ITEM='{id_item}'").FirstOrDefault();
+            cart.Rows.Remove(row);
+            loadCartItem(spCart);
+            countSubTotal();
+        }
+        public static void proceedToCheckout()
+        {
+            using(OracleTransaction Transaction = App.connection.BeginTransaction())
+            {
+                try
+                {
+                    H_Trans_ItemModel hti = new H_Trans_ItemModel();
+                    DataRow row = hti.Table.NewRow();
+                    row["ID"] = 0;
+                    row["ID_CUSTOMER"] = Session.User["ID"].ToString();
+                    
+                    hti.insert();
+                }
+                catch (OracleException e)
+                {
+                    Transaction.Rollback();
+                    MessageBox.Show(e.Message);
+                }
+            };
+            
         }
     }
 }
