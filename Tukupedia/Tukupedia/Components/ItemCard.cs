@@ -46,6 +46,7 @@ namespace Tukupedia.Components
             harga.Style = Application.Current.TryFindResource("textblockblock-md-danger") as Style;
             harga.FontSize = 16;
             harga.Foreground = new SolidColorBrush(Color.FromRgb(232,112,89));
+            harga.FontWeight = FontWeights.Bold;
             //Stack Panel untuk rating
             spRating = new StackPanel();
             // Label + Bintang Rating

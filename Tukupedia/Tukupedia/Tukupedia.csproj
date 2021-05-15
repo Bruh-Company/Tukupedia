@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\CartComponent.cs" />
     <Compile Include="Components\Comment.cs" />
     <Compile Include="Components\CustomCard.cs" />
     <Compile Include="Components\DiscussionCard.cs" />

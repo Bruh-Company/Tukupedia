@@ -77,8 +77,8 @@
                     <TextBlock x:Name="tbQuantity" Margin="10,0,10,0" Style="{StaticResource textblockblock-md}" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Click="BtnPlus_OnClick" x:Name="btnPlus" Width="40" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
-                <Button Click="BtnAddCart_OnClick" x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-white}"/>
-                <Button x:Name="btnBeliLangsung" Margin="0,5,0,0" Width="169" Content="Buy Now" Style="{StaticResource btn-warning}"/>
+                <Button Click="BtnAddCart_OnClick" x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-primary}"/>
+                <Button Click="BtnBeliLangsung_OnClick" x:Name="btnBeliLangsung" Margin="0,5,0,0" Width="169" Content="Buy Now" Style="{StaticResource btn-warning}"/>
             </StackPanel>
 
         </Grid>

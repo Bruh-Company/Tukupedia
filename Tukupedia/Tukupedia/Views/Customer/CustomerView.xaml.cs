@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 using Tukupedia.ViewModels.Customer;
+using Tukupedia.ViewModels;
 
 namespace Tukupedia.Views.Customer
 {
@@ -22,16 +23,16 @@ namespace Tukupedia.Views.Customer
     /// </summary>
     public partial class CustomerView : Window
     {
+        Transition transition;
+        const double speedMargin = 0.2;
+        const double speedOpacity = 0.3;
+        const double multiplier = 80;
+        const int transFPS = 100;
         public CustomerView()
         {
             InitializeComponent();
-            
         }
 
-        private void flipper_MouseUp(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
 
         private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -39,7 +40,20 @@ namespace Tukupedia.Views.Customer
             CustomerViewModel.loadCategory(cbCategory);
             debugMode();
             labelWelcome.Content = "Welcome "+ Session.User["NAMA"].ToString();
+            grid_Home.Margin = MarginPosition.Middle;
+            grid_Cart.Margin = MarginPosition.Right;
+            grid_Transactions.Margin = MarginPosition.Right;
+            grid_Settings.Margin = MarginPosition.Right;
+            transition = new Transition(FPS:transFPS);
 
+            ComponentHelper.changeVisibilityComponent(grid_Home, Visibility.Visible);
+            ComponentHelper.changeVisibilityComponent(grid_Cart, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(grid_Transactions, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(grid_Settings, Visibility.Hidden);
+            
+            //Init Cart
+            CartViewModel.initCart();
+            CartViewModel.loadCartItem(spCart);
         }
 
         void debugMode()
@@ -61,6 +75,163 @@ namespace Tukupedia.Views.Customer
         {
             Session.Logout();
             this.Close();
+        }
+        //Transition Settings
+
+        private void goToHome(object sender, RoutedEventArgs e)
+        {
+            transition.makeTransition(grid_Home,
+                    MarginPosition.Middle, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            transition.makeTransition(grid_Cart,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Transactions,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Settings,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+
+            ComponentHelper.changeZIndexComponent(
+                grid_Home,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                grid_Cart,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Transactions,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Settings,
+                Visibility.Hidden);
+        }
+
+        private void goToCart(object sender, RoutedEventArgs e)
+        {
+            transition.makeTransition(grid_Home,
+                    MarginPosition.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            transition.makeTransition(grid_Cart,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Transactions,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Settings,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+
+            ComponentHelper.changeZIndexComponent(
+                grid_Home,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Cart,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                grid_Transactions,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Settings,
+                Visibility.Hidden);
+        }
+
+        private void goToTransactions(object sender, RoutedEventArgs e)
+        {
+            transition.makeTransition(grid_Home,
+                    MarginPosition.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            transition.makeTransition(grid_Cart,
+                MarginPosition.Left, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Transactions,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Settings,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+
+            ComponentHelper.changeZIndexComponent(
+                grid_Home,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Cart,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Transactions,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                grid_Settings,
+                Visibility.Hidden);
+        }
+
+        private void goToSettings(object sender, RoutedEventArgs e)
+        {
+            transition.makeTransition(grid_Home,
+                    MarginPosition.Left, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            transition.makeTransition(grid_Cart,
+                MarginPosition.Left, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Transactions,
+                MarginPosition.Left, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+            transition.makeTransition(grid_Settings,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+
+            ComponentHelper.changeZIndexComponent(
+                grid_Home,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Cart,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Transactions,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                grid_Settings,
+                Visibility.Visible);
         }
     }
 }

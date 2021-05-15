@@ -31,7 +31,6 @@ namespace Tukupedia.Views.Customer
         {
             InitializeComponent();
             qty = 0;
-            maxQty = 10;
             
         }
 
@@ -41,6 +40,7 @@ namespace Tukupedia.Views.Customer
             ImageItem.Source = new BitmapImage(new Uri(
                 AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
             this.item = item;
+            maxQty = Convert.ToInt32(item["STOK"]);
             loadDetails();
             
         }
@@ -100,7 +100,10 @@ namespace Tukupedia.Views.Customer
         //TODO Add Cart
         private void BtnAddCart_OnClick(object sender, RoutedEventArgs e)
         {
-            
+            CartViewModel.addtoCart(item,qty,true);
+            CartViewModel.loadCartItem(CartViewModel.spCart);
+            MessageBox.Show($"{item["NAMA"]} berhasil di tambah ke cart!");
+            this.Close();
         }
 
         private void btnKirimDiskusi_Click(object sender, RoutedEventArgs e)
@@ -120,6 +123,10 @@ namespace Tukupedia.Views.Customer
             rtbDiskusi.Visibility = Visibility.Visible;
             btnKirimDiskusi.Visibility = Visibility.Visible;
         }
-        
+
+        private void BtnBeliLangsung_OnClick(object sender, RoutedEventArgs e)
+        {
+            //TODO Beli Langsung ke Checkout
+        }
     }
 }
