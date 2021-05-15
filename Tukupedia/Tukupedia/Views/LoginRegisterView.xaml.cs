@@ -124,7 +124,7 @@ namespace Tukupedia.Views
 
         private void btnToRegister2_click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
@@ -143,13 +143,16 @@ namespace Tukupedia.Views
 
         private void btnToRegister3_click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
-                foreach (Control nn in comp)
+                foreach (FrameworkElement nn in comp)
                 {
-                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
                 }
                 ea.makeAnimation(comp);
                 ea.playAnim();
@@ -171,9 +174,9 @@ namespace Tukupedia.Views
         }
 
         //not done
-        private List<Control> validateRegister(object sender)
+        private List<FrameworkElement> validateRegister(object sender)
         {
-            List<Control> FE = new List<Control>();
+            List<FrameworkElement> FE = new List<FrameworkElement>();
             
             if (sender == btnCustomerRegisterNext1)
             {
@@ -250,13 +253,16 @@ namespace Tukupedia.Views
 
         private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
-                foreach (Control nn in comp)
+                foreach (FrameworkElement nn in comp)
                 {
-                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
                 }
                 ea.makeAnimation(comp);
                 ea.playAnim();
