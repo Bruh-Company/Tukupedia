@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
@@ -12,6 +13,7 @@ namespace Tukupedia.ViewModels.Seller
 {
     public class PagePesanan
     {
+        //duek ditambah, stok dikurangi
         private SellerView ViewComponent;
         private ItemModel itemModel;
         private bool toggleBtnInsertProduk = true;
@@ -100,6 +102,31 @@ namespace Tukupedia.ViewModels.Seller
         {
             selectHtrans(h_trans_selected);
         }
+        public int hitungTotal()
+        {
+            int total = 0;
+            //- W = Pesanan Baru
+            //- S = Dalam Pengiriman
+            //- SC = Dalam Pengiriman blom confirm
+
+            //- D = Pesanan Selesai
+            //- [//baru](//baru) untuk admin
+            //-C = Pesanan Dibatalkan
+            //-CC = Pesanan Dibatalkan blom confirm
+            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
+            {
+                DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
+                string statuses = drHelper[1].ToString();
+                //2 = Stock
+                //3 = Barang Yang dibeli
+                if (statuses == "SC" || statuses == "S" || statuses == "D")
+                {
+                    total += Convert.ToInt32(dr["Total"].ToString());
+                }
+            }
+            ViewComponent.textboxTotalPesanan.Text = Utility.formatMoney(total);
+            return total;
+        }
         public void selectHtrans(int selected)
         {
             if(selected != -1)
@@ -118,10 +145,60 @@ namespace Tukupedia.ViewModels.Seller
                 dtrans = new D_Trans_ItemModel();
                 dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when 'W' then 'Pesanan Baru' when 'P' then 'Siap Kirim' when 'S' then 'Dalam Pengiriman' when 'D' then 'Pesanan Selesai' when 'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
                 dtrans_helper = new D_Trans_ItemModel();
-                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
+                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH, i.ID from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
                 ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
                 ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Visible;
+                hitungTotal();
             }
+        }
+
+        public void confirm()
+        {
+            int tidakterima = 0;
+            int trans = 0;
+            //check stock
+            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
+            {
+                DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
+                //2 = Stock
+                //3 = Barang Yang dibeli
+                if (Convert.ToInt32(drHelper[2].ToString()) > Convert.ToInt32(drHelper[3].ToString()))
+                {
+                    MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
+                    return;
+                }
+            }
+            //menghitung pesanan yang tidak diterima
+            foreach (DataRow dr in dtrans_helper.Table.Rows)
+            {
+                if (dr[1].ToString() == "W") tidakterima++;
+                if (dr[1].ToString() == "SC") trans++;
+            }
+            if (tidakterima != 0)
+            {
+                DialogResult d = MessageBox.Show($"Ada {tidakterima} pesanan yang belum diterima, Yakin lanjut ?", "Pesanan Blom di terima", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (d == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            //merubah status di database
+            if (trans != 0)
+            {
+                foreach (DataRow dr in dtrans_helper.Table.Rows)
+                {
+                    int stock = Convert.ToInt32(dr[2].ToString()) - Convert.ToInt32(dr[3].ToString());
+                    if (dr[1].ToString() == "SC")
+                        new DB("D_TRANS_ITEM").update("STATUS", "S").where("ID", dr[0].ToString()).execute();
+                    new DB("ITEM").update("STOK", stock).where("ID", dr[4].ToString()).execute();
+                }
+
+                DataRow drrow = new DB("SELLER").select("SALDO").where("ID_SELLER", seller["ID"].ToString()).getFirst();
+                int saldo = Convert.ToInt32(drrow[0].ToString()) - hitungTotal();
+                new DB("SELLER").update("SALDO", saldo).where("ID_SELLER", seller["ID"].ToString()).execute();
+                reloadHtrans();
+            }
+
         }
 
         public void selectDtrans(int selected)
@@ -181,57 +258,28 @@ namespace Tukupedia.ViewModels.Seller
             //-C = Pesanan Dibatalkan
             ViewComponent.datagridProdukPesanan.ItemsSource = "";
             ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
+            hitungTotal();
 
         }
         public void terimasemua(bool ya)
         {
-            foreach (DataRow dr in dtrans_helper.Table.Rows)
+            for(int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
             {
-                if(ya)dr[1] = "SC";
-                else dr[1] = "W";
-            }
-            foreach (DataRow dr in dtrans.Table.Rows)
-            {
-                if (ya) dr[4] = "Dalam Pengiriman *";
-                else dr[4] = "Pesanan Baru";
+                DataRow drhelper = dtrans_helper.Table.Rows[i], dr = dtrans.Table.Rows[i];
+                if (drhelper[1].ToString() == "W" || dr[1].ToString() == "SC")
+                {
+                    if (ya) drhelper[1] = "SC";
+                    else drhelper[1] = "W";
+
+                    if (ya) dr[4] = "Dalam Pengiriman *";
+                    else dr[4] = "Pesanan Baru";
+                }
             }
             ViewComponent.datagridProdukPesanan.ItemsSource = "";
             ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
+            hitungTotal();
         }
-        public void confirm()
-        {
-            int tidakterima = 0;
-            //check stock
-            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
-            {
-                DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
-                //2 = Stock
-                //3 = Barang Yang dibeli
-                if (Convert.ToInt32(drHelper[2].ToString()) < Convert.ToInt32(dr[3].ToString()))
-                {
-                    MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
-                    return;
-                }
-            }
-            
-            foreach (DataRow dr in dtrans_helper.Table.Rows)
-            {
-                if (dr[1].ToString() == "W") tidakterima++;
-            }
-            if (tidakterima != 0)
-            {
-                DialogResult d = MessageBox.Show($"Ada {tidakterima} pesanan yang belum diterima, Yakin lanjut ?", "Pesanan Blom di terima", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                if (d == DialogResult.No)
-                {
-                    return;
-                }
-            }
-            foreach (DataRow dr in dtrans_helper.Table.Rows)
-            {
-                new DB("D_TRANS_ITEM").update("STATUS","S").where("ID",dr[0].ToString()).execute();
-                
-            }
-        }
+        
 
         public void checkStatus(DataGridRow dgRow)
         {
