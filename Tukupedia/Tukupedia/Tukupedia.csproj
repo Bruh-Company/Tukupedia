@@ -87,6 +87,7 @@
     <Compile Include="Components\ItemCard.cs" />
     <Compile Include="Components\ReplyCard.cs" />
     <Compile Include="Components\ReviewCard.cs" />
+    <Compile Include="Components\ShopCartComponent.cs" />
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
     <Compile Include="Helpers\Utils\EmptyAnimation.cs" />

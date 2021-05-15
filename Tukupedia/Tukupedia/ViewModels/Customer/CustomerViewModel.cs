@@ -60,7 +60,7 @@ namespace Tukupedia.ViewModels.Customer
         {
             filteredItems = items.Table.Select(items.where);
         }
-
+    
         public static void loadCategory(ComboBox cb)
         {
             foreach (DataRow row in categories.Table.Select("STATUS='1'"))

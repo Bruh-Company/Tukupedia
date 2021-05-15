@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Components
 {
@@ -96,7 +97,7 @@ namespace Tukupedia.Components
 
         private void BtnDeleteOnClick(object sender, RoutedEventArgs e)
         {
-
+            CartViewModel.deleteItemFromCart(Convert.ToInt32(item["ID"]));
         }
 
         private void BtnPlusOnClick(object sender, RoutedEventArgs e)
@@ -107,6 +108,7 @@ namespace Tukupedia.Components
             qty = Math.Min(Convert.ToInt32(item["STOK"]), qty);
             tbQty.Text = qty.ToString();
             updateQty();
+            CartViewModel.countSubTotal();
         }
 
         private void BtnMinOnClick(object sender, RoutedEventArgs e)
@@ -115,6 +117,7 @@ namespace Tukupedia.Components
             qty = Math.Max(0, qty);
             tbQty.Text = qty.ToString();
             updateQty();
+            CartViewModel.countSubTotal();
         }
 
         public void iniComponent(DataRow item, int qty)
@@ -130,6 +133,7 @@ namespace Tukupedia.Components
         public void updateQty()
         {
             tbQty.Text = qty.ToString();
+            CartViewModel.updateJumlah(Convert.ToInt32(item["ID"]),qty);
         }
     }
 }

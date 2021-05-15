@@ -54,6 +54,8 @@ namespace Tukupedia.Views.Customer
             //Init Cart
             CartViewModel.initCart();
             CartViewModel.loadCartItem(spCart);
+            CartViewModel.initHargaCart(labelTotal,tbSubTotal);
+            CartViewModel.updateHarga(0,0);
         }
 
         void debugMode()
@@ -232,6 +234,11 @@ namespace Tukupedia.Views.Customer
             ComponentHelper.changeZIndexComponent(
                 grid_Settings,
                 Visibility.Visible);
+        }
+
+        private void btnProceedToCheckout_Click(object sender, RoutedEventArgs e)
+        {
+            CartViewModel.proceedToCheckout();
         }
     }
 }
