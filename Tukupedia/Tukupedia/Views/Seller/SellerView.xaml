@@ -131,7 +131,7 @@
         </Canvas>
 
         <!--PAGE INFO TOKO-->
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Hidden">
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <Canvas Height="590" Width="640">
                 <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
                 <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
