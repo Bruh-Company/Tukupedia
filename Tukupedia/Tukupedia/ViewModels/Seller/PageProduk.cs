@@ -198,8 +198,8 @@ namespace Tukupedia.ViewModels.Seller {
                 }
             }
         }
-        // PRIVATE METHODS
 
+        // PRIVATE METHODS
         private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;

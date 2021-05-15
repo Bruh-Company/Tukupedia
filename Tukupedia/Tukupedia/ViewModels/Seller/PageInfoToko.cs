@@ -7,6 +7,7 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System;
 using System.Collections.Generic;
+using Oracle.DataAccess.Client;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageInfoToko {
@@ -28,6 +29,18 @@ namespace Tukupedia.ViewModels.Seller {
 
             resetInfo();
             changeState();
+        }
+
+        public void toggleState() {
+            toggleChange = !toggleChange;
+            changeState();
+        }
+
+        public void registerOS() {
+            if (MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
+                seller["IS_OFFICIAL"] = "1";
+                
+            }
         }
 
         public void addKurir() {
@@ -52,14 +65,10 @@ namespace Tukupedia.ViewModels.Seller {
             resetKurir();
         }
 
-        public void toggleState() {
-            toggleChange = !toggleChange;
-            changeState();
-        }
-
         public void saveInfo() {
             saveDataSeller();
             saveKurirSeller();
+            transOS();
             toggleState();
             resetInfo();
         }
@@ -74,6 +83,8 @@ namespace Tukupedia.ViewModels.Seller {
             string id = seller["ID"].ToString();
             seller = new DB("SELLER").select().where("ID", id).getFirst();
             lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
+
+            SellerViewModel.initHeader();
             fillTextbox();
             resetKurir();
         }
@@ -81,6 +92,20 @@ namespace Tukupedia.ViewModels.Seller {
         private void resetKurir() {
             fillLbKurir();
             fillCmbKurir();
+        }
+
+        private void transOS() {
+            using (OracleTransaction trans = App.connection.BeginTransaction()) {
+                try {
+                    Trans_OSModel model = new Trans_OSModel();
+                    model.init();
+                    model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
+                    trans.Commit();
+                }
+                catch (OracleException) {
+                    trans.Rollback();
+                }
+            }
         }
 
         private void saveKurirSeller() {
@@ -142,6 +167,11 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnTambahKurirInfo.Visibility = Visibility.Hidden;
                 ViewComponent.btnKurangKurirInfo.Visibility = Visibility.Hidden;
             }
+
+
+            if (seller["IS_OFFICIAL"].ToString() == "0")
+                ViewComponent.btnDaftarOS.Visibility = Visibility.Hidden;
+            else ViewComponent.btnDaftarOS.Visibility = Visibility.Visible;
         }
 
         private void fillTextbox() {

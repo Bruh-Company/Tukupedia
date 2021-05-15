@@ -90,7 +90,7 @@
         </Canvas>
 
         <!--PAGE PRODUK-->
-        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280" Visibility="Hidden">
+        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <TextBox Name="textboxCariProduk" Text="Cari Kode Produk, Produk, Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
             <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
@@ -128,14 +128,16 @@
             <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
             <Button Name="btnInsert" Content="Insert" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="235" Height="40" Canvas.Left="1010" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
+            <Button x:Name="btnDiskusi" Content="Lihat Diskusi" FontSize="18" Canvas.Left="900" Canvas.Top="30" Width="160" Height="30" Style="{StaticResource btn-primary}" Click="btnDiskusi_Click"/>
+            <Button x:Name="btnUlasan" Content="Lihat Ulasan" FontSize="18" Canvas.Left="1085" Canvas.Top="30" Width="160" Height="30" Style="{StaticResource btn-primary}" Click="btnUlasan_Click"/>
         </Canvas>
 
         <!--PAGE INFO TOKO-->
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Hidden">
             <Canvas Height="590" Width="640">
                 <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
-                <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="260" Canvas.Top="15" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnTambahKurirInfo_Click"/>
-                
+                <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="260" Canvas.Top="15" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnDaftarOS_Click"/>
+
                 <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
                 <TextBox Name="textboxNamaToko" Canvas.Left="50"  Canvas.Top="100" Height="50" Width="520" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
