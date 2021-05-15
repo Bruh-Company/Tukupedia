@@ -186,19 +186,6 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
-        public void deleteProduk() {
-            int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
-            if (selectedIndex == -1)
-                return;
-            ItemModel model = new ItemModel();
-            model.init();
-            model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
-            foreach (DataRow row in model.get()) {
-                model.delete(row);
-            }
-            resetPageProduk();
-        }
-
         public void checkStok(DataGridRow dgRow) {
             DataRowView item = dgRow.Item as DataRowView;
             if (item != null) {
@@ -218,13 +205,11 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;
                 ViewComponent.btnInsert.Visibility = Visibility.Hidden;
                 ViewComponent.btnUpdate.IsEnabled = true;
-                ViewComponent.btnDelete.IsEnabled = true;
             }
             else {
                 ViewComponent.btnInsert.Visibility = Visibility.Visible;
                 ViewComponent.btnCancel.Visibility = Visibility.Hidden;
                 ViewComponent.btnUpdate.IsEnabled = false;
-                ViewComponent.btnDelete.IsEnabled = false;
             }
             resetPageProduk();
         }

@@ -136,10 +136,6 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.pageProduk.updateProduk();
         }
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.pageProduk.deleteProduk();
-        }
-
         private void textboxHarga_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Utility.NumberValidationTextBox(sender, e);
         }
@@ -172,6 +168,10 @@ namespace Tukupedia.Views.Seller {
 
         private void btnBatalInfo_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.pageInfoToko.cancelInfo();
+        }
+
+        private void textboxNoTelpInfo_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
         }
 
         // Info
