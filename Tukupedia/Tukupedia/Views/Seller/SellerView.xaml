@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
     <Window.Resources>
         <!--Base-->
         <Style TargetType="{x:Type Label}">

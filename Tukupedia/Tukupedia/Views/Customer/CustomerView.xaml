@@ -8,7 +8,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d" Loaded="CustomerView_OnLoaded"
-        Title="CustomerView" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
+        Title="CustomerView" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1274" Background="#FF65C65B" Margin="0,0,-0.4,0">
             <Label Name="labelWelcome" Content="Welcome Customer" Margin="14,10,0,10" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Left" Height="44" FontWeight="Bold"/>

@@ -3,18 +3,35 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Tukupedia.ViewModels.Seller;
 using Tukupedia.Helpers.Utils;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
+using System;
 
 namespace Tukupedia.Views.Seller {
     /// <summary>
     /// Interaction logic for SellerView.xaml
     /// </summary>
     public partial class SellerView : Window {
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private const int GWL_STYLE = -16;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+
+
         public SellerView() {
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             SellerViewModel.InitializeView(this);
+
+            IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
+            int value = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
         }
 
         // Header
