@@ -82,7 +82,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public DB delete(string id)
         {
             resetStatement();
-            statement += $"DELETE {table} WHERE `{table}`.ID = '{sanitize(id)}'";
+            statement += $"DELETE {table} WHERE {table}.ID = '{sanitize(id)}'";
             return this;
         }
         /*

@@ -42,7 +42,7 @@
         </Canvas>
 
         <!--PAGE PESANAN-->
-        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Hidden">
+        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Visible">
             <Button     Name="btnSemuaPesanan"      Content="Semua Pesanan"      Canvas.Left="0"    Width="224" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnSemuaPesanan_Click"/>
             <Button     Name="btnPesananBaru"       Content="Pesanan Baru"       Canvas.Left="224"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananBaru_Click"/>
             <Button     Name="btnDalamPengiriman"   Content="Dalam Pengiriman"   Canvas.Left="644"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnDalamPengiriman_Click"/>
@@ -125,10 +125,9 @@
             <Label Content="Deskripsi" Canvas.Left="765" Canvas.Top="380" Style="{StaticResource md-secondary}"/>
             <TextBox Name="textboxDeskripsi" Canvas.Left="765"  Canvas.Top="410"  Height="100" Width="480" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF" BorderBrush="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
-            <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="160" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
-            <Button Name="btnInsert" Content="Insert" FontSize="20" Width="160" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
-            <Button Name="btnUpdate" Content="Update" FontSize="20" Width="155" Height="40" Canvas.Left="930" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
-            <Button Name="btnDelete" Content="Delete" FontSize="20" Width="155" Height="40" Canvas.Left="1095" Canvas.Top="530" Style="{StaticResource btn-danger}" Click="btnDelete_Click"/>
+            <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
+            <Button Name="btnInsert" Content="Insert" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
+            <Button Name="btnUpdate" Content="Update" FontSize="20" Width="235" Height="40" Canvas.Left="1010" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
         </Canvas>
 
         <!--PAGE INFO TOKO-->
@@ -157,7 +156,7 @@
                 <TextBox Name="textboxEmailInfo" Canvas.Left="50"  Canvas.Top="200" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
                 <Label Content="Nomor Telepon" Canvas.Left="50" Canvas.Top="280" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxNoTelpInfo" Canvas.Left="215"  Canvas.Top="267" Height="50" Width="335" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+                <TextBox Name="textboxNoTelpInfo" Canvas.Left="215"  Canvas.Top="267" Height="50" Width="335" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxNoTelpInfo_PreviewTextInput"/>
 
                 <Label Content="Alamat" Canvas.Left="50" Canvas.Top="340" Style="{StaticResource xl-secondary}"/>
                 <TextBox Name="textboxAlamatInfo" Canvas.Left="50" Canvas.Top="380" Height="100" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>

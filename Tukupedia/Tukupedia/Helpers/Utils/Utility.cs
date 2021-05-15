@@ -93,6 +93,7 @@ namespace Tukupedia.Helpers.Utils
             }
         }
 
+        // ini buat input cuma angka + spasi (kalau ada yang mau hilangi spasinya silakan)
         public static void NumberValidationTextBox(object sender, TextCompositionEventArgs e) {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
