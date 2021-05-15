@@ -4,6 +4,7 @@ using Tukupedia.Helpers.Utils;
 using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
 using System.Data;
+using System;
 
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
@@ -49,7 +50,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         public static void initHeader() {
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            ViewComponent.labelSaldo.Content = "Rp " + seller["SALDO"].ToString();
+            ViewComponent.labelSaldo.Content = "Rp " + Utility.formatNumber(Convert.ToInt32(seller["SALDO"].ToString()));
 
             if (seller["IS_OFFICIAL"].ToString() == "1") ViewComponent.labelStatusToko.Content = "OFFICIAL STORE";
             else ViewComponent.labelStatusToko.Content = "MERCHANT";

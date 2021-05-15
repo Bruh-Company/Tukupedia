@@ -174,6 +174,10 @@ namespace Tukupedia.Views.Seller {
         // Produk
 
         // Info
+        private void btnDaftarOS_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pageInfoToko.registerOS();
+        }
+
         private void btnTambahKurirInfo_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.pageInfoToko.addKurir();
         }
@@ -198,7 +202,16 @@ namespace Tukupedia.Views.Seller {
             Utility.NumberValidationTextBox(sender, e);
         }
 
-        
+        private void btnDiskusi_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void btnUlasan_Click(object sender, RoutedEventArgs e) {
+
+        }
+
+
+
 
         // Info
     }
