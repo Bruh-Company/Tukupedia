@@ -82,7 +82,7 @@
                 <Label Content="Total" Canvas.Left="700" Canvas.Top="240" Style="{StaticResource xl-secondary}"/>
                 <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Canvas.Left="765" Canvas.Top="240" Width="250"  Height="30" Style="{StaticResource tb-noborder}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right" IsReadOnly="True"/>
 
-                <CheckBox Name="checkboxTerimaSemua" Content="Terima Semua" Canvas.Left="1040" Canvas.Top="17" FontSize="20" FontWeight="SemiBold" Checked="checkboxTerimaSemua_Checked"/>
+                <CheckBox Name="checkboxTerimaSemua" Content="Terima Semua" Canvas.Left="1040" Canvas.Top="17" FontSize="20" FontWeight="SemiBold" Click="checkboxTerimaSemua_Click"/>
 
                 <Button Name="btnKonfirmasiPesanan" Content="Konfirmasi" FontSize="18" Canvas.Left="1040" Canvas.Top="180" Width="160" Height="40" Style="{StaticResource btn-primary}" Click="btnKonfirmasiPesanan_Click"/>
                 <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="1040" Canvas.Top="230" Width="160" Height="40" Style="{StaticResource btn-danger}"  Click="btnBatalPesanan_Click"/>
