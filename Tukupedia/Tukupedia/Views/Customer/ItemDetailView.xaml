@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="ItemDetailView" Height="690" Width="1100" WindowStartupLocation="CenterOwner"
+        Title="ItemDetailView" Height="690" Width="1100" WindowStartupLocation="CenterOwner" Loaded="Window_Loaded" MinWidth="1100" MaxWidth="1100" MinHeight="690" MaxHeight="690"
         
         >
     <!-- WindowStyle="None" -->

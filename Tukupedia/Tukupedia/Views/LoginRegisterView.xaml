@@ -8,7 +8,7 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
-        Title="LoginPage" Height="720" Width="1280" WindowStartupLocation="CenterScreen">
+        Title="LoginPage" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxHeight="720" MaxWidth="1280" Loaded="Window_Loaded">
     <Grid>
         <Canvas Margin="-1117,-157,-1583.4,81.4" RenderTransformOrigin="0.5,0.5" IsEnabled="False" IsManipulationEnabled="True" d:IsLocked="True">
             <Canvas.RenderTransform>
@@ -52,7 +52,7 @@
             <Grid HorizontalAlignment="Left" Height="670" VerticalAlignment="Top" Width="441" d:IsLocked="True">
                 <Image x:Name="imgLogo" HorizontalAlignment="Center" Height="250" VerticalAlignment="Center" Width="250" Margin="0"/>
             </Grid>
-            <Grid x:Name="gridCard" HorizontalAlignment="Left" Height="670" Margin="446,0,0,0" VerticalAlignment="Top" Width="808" Loaded="Grid_Loaded">
+            <Grid x:Name="gridCard" HorizontalAlignment="Left" Height="670" Margin="446,0,0,0" VerticalAlignment="Top" Width="808">
                 <materialDesign:Card x:Name="CardCustomer" HorizontalAlignment="Center" VerticalAlignment="Center" Height="433" Width="1701" UniformCornerRadius="20" Margin="205,119,-1098,118" RenderTransformOrigin="0.424,0.518" Foreground="{x:Null}">
                     <materialDesign:Card.Background>
                         <RadialGradientBrush>

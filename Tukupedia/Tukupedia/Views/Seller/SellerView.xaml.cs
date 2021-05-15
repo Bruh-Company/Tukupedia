@@ -3,18 +3,35 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Tukupedia.ViewModels.Seller;
 using Tukupedia.Helpers.Utils;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
+using System;
 
 namespace Tukupedia.Views.Seller {
     /// <summary>
     /// Interaction logic for SellerView.xaml
     /// </summary>
     public partial class SellerView : Window {
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private const int GWL_STYLE = -16;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+
+
         public SellerView() {
             InitializeComponent();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             SellerViewModel.InitializeView(this);
+
+            IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
+            int value = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
         }
 
         // Header
@@ -77,18 +94,25 @@ namespace Tukupedia.Views.Seller {
         private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             SellerViewModel.pagePesanan.selectHtrans(datagridPesanan.SelectedIndex);
+
         }
 
         private void datagridProdukPesanan_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
-
+            SellerViewModel.pagePesanan.toggleDtrans();
+            
         }
 
         private void datagridProdukPesanan_LoadingRow(object sender, DataGridRowEventArgs e) {
-
+            SellerViewModel.pagePesanan.checkStatus(e.Row);
         }
 
         private void checkboxTerimaSemua_Checked(object sender, RoutedEventArgs e) {
             SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked);
+        }
+        private void checkboxTerimaSemua_Click(object sender, RoutedEventArgs e)
+        {
+            SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked);
+
         }
 
         private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
@@ -173,6 +197,8 @@ namespace Tukupedia.Views.Seller {
         private void textboxNoTelpInfo_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Utility.NumberValidationTextBox(sender, e);
         }
+
+        
 
         // Info
     }

@@ -17,6 +17,8 @@ using Tukupedia.Views.Admin;
 using Tukupedia.Views.Customer;
 using Tukupedia.Views.Seller;
 using System.Text.RegularExpressions;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace Tukupedia.Views
 {
@@ -25,6 +27,14 @@ namespace Tukupedia.Views
     /// </summary>
     public partial class LoginRegisterView : Window
     {
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private const int GWL_STYLE = -16;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+
         EmptyAnimation ea;
 
         public LoginRegisterView()
@@ -32,7 +42,7 @@ namespace Tukupedia.Views
             InitializeComponent();
         }
 
-        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.InitializeView(this);
             loadInit();
@@ -41,6 +51,15 @@ namespace Tukupedia.Views
 
             Panel.SetZIndex(CardCustomer, 1);
             Panel.SetZIndex(CardSeller, 0);
+
+            IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
+            int value = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
+        }
+
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
+        {
+            
         }
 
         private void loadInit()
@@ -124,7 +143,7 @@ namespace Tukupedia.Views
 
         private void btnToRegister2_click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
@@ -143,13 +162,16 @@ namespace Tukupedia.Views
 
         private void btnToRegister3_click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
-                foreach (Control nn in comp)
+                foreach (FrameworkElement nn in comp)
                 {
-                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
                 }
                 ea.makeAnimation(comp);
                 ea.playAnim();
@@ -171,9 +193,9 @@ namespace Tukupedia.Views
         }
 
         //not done
-        private List<Control> validateRegister(object sender)
+        private List<FrameworkElement> validateRegister(object sender)
         {
-            List<Control> FE = new List<Control>();
+            List<FrameworkElement> FE = new List<FrameworkElement>();
             
             if (sender == btnCustomerRegisterNext1)
             {
@@ -250,13 +272,16 @@ namespace Tukupedia.Views
 
         private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            List<Control> comp = validateRegister(sender);
+            List<FrameworkElement> comp = validateRegister(sender);
 
             if (comp.Count > 0)
             {
-                foreach (Control nn in comp)
+                foreach (FrameworkElement nn in comp)
                 {
-                    nn.BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
                 }
                 ea.makeAnimation(comp);
                 ea.playAnim();
@@ -281,7 +306,7 @@ namespace Tukupedia.Views
                 bool success = LoginRegisterViewModel.RegisterCustomer(
                     nama    : tbCustomerFullNameRegister.Text,
                     email   : tbCustomerEmailRegister.Text,
-                    lahir   : dpCustomerBornDateRegister.SelectedDate.Value,
+                    lahir   : dpCustomerBornDateRegister.SelectedDate ?? DateTime.Now,
                     alamat  : tbCustomerAddressRegister.Text,
                     notelp  : tbCustomerPhoneNumberRegister.Text,
                     password: tbCustomerPasswordRegister.Password

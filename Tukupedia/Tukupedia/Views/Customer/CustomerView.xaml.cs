@@ -15,6 +15,8 @@ using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 using Tukupedia.ViewModels.Customer;
 using Tukupedia.ViewModels;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 
 namespace Tukupedia.Views.Customer
 {
@@ -23,6 +25,14 @@ namespace Tukupedia.Views.Customer
     /// </summary>
     public partial class CustomerView : Window
     {
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private const int GWL_STYLE = -16;
+        private const int WS_MAXIMIZEBOX = 0x10000;
+
         Transition transition;
         const double speedMargin = 0.2;
         const double speedOpacity = 0.3;
@@ -56,6 +66,10 @@ namespace Tukupedia.Views.Customer
             CartViewModel.loadCartItem(spCart);
             CartViewModel.initHargaCart(labelTotal,tbSubTotal);
             CartViewModel.updateHarga(0,0);
+
+            IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
+            int value = GetWindowLong(hwnd, GWL_STYLE);
+            SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
         }
 
         void debugMode()
