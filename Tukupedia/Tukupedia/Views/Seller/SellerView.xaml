@@ -42,7 +42,7 @@
         </Canvas>
 
         <!--PAGE PESANAN-->
-        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Hidden">
+        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Visible">
             <Button     Name="btnSemuaPesanan"      Content="Semua Pesanan"      Canvas.Left="0"    Width="224" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnSemuaPesanan_Click"/>
             <Button     Name="btnPesananBaru"       Content="Pesanan Baru"       Canvas.Left="224"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananBaru_Click"/>
             <Button     Name="btnDalamPengiriman"   Content="Dalam Pengiriman"   Canvas.Left="644"  Width="210" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnDalamPengiriman_Click"/>

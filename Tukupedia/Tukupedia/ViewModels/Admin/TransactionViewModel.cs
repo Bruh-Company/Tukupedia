@@ -45,7 +45,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             DataRow dr = hm.Table.Rows[selected];
             dm = new D_Trans_ItemModel();
-            dm.initAdapter($"select i.NAMA as \"Nama Item\", s.NAMA as \"Nama Seller\", i.HARGA as \"Harga\", d.JUMLAH as \"Jumlah\", to_number(d.JUMLAH) * to_number(i.HARGA) as \"Total\" from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_HTRANS = '{dr[0].ToString()}'");
+            dm.initAdapter($"select i.NAMA as \"Nama Item\", s.NAMA as \"Nama Seller\", i.HARGA as \"Harga\", d.JUMLAH as \"Jumlah\", to_number(d.JUMLAH) * to_number(i.HARGA) as \"Total\" from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_H_TRANS_ITEM = '{dr[0].ToString()}'");
             return dm.Table;
         }
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir, int official)

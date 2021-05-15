@@ -189,14 +189,14 @@ DECLARE
     new_code varchar2(30);
     jumlah   number;
 BEGIN
-    new_code := 'HTI' || to_char(sysdate, 'ddmmyyyy') || lpad(jumlah, 5, '0');
+    new_code := 'HTI' || to_char(sysdate, 'ddmmyyyy');
     select NVL(MAX(ltrim(substr(KODE, 12), '0')), 0) + 1
     into jumlah
     from H_TRANS_ITEM
     where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
     :new.ID := new_id;
-    :new.kode := new_code;
+    :new.kode := new_code || lpad(jumlah, 4, '0') ;
 END AUTO_ID_H_TRANS_ITEM;
 /
 --ALTER TRIGGER "AUTO_ID_H_TRANS_ITEM" ENABLE
@@ -466,14 +466,14 @@ DECLARE
     new_code varchar2(30);
     jumlah   number;
 BEGIN
-    new_code := 'TOS' || to_char(sysdate, 'ddmmyyyy') || lpad(jumlah, 5, '0');
+    new_code := 'TOS' || to_char(sysdate, 'ddmmyyyy');
     select NVL(MAX(ltrim(substr(KODE, 12), '0')), 0) + 1
     into jumlah
     from TRANS_OS
     where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
     :new.ID := new_id;
-    :new.kode := new_code;
+    :new.kode := new_code || lpad(jumlah,4,'0');
 END AUTO_ID_TRANS_OS;
 /
 --ALTER TRIGGER "AUTO_ID_TRANS_OS" ENABLE

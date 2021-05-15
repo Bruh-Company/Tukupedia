@@ -42,23 +42,23 @@ namespace Tukupedia.Views.Seller {
         // Pesanan
         // Pesanan Header
         private void btnSemuaPesanan_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.viewSemuaPesanan();
         }
 
         private void btnPesananBaru_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.viewPesananBaru();
         }
 
         private void btnDalamPengiriman_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.viewDalamPengiriman();
         }
 
         private void btnPesananSelesai_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.viewPesananSelesai();
         }
 
         private void btnPesananDibatalkan_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.viewPesananBatal();
         }
         // Pesanan Header
 
@@ -76,7 +76,7 @@ namespace Tukupedia.Views.Seller {
 
         private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-
+            SellerViewModel.pagePesanan.selectHtrans(datagridPesanan.SelectedIndex);
         }
 
         private void datagridProdukPesanan_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -88,15 +88,15 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void checkboxTerimaSemua_Checked(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked);
         }
 
         private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.confirm();
         }
 
         private void btnBatalPesanan_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.reloadHtrans();
         }
 
         // Pesanan
