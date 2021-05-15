@@ -4,7 +4,10 @@
     <projectFile>Tukupedia/Tukupedia.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="" />
+    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +115,7 @@
       <workItem from="1620798915011" duration="26402000" />
       <workItem from="1620892847144" duration="10617000" />
       <workItem from="1620972608264" duration="28278000" />
-      <workItem from="1621059230513" duration="21145000" />
+      <workItem from="1621059230513" duration="23023000" />
     </task>
     <servers />
   </component>
