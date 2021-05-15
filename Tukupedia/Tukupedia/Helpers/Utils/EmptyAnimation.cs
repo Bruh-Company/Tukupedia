@@ -58,11 +58,11 @@ namespace Tukupedia.Helpers.Utils
             status = false;
         }
 
-        public void makeAnimation(List<Control> liFrEl)
+        public void makeAnimation(List<FrameworkElement> liFrEl)
         {
             if (status) return;
             animList = new List<AnimData>();
-            foreach (Control nn in liFrEl)
+            foreach (FrameworkElement nn in liFrEl)
             {
                 animList.Add(new AnimData(nn));
             }
