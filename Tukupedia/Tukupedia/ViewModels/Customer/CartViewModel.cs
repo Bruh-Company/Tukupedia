@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows;
@@ -18,6 +19,8 @@ namespace Tukupedia.ViewModels.Customer
         public static StackPanel spCart;
         public static Label labelHarga;
         public static TextBlock tbSubTotal;
+        public static List<ShopCartComponent> list_shopcart;
+        public static int grandTotal;
         
         
 
@@ -64,6 +67,10 @@ namespace Tukupedia.ViewModels.Customer
             }
         }
 
+        public static int getJumlah(int id_item)
+        {
+            return Convert.ToInt32(cart.Select($"ID_ITEM ='{id_item}'").First()["JUMLAH"]);
+        }
         //Check apakah barang sudah di cart atau tidak
         // Kenapa harus dicek? karena barang yang sama tidak boleh double
         public static bool checkCart(int id_item)
@@ -98,12 +105,33 @@ namespace Tukupedia.ViewModels.Customer
         {
             if(spCart==null)spCart = sp;
             sp.Children.Clear();
+            Dictionary<string, List<DataRow>> toko = new Dictionary<string, List<DataRow>>();
+            //Check per Toko
             foreach (DataRow row in cart.Rows)
             {
-                CartComponent cc = new CartComponent();
                 DataRow item = new DB("ITEM").@select().@where("ID", row["ID_ITEM"].ToString()).getFirst();
-                cc.iniComponent(item,Convert.ToInt32(row["JUMLAH"]));
-                sp.Children.Add(cc);
+                string id_toko = item["ID_SELLER"].ToString();
+                MessageBox.Show(id_toko);
+                if (toko.ContainsKey(id_toko))
+                {
+                    toko[id_toko].Add(item);
+                }
+                else
+                {
+                    toko[id_toko] = new List<DataRow>();
+                    toko[id_toko].Add(item);
+                }
+                
+            }
+
+            list_shopcart = new List<ShopCartComponent>();
+            foreach (var val in toko)
+            {
+                ShopCartComponent scc = new ShopCartComponent();
+                scc.addItemCart(val.Value);
+                scc.initToko(new DB("SELLER").@select().@where("ID",val.Key).getFirst());
+                list_shopcart.Add(scc);;
+                sp.Children.Add(scc);
             }
         }
 
@@ -147,6 +175,16 @@ namespace Tukupedia.ViewModels.Customer
             cart.Rows.Remove(row);
             loadCartItem(spCart);
             countSubTotal();
+        }
+
+        //TODO GRAND TOTAL INI BLUM TERMASUK DISKONNYA
+        public static void updateGrandTotal()
+        {
+            grandTotal = 0;
+            foreach (ShopCartComponent scc in list_shopcart)
+            {
+                grandTotal += scc.getSubtotal();
+            }
         }
         public static void proceedToCheckout()
         {

@@ -33,8 +33,11 @@ namespace Tukupedia.Components
         private Button btnPlus;
         private DataRow item;
         private int qty;
-        public CartComponent()
+        private int subtotal;
+        private ShopCartComponent parent;
+        public CartComponent(ShopCartComponent parent)
         {
+            this.parent = parent;
             spMain = new StackPanel();
             spContent = new StackPanel();
             spItem = new StackPanel();
@@ -49,6 +52,7 @@ namespace Tukupedia.Components
             btnMin = new Button();
             tbQty = new TextBlock();
             btnPlus = new Button();
+            subtotal = 0;
             
             spDesc.Children.Add(tbnamaItem);
             spDesc.Children.Add(tbHarga);
@@ -87,11 +91,20 @@ namespace Tukupedia.Components
             tbHarga.FontWeight = FontWeights.Bold;
             btnDelete.Content = "Remove";
             btnDelete.Style = Application.Current.TryFindResource("btn-danger") as Style;
+            btnDelete.Margin = new Thickness(0, 0, 10, 0);
             btnMin.Content = "-";
             btnMin.Style = Application.Current.TryFindResource("btn-primary") as Style;
+            btnMin.Margin = new Thickness(10, 0, 10, 0);
             btnPlus.Content = "+";
             btnPlus.Style = Application.Current.TryFindResource("btn-primary") as Style;
-            
+            btnPlus.Margin = new Thickness(10, 0, 10, 0);
+            tbQty.VerticalAlignment = VerticalAlignment.Center;
+            tbQty.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            spContent.Margin = new Thickness(10, 0, 0, 0);
+
+            spCondition.Margin = new Thickness(0,10, 0, 10);
+            this.Padding = new Thickness(5, 7, 5, 7);
+            this.Margin = new Thickness(0, 0, 0, 10);
             this.AddChild(spMain);
         }
 
@@ -120,7 +133,7 @@ namespace Tukupedia.Components
             CartViewModel.countSubTotal();
         }
 
-        public void iniComponent(DataRow item, int qty)
+        public void initComponent(DataRow item, int qty)
         {
             this.item = item;
             this.qty = qty;
@@ -129,11 +142,18 @@ namespace Tukupedia.Components
             updateQty();
 
         }
-
+        
         public void updateQty()
         {
             tbQty.Text = qty.ToString();
             CartViewModel.updateJumlah(Convert.ToInt32(item["ID"]),qty);
+            subtotal = qty * Convert.ToInt32(item["HARGA"]);
+            parent.updateSubTotal();;
+        }
+
+        public int getHarga()
+        {
+            return subtotal;
         }
     }
 }

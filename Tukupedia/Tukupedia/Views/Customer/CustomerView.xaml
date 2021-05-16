@@ -47,8 +47,8 @@
             <Grid x:Name="grid_Cart" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="1279,0,0,0" Background="#FF695CAB">
                 <Grid HorizontalAlignment="Left" Height="601" Margin="10,10,0,0" VerticalAlignment="Top" Width="939" Background="#FF404040">
                     <Label Content="Cart" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
-                    <ScrollViewer HorizontalAlignment="Left" Height="543" Margin="19,48,0,0" VerticalAlignment="Top" Width="910">
-                        <StackPanel Name="spCart" Height="530" Width="879"/>
+                    <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Left" Height="530" Margin="19,48,0,0" VerticalAlignment="Top" Width="910">
+                        <StackPanel Name="spCart" Height="Auto" Width="879"/>
                     </ScrollViewer>
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="601" Margin="954,10,0,0" VerticalAlignment="Top" Width="310" Background="#FF404040">

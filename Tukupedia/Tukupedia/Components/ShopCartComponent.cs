@@ -1,5 +1,15 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
+using Tukupedia.Helpers.DatabaseHelpers;
+using Tukupedia.Helpers.Utils;
+using Tukupedia.Models;
+using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Components
 {
@@ -11,16 +21,23 @@ namespace Tukupedia.Components
         private StackPanel spContent;
         private StackPanel spSubtotal;
         private StackPanel spKurir;
+        private Image imgToko;
         private TextBlock namaToko;
-        private TextBlock isOfficial;
+        private TextBlock tbisOfficial;
         private TextBlock pilihDurasi;
         private TextBlock subTotal;
         private TextBlock labelsubTotal;
         private ComboBox cbKurir;
-        
+        private bool isOfficial;
+        private DataTable kurir_seller;
+        private int hargaTotal;
+        private List<CartComponent> list_carts;
+
 
         public ShopCartComponent()
         {
+            list_carts = new List<CartComponent>();
+            isOfficial = false;
             spMain = new StackPanel();
             spDesc = new StackPanel();
             spContent = new StackPanel();
@@ -28,15 +45,20 @@ namespace Tukupedia.Components
             spSubtotal = new StackPanel();
             spKurir = new StackPanel();
             namaToko = new TextBlock();
-            isOfficial = new TextBlock();
+            imgToko = new Image();
+            tbisOfficial = new TextBlock();
             pilihDurasi = new TextBlock();
             subTotal = new TextBlock();
             labelsubTotal = new TextBlock();
             cbKurir = new ComboBox();
+            kurir_seller = new DataTable();
+            hargaTotal = 0;
 
+            spDesc.Orientation = Orientation.Horizontal;
+            spDesc.Children.Add(imgToko);
             spDesc.Children.Add(namaToko);
             //Check if Official
-            spDesc.Children.Add(isOfficial);
+            spDesc.Children.Add(tbisOfficial);
 
             spKurir.Children.Add(pilihDurasi);
             spKurir.Children.Add(cbKurir);
@@ -45,13 +67,118 @@ namespace Tukupedia.Components
             spContent.Children.Add(spCart);
             spContent.Children.Add(spKurir);
 
+            spSubtotal.Orientation = Orientation.Horizontal;
             spSubtotal.Children.Add(labelsubTotal);
             spSubtotal.Children.Add(subTotal);
             
             spMain.Children.Add(spDesc);
             spMain.Children.Add(spContent);
             spMain.Children.Add(spSubtotal);
-
+            
+            this.AddChild(spMain);
+            
+            //Events
+            cbKurir.SelectionChanged+=CbKurirOnSelectionChanged;
+            
+            //init Styles
+            imgToko.Width = 50;
+            imgToko.Height = 50;
+            imgToko.Source =
+                new BitmapImage(new Uri(
+                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            namaToko.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
+            namaToko.VerticalAlignment = VerticalAlignment.Center;
+            tbisOfficial.Text = "Official";
+            tbisOfficial.Background = new SolidColorBrush(Color.FromRgb(127, 55, 215));
+            tbisOfficial.Foreground = new SolidColorBrush(Color.FromRgb(255, 166, 23));
+            tbisOfficial.Margin = new Thickness(10, 0, 0, 0);
+            tbisOfficial.Padding = new Thickness(4, 4, 4, 4);
+            tbisOfficial.VerticalAlignment = VerticalAlignment.Center;
+            tbisOfficial.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            pilihDurasi.FontWeight = FontWeights.Bold;
+            pilihDurasi.Text = "Pilih Durasi ";
+            pilihDurasi.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            labelsubTotal.Text = "Subtotal : ";
+            labelsubTotal.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            subTotal.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            subTotal.Text = Utility.formatMoney(0);
+            cbKurir.Width = 200;
+            spCart.Margin = new Thickness(50, 10, 20, 10);
+            spCart.Width = 500;
+            labelsubTotal.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            labelsubTotal.VerticalAlignment = VerticalAlignment.Center;
+            subTotal.VerticalAlignment = VerticalAlignment.Center;
+            subTotal.HorizontalAlignment = HorizontalAlignment.Right;
+            subTotal.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            
+            this.Padding = new Thickness(5, 7, 5, 7);
+            this.Margin = new Thickness(0, 0, 0, 10);
         }
+
+        private void CbKurirOnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Harga Kurir itu berdasarkan barang,
+            // Kalau biasa itu, anggap di db itu harga/500 Gram? Tetapi kalau kurang dri 500 gram itu minimal bayar harga
+            // jangan lupa untuk liat diskon dri promo
+            updateSubTotal();
+        }
+
+        public void initToko(DataRow toko)
+        {
+            namaToko.Text = toko["NAMA_TOKO"].ToString();
+            isOfficial = toko["IS_OFFICIAL"].ToString() == "1" ? true: false;
+            if (!isOfficial) tbisOfficial.Visibility = Visibility.Hidden;
+            if (toko["IMAGE"].ToString() != "")
+            {
+                imgToko.Source =
+                    new BitmapImage(new Uri(
+                        AppDomain.CurrentDomain.BaseDirectory + toko["IMAGE"].ToString()));
+            }
+            Kurir_SellerModel ksm = new Kurir_SellerModel();
+            DataRow[] rows = ksm.Table.Select($"ID_SELLER ='{toko["ID"]}'");
+            if (rows.Length > 0)
+            {
+                kurir_seller = rows.CopyToDataTable();
+                foreach (DataRow row in kurir_seller.Rows)
+                {
+                    ComboBoxItem cbi = new ComboBoxItem();
+                    DataRow kurir = new DB("KURIR").@select().@where("ID", row["ID_KURIR"].ToString()).getFirst();
+                    cbi.Content = kurir["NAMA"].ToString();
+                    cbi.Tag = kurir["ID"].ToString();
+                    cbKurir.Items.Add(cbi);
+                }
+            }
+            
+        }
+
+        //TODO HARGA KURIR BELUM KALAU GANTI
+        public void updateSubTotal()
+        {
+            hargaTotal = 0;
+            foreach (CartComponent cart in list_carts)
+            {
+                hargaTotal += cart.getHarga();
+            }
+            //Untuk harga Kurir belum
+            subTotal.Text = Utility.formatMoney(hargaTotal);
+        }
+
+        public int getSubtotal()
+        {
+            return hargaTotal;
+        }
+        public void addItemCart(List<DataRow> list_item)
+        {
+            foreach (var row in list_item)
+            {
+                CartComponent cc = new CartComponent(this);
+                cc.initComponent(row,CartViewModel.getJumlah(Convert.ToInt32(row["ID"])));
+                list_carts.Add(cc);
+                spCart.Children.Add(cc);
+            }
+            updateSubTotal();
+            
+        }
+
     }
 }
