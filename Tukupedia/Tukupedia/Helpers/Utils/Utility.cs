@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Tukupedia.Helpers.Utils
 {
@@ -144,7 +145,62 @@ namespace Tukupedia.Helpers.Utils
         }
 
         public static string getSellerImagePath(string filename) {
-            return new Uri(Path.Combine(getDebugPath(), "\\Resource\\Sellers\\", filename)).AbsolutePath;
+            return new Uri(getDebugPath() + "\\Resource\\Sellers\\" + filename).LocalPath;
+        }
+        public static string getCustomerImagePath(string filename) {
+            return new Uri(getDebugPath() + "\\Resource\\Customers\\" + filename).LocalPath;
+        }
+
+        public static string saveImage(string originPath, string newName) {
+            // return image path
+            string oldUri = new Uri(originPath).LocalPath;
+            string fName = Path.GetFileName(oldUri);
+            string ext = Path.GetExtension(oldUri);
+            string name = newName + ext;
+
+            try {
+                File.Copy(oldUri, Utility.getSellerImagePath(fName));
+
+                MessageBox.Show(Utility.getSellerImagePath(name));
+                if (File.Exists(Utility.getSellerImagePath(name))) {
+                    File.Delete(Utility.getSellerImagePath(name));
+                }
+
+                File.Move(Utility.getSellerImagePath(fName), Utility.getSellerImagePath(name));
+
+                return name;
+            }
+            catch (IOException copyError) {
+                Console.WriteLine(copyError.Message);
+            }
+            return "";
+        }
+
+        public static BitmapImage loadImageItem(string filename) {
+            Uri fileUri = new Uri(Utility.getItemImagePath(filename));
+            return new BitmapImage(fileUri);
+        }
+
+        public static BitmapImage loadImageSeller(string filename) {
+            Uri fileUri = new Uri(Utility.getSellerImagePath(filename));
+            return new BitmapImage(fileUri);
+        }
+
+        public static BitmapImage loadImageCustomer(string filename) {
+            Uri fileUri = new Uri(Utility.getCustomerImagePath(filename));
+            return new BitmapImage(fileUri);
+        }
+
+        public static BitmapImage loadImageCheems() {
+            string path = new Uri(getDebugPath() + "\\Resource\\cheems.png").LocalPath;
+            Uri fileUri = new Uri(path);
+            return new BitmapImage(fileUri);
+        }
+
+        public static BitmapImage loadImageSwole() {
+            string path = new Uri(getDebugPath() + "\\Resource\\swole.png").LocalPath;
+            Uri fileUri = new Uri(path);
+            return new BitmapImage(fileUri);
         }
 
     }

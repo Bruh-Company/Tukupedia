@@ -5,6 +5,9 @@ using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
 using System.Data;
 using System;
+using System.Windows.Forms;
+using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
@@ -53,7 +56,9 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.labelSaldo.Content = "Rp " + Utility.formatNumber(Convert.ToInt32(seller["SALDO"].ToString()));
 
             if (seller["IS_OFFICIAL"].ToString() == "1") ViewComponent.labelStatusToko.Content = "OFFICIAL STORE";
-            else ViewComponent.labelStatusToko.Content = "MERCHANT";
+            else ViewComponent.labelStatusToko.Content = "PEASANT MERCHANT";
+
+            pageInfoToko.initImageToko();
         }
 
         public static void swapTo(page p) {
@@ -163,7 +168,6 @@ namespace Tukupedia.ViewModels.Seller {
             new LoginRegisterView().Show();
             ViewComponent.Close();
         }
-
 
     }
 }
