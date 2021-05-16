@@ -14,9 +14,9 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         public OracleCommand cmd { get; set; }
         Dictionary<string, ParameterDirection> directions;
         //Contoh Cara Pakai
-        //OracleStoredProchedure autogen = new OracleStoredProchedure("autogenNota");
+        //StoredProchedure autogen = new StoredProchedure("autogenNota");
         //autogen.addParam("I", "tgl",tgl,255,OracleDbType.Varchar2);
-        //autogen.addParam("R", "return",255, OracleDbType.Varchar2);
+        //autogen.addParam("R", "ret",255, OracleDbType.Varchar2);
         //tbNomorNota.Text = autogen.getValue();
 
         public StoredProchedure(string prochedure_name)
