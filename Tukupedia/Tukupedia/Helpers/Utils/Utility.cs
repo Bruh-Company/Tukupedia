@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace Tukupedia.Helpers.Utils
 {
@@ -144,7 +145,94 @@ namespace Tukupedia.Helpers.Utils
         }
 
         public static string getSellerImagePath(string filename) {
-            return new Uri(Path.Combine(getDebugPath(), "\\Resource\\Sellers\\", filename)).AbsolutePath;
+            return new Uri(getDebugPath() + "\\Resource\\Sellers\\" + filename).LocalPath;
+        }
+        public static string getCustomerImagePath(string filename) {
+            return new Uri(getDebugPath() + "\\Resource\\Customers\\" + filename).LocalPath;
+        }
+
+        public static string saveImage(string originPath, string newName) {
+            // return image path
+            string oldUri = new Uri(originPath).LocalPath;
+            string fName = Path.GetFileName(oldUri);
+            string ext = ".png";
+            string name = newName + ext;
+
+            try {
+                File.Copy(oldUri, Utility.getSellerImagePath(fName));
+
+                if (File.Exists(Utility.getSellerImagePath(name))) {
+                    
+                    File.Delete(Utility.getSellerImagePath(name));
+                }
+
+                File.Move(Utility.getSellerImagePath(fName), Utility.getSellerImagePath(name));
+
+                return name;
+            }
+            catch (IOException copyError) {
+                MessageBox.Show(copyError.Message);
+            }
+            return "";
+        }
+
+        public static BitmapImage loadImageItem(string fileName) {
+            fileName = getItemImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
+        }
+
+        public static BitmapImage loadImageSeller(string fileName) {
+            fileName = getSellerImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
+        }
+
+        public static BitmapImage loadImageCustomer(string fileName) {
+            fileName = getCustomerImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
+        }
+
+        public static BitmapImage loadImageCheems() {
+            string path = new Uri(getDebugPath() + "\\Resource\\cheems.png").LocalPath;
+            Uri fileUri = new Uri(path);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(fileUri.LocalPath);
+            image.EndInit();
+            return image;
+        }
+
+        public static BitmapImage loadImageSwole() {
+            string path = new Uri(getDebugPath() + "\\Resource\\swole.png").LocalPath;
+            Uri fileUri = new Uri(path);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(fileUri.LocalPath);
+            image.EndInit();
+            return image;
         }
 
     }

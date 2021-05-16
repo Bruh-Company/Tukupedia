@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Tukupedia.Helpers.DatabaseHelpers
 {
-    public class StoredProchedure
+    public class StoredProcedure
     {
         public string prochedure_name { get; set; }
         public OracleCommand cmd { get; set; }
@@ -19,7 +19,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
         //autogen.addParam("R", "ret",255, OracleDbType.Varchar2);
         //tbNomorNota.Text = autogen.getValue();
 
-        public StoredProchedure(string prochedure_name)
+        public StoredProcedure(string prochedure_name)
         {
             this.prochedure_name = prochedure_name;
             directions = new Dictionary<string, ParameterDirection>();

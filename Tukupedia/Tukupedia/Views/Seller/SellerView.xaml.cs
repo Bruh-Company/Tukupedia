@@ -21,7 +21,6 @@ namespace Tukupedia.Views.Seller {
         private const int GWL_STYLE = -16;
         private const int WS_MAXIMIZEBOX = 0x10000;
 
-
         public SellerView() {
             InitializeComponent();
         }
@@ -45,10 +44,6 @@ namespace Tukupedia.Views.Seller {
 
         private void btnInfoToko_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.swapTo(SellerViewModel.page.InfoToko);
-        }
-
-        private void btnStatistikToko_Click(object sender, RoutedEventArgs e) {
-
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e) {
@@ -198,21 +193,13 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.pageInfoToko.cancelInfo();
         }
 
+        private void btnChangeImage_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pageInfoToko.changeTokoPic();
+        }
+
         private void textboxNoTelpInfo_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Utility.NumberValidationTextBox(sender, e);
         }
-
-        private void btnDiskusi_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btnUlasan_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-
-
-
         // Info
     }
 }

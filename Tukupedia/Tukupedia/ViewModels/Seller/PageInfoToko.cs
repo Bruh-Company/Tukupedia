@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using Oracle.DataAccess.Client;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
+using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageInfoToko {
@@ -37,9 +40,8 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void registerOS() {
-            if (MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
-                seller["IS_OFFICIAL"] = "1";
-                
+            if (System.Windows.MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
+                transOS();
             }
         }
 
@@ -68,7 +70,6 @@ namespace Tukupedia.ViewModels.Seller {
         public void saveInfo() {
             saveDataSeller();
             saveKurirSeller();
-            transOS();
             toggleState();
             resetInfo();
         }
@@ -78,14 +79,29 @@ namespace Tukupedia.ViewModels.Seller {
             resetInfo();
         }
 
+        public void changeTokoPic() {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                if (openFileDialog.FileName == "") return;
+                Uri fileUri = new Uri(openFileDialog.FileName);
+                ViewComponent.imageInfo.Source = new BitmapImage(fileUri);
+            }
+        }
+
+        public void initImageToko() {
+            if (seller["IMAGE"].ToString() == "") ViewComponent.imageToko.Source = Utility.loadImageCheems();
+            else ViewComponent.imageToko.Source = Utility.loadImageSeller(seller["IMAGE"].ToString());
+        }
+
         // Private Void
         private void resetInfo() {
             string id = seller["ID"].ToString();
             seller = new DB("SELLER").select().where("ID", id).getFirst();
             lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
 
-            SellerViewModel.initHeader();
+            initImageToko();
             fillTextbox();
+            reloadImage();
             resetKurir();
         }
 
@@ -134,7 +150,8 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("ID", idSeller, "=", false);
             foreach (DataRow row in model.get()) {
-                model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4]);
+                string img = Utility.saveImage(data[5], seller["KODE"].ToString());
+                model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4], "IMAGE", img);
             }
         }
 
@@ -152,6 +169,7 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.comboboxKurirInfo.Visibility = Visibility.Visible;
                 ViewComponent.btnTambahKurirInfo.Visibility = Visibility.Visible;
                 ViewComponent.btnKurangKurirInfo.Visibility = Visibility.Visible;
+                ViewComponent.btnChangeImage.Visibility = Visibility.Visible;
             }
             else {
                 ViewComponent.textboxNamaToko.IsReadOnly = true;
@@ -166,12 +184,14 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.comboboxKurirInfo.Visibility = Visibility.Hidden;
                 ViewComponent.btnTambahKurirInfo.Visibility = Visibility.Hidden;
                 ViewComponent.btnKurangKurirInfo.Visibility = Visibility.Hidden;
+                ViewComponent.btnChangeImage.Visibility = Visibility.Hidden;
             }
+        }
 
-
-            if (seller["IS_OFFICIAL"].ToString() == "0")
-                ViewComponent.btnDaftarOS.Visibility = Visibility.Hidden;
-            else ViewComponent.btnDaftarOS.Visibility = Visibility.Visible;
+        private void reloadImage() {
+            string img = seller["IMAGE"].ToString();
+            if (img == "") ViewComponent.imageInfo.Source = Utility.loadImageCheems();
+            else ViewComponent.imageInfo.Source = Utility.loadImageSeller(img);
         }
 
         private void fillTextbox() {
@@ -227,17 +247,17 @@ namespace Tukupedia.ViewModels.Seller {
                 namaPenjual = ViewComponent.textboxNamaPenjual.Text.ToUpper(),
                 email = ViewComponent.textboxEmailInfo.Text,
                 noTelp = ViewComponent.textboxNoTelpInfo.Text,
-                alamat = ViewComponent.textboxAlamatInfo.Text.ToUpper();
+                alamat = ViewComponent.textboxAlamatInfo.Text.ToUpper(),
+                imageUri = ViewComponent.imageInfo.Source == null ? "" : ViewComponent.imageInfo.Source.ToString();
 
-            string[] data = { namaToko, namaPenjual, email, noTelp, alamat};
+            string[] data = { namaToko, namaPenjual, email, noTelp, alamat, imageUri};
             return data;
         }
 
         private bool dataValidation(string[] data) {
-            if (data.Length < 4) return false;
+            if (data.Length < 5) return false;
             foreach (string item in data) {
                 if (item == "") {
-                    MessageBox.Show("Insert Gagal");
                     return false;
                 }
             }

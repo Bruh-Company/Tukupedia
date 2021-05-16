@@ -10,6 +10,7 @@ using System.Windows.Media.Imaging;
 using System.IO;
 using Tukupedia.Helpers.Utils;
 using System.Windows;
+using Oracle.DataAccess.Client;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageProduk {
@@ -124,7 +125,7 @@ namespace Tukupedia.ViewModels.Seller {
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
 
-            loadImage(row["IMAGE"].ToString());
+            ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
 
             toggleBtnInsertProduk = false;
             switchBtnInsert();
@@ -157,7 +158,11 @@ namespace Tukupedia.ViewModels.Seller {
                 berat = Convert.ToInt32(data[4]);
             char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
 
-            saveImage(imageUri);
+            StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
+            procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
+            procedure.addParam("R", "ret", 255, OracleDbType.Varchar2);
+
+            
 
             ItemModel model = new ItemModel();
             model.init();
@@ -172,6 +177,7 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
+            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue());
             model.insert(newItem);
 
             resetPageProduk();
@@ -216,25 +222,6 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         // PRIVATE METHODS
-        private void loadImage(string filename) {
-            Uri fileUri = new Uri(Utility.getItemImagePath(filename));
-            ViewComponent.imageProduk.Source = new BitmapImage(fileUri);
-        }
-
-        private void saveImage(string imageUri) {
-            string oldUri = new Uri(imageUri).LocalPath;
-            string fName = Path.GetFileName(oldUri);
-            string ext = Path.GetExtension(oldUri);
-            string newName = "KODE ITEM" + ext;
-
-            try {
-                File.Copy(oldUri, Utility.getItemImagePath(fName));
-                File.Move(Utility.getItemImagePath(fName), Utility.getItemImagePath(newName));
-            }
-            catch (IOException copyError) {
-                Console.WriteLine(copyError.Message);
-            }
-        }
 
         private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {

@@ -28,7 +28,7 @@
     <Grid Width="1280" Height="690">
         <!--HEADER-->
         <Canvas HorizontalAlignment="Left" Height="100" Width="1280" VerticalAlignment="Top" Background="#65c65b">
-            <Image Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
+            <Image  Name="imageToko" Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
             <Label  Name="labelNamaToko"    Content="NAMA TOKO"     Canvas.Left="125"   Canvas.Top="0" Style="{StaticResource h2}" Width="600"/>
             <Label  Name="labelStatusToko"  Content="STATUS TOKO"   Canvas.Left="125"   Canvas.Top="40" Style="{StaticResource lg}"/>
 
@@ -128,46 +128,46 @@
             <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
             <Button Name="btnInsert" Content="Insert" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
             <Button Name="btnUpdate" Content="Update" FontSize="20" Width="235" Height="40" Canvas.Left="1010" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
-            <Button x:Name="btnDiskusi" Content="Lihat Diskusi" FontSize="18" Canvas.Left="900" Canvas.Top="30" Width="160" Height="30" Style="{StaticResource btn-primary}" Click="btnDiskusi_Click"/>
-            <Button x:Name="btnUlasan" Content="Lihat Ulasan" FontSize="18" Canvas.Left="1085" Canvas.Top="30" Width="160" Height="30" Style="{StaticResource btn-primary}" Click="btnUlasan_Click"/>
         </Canvas>
 
         <!--PAGE INFO TOKO-->
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Hidden">
-            <Canvas Height="590" Width="640">
-                <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
-                <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="260" Canvas.Top="15" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnDaftarOS_Click"/>
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
+            <ScrollViewer Width="1280" Height="590" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <Canvas Height="1200" Width="1280">
+                    <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
+                    <Button Name="btnUbahInfoPenjual" Content="Ubah" Canvas.Left="240" Canvas.Top="23" Width="100" Height="35" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Click="btnUbahInfoPenjual_Click"/>
+                    <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="750" Canvas.Top="60" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnDaftarOS_Click"/>
 
-                <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxNamaToko" Canvas.Left="50"  Canvas.Top="100" Height="50" Width="520" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+                    <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
+                    <TextBox Name="textboxNamaToko" Canvas.Left="50"  Canvas.Top="100" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                <Label Content="Buka Sejak" Canvas.Left="50" Canvas.Top="160" Style="{StaticResource xl-secondary}"/>
-                <Label Name="labelBukaSejak" Content="06 September 2021" Canvas.Left="50" Canvas.Top="200" Style="{StaticResource h3}"/>
+                    <Label Content="Email" Canvas.Left="50" Canvas.Top="160" Style="{StaticResource xl-secondary}"/>
+                    <TextBox Name="textboxEmailInfo" Canvas.Left="50"  Canvas.Top="200" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                <Label Content="Layanan Kurir" Canvas.Left="50" Canvas.Top="250" Style="{StaticResource xl-secondary}"/>
-                <ComboBox Name="comboboxKurirInfo" Canvas.Left="50" Canvas.Top="300" Width="290" Height="30" Style="{StaticResource combobox-green}"/>
-                <ListBox Name="listboxListKurirInfo" Width="360" Height="225" Canvas.Left="50" Canvas.Top="345"/>
-                <Button Name="btnTambahKurirInfo" Content="Tambah Kurir" Canvas.Left="450" Canvas.Top="345" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnTambahKurirInfo_Click"/>
-                <Button Name="btnKurangKurirInfo" Content="Hapus Kurir" Canvas.Left="450" Canvas.Top="390" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnKurangKurirInfo_Click"/>
-            </Canvas>
-            <Canvas Height="590" Width="640" Canvas.Left="640">
-                <Button Name="btnUbahInfoPenjual" Content="Ubah" Canvas.Left="450" Canvas.Top="23" Width="100" Height="35" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Click="btnUbahInfoPenjual_Click"/>
+                    <Label Content="Nomor Telepon" Canvas.Left="50" Canvas.Top="280" Style="{StaticResource xl-secondary}"/>
+                    <TextBox Name="textboxNoTelpInfo" Canvas.Left="215"  Canvas.Top="267" Height="50" Width="335" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxNoTelpInfo_PreviewTextInput"/>
 
-                <Label Content="Nama Penjual" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxNamaPenjual" Canvas.Left="50"  Canvas.Top="100" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+                    <Label Content="Alamat" Canvas.Left="50" Canvas.Top="335" Style="{StaticResource xl-secondary}"/>
+                    <TextBox Name="textboxAlamatInfo" Canvas.Left="50" Canvas.Top="375" Height="100" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
-                <Label Content="Email" Canvas.Left="50" Canvas.Top="160" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxEmailInfo" Canvas.Left="50"  Canvas.Top="200" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
+                    <Label Content="Buka Sejak" Canvas.Left="50" Canvas.Top="500" Style="{StaticResource xl-secondary}"/>
+                    <Label Name="labelBukaSejak" Content="06 September 2021" Canvas.Left="50" Canvas.Top="540" Style="{StaticResource h3}"/>
 
-                <Label Content="Nomor Telepon" Canvas.Left="50" Canvas.Top="280" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxNoTelpInfo" Canvas.Left="215"  Canvas.Top="267" Height="50" Width="335" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxNoTelpInfo_PreviewTextInput"/>
+                    <Label Content="Nama Penjual" Canvas.Left="50" Canvas.Top="610" Style="{StaticResource xl-secondary}"/>
+                    <TextBox Name="textboxNamaPenjual" Canvas.Left="50"  Canvas.Top="650" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                <Label Content="Alamat" Canvas.Left="50" Canvas.Top="340" Style="{StaticResource xl-secondary}"/>
-                <TextBox Name="textboxAlamatInfo" Canvas.Left="50" Canvas.Top="380" Height="100" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
+                    <Label Content="Layanan Kurir" Canvas.Left="50" Canvas.Top="700" Style="{StaticResource xl-secondary}"/>
+                    <ComboBox Name="comboboxKurirInfo" Canvas.Left="50" Canvas.Top="745" Width="290" Height="30" Style="{StaticResource combobox-green}"/>
+                    <ListBox Name="listboxListKurirInfo" Width="360" Height="225" Canvas.Left="50" Canvas.Top="800"/>
+                    <Button Name="btnTambahKurirInfo" Content="Tambah Kurir" Canvas.Left="450" Canvas.Top="800" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnTambahKurirInfo_Click"/>
+                    <Button Name="btnKurangKurirInfo" Content="Hapus Kurir" Canvas.Left="450" Canvas.Top="850" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnKurangKurirInfo_Click"/>
 
-                <Button Name="btnSimpanInfo" Content="Simpan" Canvas.Left="140" Canvas.Top="500" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnSimpanInfo_Click"/>
-                <Button Name="btnBatalInfo" Content="Batal" Canvas.Left="350" Canvas.Top="500" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnBatalInfo_Click"/>
-            </Canvas>
+                    <Button Name="btnSimpanInfo" Content="Simpan" Canvas.Left="50" Canvas.Top="1100" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnSimpanInfo_Click"/>
+                    <Button Name="btnBatalInfo" Content="Batal" Canvas.Left="260" Canvas.Top="1100" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnBatalInfo_Click"/>
+                    <Image  Name="imageInfo" Width="300" Height="300" Canvas.Left="750" Canvas.Top="150"/>
+                    <Button Name="btnChangeImage" Content="Pilih Gambar" Canvas.Left="750" Canvas.Top="473" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnChangeImage_Click"/>
+                </Canvas>
+            </ScrollViewer>
         </Canvas>
     </Grid>
 </Window>

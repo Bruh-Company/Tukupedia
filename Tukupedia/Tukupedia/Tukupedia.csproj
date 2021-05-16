@@ -89,7 +89,7 @@
     <Compile Include="Components\ReviewCard.cs" />
     <Compile Include="Components\ShopCartComponent.cs" />
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
-    <Compile Include="Helpers\DatabaseHelpers\StoredProchedure.cs" />
+    <Compile Include="Helpers\DatabaseHelpers\StoredProcedure.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
     <Compile Include="Helpers\Utils\EmptyAnimation.cs" />
     <Compile Include="Helpers\Utils\Transition.cs" />
