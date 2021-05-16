@@ -145,7 +145,7 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pageProduk.insertImage();
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {

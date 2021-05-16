@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -132,6 +133,18 @@ namespace Tukupedia.Helpers.Utils
             // The Text property on a TextRange object returns a string
             // representing the plain text content of the TextRange.
             return textRange.Text;
+        }
+
+        public static string getDebugPath() {
+            return Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase).Substring(6);
+        }
+
+        public static string getItemImagePath(string filename) {
+            return new Uri(getDebugPath() + "\\Resource\\Items\\" + filename).LocalPath;
+        }
+
+        public static string getSellerImagePath(string filename) {
+            return new Uri(Path.Combine(getDebugPath(), "\\Resource\\Sellers\\", filename)).AbsolutePath;
         }
 
     }
