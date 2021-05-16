@@ -155,14 +155,14 @@ namespace Tukupedia.Helpers.Utils
             // return image path
             string oldUri = new Uri(originPath).LocalPath;
             string fName = Path.GetFileName(oldUri);
-            string ext = Path.GetExtension(oldUri);
+            string ext = ".png";
             string name = newName + ext;
 
             try {
                 File.Copy(oldUri, Utility.getSellerImagePath(fName));
 
-                MessageBox.Show(Utility.getSellerImagePath(name));
                 if (File.Exists(Utility.getSellerImagePath(name))) {
+                    
                     File.Delete(Utility.getSellerImagePath(name));
                 }
 
@@ -171,36 +171,68 @@ namespace Tukupedia.Helpers.Utils
                 return name;
             }
             catch (IOException copyError) {
-                Console.WriteLine(copyError.Message);
+                MessageBox.Show(copyError.Message);
             }
             return "";
         }
 
-        public static BitmapImage loadImageItem(string filename) {
-            Uri fileUri = new Uri(Utility.getItemImagePath(filename));
-            return new BitmapImage(fileUri);
+        public static BitmapImage loadImageItem(string fileName) {
+            fileName = getItemImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
         }
 
-        public static BitmapImage loadImageSeller(string filename) {
-            Uri fileUri = new Uri(Utility.getSellerImagePath(filename));
-            return new BitmapImage(fileUri);
+        public static BitmapImage loadImageSeller(string fileName) {
+            fileName = getSellerImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
         }
 
-        public static BitmapImage loadImageCustomer(string filename) {
-            Uri fileUri = new Uri(Utility.getCustomerImagePath(filename));
-            return new BitmapImage(fileUri);
+        public static BitmapImage loadImageCustomer(string fileName) {
+            fileName = getCustomerImagePath(fileName);
+            using (var stream = new FileStream(fileName, FileMode.Open)) {
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.StreamSource = stream;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
         }
 
         public static BitmapImage loadImageCheems() {
             string path = new Uri(getDebugPath() + "\\Resource\\cheems.png").LocalPath;
             Uri fileUri = new Uri(path);
-            return new BitmapImage(fileUri);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(fileUri.LocalPath);
+            image.EndInit();
+            return image;
         }
 
         public static BitmapImage loadImageSwole() {
             string path = new Uri(getDebugPath() + "\\Resource\\swole.png").LocalPath;
             Uri fileUri = new Uri(path);
-            return new BitmapImage(fileUri);
+            BitmapImage image = new BitmapImage();
+            image.BeginInit();
+            image.UriSource = new Uri(fileUri.LocalPath);
+            image.EndInit();
+            return image;
         }
 
     }

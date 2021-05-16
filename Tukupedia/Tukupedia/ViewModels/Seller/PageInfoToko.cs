@@ -151,7 +151,6 @@ namespace Tukupedia.ViewModels.Seller {
             model.addWhere("ID", idSeller, "=", false);
             foreach (DataRow row in model.get()) {
                 string img = Utility.saveImage(data[5], seller["KODE"].ToString());
-                System.Windows.MessageBox.Show(img);
                 model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4], "IMAGE", img);
             }
         }

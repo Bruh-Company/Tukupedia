@@ -165,7 +165,7 @@ namespace Tukupedia.ViewModels.Seller {
         
         public static void logout() {
             Session.Logout();
-            new LoginRegisterView().Show();
+            //new LoginRegisterView().Show();
             ViewComponent.Close();
         }
 

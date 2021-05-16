@@ -158,9 +158,9 @@ namespace Tukupedia.ViewModels.Seller {
                 berat = Convert.ToInt32(data[4]);
             char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
 
-            //StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
-            //procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
-            //procedure.addParam("R", "ret", 255, OracleDbType.Varchar2);
+            StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
+            procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
+            procedure.addParam("R", "ret", 255, OracleDbType.Varchar2);
 
             
 
@@ -177,7 +177,7 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
-            //newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue());
+            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue());
             model.insert(newItem);
 
             resetPageProduk();
