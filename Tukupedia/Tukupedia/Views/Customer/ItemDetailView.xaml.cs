@@ -115,7 +115,6 @@ namespace Tukupedia.Views.Customer
             tbQuantity.Text = qty.ToString();
         }
 
-        //TODO Add Cart
         private void BtnAddCart_OnClick(object sender, RoutedEventArgs e)
         {
             if (qty < 0)

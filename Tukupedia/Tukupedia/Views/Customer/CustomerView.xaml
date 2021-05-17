@@ -52,14 +52,16 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="601" Margin="954,10,0,0" VerticalAlignment="Top" Width="310" Background="#FF404040">
-                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Height="205" Width="290" UniformCornerRadius="10" Background="#FF404040">
-                        <Grid HorizontalAlignment="Left" Height="185" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
+                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" Height="238" Width="290" UniformCornerRadius="10" Background="#FF404040">
+                        <Grid HorizontalAlignment="Left" Height="218" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
                             <ComboBox SelectionChanged="cbPromotion_SelectionChanged" x:Name="cbPromotion" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
                             <Label Content="Promotions" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="23" Width="79" FontWeight="Bold"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,158,0,0" TextWrapping="Wrap" Text="Discount Amount : " VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="20"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="171,159,0,0" TextWrapping="Wrap" Text="Rp0,00" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="11" TextDecorations="{x:Null}"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,197,0,0" TextWrapping="Wrap" Text="Discount Amount : " VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="20"/>
+                            <TextBlock Name="tbDiscount" HorizontalAlignment="Left" Margin="171,198,0,0" TextWrapping="Wrap" Text="Rp0,00" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="11" TextDecorations="{x:Null}"/>
                             <TextBlock HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" Text="Description :" VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="15"/>
-                            <TextBlock x:Name="tbDesc" Padding="3,3,3,3" HorizontalAlignment="Left" Margin="10,101,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="250" TextDecorations="{x:Null}" Height="48"/>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Left"  Margin="0,100,0,27">
+                                <TextBlock x:Name="tbDesc" Padding="3,3,3,3" HorizontalAlignment="Left" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="250" TextDecorations="{x:Null}" MinWidth="100"/>
+                            </ScrollViewer>
                             <TextBlock x:Name="tbErrorPromotion" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,61,0,0" TextWrapping="Wrap" Text="Small PP" FontStyle="Italic" VerticalAlignment="Top" Width="250" TextDecorations="{x:Null}" Height="15" Foreground="#FFFF4242" TextAlignment="Right" Padding="2" FontWeight="Bold" LineHeight="20"/>
                         </Grid>
                     </materialDesign:Card>
