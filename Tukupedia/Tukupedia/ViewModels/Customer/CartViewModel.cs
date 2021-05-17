@@ -8,6 +8,7 @@ using Oracle.DataAccess.Client;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 using Tukupedia.Components;
+using Tukupedia.Helpers.Classes;
 using Tukupedia.Helpers.DatabaseHelpers;
 
 namespace Tukupedia.ViewModels.Customer
@@ -21,6 +22,7 @@ namespace Tukupedia.ViewModels.Customer
         public static TextBlock tbSubTotal;
         public static List<ShopCartComponent> list_shopcart;
         public static int grandTotal;
+        public static List<Promo> list_promo;
         
         
 
@@ -241,6 +243,32 @@ namespace Tukupedia.ViewModels.Customer
                 cbi.Tag = row["ID"].ToString();
                 comboBox.Items.Add(cbi);
             }
+        }
+
+        public static void initPromotion(ComboBox comboBox)
+        {
+            PromoModel pm = new PromoModel();
+
+            list_promo = new List<Promo>();
+            foreach (DataRow row in pm.Table.Rows)
+            {
+                Promo p = new Promo(
+                    id:row["ID"].ToString(),
+                    kode: row["KODE"].ToString(),
+                    potongan: Convert.ToInt32(row["POTONGAN"]),
+                    potonganMax:Convert.ToInt32(row["POTONGAN_MAKS"]),
+                    hargaMin:Convert.ToInt32(row["HARGA_MIN"]),
+                    jenisPotongan:row["JENIS_POTONGAN"].ToString(),
+                    idJenisPromo: Convert.ToInt32(row["ID_JENIS_PROMO"]),
+                    tanggalAwal:Utility.dateParse(row["TANGGAL_AWAL"].ToString()),
+                    tanggalAkhir:Utility.dateParse(row["TANGGAL_AKHIR"].ToString()),
+                    status:row["STATUS"].ToString()
+                    );
+                list_promo.Add(p);
+            }
+
+            comboBox.ItemsSource = list_promo;
+            comboBox.SelectedValuePath = "ID";
         }
         
     }

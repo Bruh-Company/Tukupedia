@@ -67,6 +67,7 @@ namespace Tukupedia.Views.Customer
             CartViewModel.initHargaCart(labelTotal,tbSubTotal);
             CartViewModel.updateHarga(0,0);
             CartViewModel.initPaymentMethod(cbPaymentMethod);
+            CartViewModel.initPromotion(cbPromotion);
 
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);

@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/CartComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/CartComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Tukupedia.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,9 +60,9 @@
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/CartComponent.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" />
     </changedPaths>
   </component>
@@ -123,7 +116,7 @@
       <workItem from="1620972608264" duration="28278000" />
       <workItem from="1621059230513" duration="23023000" />
       <workItem from="1621169993202" duration="11343000" />
-      <workItem from="1621230644465" duration="12333000" />
+      <workItem from="1621230644465" duration="14577000" />
     </task>
     <servers />
   </component>
