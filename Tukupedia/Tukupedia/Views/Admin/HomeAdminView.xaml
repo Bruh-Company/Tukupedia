@@ -23,7 +23,7 @@
             <Label Content="Jumlah Toko Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="890" Canvas.Top="300"/>
             <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
         </Canvas>
-        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="20,65,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
@@ -161,6 +161,27 @@
                 <ComboBox x:Name="cbJenisPromo" Canvas.Left="918" Canvas.Top="322" Width="227"/>
             </Canvas>
         </Canvas>
+        <Canvas x:Name="CanvasOfficialStore" HorizontalAlignment="Left" Height="613" Margin="10,52,0,0" VerticalAlignment="Top" Width="1252">
+            <DataGrid x:Name="dgOS" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgOS_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
+            <Label Content="Tukupedia Official Store Manager" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
+            <Canvas x:Name="CanvasDetailOfficialStore" Height="546" Canvas.Left="655" Canvas.Top="34" Width="551">
+                <Label Content="Nama Toko" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="24"/>
+                <TextBox x:Name="tbNamaTokoOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="24" Width="284" FontSize="20" IsReadOnly="True"/>
+                <Button Style="{StaticResource btn-primary}" x:Name="btTerimaOS" Content="Terima Official Store" Canvas.Left="29" Canvas.Top="475" Width="182" Click="btTerimaOS_Click"/>
+                <Button Style="{StaticResource btn-danger}" x:Name="btTolakOS" Content="Tolak Official Store" Canvas.Left="302" Canvas.Top="475" Width="176" Click="btTolakOS_Click"/>
+                <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="87"/>
+                <TextBox x:Name="tbEmailOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="87" Width="284" FontSize="20" IsReadOnly="True"/>
+                <Label Content="Alamat" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="151"/>
+                <TextBox x:Name="tbAlamatOS" TextWrapping="Wrap" FontSize="20" IsReadOnly="True" Height="41" Canvas.Left="230" Canvas.Top="151" Width="284"/>
+                <Label Content="No Telp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="213"/>
+                <TextBox x:Name="tbNoTelpOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="213" Width="284" FontSize="20" IsReadOnly="True"/>
+                <Label Content="Nama Seller" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="275"/>
+                <TextBox x:Name="tbNamaSellerOS" Height="42" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="274" Width="284" FontSize="20" IsReadOnly="True"/>
+                <Label Content="Mendaftar Sejak" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="336"/>
+                <TextBox x:Name="tbMendaftarSejakOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="336" Width="284" FontSize="20" IsReadOnly="True"/>
+            </Canvas>
+        </Canvas>
+        <Button Style="{StaticResource btn-primary}" x:Name="btOfficialStore" Content="Official Store" HorizontalAlignment="Left" Margin="1090,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btOfficialStore_Click"/>
 
     </Grid>
 </Window>
