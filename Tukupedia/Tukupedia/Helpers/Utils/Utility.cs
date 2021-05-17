@@ -151,22 +151,39 @@ namespace Tukupedia.Helpers.Utils
             return new Uri(getDebugPath() + "\\Resource\\Customers\\" + filename).LocalPath;
         }
 
-        public static string saveImage(string originPath, string newName) {
+        public static string saveImage(string originPath, string newName, char target) {
             // return image path
+            // target 's' = seller
+            // target 'i' = item
+            // target 'c' = customer
             string oldUri = new Uri(originPath).LocalPath;
+            string newUri = "", moveUri = "";
+
             string fName = Path.GetFileName(oldUri);
-            string ext = ".png";
-            string name = newName + ext;
+            string name = newName + ".png";
 
+            if (target == 's') {
+                newUri = Utility.getSellerImagePath(fName);
+                moveUri = Utility.getSellerImagePath(name);
+            }
+            if (target == 'i') {
+                newUri = Utility.getItemImagePath(fName);
+                moveUri = Utility.getItemImagePath(name);
+            }
+            if (target == 'c') {
+                newUri = Utility.getCustomerImagePath(fName);
+                moveUri = Utility.getCustomerImagePath(name);
+            }
+            MessageBox.Show(moveUri + " - " +newName);
             try {
-                File.Copy(oldUri, Utility.getSellerImagePath(fName));
+                File.Copy(oldUri, newUri);
 
-                if (File.Exists(Utility.getSellerImagePath(name))) {
+                if (File.Exists(moveUri)) {
                     
-                    File.Delete(Utility.getSellerImagePath(name));
+                    File.Delete(moveUri);
                 }
 
-                File.Move(Utility.getSellerImagePath(fName), Utility.getSellerImagePath(name));
+                File.Move(newUri, moveUri);
 
                 return name;
             }

@@ -30,6 +30,7 @@ namespace Tukupedia.Views.Admin
         JenisPembayaranViewModel jvm;
         PromoViewModel pvm;
         JenisPromoViewModel jpvm;
+        OfficialStoreViewModel osvm;
         public HomeAdminView()
         {
             InitializeComponent();
@@ -880,6 +881,59 @@ namespace Tukupedia.Views.Admin
             reloadJenisPromo();
             resetJenisPromo();
             
+        }
+
+        private void btOfficialStore_Click(object sender, RoutedEventArgs e)
+        {
+            reloadOfficialStore();
+        }
+        void reloadOfficialStore()
+        {
+            osvm = new OfficialStoreViewModel();
+            dgOS.ItemsSource = osvm.getHtom().DefaultView;
+            CanvasDetailOfficialStore.Visibility = Visibility.Hidden;
+        }
+
+        private void dgOS_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if(dgOS.SelectedIndex != -1)
+            {
+                DataRow dr = osvm.getDetailToko(dgOS.SelectedIndex);
+                if (dr == null) return;
+                tbNamaTokoOS.Text = dr[0].ToString();
+                tbEmailOS.Text = dr[1].ToString();
+                tbAlamatOS.Text = dr[2].ToString();
+                tbNoTelpOS.Text = dr[3].ToString();
+                tbNamaSellerOS.Text = dr[4].ToString();
+                tbMendaftarSejakOS.Text = dr[5].ToString();
+                CanvasDetailOfficialStore.Visibility = Visibility.Visible;
+                if (osvm.getOS_Status())
+                {
+                    btTerimaOS.Visibility = Visibility.Hidden;
+                    btTolakOS.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    btTerimaOS.Visibility = Visibility.Visible;
+                    btTolakOS.Visibility = Visibility.Visible;
+                }
+                DataRow temp = osvm.getHtomHelper();
+                if (temp[1].ToString() == "A") btTolakOS.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btTolakOS_Click(object sender, RoutedEventArgs e)
+        {
+            osvm.ChangeStatus(false);
+            CanvasDetailOfficialStore.Visibility = Visibility.Hidden;
+            reloadOfficialStore();
+        }
+
+        private void btTerimaOS_Click(object sender, RoutedEventArgs e)
+        {
+            osvm.ChangeStatus(true);
+            CanvasDetailOfficialStore.Visibility = Visibility.Hidden;
+            reloadOfficialStore();
         }
     }
 }

@@ -42,18 +42,17 @@
         </Canvas>
 
         <!--PAGE PESANAN-->
-        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Hidden">
+        <Canvas Name="canvasPesanan" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Width="1280" Visibility="Visible">
             <Button     Name="btnSemuaPesanan"      Content="Semua Pesanan"      Canvas.Left="0"    Width="256" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnSemuaPesanan_Click"/>
             <Button     Name="btnPesananBaru"       Content="Pesanan Baru"       Canvas.Left="256"  Width="256" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananBaru_Click"/>
             <Button     Name="btnDalamPengiriman"   Content="Dalam Pengiriman"   Canvas.Left="512"  Width="256" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnDalamPengiriman_Click"/>
             <Button     Name="btnPesananSelesai"    Content="Pesanan Selesai"    Canvas.Left="768"  Width="256" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananSelesai_Click"/>
             <Button     Name="btnPesananDibatalkan" Content="Pesanan Dibatalkan" Canvas.Left="1024" Width="256" Height="40" Background="Transparent" Foreground="#65c65b" ClipToBounds="True" FontSize="20" FontWeight="Regular" BorderThickness="0,0,0,1" Click="btnPesananDibatalkan_Click"/>
 
-            <TextBox    Name="textboxCariPesanan"   Text="Cari nama pembeli atau produk" Canvas.Left="25"  Canvas.Top="50" Width="350" Height="30" Style="{StaticResource tb-border-1}" BorderBrush="#65c65b" Padding="10,0,10,0" VerticalContentAlignment="Center"/>
+            <TextBox    Name="textboxCariPesanan"   Canvas.Left="25"  Canvas.Top="50" Width="350" Height="30" Style="{StaticResource tb-border-1}" BorderBrush="#65c65b" Padding="10,0,10,0" VerticalContentAlignment="Center"/>
             <Button     Name="btnCariPesanan"       Content="Cari"                       Canvas.Left="375" Canvas.Top="50" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariPesanan_Click"/>
 
-            <ComboBox   Name="comboboxFilterKurir"  Canvas.Left="880"  Canvas.Top="50"  Width="200"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxFilterKurir_SelectionChanged"/>
-            <ComboBox   Name="comboboxSortPesanan"  Canvas.Left="1100"  Canvas.Top="50"  Width="150"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortPesanan_SelectionChanged"/>
+            <ComboBox   Name="comboboxSortPesanan"  Canvas.Left="1000"  Canvas.Top="50"  Width="250"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortPesanan_SelectionChanged"/>
 
             <DataGrid   Name="datagridPesanan"      Canvas.Left="25"   Canvas.Top="90"   Width="1225"  Height="200" SelectedCellsChanged="datagridPesanan_SelectedCellsChanged"/>
 
@@ -91,7 +90,7 @@
 
         <!--PAGE PRODUK-->
         <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
-            <TextBox Name="textboxCariProduk" Text="Cari Kode Produk, Produk, Kategori" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
+            <TextBox Name="textboxCariProduk" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
             <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
 

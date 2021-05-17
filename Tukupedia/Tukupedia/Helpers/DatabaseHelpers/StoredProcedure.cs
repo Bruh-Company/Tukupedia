@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Tukupedia.Helpers.DatabaseHelpers
 {
@@ -67,7 +68,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             cmd.ExecuteNonQuery();
             string value = cmd.Parameters[ret].Value.ToString();
             App.closeConnection(out _);
-
+            
             return value;
         }
     }

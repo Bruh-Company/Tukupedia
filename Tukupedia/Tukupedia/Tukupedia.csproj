@@ -122,6 +122,7 @@
     <Compile Include="ViewModels\Admin\HomeViewModel.cs" />
     <Compile Include="ViewModels\Admin\JenisPembayaranViewModel.cs" />
     <Compile Include="ViewModels\Admin\JenisPromoViewModel.cs" />
+    <Compile Include="ViewModels\Admin\OfficialStoreViewModel.cs" />
     <Compile Include="ViewModels\Admin\PromoViewModel.cs" />
     <Compile Include="ViewModels\Admin\SellerViewModel.cs" />
     <Compile Include="ViewModels\Admin\TransactionViewModel.cs" />

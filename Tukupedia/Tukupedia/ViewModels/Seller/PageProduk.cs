@@ -24,12 +24,23 @@ namespace Tukupedia.ViewModels.Seller {
             this.seller = seller;
         }
 
+        private void DEBUG() {
+            ViewComponent.comboboxKategori.SelectedIndex = 0;
+            ViewComponent.textboxNamaProduk.Text = "TEST ITEM";
+            ViewComponent.textboxHarga.Text = "100";
+            ViewComponent.textboxStok.Text = "100";
+            ViewComponent.textboxBerat.Text = "100";
+            ViewComponent.textboxDeskripsi.Text = "TEST";
+        }
+
         public void initPageProduk() {
             fillCmbSort();
             fillCmbKategori();
             fillDgvProduk();
             fillCmbBerat();
             switchBtnInsert();
+
+            DEBUG();
         }
 
         public void fillCmbKategori() {
@@ -124,7 +135,6 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxKategori.SelectedIndex = Convert.ToInt32(row["ID_CATEGORY"].ToString()) - 1;
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
-
             ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
 
             toggleBtnInsertProduk = false;
@@ -143,6 +153,7 @@ namespace Tukupedia.ViewModels.Seller {
         public void cancelProduk() {
             toggleBtnInsertProduk = true;
             switchBtnInsert();
+            resetPageProduk();
         }
 
         public void insertProduk() {
@@ -159,10 +170,8 @@ namespace Tukupedia.ViewModels.Seller {
             char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
 
             StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
+            procedure.addParam("R", "ret", 30, OracleDbType.Varchar2);
             procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
-            procedure.addParam("R", "ret", 255, OracleDbType.Varchar2);
-
-            
 
             ItemModel model = new ItemModel();
             model.init();
@@ -177,7 +186,7 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
-            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue());
+            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue("ret"), 'i');
             model.insert(newItem);
 
             resetPageProduk();
@@ -192,7 +201,8 @@ namespace Tukupedia.ViewModels.Seller {
                 return;
 
             string nama = data[0],
-                deskripsi = data[5];
+                deskripsi = data[5],
+                imageUri = data[6];
             int idCategory = Convert.ToInt32(data[1]),
                 harga = Convert.ToInt32(data[2]),
                 stok = Convert.ToInt32(data[3]),
@@ -203,12 +213,22 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
-                model.updateRow(row, "NAMA", nama, "DESKRIPSI", deskripsi, "ID_CATEGORY", idCategory, "STOK", stok, "BERAT", berat, "HARGA", harga, "STATUS", status);
+                model.updateRow(
+                    row, 
+                    "NAMA", nama, 
+                    "DESKRIPSI", deskripsi, 
+                    "ID_CATEGORY", idCategory, 
+                    "STOK", stok, 
+                    "BERAT", berat, 
+                    "HARGA", harga, 
+                    "STATUS", status,
+                    "IMAGE", Utility.saveImage(imageUri, row["IMAGE"].ToString(), 'i')
+                );
             }
             resetPageProduk();
         }
 
-        public void checkStok(DataGridRow dgRow) {
+        public void checkRow(DataGridRow dgRow) {
             DataRowView item = dgRow.Item as DataRowView;
             if (item != null) {
                 DataRow row = item.Row;
@@ -218,6 +238,13 @@ namespace Tukupedia.ViewModels.Seller {
                     Color color = (Color)ColorConverter.ConvertFromString("#E23434");
                     dgRow.Background = new SolidColorBrush(color);
                 }
+
+                char status = char.Parse(data["STATUS"].ToString());
+                if (status == '0') {
+                    Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
+                    dgRow.Background = new SolidColorBrush(color);
+                }
+
             }
         }
 
@@ -234,7 +261,6 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnCancel.Visibility = Visibility.Hidden;
                 ViewComponent.btnUpdate.IsEnabled = false;
             }
-            resetPageProduk();
         }
 
         private string[] getData() {
