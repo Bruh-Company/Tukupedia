@@ -114,7 +114,7 @@
             <Button Style="{StaticResource btn-danger}" x:Name="btToggleJenisPembayaran" Content="Matikan" Canvas.Left="829" Canvas.Top="397" Width="143" Click="btToggleJenisPembayaran_Click"/>
         </Canvas>
         <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="999,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click"/>
-        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="10,1769,0,-1704" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="0,86,0,-21" VerticalAlignment="Top" Width="1252">
             <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">
                 <Label Content="Tukupedia Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="48"/>
                 <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseDoubleClick="dgJenisPromo_MouseDoubleClick"/>
@@ -161,7 +161,7 @@
                 <ComboBox x:Name="cbJenisPromo" Canvas.Left="918" Canvas.Top="322" Width="227"/>
             </Canvas>
         </Canvas>
-        <Canvas x:Name="CanvasOfficialStore" HorizontalAlignment="Left" Height="613" Margin="10,52,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasOfficialStore" HorizontalAlignment="Left" Height="613" Margin="4024,1437,-4004,-1361" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgOS" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgOS_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Official Store Manager" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Canvas x:Name="CanvasDetailOfficialStore" Height="546" Canvas.Left="655" Canvas.Top="34" Width="551">

@@ -23,44 +23,76 @@ namespace Tukupedia.ViewModels.Seller
         private D_Trans_ItemModel forselectdata;
         private D_Trans_ItemModel dtrans_helper;
         private D_Trans_ItemModel dtrans;
+        private KurirModel km;
         int h_trans_selected = -1, d_trans_selected;
         string status = "";
+        int lastclick = -1;
 
         public PagePesanan(SellerView viewComponent, DataRow seller)
         {
             ViewComponent = viewComponent;
             this.seller = seller;
+            //MessageBox.Show(seller["ID"].ToString());
             htrans = new D_Trans_ItemModel();
             forselectdata = new D_Trans_ItemModel();
             dtrans = new D_Trans_ItemModel();
             dtrans_helper = new D_Trans_ItemModel();
+            km = new KurirModel();
         }
 
         public void initPagePesanan()
         {
-            seller = Session.User;
+            //seller = Session.User;
+            viewSemuaPesanan();
+            //ViewComponent.textboxCariPesanan.Text = "Cari nama pembeli atau kode pesanan";
+            //km.initAdapter("select ID, NAMA from KURIR");
+            //DataRow dr = km.Table.NewRow();
+            //dr["ID"] = "0";
+            //dr["NAMA"] = "Semua Kurir";
+            //km.Table.Rows.InsertAt(dr, 0);
+            //ViewComponent..ItemsSource = km.Table.DefaultView;
+            //ViewComponent.comboboxFilterKurir.DisplayMemberPath = "NAMA";
+            //ViewComponent.comboboxFilterKurir.SelectedValuePath = "ID";
+            //ViewComponent.comboboxFilterKurir.SelectedIndex = 0;
+            //    cbMetodePembayaran.DisplayMemberPath = "NAMA";
+            //cbMetodePembayaran.SelectedValuePath = "ID";
+
 
         }
-        public void viewSemuaPesanan()
+        public void cariPesanan()
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            string keyword = ViewComponent.textboxCariPesanan.Text;
+            string query = $"AND c.NAMA = '{keyword}' OR h.KODE = '{keyword}'";
+            if (lastclick == 1) viewSemuaPesanan(query);
+            if (lastclick == 2) viewPesananBaru(query);
+            if (lastclick == 3) viewDalamPengiriman(query);
+            if (lastclick == 4) viewPesananSelesai(query);
+            if (lastclick == 5) viewPesananBatal(query);
+        }
+        public void viewSemuaPesanan(string keyword = "")
+        {
+            lastclick = 1;
+            //MessageBox.Show(seller["ID"].ToString());
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             status = "";
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
         }
-        public void viewPesananBaru()
+        public void viewPesananBaru(string keyword = "")
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and d.STATUS = 'W' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            lastclick = 2;
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
             status = "and d.STATUS = 'W'";
 
         }
-        public void viewSiapKirim()
+        public void viewSiapKirim(string keyword = "")
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and d.STATUS = 'W' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            lastclick = 3;
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -68,9 +100,10 @@ namespace Tukupedia.ViewModels.Seller
 
         }
 
-        public void viewDalamPengiriman()
+        public void viewDalamPengiriman(string keyword = "")
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and d.STATUS = 'W' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            lastclick = 3;
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -78,9 +111,10 @@ namespace Tukupedia.ViewModels.Seller
 
         }
 
-        public void viewPesananSelesai()
+        public void viewPesananSelesai(string keyword = "")
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and d.STATUS = 'W' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            lastclick = 4;
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -88,9 +122,10 @@ namespace Tukupedia.ViewModels.Seller
 
         }
 
-        public void viewPesananBatal()
+        public void viewPesananBatal(string keyword = "")
         {
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\"  from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and d.STATUS = 'W' group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI order by h.TANGGAL_TRANSAKSI desc");
+            lastclick = 5;
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
