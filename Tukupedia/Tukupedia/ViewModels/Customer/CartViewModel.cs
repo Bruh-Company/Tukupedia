@@ -104,6 +104,16 @@ namespace Tukupedia.ViewModels.Customer
         public static void loadCartItem(StackPanel sp)
         {
             if(spCart==null)spCart = sp;
+            Dictionary<string, bool> list_checked = new Dictionary<string, bool>();
+            if (list_shopcart!=null&&list_shopcart.Count > 0)
+            {
+                foreach (ShopCartComponent scc in list_shopcart)
+                {
+                    list_checked = list_checked.Concat(scc.getCheckedItems().Where(kvp => !list_checked.ContainsKey(kvp.Key)))
+                        .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+                }
+            }
+            
             sp.Children.Clear();
             Dictionary<string, List<DataRow>> toko = new Dictionary<string, List<DataRow>>();
             //Check per Toko
@@ -111,7 +121,6 @@ namespace Tukupedia.ViewModels.Customer
             {
                 DataRow item = new DB("ITEM").@select().@where("ID", row["ID_ITEM"].ToString()).getFirst();
                 string id_toko = item["ID_SELLER"].ToString();
-                MessageBox.Show(id_toko);
                 if (toko.ContainsKey(id_toko))
                 {
                     toko[id_toko].Add(item);
@@ -128,10 +137,15 @@ namespace Tukupedia.ViewModels.Customer
             foreach (var val in toko)
             {
                 ShopCartComponent scc = new ShopCartComponent();
-                scc.addItemCart(val.Value);
                 scc.initToko(new DB("SELLER").@select().@where("ID",val.Key).getFirst());
+                scc.addItemCart(val.Value);
                 list_shopcart.Add(scc);;
                 sp.Children.Add(scc);
+            }
+
+            foreach (var shopCart in list_shopcart)
+            {
+                shopCart.setCheckedItems(list_checked);
             }
         }
 
@@ -174,17 +188,25 @@ namespace Tukupedia.ViewModels.Customer
             DataRow row = cart.Select($"ID_ITEM='{id_item}'").FirstOrDefault();
             cart.Rows.Remove(row);
             loadCartItem(spCart);
-            countSubTotal();
+            updateGrandTotal();
         }
 
         //TODO GRAND TOTAL INI BLUM TERMASUK DISKONNYA
         public static void updateGrandTotal()
         {
             grandTotal = 0;
+            int qty = 0;
             foreach (ShopCartComponent scc in list_shopcart)
             {
                 grandTotal += scc.getSubtotal();
+                qty += scc.getQuantity();
             }
+            updateHarga(qty,grandTotal);
+        }
+
+        public static void checkPromotions()
+        {
+            
         }
         public static void proceedToCheckout()
         {
@@ -207,5 +229,19 @@ namespace Tukupedia.ViewModels.Customer
             };
             
         }
+
+        public static void initPaymentMethod(ComboBox comboBox)
+        {
+            Metode_PembayaranModel mpm = new Metode_PembayaranModel();
+
+            foreach (DataRow row in mpm.Table.Rows)
+            {
+                ComboBoxItem cbi = new ComboBoxItem();
+                cbi.Content = row["NAMA"].ToString();
+                cbi.Tag = row["ID"].ToString();
+                comboBox.Items.Add(cbi);
+            }
+        }
+        
     }
 }

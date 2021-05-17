@@ -32,6 +32,7 @@ namespace Tukupedia.Components
         private DataTable kurir_seller;
         private int hargaTotal;
         private List<CartComponent> list_carts;
+        private int Quantity,hargaAwal,ongkosKirim;
 
 
         public ShopCartComponent()
@@ -121,6 +122,7 @@ namespace Tukupedia.Components
             // Kalau biasa itu, anggap di db itu harga/500 Gram? Tetapi kalau kurang dri 500 gram itu minimal bayar harga
             // jangan lupa untuk liat diskon dri promo
             updateSubTotal();
+            CartViewModel.updateGrandTotal();
         }
 
         public void initToko(DataRow toko)
@@ -154,15 +156,41 @@ namespace Tukupedia.Components
         //TODO HARGA KURIR BELUM KALAU GANTI
         public void updateSubTotal()
         {
-            hargaTotal = 0;
+            hargaAwal = 0;
+            ongkosKirim = 0;
+            int hargaKurir = 0, berat = 0;
+            DataRow kurir=null;
+            int idxKurir = cbKurir.SelectedIndex;
+            if (idxKurir >= 0)
+            {
+                string selectedKurir = ((ComboBoxItem) cbKurir.SelectedItem).Tag.ToString();
+                kurir = new DB("KURIR").@select().@where("ID", selectedKurir).getFirst();
+                    if (kurir != null) hargaKurir = Convert.ToInt32(kurir["HARGA"]);
+            }
             foreach (CartComponent cart in list_carts)
             {
-                hargaTotal += cart.getHarga();
+                Quantity = 0;
+                if (cart.isChecked())
+                {
+                    Quantity += 1;
+                    hargaTotal += cart.getHarga();
+                    if (kurir != null)
+                    {
+                        berat += cart.getBerat();
+                    }
+                }
             }
+            ongkosKirim = berat < 1000 ? hargaKurir : hargaKurir * Convert.ToInt32((double)(berat / 1000));
+            hargaTotal = hargaAwal + ongkosKirim;
+            hargaTotal=berat > 0 ? hargaTotal : 0;
             //Untuk harga Kurir belum
             subTotal.Text = Utility.formatMoney(hargaTotal);
         }
 
+        public int getQuantity()
+        {
+            return Quantity;
+        }
         public int getSubtotal()
         {
             return hargaTotal;
@@ -177,7 +205,34 @@ namespace Tukupedia.Components
                 spCart.Children.Add(cc);
             }
             updateSubTotal();
-            
+        }
+
+        public Dictionary<string, bool> getCheckedItems()
+        {
+            Dictionary<string, bool> checked_items = new Dictionary<string, bool>();
+            foreach (var cart in list_carts)
+            {
+                checked_items.Add(cart.getItemID(),cart.isChecked());
+            }
+            return checked_items;
+        }
+
+        public void setCheckedItems(Dictionary<string, bool> list_checked)
+        {
+            foreach (var cart in list_carts)
+            {
+                string item_id = cart.getItemID();
+                if (list_checked.ContainsKey(item_id))
+                {
+                    cart.setChecked(list_checked[item_id]);
+                }
+                else
+                {
+                    //kalau gaada di list checked maka defaultnya adlah false
+                    cart.setChecked(false);
+                }
+                
+            }
         }
 
     }

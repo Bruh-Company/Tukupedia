@@ -52,22 +52,25 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="601" Margin="954,10,0,0" VerticalAlignment="Top" Width="310" Background="#FF404040">
-                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Height="123" Width="290" UniformCornerRadius="10" Background="#FF404040">
-                        <Grid HorizontalAlignment="Left" Height="103" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
-                            <ComboBox HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
+                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Height="205" Width="290" UniformCornerRadius="10" Background="#FF404040">
+                        <Grid HorizontalAlignment="Left" Height="185" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
+                            <ComboBox SelectionChanged="cbPromotion_SelectionChanged" x:Name="cbPromotion" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
                             <Label Content="Promotions" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="23" Width="79" FontWeight="Bold"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" TextWrapping="Wrap" Text="Cashback Amount" VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="20"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="171,68,0,0" TextWrapping="Wrap" Text="Rp69.000.000" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="11" TextDecorations="{x:Null}"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,158,0,0" TextWrapping="Wrap" Text="Discount Amount : " VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="20"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="171,159,0,0" TextWrapping="Wrap" Text="Rp0,00" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="11" TextDecorations="{x:Null}"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" Text="Description :" VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="15"/>
+                            <TextBlock x:Name="tbDesc" Padding="3,3,3,3" HorizontalAlignment="Left" Margin="10,101,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" Width="250" TextDecorations="{x:Null}" Height="48"/>
+                            <TextBlock x:Name="tbErrorPromotion" Visibility="Hidden" HorizontalAlignment="Left" Margin="10,61,0,0" TextWrapping="Wrap" Text="Small PP" FontStyle="Italic" VerticalAlignment="Top" Width="250" TextDecorations="{x:Null}" Height="15" Foreground="#FFFF4242" TextAlignment="Right" Padding="2" FontWeight="Bold" LineHeight="20"/>
                         </Grid>
                     </materialDesign:Card>
-                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,319,0,0" VerticalAlignment="Top" Height="191" Width="290" UniformCornerRadius="10" Background="#FF404040">
+                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,358,0,0" VerticalAlignment="Top" Height="191" Width="290" UniformCornerRadius="10" Background="#FF404040">
                         <Grid HorizontalAlignment="Left" Height="171" Margin="9,18,0,0" VerticalAlignment="Top" Width="275">
                             <Button Click="btnProceedToCheckout_Click" x:Name="btnProceedToCheckout" Content="Proceed to checkout" HorizontalAlignment="Left" Margin="0,123,0,0" VerticalAlignment="Top" Width="275" Height="43" FontSize="16" Background="#FF65C65B" BorderBrush="#FF404040" FontWeight="Bold"/>
-                            <Label Content="Subtotal" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="23" Width="56" FontWeight="Bold"/>
+                            <Label Content="Subtotal" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" Height="26" Width="66" FontWeight="Bold"/>
                             <Label Content=" I agree to the terms and conditions that apply." HorizontalAlignment="Left" Margin="6,93,0,0" VerticalAlignment="Top" FontSize="10" Height="23" FontStyle="Italic"/>
                             <Rectangle Fill="#FFBDBDBD" HorizontalAlignment="Left" Height="2" Margin="6,65,0,0" Stroke="#00000000" VerticalAlignment="Top" Width="262"/>
                             <Label Content="Summary" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="28" Width="64" FontWeight="Bold"/>
-                            <Label Name="labelTotal" Content="Total Price (69 Items)" HorizontalAlignment="Left" Margin="9,30,0,0" VerticalAlignment="Top" Height="23" Width="117" FontSize="12" RenderTransformOrigin="0.5,0.5">
+                            <Label Name="labelTotal" Content="Total Price (69 Items)" HorizontalAlignment="Left" Margin="9,30,0,0" VerticalAlignment="Top" Height="27" Width="121" FontSize="12" RenderTransformOrigin="0.5,0.5">
                                 <Label.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform/>
@@ -80,12 +83,10 @@
                             <TextBlock Name="tbSubTotal" HorizontalAlignment="Left" Margin="176,34,0,0" TextWrapping="Wrap" Text="Rp69.000.000" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="12" TextDecorations="{x:Null}" RenderTransformOrigin="0.533,-0.347"/>
                         </Grid>
                     </materialDesign:Card>
-                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,182,0,0" VerticalAlignment="Top" Height="123" Width="290" UniformCornerRadius="10" Background="#FF404040">
-                        <Grid HorizontalAlignment="Left" Height="103" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
-                            <ComboBox HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
-                            <Label Content="Promotions" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="23" Width="79" FontWeight="Bold"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" TextWrapping="Wrap" Text="Cashback Amount" VerticalAlignment="Top" Width="119" TextDecorations="{x:Null}" Height="20"/>
-                            <TextBlock HorizontalAlignment="Left" Margin="171,68,0,0" TextWrapping="Wrap" Text="Rp69.000.000" VerticalAlignment="Top" TextAlignment="Right" Width="89" FontSize="11" TextDecorations="{x:Null}"/>
+                    <materialDesign:Card HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Height="94" Width="290" UniformCornerRadius="10" Background="#FF404040">
+                        <Grid HorizontalAlignment="Left" Height="74" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
+                            <ComboBox SelectionChanged="cbPaymentMethod_SelectionChanged" x:Name="cbPaymentMethod" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
+                            <Label Content="Payment Method" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top" Height="26" Width="119" FontWeight="Bold"/>
                         </Grid>
                     </materialDesign:Card>
                 </Grid>

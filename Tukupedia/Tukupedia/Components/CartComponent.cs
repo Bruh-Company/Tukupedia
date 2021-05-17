@@ -78,6 +78,7 @@ namespace Tukupedia.Components
             btnDelete.Click+=BtnDeleteOnClick;
             btnMin.Click+=BtnMinOnClick;
             btnPlus.Click+=BtnPlusOnClick;
+            checkBox.Click+=CheckBoxOnClick;
             
             //Styles
             itemImage.Source =
@@ -108,6 +109,12 @@ namespace Tukupedia.Components
             this.AddChild(spMain);
         }
 
+        private void CheckBoxOnClick(object sender, RoutedEventArgs e)
+        {
+            parent.updateSubTotal();
+            CartViewModel.updateGrandTotal();
+        }
+
         private void BtnDeleteOnClick(object sender, RoutedEventArgs e)
         {
             CartViewModel.deleteItemFromCart(Convert.ToInt32(item["ID"]));
@@ -115,13 +122,11 @@ namespace Tukupedia.Components
 
         private void BtnPlusOnClick(object sender, RoutedEventArgs e)
         {
-            //TODO SETELAH DI PLUS HARUS UPDATE HARGA DI CART :)
-            // BUAT AJA 1 FUNCTION STATIC DI CARTVIEWMODEL TRUS DIPANGGIL
             qty++;
             qty = Math.Min(Convert.ToInt32(item["STOK"]), qty);
             tbQty.Text = qty.ToString();
             updateQty();
-            CartViewModel.countSubTotal();
+            CartViewModel.updateGrandTotal();
         }
 
         private void BtnMinOnClick(object sender, RoutedEventArgs e)
@@ -130,7 +135,7 @@ namespace Tukupedia.Components
             qty = Math.Max(0, qty);
             tbQty.Text = qty.ToString();
             updateQty();
-            CartViewModel.countSubTotal();
+            CartViewModel.updateGrandTotal();
         }
 
         public void initComponent(DataRow item, int qty)
@@ -148,12 +153,34 @@ namespace Tukupedia.Components
             tbQty.Text = qty.ToString();
             CartViewModel.updateJumlah(Convert.ToInt32(item["ID"]),qty);
             subtotal = qty * Convert.ToInt32(item["HARGA"]);
-            parent.updateSubTotal();;
+            parent.updateSubTotal();
         }
 
         public int getHarga()
         {
             return subtotal;
         }
+
+        public int getBerat()
+        {
+            // Berat dpt dari berat * jumlah (satuannya gram)
+            return Convert.ToInt32(item["BERAT"]) * qty;
+        }
+
+        public bool isChecked()
+        {
+            return checkBox.IsChecked==true;
+        }
+
+        public string getItemID()
+        {
+            return item["ID"].ToString();
+        }
+
+        public void setChecked(bool val)
+        {
+            checkBox.IsChecked=val;
+        }
+        
     }
 }

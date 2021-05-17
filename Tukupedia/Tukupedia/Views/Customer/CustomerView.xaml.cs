@@ -66,6 +66,7 @@ namespace Tukupedia.Views.Customer
             CartViewModel.loadCartItem(spCart);
             CartViewModel.initHargaCart(labelTotal,tbSubTotal);
             CartViewModel.updateHarga(0,0);
+            CartViewModel.initPaymentMethod(cbPaymentMethod);
 
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);
@@ -253,6 +254,16 @@ namespace Tukupedia.Views.Customer
         private void btnProceedToCheckout_Click(object sender, RoutedEventArgs e)
         {
             CartViewModel.proceedToCheckout();
+        }
+
+        private void cbPromotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cbPaymentMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

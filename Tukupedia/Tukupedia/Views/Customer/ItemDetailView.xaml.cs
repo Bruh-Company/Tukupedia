@@ -68,6 +68,7 @@ namespace Tukupedia.Views.Customer
             tbDescription.Text = item["DESKRIPSI"].ToString();
             //Load Item Name
             tbNamaItem.Text = item["NAMA"].ToString();
+            tbHarga.Text = Utility.formatMoney(Convert.ToInt32(item["HARGA"]));
             //Load Rating TODO Ganti setelah sudah ganti DB
             // RatingBar.Value = Convert.ToInt32(item["RATING"]);
             hideInputReply();
@@ -124,7 +125,7 @@ namespace Tukupedia.Views.Customer
             }
             CartViewModel.addtoCart(item,qty,true);
             CartViewModel.loadCartItem(CartViewModel.spCart);
-            CartViewModel.countSubTotal();
+            CartViewModel.updateGrandTotal();
             
             MessageBox.Show($"{item["NAMA"]} berhasil di tambah ke cart!");
             this.Close();
