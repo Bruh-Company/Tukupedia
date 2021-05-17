@@ -6,7 +6,7 @@
 			 StartupUri="Views/Customer/CustomerView.xaml">
     <!--Views/Seller/SellerView.xaml -Untuk Bryan-->
     <!--Views/Customer/CustomerView.xaml -Untuk Chen-->
-    <!--www.youtube.com/watch?v=iik25wqIuFo -Untuk Marmar-->
+    <!--Views/Admin/HomeAdminView.xaml -Untuk Marmar-->
     <!--Views/LoginRegisterView.xaml -Untuk Main-->
     <Application.Resources>
         <ResourceDictionary>

@@ -75,12 +75,9 @@ namespace Tukupedia.Views.Seller {
         // Pesanan Header
 
         private void btnCariPesanan_Click(object sender, RoutedEventArgs e) {
-
+            SellerViewModel.pagePesanan.cariPesanan();
         }
 
-        private void comboboxFilterKurir_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        }
 
         private void comboboxSortPesanan_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
