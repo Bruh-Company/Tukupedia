@@ -136,7 +136,7 @@ namespace Tukupedia.Views.Seller {
         }
 
         private void datagridProduk_LoadingRow(object sender, DataGridRowEventArgs e) {
-            SellerViewModel.pageProduk.checkStok(e.Row);
+            SellerViewModel.pageProduk.checkRow(e.Row);
         }
 
         private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {

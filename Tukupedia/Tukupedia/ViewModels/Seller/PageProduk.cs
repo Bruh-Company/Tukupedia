@@ -135,10 +135,8 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxKategori.SelectedIndex = Convert.ToInt32(row["ID_CATEGORY"].ToString()) - 1;
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
-
-
             ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
-            System.Windows.MessageBox.Show(ViewComponent.imageProduk.Source.ToString());
+
             toggleBtnInsertProduk = false;
             switchBtnInsert();
         }
@@ -155,6 +153,7 @@ namespace Tukupedia.ViewModels.Seller {
         public void cancelProduk() {
             toggleBtnInsertProduk = true;
             switchBtnInsert();
+            resetPageProduk();
         }
 
         public void insertProduk() {
@@ -202,7 +201,8 @@ namespace Tukupedia.ViewModels.Seller {
                 return;
 
             string nama = data[0],
-                deskripsi = data[5];
+                deskripsi = data[5],
+                imageUri = data[6];
             int idCategory = Convert.ToInt32(data[1]),
                 harga = Convert.ToInt32(data[2]),
                 stok = Convert.ToInt32(data[3]),
@@ -213,12 +213,22 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
-                model.updateRow(row, "NAMA", nama, "DESKRIPSI", deskripsi, "ID_CATEGORY", idCategory, "STOK", stok, "BERAT", berat, "HARGA", harga, "STATUS", status);
+                model.updateRow(
+                    row, 
+                    "NAMA", nama, 
+                    "DESKRIPSI", deskripsi, 
+                    "ID_CATEGORY", idCategory, 
+                    "STOK", stok, 
+                    "BERAT", berat, 
+                    "HARGA", harga, 
+                    "STATUS", status,
+                    "IMAGE", Utility.saveImage(imageUri, row["IMAGE"].ToString(), 'i')
+                );
             }
             resetPageProduk();
         }
 
-        public void checkStok(DataGridRow dgRow) {
+        public void checkRow(DataGridRow dgRow) {
             DataRowView item = dgRow.Item as DataRowView;
             if (item != null) {
                 DataRow row = item.Row;
@@ -228,6 +238,13 @@ namespace Tukupedia.ViewModels.Seller {
                     Color color = (Color)ColorConverter.ConvertFromString("#E23434");
                     dgRow.Background = new SolidColorBrush(color);
                 }
+
+                char status = char.Parse(data["STATUS"].ToString());
+                if (status == '0') {
+                    Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
+                    dgRow.Background = new SolidColorBrush(color);
+                }
+
             }
         }
 
@@ -244,7 +261,6 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnCancel.Visibility = Visibility.Hidden;
                 ViewComponent.btnUpdate.IsEnabled = false;
             }
-            resetPageProduk();
         }
 
         private string[] getData() {
