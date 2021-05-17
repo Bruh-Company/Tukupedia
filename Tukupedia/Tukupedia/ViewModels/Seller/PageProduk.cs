@@ -24,12 +24,23 @@ namespace Tukupedia.ViewModels.Seller {
             this.seller = seller;
         }
 
+        private void DEBUG() {
+            ViewComponent.comboboxKategori.SelectedIndex = 0;
+            ViewComponent.textboxNamaProduk.Text = "TEST ITEM";
+            ViewComponent.textboxHarga.Text = "100";
+            ViewComponent.textboxStok.Text = "100";
+            ViewComponent.textboxBerat.Text = "100";
+            ViewComponent.textboxDeskripsi.Text = "TEST";
+        }
+
         public void initPageProduk() {
             fillCmbSort();
             fillCmbKategori();
             fillDgvProduk();
             fillCmbBerat();
             switchBtnInsert();
+
+            DEBUG();
         }
 
         public void fillCmbKategori() {
@@ -125,8 +136,9 @@ namespace Tukupedia.ViewModels.Seller {
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
 
-            ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
 
+            ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
+            System.Windows.MessageBox.Show(ViewComponent.imageProduk.Source.ToString());
             toggleBtnInsertProduk = false;
             switchBtnInsert();
         }
@@ -159,10 +171,8 @@ namespace Tukupedia.ViewModels.Seller {
             char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
 
             StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
+            procedure.addParam("R", "ret", 30, OracleDbType.Varchar2);
             procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
-            procedure.addParam("R", "ret", 255, OracleDbType.Varchar2);
-
-            
 
             ItemModel model = new ItemModel();
             model.init();
@@ -177,7 +187,7 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
-            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue());
+            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue("ret"), 'i');
             model.insert(newItem);
 
             resetPageProduk();

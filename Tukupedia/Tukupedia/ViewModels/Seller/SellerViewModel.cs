@@ -35,6 +35,7 @@ namespace Tukupedia.ViewModels.Seller {
             transition = new Transition(transFPS);
             initState();
             initHeader();
+            pagePesanan.initPagePesanan();
         }
 
         public static void TESTING() {
