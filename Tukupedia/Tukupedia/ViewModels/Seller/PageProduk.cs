@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
-using System.IO;
 using Tukupedia.Helpers.Utils;
 using System.Windows;
 using Oracle.DataAccess.Client;
@@ -40,7 +39,7 @@ namespace Tukupedia.ViewModels.Seller {
             fillCmbBerat();
             switchBtnInsert();
 
-            DEBUG();
+            //DEBUG();
         }
 
         public void fillCmbKategori() {
