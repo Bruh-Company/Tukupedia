@@ -11,9 +11,11 @@ using System.Windows.Media.Imaging;
 
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
-        public enum page { Pesanan, Produk, InfoToko }
-        public static PageProduk pageProduk;
+        public enum page { Pesanan, Produk, InfoToko, Ulasan, Diskusi }
         public static PagePesanan pagePesanan;
+        public static PageProduk pageProduk;
+        public static PageUlasan pageUlasan;
+        public static PageDiskusi pageDiskusi;
         public static PageInfoToko pageInfoToko;
 
         private static SellerView ViewComponent;
@@ -28,9 +30,13 @@ namespace Tukupedia.ViewModels.Seller {
         public static void InitializeView(SellerView view) {
             seller = Session.User;
             ViewComponent = view;
+
             TESTING();
+
             pagePesanan = new PagePesanan(view, seller);
             pageProduk = new PageProduk(view, seller);
+            pageUlasan = new PageUlasan(view, seller);
+            pageDiskusi = new PageDiskusi(view, seller);
             pageInfoToko = new PageInfoToko(view, seller);
             transition = new Transition(transFPS);
             initState();
@@ -45,10 +51,14 @@ namespace Tukupedia.ViewModels.Seller {
         public static void initState() {
             ViewComponent.canvasPesanan.Margin = MarginPosition.Middle;
             ViewComponent.canvasProduk.Margin = MarginPosition.Right;
+            ViewComponent.canvasUlasan.Margin = MarginPosition.Right;
+            ViewComponent.canvasDiskusi.Margin = MarginPosition.Right;
             ViewComponent.canvasInfoToko.Margin = MarginPosition.Right;
 
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasPesanan, Visibility.Visible);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasProduk, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(ViewComponent.canvasUlasan, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(ViewComponent.canvasDiskusi, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasInfoToko, Visibility.Hidden);
         }
 
@@ -61,108 +71,6 @@ namespace Tukupedia.ViewModels.Seller {
 
             pageInfoToko.initImageToko();
         }
-
-        public static void swapTo(page p) {
-            if (p == page.Pesanan) {
-                transition.setCallback(pagePesanan.initPagePesanan);
-
-                transition.makeTransition(ViewComponent.canvasPesanan,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasProduk,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasInfoToko,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasPesanan,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasProduk,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasInfoToko,
-                    Visibility.Hidden);
-            }
-
-            if (p == page.Produk) {
-                transition.setCallback(pageProduk.initPageProduk);
-
-                transition.makeTransition(ViewComponent.canvasProduk,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasPesanan,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasInfoToko,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasProduk,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasPesanan,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasInfoToko,
-                    Visibility.Hidden);
-            }
-
-            if (p == page.InfoToko) {
-                transition.setCallback(pageInfoToko.initPageInfoToko);
-
-                transition.makeTransition(ViewComponent.canvasInfoToko,
-                    MarginPosition.Middle, 1,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasProduk,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.makeTransition(ViewComponent.canvasPesanan,
-                    MarginPosition.Right, 0,
-                    speedMargin * multiplier / transFPS,
-                    speedOpacity * multiplier / transFPS,
-                    "with previous");
-
-                transition.playTransition();
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasInfoToko,
-                    Visibility.Visible);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasProduk,
-                    Visibility.Hidden);
-                ComponentHelper.changeZIndexComponent(
-                    ViewComponent.canvasPesanan,
-                    Visibility.Hidden);
-            }
-        }
         
         public static void logout() {
             Session.Logout();
@@ -170,5 +78,267 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.Close();
         }
 
+        public static void swapTo(page p) {
+            if (p == page.Pesanan) swapToPagePesanan();
+            if (p == page.Produk) swapToPageProduk();
+            if (p == page.Ulasan) swapToPageUlasan();
+            if (p == page.Diskusi) swapToPageDiskusi();
+            if (p == page.InfoToko) swapToPageInfoToko();
+        }
+
+        public static void swapToPagePesanan() {
+            transition.setCallback(pagePesanan.initPagePesanan);
+
+            transition.makeTransition(ViewComponent.canvasPesanan,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasProduk,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasUlasan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasDiskusi,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasInfoToko,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasPesanan,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasProduk,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasUlasan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasDiskusi,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasInfoToko,
+                Visibility.Hidden);
+        }
+
+        public static void swapToPageProduk() {
+            transition.setCallback(pageProduk.initPageProduk);
+
+            transition.makeTransition(ViewComponent.canvasProduk,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasPesanan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasUlasan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasDiskusi,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasInfoToko,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasProduk,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasPesanan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasUlasan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasDiskusi,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasInfoToko,
+                Visibility.Hidden);
+        }
+
+        public static void swapToPageUlasan() {
+            transition.setCallback(pageUlasan.initPageUlasan);
+
+            transition.makeTransition(ViewComponent.canvasUlasan,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasPesanan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasProduk,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasDiskusi,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasInfoToko,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasUlasan,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasPesanan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasProduk,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasDiskusi,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasInfoToko,
+                Visibility.Hidden);
+        }
+
+        public static void swapToPageDiskusi() {
+            transition.setCallback(pageDiskusi.initPageDiskusi);
+
+            transition.makeTransition(ViewComponent.canvasDiskusi,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasPesanan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasProduk,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasUlasan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasInfoToko,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasPesanan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasProduk,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasUlasan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasDiskusi,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasInfoToko,
+                Visibility.Hidden);
+        }
+
+        public static void swapToPageInfoToko() {
+            transition.setCallback(pageInfoToko.initPageInfoToko);
+
+            transition.makeTransition(ViewComponent.canvasInfoToko,
+                MarginPosition.Middle, 1,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasPesanan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasProduk,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasUlasan,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.makeTransition(ViewComponent.canvasDiskusi,
+                MarginPosition.Right, 0,
+                speedMargin * multiplier / transFPS,
+                speedOpacity * multiplier / transFPS,
+                "with previous");
+
+            transition.playTransition();
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasInfoToko,
+                Visibility.Visible);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasPesanan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasProduk,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasUlasan,
+                Visibility.Hidden);
+            ComponentHelper.changeZIndexComponent(
+                ViewComponent.canvasDiskusi,
+                Visibility.Hidden);
+        }
     }
 }

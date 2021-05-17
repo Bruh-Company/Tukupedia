@@ -15,18 +15,18 @@ namespace Tukupedia.ViewModels.Seller
     {
         //duek ditambah, stok dikurangi
         private SellerView ViewComponent;
-        private ItemModel itemModel;
-        private bool toggleBtnInsertProduk = true;
         private DataRow seller;
 
         private D_Trans_ItemModel htrans;
         private D_Trans_ItemModel forselectdata;
         private D_Trans_ItemModel dtrans_helper;
         private D_Trans_ItemModel dtrans;
-        private KurirModel km;
+        //private KurirModel km;
         int h_trans_selected = -1, d_trans_selected;
         string status = "";
         int lastclick = -1;
+        string orderby = "order by h.TANGGAL_TRANSAKSI desc";
+        string query = "";
 
         public PagePesanan(SellerView viewComponent, DataRow seller)
         {
@@ -37,7 +37,7 @@ namespace Tukupedia.ViewModels.Seller
             forselectdata = new D_Trans_ItemModel();
             dtrans = new D_Trans_ItemModel();
             dtrans_helper = new D_Trans_ItemModel();
-            km = new KurirModel();
+            //km = new KurirModel();
         }
 
         public void initPagePesanan()
@@ -57,23 +57,67 @@ namespace Tukupedia.ViewModels.Seller
             //    cbMetodePembayaran.DisplayMemberPath = "NAMA";
             //cbMetodePembayaran.SelectedValuePath = "ID";
 
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Transaksi Terbaru");
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Transaksi Terlama");
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Nama Customer A-Z");
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Nama Customer Z-A");
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Kode Pesanan A-Z");
+            ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Kode Pesanan Z-A");
+            ViewComponent.comboboxSortPesanan.SelectedIndex = 0;
+
 
         }
-        public void cariPesanan()
+        public void orderBy()
         {
-            string keyword = ViewComponent.textboxCariPesanan.Text;
-            string query = $"AND c.NAMA = '{keyword}' OR h.KODE = '{keyword}'";
+            int choose = ViewComponent.comboboxSortPesanan.SelectedIndex;
+            if(choose == 0)
+            {
+                orderby = "order by h.TANGGAL_TRANSAKSI desc";
+            }
+            else if (choose == 1)
+            {
+                orderby = "order by h.TANGGAL_TRANSAKSI asc";
+            }
+            else if (choose == 2)
+            {
+                orderby = "order by c.NAMA asc";
+            }
+            else if (choose == 3)
+            {
+                orderby = "order by c.NAMA desc";
+            }
+            else if (choose == 4)
+            {
+                orderby = "order by h.KODE asc";
+            }
+            else if (choose == 5)
+            {
+                orderby = "order by h.KODE desc";
+            }
+            reloadInternal();
+        }
+
+        void reloadInternal()
+        {
             if (lastclick == 1) viewSemuaPesanan(query);
             if (lastclick == 2) viewPesananBaru(query);
             if (lastclick == 3) viewDalamPengiriman(query);
             if (lastclick == 4) viewPesananSelesai(query);
             if (lastclick == 5) viewPesananBatal(query);
         }
+        public void cariPesanan()
+        {
+            string keyword = ViewComponent.textboxCariPesanan.Text;
+            if (keyword == "")query = "";
+            else query = $"AND lower(c.NAMA) like lower('%{keyword}%') OR lower(h.KODE) like lower('%{keyword}%')";
+            reloadInternal();
+        }
         public void viewSemuaPesanan(string keyword = "")
         {
             lastclick = 1;
+            ViewComponent.textboxCariPesanan.Text = "";
             //MessageBox.Show(seller["ID"].ToString());
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             status = "";
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
@@ -82,7 +126,9 @@ namespace Tukupedia.ViewModels.Seller
         public void viewPesananBaru(string keyword = "")
         {
             lastclick = 2;
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            ViewComponent.textboxCariPesanan.Text = "";
+
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -92,7 +138,9 @@ namespace Tukupedia.ViewModels.Seller
         public void viewSiapKirim(string keyword = "")
         {
             lastclick = 3;
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            ViewComponent.textboxCariPesanan.Text = "";
+
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'P' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -103,7 +151,9 @@ namespace Tukupedia.ViewModels.Seller
         public void viewDalamPengiriman(string keyword = "")
         {
             lastclick = 3;
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            ViewComponent.textboxCariPesanan.Text = "";
+
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'S' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -114,7 +164,9 @@ namespace Tukupedia.ViewModels.Seller
         public void viewPesananSelesai(string keyword = "")
         {
             lastclick = 4;
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            ViewComponent.textboxCariPesanan.Text = "";
+
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'D' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -125,7 +177,9 @@ namespace Tukupedia.ViewModels.Seller
         public void viewPesananBatal(string keyword = "")
         {
             lastclick = 5;
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA order by h.TANGGAL_TRANSAKSI desc");
+            ViewComponent.textboxCariPesanan.Text = "";
+
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'C' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
             ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Hidden;
 
@@ -197,7 +251,10 @@ namespace Tukupedia.ViewModels.Seller
                 DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
                 //2 = Stock
                 //3 = Barang Yang dibeli
-                if (Convert.ToInt32(drHelper[2].ToString()) > Convert.ToInt32(drHelper[3].ToString()))
+                //MessageBox.Show(drHelper[2].ToString());
+                //MessageBox.Show(drHelper[3].ToString());
+
+                if (Convert.ToInt32(drHelper[2].ToString()) < Convert.ToInt32(drHelper[3].ToString()))
                 {
                     MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
                     return;
@@ -228,9 +285,9 @@ namespace Tukupedia.ViewModels.Seller
                     new DB("ITEM").update("STOK", stock).where("ID", dr[4].ToString()).execute();
                 }
 
-                DataRow drrow = new DB("SELLER").select("SALDO").where("ID_SELLER", seller["ID"].ToString()).getFirst();
+                DataRow drrow = new DB("SELLER").select("SALDO").where("ID", seller["ID"].ToString()).getFirst();
                 int saldo = Convert.ToInt32(drrow[0].ToString()) - hitungTotal();
-                new DB("SELLER").update("SALDO", saldo).where("ID_SELLER", seller["ID"].ToString()).execute();
+                new DB("SELLER").update("SALDO", saldo).where("ID", seller["ID"].ToString()).execute();
                 reloadHtrans();
             }
 

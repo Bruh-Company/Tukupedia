@@ -42,6 +42,14 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.swapTo(SellerViewModel.page.Produk);
         }
 
+        private void btnDiskusi_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.swapTo(SellerViewModel.page.Diskusi);
+        }
+
+        private void btnUlasan_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.swapTo(SellerViewModel.page.Ulasan);
+        }
+
         private void btnInfoToko_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.swapTo(SellerViewModel.page.InfoToko);
         }
@@ -80,7 +88,7 @@ namespace Tukupedia.Views.Seller {
 
 
         private void comboboxSortPesanan_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+            SellerViewModel.pagePesanan.orderBy();
         }
 
         private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -198,5 +206,18 @@ namespace Tukupedia.Views.Seller {
             Utility.NumberValidationTextBox(sender, e);
         }
         // Info
+
+        // Ulasan
+        private void btnBalasUlasan_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pageUlasan.replyUlasan();
+        }
+
+        private void btnCancelUlasan_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pageUlasan.reset();
+        }
+
+        private void datagridUlasan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
+            SellerViewModel.pageUlasan.selectUlasan();
+        }
     }
 }
