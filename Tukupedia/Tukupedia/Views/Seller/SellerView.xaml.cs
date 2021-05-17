@@ -88,7 +88,7 @@ namespace Tukupedia.Views.Seller {
 
 
         private void comboboxSortPesanan_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+            SellerViewModel.pagePesanan.orderBy();
         }
 
         private void datagridPesanan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
