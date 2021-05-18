@@ -123,6 +123,7 @@ namespace Tukupedia.Components
             // jangan lupa untuk liat diskon dri promo
             updateSubTotal();
             CartViewModel.updateGrandTotal();
+            CartViewModel.checkPromotion(CartViewModel.promo);
         }
 
         public void initToko(DataRow toko)
@@ -153,7 +154,6 @@ namespace Tukupedia.Components
             
         }
 
-        //TODO HARGA KURIR BELUM KALAU GANTI
         public void updateSubTotal()
         {
             hargaAwal = 0;
@@ -167,29 +167,42 @@ namespace Tukupedia.Components
                 kurir = new DB("KURIR").@select().@where("ID", selectedKurir).getFirst();
                     if (kurir != null) hargaKurir = Convert.ToInt32(kurir["HARGA"]);
             }
+            Quantity = 0;
+            bool checkedCart = false;
             foreach (CartComponent cart in list_carts)
             {
-                Quantity = 0;
                 if (cart.isChecked())
                 {
-                    Quantity += 1;
-                    hargaTotal += cart.getHarga();
+                    checkedCart = true;
+                    Quantity += cart.getQuantity();
+                    hargaAwal += cart.getHarga();
                     if (kurir != null)
                     {
                         berat += cart.getBerat();
                     }
                 }
             }
-            ongkosKirim = berat < 1000 ? hargaKurir : hargaKurir * Convert.ToInt32((double)(berat / 1000));
+            //Check kalau ada barang yang di check ada atau tidak, kalau gaada gaada ongkir
+            if(checkedCart) ongkosKirim = berat < 1000 ? hargaKurir : hargaKurir * Convert.ToInt32((double)(berat / 1000));
             hargaTotal = hargaAwal + ongkosKirim;
             hargaTotal=berat > 0 ? hargaTotal : 0;
             //Untuk harga Kurir belum
             subTotal.Text = Utility.formatMoney(hargaTotal);
+            CartViewModel.checkPromotion(CartViewModel.promo);
         }
 
+        public int getOngkir()
+        {
+            return ongkosKirim;
+        }
         public int getQuantity()
         {
             return Quantity;
+        }
+
+        public int getHargaSebelumOngkir()
+        {
+            return hargaAwal;
         }
         public int getSubtotal()
         {
@@ -231,9 +244,45 @@ namespace Tukupedia.Components
                     //kalau gaada di list checked maka defaultnya adlah false
                     cart.setChecked(false);
                 }
-                
             }
         }
+
+        public List<DataRow> getItems()
+        {
+            List<DataRow> list_items = new List<DataRow>();
+            foreach (var cart in list_carts)
+            {
+                if (cart.isChecked())
+                {
+                    list_items.Add(cart.getItem());   
+                }
+            }
+            return list_items;
+        }
+
+        public string getIDKurir()
+        {
+            if(cbKurir.SelectedIndex>=0) return ((ComboBoxItem) cbKurir.SelectedItem).Tag.ToString();
+            else
+            {
+                return "";
+            }
+        }
+
+        public List<CartComponent> getCarts()
+        {
+            List<CartComponent> checked_carts = new List<CartComponent>();
+            foreach (CartComponent cc in list_carts)
+            {
+                if (cc.isChecked())
+                {
+                    checked_carts.Add(cc);
+                }
+            }
+
+            return checked_carts;
+        }
+
 
     }
 }

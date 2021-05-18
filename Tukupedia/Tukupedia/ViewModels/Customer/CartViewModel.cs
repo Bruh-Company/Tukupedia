@@ -21,9 +21,14 @@ namespace Tukupedia.ViewModels.Customer
         public static Label labelHarga;
         public static TextBlock tbSubTotal;
         public static List<ShopCartComponent> list_shopcart;
-        public static int grandTotal;
+        public static int grandTotal,hargaSebelumOngkir,ongkos_kirim;
         public static List<Promo> list_promo;
-        
+        public static Dictionary<string, bool> list_checked;
+        public static ComboBox cbPayment;
+        public static Promo promo;
+        public static TextBlock tbDiscount;
+        public static TextBlock tbErrorPromotion;
+        public static int diskon;
         
 
         public static void initCart()
@@ -95,18 +100,18 @@ namespace Tukupedia.ViewModels.Customer
         public static int generateID_H_Trans()
         {
             // MessageBox.Show(Utility.checkMax(new H_Trans_ItemModel().Table, "ID", 0, 5, "1=1").ToString());
-            return Utility.checkMax(new H_Trans_ItemModel().Table,"ID",0,5,"1=1") + 1;
+            return Utility.checkMax(new H_Trans_ItemModel().Table,"ID",0,0,"1=1");
         }
         public static int generateID_D_Trans()
         {
             MessageBox.Show(Utility.checkMax(new D_Trans_ItemModel().Table, "ID", 0, 5, "1=1").ToString());
-            return Utility.checkMax(new D_Trans_ItemModel().Table,"ID",0,5,"1=1") + 1;
+            return Utility.checkMax(new D_Trans_ItemModel().Table,"ID",0,0,"1=1");
         }
 
         public static void loadCartItem(StackPanel sp)
         {
             if(spCart==null)spCart = sp;
-            Dictionary<string, bool> list_checked = new Dictionary<string, bool>();
+            list_checked = new Dictionary<string, bool>();
             if (list_shopcart!=null&&list_shopcart.Count > 0)
             {
                 foreach (ShopCartComponent scc in list_shopcart)
@@ -157,23 +162,12 @@ namespace Tukupedia.ViewModels.Customer
             tbSubTotal = tbHarga;
         }
 
-        public static void countSubTotal()
+        public static void updateHarga(int qty, int harga, int discount)
         {
-            int total = 0;
-            int qty = 0;
-            foreach (DataRow row in cart.Rows)
-            {
-                DataRow item = new DB("ITEM").@select().@where("ID", row["ID_ITEM"].ToString()).getFirst();
-                total += (Convert.ToInt32(item["HARGA"]) * Convert.ToInt32(row["JUMLAH"]));
-                qty += Convert.ToInt32(row["JUMLAH"]);
-            }
-            updateHarga(qty,total);
-        }
-        public static void updateHarga(int qty, int harga)
-        {
-            string desc = qty > 0 ? "Items" : "Item";
+            string desc = qty > 1 ? "Items" : "Item";
             labelHarga.Content = $"Total Price ({qty} {desc})";
             tbSubTotal.Text = Utility.formatMoney(harga);
+            tbDiscount.Text = Utility.formatMoney(discount);
         }
 
         public static void updateJumlah(int id_item, int jml)
@@ -185,57 +179,176 @@ namespace Tukupedia.ViewModels.Customer
             }
         }
 
-        public static void deleteItemFromCart(int id_item)
+        public static void deleteItemFromCart(int id_item, bool update=true)
         {
             DataRow row = cart.Select($"ID_ITEM='{id_item}'").FirstOrDefault();
             cart.Rows.Remove(row);
-            loadCartItem(spCart);
-            updateGrandTotal();
+            if (update)
+            {
+                loadCartItem(spCart);
+                updateGrandTotal();
+            }
         }
 
-        //TODO GRAND TOTAL INI BLUM TERMASUK DISKONNYA
         public static void updateGrandTotal()
         {
             grandTotal = 0;
             int qty = 0;
+            hargaSebelumOngkir = 0;
+            ongkos_kirim = 0;
             foreach (ShopCartComponent scc in list_shopcart)
             {
                 grandTotal += scc.getSubtotal();
+                // MessageBox.Show(scc.getSubtotal().ToString());
+                hargaSebelumOngkir += scc.getHargaSebelumOngkir();
+                 ongkos_kirim += scc.getOngkir();
                 qty += scc.getQuantity();
             }
-            updateHarga(qty,grandTotal);
-        }
-
-        public static void checkPromotions()
-        {
+            //Cari Diskon berapa
+            diskon = 0;
+            if (promo != null)
+            {
+                if (promo.JENIS_POTONGAN == "P")
+                {
+                    diskon = Convert.ToInt32((Convert.ToDouble(promo.POTONGAN) * Convert.ToDouble(hargaSebelumOngkir)) / 100.0);
+                    diskon = Math.Min(promo.POTONGAN_MAX, diskon);
+                }
+                else
+                {
+                    diskon = promo.POTONGAN;
+                }
+            }
             
+            updateHarga(qty,grandTotal,diskon);
         }
         public static void proceedToCheckout()
         {
-            using(OracleTransaction Transaction = App.connection.BeginTransaction())
+            //Validasi Promo + Validasi Ada checked + kurir + payment
+            //Validasi Ada barang, 
+            string message = validateProceedCheckout();
+            if (message == "Success")
             {
-                try
+                App.openConnection(out _);
+                using(OracleTransaction Transaction = App.connection.BeginTransaction())
                 {
-                    H_Trans_ItemModel hti = new H_Trans_ItemModel();
-                    DataRow row = hti.Table.NewRow();
-                    row["ID"] = 0;
-                    row["ID_CUSTOMER"] = Session.User["ID"].ToString();
-                    
-                    hti.insert();
-                }
-                catch (OracleException e)
-                {
-                    Transaction.Rollback();
-                    MessageBox.Show(e.Message);
-                }
-            };
+                    try
+                    {
+                        Dictionary<string, int> updateStok = new Dictionary<string, int>();
+                        List<string> id_items = new List<string>();
+                        H_Trans_ItemModel hti = new H_Trans_ItemModel();
+                        DataRow rowHTI = hti.Table.NewRow();
+                        rowHTI["ID"] = 0;
+                        rowHTI["ID_CUSTOMER"] = Session.User["ID"].ToString();
+                        rowHTI["TANGGAL_TRANSAKSI"] = DateTime.Now;
+                        if (checkPromotion(promo, false))
+                        {
+                            rowHTI["ID_PROMO"] = promo.ID;
+                        }
+                        //grandtotal = hargasebelumongkir + ongkir - diskon
+                        rowHTI["GRANDTOTAL"] = grandTotal-diskon;
+                        rowHTI["SUBTOTAL"] = hargaSebelumOngkir;
+                        rowHTI["ONGKOS_KIRIM"] = ongkos_kirim;
+                        rowHTI["DISKON"] = diskon;
+                        rowHTI["STATUS"] = "W";
+                        hti.insert(rowHTI);
+                        D_Trans_ItemModel dti = new D_Trans_ItemModel();
+                        int id_hti = generateID_H_Trans(); 
+                        foreach (ShopCartComponent scc in list_shopcart)
+                        {
+                            foreach (CartComponent cc in scc.getCarts())
+                            {
+                                DataRow rowDTI = dti.Table.NewRow();
+                                rowDTI["ID"] = 0;
+                                rowDTI["ID_H_TRANS_ITEM"] = id_hti;
+                                rowDTI["ID_ITEM"] = cc.getItemID();
+                                id_items.Add( cc.getItemID());
+                                rowDTI["JUMLAH"] = cc.getQuantity();
+                                rowDTI["ID_KURIR"] = scc.getIDKurir();
+                                rowDTI["STATUS"] = "W";
+                                if (updateStok.ContainsKey(cc.getItemID()))
+                                {
+                                    updateStok[cc.getItemID()] += Convert.ToInt32(cc.getQuantity());
+                                }
+                                else
+                                {
+                                    updateStok.Add(cc.getItemID(),Convert.ToInt32(cc.getQuantity()));
+                                }
+                                dti.insert(rowDTI);
+                            }
+                        }
+                        Transaction.Commit();
+                        //Update Stok
+                        foreach (var val in updateStok)
+                        {
+                            string id_item = val.Key;
+                            int qty = val.Value;
+                            // MessageBox.Show(id_item + " - " + qty);
+                            ItemModel im = new ItemModel();
+                            DataRow item = im.Table.Select($"ID ='{id_item}'").FirstOrDefault();
+                            if (item != null)
+                            {
+                                item["STOK"] = Convert.ToInt32(item["STOK"]) - qty;
+                            }
+                            im.update();
+                        }
+                        //TODO tambah ke history trans :) 
+                        foreach (string id_item in id_items)
+                        {
+                            deleteItemFromCart(Convert.ToInt32(id_item),false);
+                        }
+                        loadCartItem(spCart);
+                        updateGrandTotal();
+                        
+                    }
+                    catch (OracleException e)
+                    {
+                        Transaction.Rollback();
+                        MessageBox.Show(e.Message);
+                    }
+                };
+                App.closeConnection(out _);
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
             
+        }
+
+        public static string validateProceedCheckout()
+        {
+            int jmlBrg = 0;
+            int jmlKurir = 0;
+            string message = "Success";
+            foreach (ShopCartComponent scc in list_shopcart)
+            {
+                foreach (CartComponent cc in scc.getCarts())
+                {
+                    if (scc.getIDKurir() != "") jmlKurir++;
+                    jmlBrg++;
+                }
+            }
+
+            if (jmlBrg <= 0)
+            {
+                message="Pilihlah minimal 1 barang untuk dibeli!";
+            }
+            else if (jmlKurir != jmlBrg)
+            {
+                message = "Pilihlah kurir terlebih dahulu!";
+            }
+            else if (cbPayment.SelectedIndex<0)
+            {
+                message = "Pilihlah payment method terlebih dahulu!";
+            }
+            
+            return message;
         }
 
         public static void initPaymentMethod(ComboBox comboBox)
         {
             Metode_PembayaranModel mpm = new Metode_PembayaranModel();
-
+            comboBox.Items.Clear();
             foreach (DataRow row in mpm.Table.Rows)
             {
                 ComboBoxItem cbi = new ComboBoxItem();
@@ -243,10 +356,13 @@ namespace Tukupedia.ViewModels.Customer
                 cbi.Tag = row["ID"].ToString();
                 comboBox.Items.Add(cbi);
             }
+            cbPayment = comboBox;
         }
 
-        public static void initPromotion(ComboBox comboBox)
+        public static void initPromotion(ComboBox comboBox, TextBlock discount, TextBlock tbError)
         {
+            tbDiscount = discount;
+            tbErrorPromotion = tbError;
             PromoModel pm = new PromoModel();
 
             list_promo = new List<Promo>();
@@ -269,6 +385,38 @@ namespace Tukupedia.ViewModels.Customer
 
             comboBox.ItemsSource = list_promo;
             comboBox.SelectedValuePath = "ID";
+        }
+
+        public static bool checkPromotion(Promo p, bool toggle=true)
+        {
+            bool valid = false;
+            if (promo != null)
+            {
+                valid = true;
+                foreach (ShopCartComponent scc in list_shopcart)
+                {
+                    string id_kurir = scc.getIDKurir();
+                    string id_payment = cbPayment.SelectedIndex >= 0
+                        ? ((ComboBoxItem)cbPayment.SelectedItem).Tag.ToString()
+                        : "";
+                    foreach (DataRow item in scc.getItems())
+                    {
+                        valid &= p.checkPromo(item["ID_CATEGORY"].ToString(), id_kurir, item["ID_SELLER"].ToString(), id_payment);
+                    }
+
+                    valid &= hargaSebelumOngkir >= p.HARGA_MIN;
+                }
+                if(toggle)togglePromotionError(valid);
+            }
+            return valid;
+        }
+        public static void togglePromotionError(bool valid)
+        {
+            if (promo != null)
+            {
+                if (valid) tbErrorPromotion.Visibility = Visibility.Hidden;
+                else tbErrorPromotion.Visibility = Visibility.Visible;
+            }
         }
         
     }

@@ -17,6 +17,7 @@ using Tukupedia.ViewModels.Customer;
 using Tukupedia.ViewModels;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using Tukupedia.Helpers.Classes;
 
 namespace Tukupedia.Views.Customer
 {
@@ -65,9 +66,9 @@ namespace Tukupedia.Views.Customer
             CartViewModel.initCart();
             CartViewModel.loadCartItem(spCart);
             CartViewModel.initHargaCart(labelTotal,tbSubTotal);
-            CartViewModel.updateHarga(0,0);
             CartViewModel.initPaymentMethod(cbPaymentMethod);
-            CartViewModel.initPromotion(cbPromotion);
+            CartViewModel.initPromotion(cbPromotion, tbDiscount,tbErrorPromotion);
+            CartViewModel.updateHarga(0,0,0);
 
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);
@@ -257,14 +258,18 @@ namespace Tukupedia.Views.Customer
             CartViewModel.proceedToCheckout();
         }
 
+        
         private void cbPromotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            Promo p = (Promo) cbPromotion.SelectedItem;
+            CartViewModel.promo = p;
+            tbDesc.Text = p.getDescription();
+            CartViewModel.checkPromotion(CartViewModel.promo);
         }
 
         private void cbPaymentMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            CartViewModel.checkPromotion(CartViewModel.promo);
         }
     }
 }

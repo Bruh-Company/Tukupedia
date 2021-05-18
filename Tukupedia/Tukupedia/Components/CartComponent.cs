@@ -113,6 +113,7 @@ namespace Tukupedia.Components
         {
             parent.updateSubTotal();
             CartViewModel.updateGrandTotal();
+            CartViewModel.checkPromotion(CartViewModel.promo);
         }
 
         private void BtnDeleteOnClick(object sender, RoutedEventArgs e)
@@ -180,6 +181,16 @@ namespace Tukupedia.Components
         public void setChecked(bool val)
         {
             checkBox.IsChecked=val;
+        }
+
+        public DataRow getItem()
+        {
+            return item;
+        }
+
+        public int getQuantity()
+        {
+            return qty;
         }
         
     }

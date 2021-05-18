@@ -69,7 +69,6 @@ namespace Tukupedia.ViewModels.Customer
                 checkBox.Content = row["NAMA"].ToString();
                 checkBox.Tag = row["ID"];
                 checkBox.IsChecked = true;
-                // TODO Beri handler untuk kasih label berapa category yang dipilih
                 cb.Items.Add(checkBox);
             }
         }
