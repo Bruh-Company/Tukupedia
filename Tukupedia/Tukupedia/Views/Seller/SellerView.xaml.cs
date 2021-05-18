@@ -42,9 +42,6 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.swapTo(SellerViewModel.page.Produk);
         }
 
-        private void btnDiskusi_Click(object sender, RoutedEventArgs e) {
-            SellerViewModel.swapTo(SellerViewModel.page.Diskusi);
-        }
 
         private void btnUlasan_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.swapTo(SellerViewModel.page.Ulasan);
@@ -218,6 +215,10 @@ namespace Tukupedia.Views.Seller {
 
         private void datagridUlasan_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
             SellerViewModel.pageUlasan.selectUlasan();
+        }
+
+        private void btnCariUlasan_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pageUlasan.searchUlasan();
         }
     }
 }

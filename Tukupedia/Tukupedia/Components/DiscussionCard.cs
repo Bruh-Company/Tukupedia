@@ -50,7 +50,6 @@ namespace Tukupedia.Components
                 bool isPenjual;
                 isPenjual = row["SENDER"].ToString() == "C" ? false : true;
                 Comment com = new Comment(isPenjual);
-                string date;
                 DataRow user;
                 if (isPenjual) user = new DB("SELLER").select().@where("ID", row["ID_SELLER"].ToString()).getFirst();
                 else user = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
