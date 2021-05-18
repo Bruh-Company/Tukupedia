@@ -16,7 +16,6 @@ namespace Tukupedia.ViewModels.Seller {
         private DataTable lbKurirTable;
         private DataTable cbKurirTable;
         private bool toggleChange = false;
-
         private string imagePath;
 
         public PageInfoToko(SellerView viewComponent, DataRow seller) {
@@ -27,7 +26,6 @@ namespace Tukupedia.ViewModels.Seller {
         public void initPageInfoToko() {
             sellerModel = new SellerModel();
             sellerModel.init();
-
             resetInfo();
             changeState();
         }
@@ -38,8 +36,20 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void registerOS() {
-            if (System.Windows.MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
-                transOS();
+            if (MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
+                App.openConnection(out _);
+                using (OracleTransaction trans = App.connection.BeginTransaction()) {
+                    try {
+                        Trans_OSModel model = new Trans_OSModel();
+                        model.init();
+                        model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
+                        trans.Commit();
+                    }
+                    catch (OracleException) {
+                        trans.Rollback();
+                    }
+                }
+                App.closeConnection(out _);
             }
         }
 
@@ -86,16 +96,17 @@ namespace Tukupedia.ViewModels.Seller {
             else ImageHelper.loadImage(ViewComponent.imageToko, seller["IMAGE"].ToString());
         }
 
+
         // Private Void
         private void resetInfo() {
-            string id = seller["ID"].ToString();
-            seller = new DB("SELLER").select().where("ID", id).getFirst();
-            lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
+            seller = new DB("SELLER").select().where("ID", seller["ID"].ToString()).getFirst();
             imagePath = seller["IMAGE"].ToString();
+            ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
+            lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
 
             initImageToko();
             fillTextbox();
-            reloadImage();
+            reloadImageInfo();
             resetKurir();
         }
 
@@ -104,27 +115,13 @@ namespace Tukupedia.ViewModels.Seller {
             fillCmbKurir();
         }
 
-        private void transOS() {
-            using (OracleTransaction trans = App.connection.BeginTransaction()) {
-                try {
-                    Trans_OSModel model = new Trans_OSModel();
-                    model.init();
-                    model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
-                    trans.Commit();
-                }
-                catch (OracleException) {
-                    trans.Rollback();
-                }
-            }
-        }
-
         private void saveKurirSeller() {
             Kurir_SellerModel model = new Kurir_SellerModel();
             model.init();
             model.addWhere("ID_SELLER", seller["ID"].ToString());
             foreach (DataRow row in model.get()) {
+                new DB("KURIR_SELLER").delete(seller["ID"].ToString()).execute();
             }
-            new DB("KURIR_SELLER").delete(seller["ID"].ToString()).execute();
 
             foreach (DataRow row in lbKurirTable.Rows) {
                 DataRow target = new DB("KURIR_SELLER").select("count(*)").where("ID_SELLER", seller["ID"].ToString()).where("ID_KURIR", row["ID"].ToString()).getFirst();
@@ -144,7 +141,8 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("ID", idSeller, "=", false);
             foreach (DataRow row in model.get()) {
-                string img = ImageHelper.saveImage(imagePath, seller["KODE"].ToString(), ImageHelper.target.seller, true);
+                string img = "";
+                if (imagePath != "") img = ImageHelper.saveImage(imagePath, seller["KODE"].ToString(), ImageHelper.target.seller, true);
                 model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4], "IMAGE", img);
             }
         }
@@ -182,7 +180,7 @@ namespace Tukupedia.ViewModels.Seller {
             }
         }
 
-        private void reloadImage() {
+        private void reloadImageInfo() {
             if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageInfo);
             else ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString());
         }
@@ -247,7 +245,7 @@ namespace Tukupedia.ViewModels.Seller {
         private bool dataValidation(List<string> data) {
             foreach (string item in data)
                 if (item == "") return false;
-            return imagePath == "" ? false : true;
+            return true;
         }
     }
 }

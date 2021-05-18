@@ -150,8 +150,8 @@ namespace Tukupedia.ViewModels.Seller {
             imagePath = row["IMAGE"].ToString();
             ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString());
 
-            pageDiskusi = new PageDiskusi(ViewComponent, seller, row["ID"].ToString());
             ViewComponent.canvasDiskusi.Visibility = Visibility.Visible;
+            pageDiskusi = new PageDiskusi(ViewComponent, seller, row["ID"].ToString());
 
             toggleBtnInsertProduk = false;
             switchBtnInsert();
@@ -167,16 +167,19 @@ namespace Tukupedia.ViewModels.Seller {
                 harga = Convert.ToInt32(data[2]),
                 stok = Convert.ToInt32(data[3]),
                 berat = Convert.ToInt32(data[4]);
-            char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
+            char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? '0' : '1';
 
             StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
             procedure.addParam("R", "ret", 30, OracleDbType.Varchar2);
             procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
 
+            string img = ImageHelper.saveImage(imagePath, procedure.getValue(), ImageHelper.target.item);
+
             ItemModel model = new ItemModel();
             model.init();
+
             DataRow newItem = model.Table.NewRow();
-            newItem["ID"] = 0;
+            newItem["ID"] = 1;
             newItem["KODE"] = " ";
             newItem["NAMA"] = nama.ToUpper();
             newItem["DESKRIPSI"] = deskripsi.ToUpper();
@@ -186,7 +189,7 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
-            newItem["IMAGE"] = ImageHelper.saveImage(imagePath, procedure.getValue(), ImageHelper.target.item);
+            newItem["IMAGE"] = img;
             model.insert(newItem);
 
             resetPageProduk();
@@ -208,11 +211,11 @@ namespace Tukupedia.ViewModels.Seller {
                 berat = Convert.ToInt32(data[4]);
             char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
 
-
             ItemModel model = new ItemModel();
             model.init();
             model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
+                string img = ImageHelper.saveImage(imagePath, row["KODE"].ToString(), ImageHelper.target.item);
                 model.updateRow(
                     row,
                     "NAMA", nama,
@@ -222,7 +225,7 @@ namespace Tukupedia.ViewModels.Seller {
                     "BERAT", berat,
                     "HARGA", harga,
                     "STATUS", status,
-                    "IMAGE", ImageHelper.saveImage(imagePath, row["KODE"].ToString(), ImageHelper.target.item)
+                    "IMAGE", img
                 );
             }
             cancelProduk();
@@ -269,9 +272,10 @@ namespace Tukupedia.ViewModels.Seller {
             data.Add((ViewComponent.comboboxKategori.SelectedIndex + 1).ToString());
             data.Add(ViewComponent.textboxHarga.Text);
             data.Add(ViewComponent.textboxStok.Text);
-            if (ViewComponent.comboboxBerat.SelectedIndex == 1)
+
+            if (ViewComponent.comboboxBerat.SelectedIndex == 0)
                 data.Add(ViewComponent.textboxBerat.Text);
-            else data.Add((Convert.ToInt32(ViewComponent.textboxBerat.Text) / 1000).ToString());
+            else data.Add((Convert.ToInt32(ViewComponent.textboxBerat.Text) * 1000).ToString());
             data.Add(ViewComponent.textboxDeskripsi.Text);
 
             return data;

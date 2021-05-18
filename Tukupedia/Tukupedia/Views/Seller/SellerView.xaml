@@ -24,7 +24,8 @@
             <Setter Property="BorderBrush" Value="#FFFFFF"/>
         </Style>
     </Window.Resources>
-    <Grid Width="1280" Height="690">
+    
+    <Grid>
         <!--HEADER-->
         <Canvas HorizontalAlignment="Left" Height="100" Width="1280" VerticalAlignment="Top" Background="#65c65b">
             <Image  Name="imageToko" Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
@@ -89,9 +90,9 @@
         </Canvas>
 
         <!--PAGE PRODUK-->
-        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
+        <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="1920,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <ScrollViewer Width="1280" Height="590" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                <Canvas Width="1280" Height="auto">
+                <Canvas Width="1280" Height="1180">
                     <Canvas Width="1280" Height="590" Canvas.Top="0">
                         <TextBox Name="textboxCariProduk" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
                         <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
@@ -133,14 +134,20 @@
                     </Canvas>
                     
                     <!--PAGE DISKUSI-->
-                    <Canvas Name="canvasDiskusi" Width="980" Height="490" Canvas.Left="150" Canvas.Top="640"/>
+                    <Canvas Name="canvasDiskusi" Width="1280" Height="590" Canvas.Top="590">
+                        <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
+                            <StackPanel Margin="5,5,5,10" Width="1080" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="spanelDiscussion">
+
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Canvas>
                 </Canvas>
             </ScrollViewer>
             
         </Canvas>
 
         <!--PAGE INFO TOKO-->
-        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
+        <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3200,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <ScrollViewer Width="1280" Height="590" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
                 <Canvas Height="1200" Width="1280">
                     <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
@@ -171,8 +178,8 @@
                     <Button Name="btnTambahKurirInfo" Content="Tambah Kurir" Canvas.Left="450" Canvas.Top="800" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnTambahKurirInfo_Click"/>
                     <Button Name="btnKurangKurirInfo" Content="Hapus Kurir" Canvas.Left="450" Canvas.Top="850" Width="150" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnKurangKurirInfo_Click"/>
 
-                    <Button Name="btnSimpanInfo" Content="Simpan" Canvas.Left="50" Canvas.Top="1100" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnSimpanInfo_Click"/>
-                    <Button Name="btnBatalInfo" Content="Batal" Canvas.Left="260" Canvas.Top="1100" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnBatalInfo_Click"/>
+                    <Button Name="btnSimpanInfo" Content="Simpan" Canvas.Left="50" Canvas.Top="1050" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnSimpanInfo_Click"/>
+                    <Button Name="btnBatalInfo" Content="Batal" Canvas.Left="260" Canvas.Top="1050" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnBatalInfo_Click"/>
                     <Image  Name="imageInfo" Width="300" Height="300" Canvas.Left="750" Canvas.Top="150"/>
                     <Button Name="btnChangeImage" Content="Pilih Gambar" Canvas.Left="750" Canvas.Top="473" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnChangeImage_Click"/>
                 </Canvas>
@@ -180,7 +187,7 @@
         </Canvas>
 
         <!--PAGE ULASAN-->
-        <Canvas Name="canvasUlasan" HorizontalAlignment="Center" Height="590" Margin="3,0,10,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
+        <Canvas Name="canvasUlasan" HorizontalAlignment="Center" Height="590" Margin="4480,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <TextBox Name="textboxCariUlasan" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="315" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariUlasan" Content="Cari" FontSize="18" Canvas.Left="340" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariUlasan_Click"/>
             <ComboBox Name="comboboxSortUlasan" Canvas.Left="480" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
