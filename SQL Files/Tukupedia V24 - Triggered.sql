@@ -30,7 +30,7 @@ END BEFORE STATEMENT;
         new_code := upper(new_code);
         if inserting then
             -- Ganti Substr berdasarkan kode
-            select NVL(MAX(substr(KODE, 5)), 0) + 1
+            select NVL(MAX(substr(KODE, 6)), 0) + 1
             into jumlah
             from CATEGORY
             where KODE like '%' || new_code || '%';
@@ -53,7 +53,7 @@ END BEFORE STATEMENT;
     AFTER STATEMENT IS
     BEGIN
         if (old_id <> -1) then
-            select NVL(MAX(substr(KODE, 5)), 0) + 1
+            select NVL(MAX(substr(KODE, 6)), 0) + 1
             into jumlah
             from CATEGORY
             where KODE like '%' || new_code || '%';
