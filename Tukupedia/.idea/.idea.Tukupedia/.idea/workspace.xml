@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Tukupedia/App.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/App.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,11 +59,11 @@
       <option value="$PROJECT_DIR$/Tukupedia/Components/CartComponent.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/ReviewCard.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/ItemDetailView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CustomerViewModel.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
+      <option value="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -71,10 +73,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3495212" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34965035" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
   </component>
@@ -116,6 +119,7 @@
       <workItem from="1621169993202" duration="11343000" />
       <workItem from="1621230644465" duration="19495000" />
       <workItem from="1621265144411" duration="5487000" />
+      <workItem from="1621315287610" duration="8038000" />
     </task>
     <servers />
   </component>

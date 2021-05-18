@@ -39,7 +39,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA <> :new.NAMA and substr(:old.KODE,4,2) <> new_code then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 4, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -103,7 +103,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.nama <> :new.nama and substr(:old.KODE,3,2) <> new_code  then
+            if :old.nama <> :new.nama and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -196,7 +196,7 @@ BEGIN
     where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
     :new.ID := new_id;
-    :new.kode := new_code || lpad(jumlah, 5, '0') ;
+    :new.kode := new_code || lpad(jumlah, 5, '0');
 END AUTO_ID_H_TRANS_ITEM;
 /
 --ALTER TRIGGER "AUTO_ID_H_TRANS_ITEM" ENABLE
@@ -237,8 +237,8 @@ END BEFORE STATEMENT;
             :new.ID := new_id;
             :new.KODE := new_code;
         end if;
-        if updating  then
-            if :old.NAMA <> :new.NAMA and substr(:old.KODE,3,2) <> new_code then
+        if updating then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -317,7 +317,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA <> :new.NAMA and substr(:old.KODE,3,2) <> new_code then
+            if :old.NAMA <> :new.NAMA and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -412,7 +412,7 @@ END BEFORE STATEMENT;
             :new.KODE := new_code;
         end if;
         if updating then
-            if :old.NAMA_TOKO <> :new.NAMA_TOKO and substr(:old.KODE,3,2) <> new_code then
+            if :old.NAMA_TOKO <> :new.NAMA_TOKO and substr(:old.KODE, 3, 2) <> new_code then
                 old_id := :old.ID;
             end if;
         end if;
@@ -457,7 +457,7 @@ BEGIN
     where KODE like '%' || new_code || '%';
     select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
     :new.ID := new_id;
-    :new.kode := new_code || lpad(jumlah,5,'0');
+    :new.kode := new_code || lpad(jumlah, 5, '0');
 END AUTO_ID_TRANS_OS;
 /
 --ALTER TRIGGER "AUTO_ID_TRANS_OS" ENABLE
@@ -489,6 +489,28 @@ BEGIN
     :new.ID := new_id;
 END AUTO_ID_KURIR_SELLER;
 /
+
+--Trigger dari chen untuk rating
+CREATE or REPLACE TRIGGER POST_ULASAN
+    AFTER INSERT
+    on ULASAN
+DECLARE
+BEGIN
+    for i in (
+        SELECT AVG(U.RATING) as ratingBaru, I.id as ID_ITEM
+        FROM ULASAN U
+                 join D_TRANS_ITEM DTI on DTI.ID = U.ID_D_TRANS_ITEM
+                 join ITEM I on I.ID = DTI.ID_ITEM
+        GROUP BY I.id
+        )
+        loop
+            update ITEM
+            set RATING=i.ratingBaru
+            where ID = i.ID_ITEM;
+        end loop;
+END;
+/
+
 
 
 

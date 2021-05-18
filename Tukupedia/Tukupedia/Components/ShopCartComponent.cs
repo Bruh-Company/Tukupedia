@@ -168,10 +168,12 @@ namespace Tukupedia.Components
                     if (kurir != null) hargaKurir = Convert.ToInt32(kurir["HARGA"]);
             }
             Quantity = 0;
+            bool checkedCart = false;
             foreach (CartComponent cart in list_carts)
             {
                 if (cart.isChecked())
                 {
+                    checkedCart = true;
                     Quantity += cart.getQuantity();
                     hargaAwal += cart.getHarga();
                     if (kurir != null)
@@ -180,7 +182,8 @@ namespace Tukupedia.Components
                     }
                 }
             }
-            ongkosKirim = berat < 1000 ? hargaKurir : hargaKurir * Convert.ToInt32((double)(berat / 1000));
+            //Check kalau ada barang yang di check ada atau tidak, kalau gaada gaada ongkir
+            if(checkedCart) ongkosKirim = berat < 1000 ? hargaKurir : hargaKurir * Convert.ToInt32((double)(berat / 1000));
             hargaTotal = hargaAwal + ongkosKirim;
             hargaTotal=berat > 0 ? hargaTotal : 0;
             //Untuk harga Kurir belum

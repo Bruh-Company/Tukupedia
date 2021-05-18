@@ -28,6 +28,7 @@ namespace Tukupedia.ViewModels.Customer
         public static Promo promo;
         public static TextBlock tbDiscount;
         public static TextBlock tbErrorPromotion;
+        public static int diskon;
         
 
         public static void initCart()
@@ -99,12 +100,12 @@ namespace Tukupedia.ViewModels.Customer
         public static int generateID_H_Trans()
         {
             // MessageBox.Show(Utility.checkMax(new H_Trans_ItemModel().Table, "ID", 0, 5, "1=1").ToString());
-            return Utility.checkMax(new H_Trans_ItemModel().Table,"ID",0,5,"1=1");
+            return Utility.checkMax(new H_Trans_ItemModel().Table,"ID",0,0,"1=1");
         }
         public static int generateID_D_Trans()
         {
             MessageBox.Show(Utility.checkMax(new D_Trans_ItemModel().Table, "ID", 0, 5, "1=1").ToString());
-            return Utility.checkMax(new D_Trans_ItemModel().Table,"ID",0,5,"1=1");
+            return Utility.checkMax(new D_Trans_ItemModel().Table,"ID",0,0,"1=1");
         }
 
         public static void loadCartItem(StackPanel sp)
@@ -178,12 +179,15 @@ namespace Tukupedia.ViewModels.Customer
             }
         }
 
-        public static void deleteItemFromCart(int id_item)
+        public static void deleteItemFromCart(int id_item, bool update=true)
         {
             DataRow row = cart.Select($"ID_ITEM='{id_item}'").FirstOrDefault();
             cart.Rows.Remove(row);
-            loadCartItem(spCart);
-            updateGrandTotal();
+            if (update)
+            {
+                loadCartItem(spCart);
+                updateGrandTotal();
+            }
         }
 
         public static void updateGrandTotal()
@@ -197,11 +201,11 @@ namespace Tukupedia.ViewModels.Customer
                 grandTotal += scc.getSubtotal();
                 // MessageBox.Show(scc.getSubtotal().ToString());
                 hargaSebelumOngkir += scc.getHargaSebelumOngkir();
-                ongkos_kirim += scc.getOngkir();
+                 ongkos_kirim += scc.getOngkir();
                 qty += scc.getQuantity();
             }
             //Cari Diskon berapa
-            int diskon = 0;
+            diskon = 0;
             if (promo != null)
             {
                 if (promo.JENIS_POTONGAN == "P")
@@ -219,45 +223,126 @@ namespace Tukupedia.ViewModels.Customer
         }
         public static void proceedToCheckout()
         {
-            using(OracleTransaction Transaction = App.connection.BeginTransaction())
+            //Validasi Promo + Validasi Ada checked + kurir + payment
+            //Validasi Ada barang, 
+            string message = validateProceedCheckout();
+            if (message == "Success")
             {
-                try
+                App.openConnection(out _);
+                using(OracleTransaction Transaction = App.connection.BeginTransaction())
                 {
-                    H_Trans_ItemModel hti = new H_Trans_ItemModel();
-                    DataRow rowHTI = hti.Table.NewRow();
-                    rowHTI["ID"] = 0;
-                    rowHTI["ID_CUSTOMER"] = Session.User["ID"].ToString();
-                    rowHTI["TANGGAL_TRANSAKSI"] = DateTime.Now;
-                    rowHTI["ID_PROMO"] = 0;
-                    rowHTI["GRANDTOTAL"] = grandTotal;
-                    rowHTI["SUBTOTAL"] = hargaSebelumOngkir;
-                    rowHTI["ONGKOS_KIRIM"] = ongkos_kirim;
-                    rowHTI["DISKON"] = Convert.ToInt32(tbDiscount.Text);
-                    hti.insert(rowHTI);
-                    D_Trans_ItemModel dti = new D_Trans_ItemModel();
-                    int id_hti = generateID_H_Trans(); 
-                    foreach (ShopCartComponent scc in list_shopcart)
+                    try
                     {
-                        foreach (CartComponent cc in scc.getCarts())
+                        Dictionary<string, int> updateStok = new Dictionary<string, int>();
+                        List<string> id_items = new List<string>();
+                        H_Trans_ItemModel hti = new H_Trans_ItemModel();
+                        DataRow rowHTI = hti.Table.NewRow();
+                        rowHTI["ID"] = 0;
+                        rowHTI["ID_CUSTOMER"] = Session.User["ID"].ToString();
+                        rowHTI["TANGGAL_TRANSAKSI"] = DateTime.Now;
+                        if (checkPromotion(promo, false))
                         {
-                            DataRow rowDTI = dti.Table.NewRow();
-                            rowDTI["ID"] = 0;
-                            rowDTI["ID_H_TRANS_ITEM"] = id_hti;
-                            rowDTI["ID_ITEM"] = cc.getItemID();
-                            rowDTI["JUMLAH"] = cc.getQuantity();
-                            rowDTI["ID_KURIR"] = scc.getIDKurir();
-                            dti.insert(rowDTI);
+                            rowHTI["ID_PROMO"] = promo.ID;
                         }
+                        //grandtotal = hargasebelumongkir + ongkir - diskon
+                        rowHTI["GRANDTOTAL"] = grandTotal-diskon;
+                        rowHTI["SUBTOTAL"] = hargaSebelumOngkir;
+                        rowHTI["ONGKOS_KIRIM"] = ongkos_kirim;
+                        rowHTI["DISKON"] = diskon;
+                        rowHTI["STATUS"] = "W";
+                        hti.insert(rowHTI);
+                        D_Trans_ItemModel dti = new D_Trans_ItemModel();
+                        int id_hti = generateID_H_Trans(); 
+                        foreach (ShopCartComponent scc in list_shopcart)
+                        {
+                            foreach (CartComponent cc in scc.getCarts())
+                            {
+                                DataRow rowDTI = dti.Table.NewRow();
+                                rowDTI["ID"] = 0;
+                                rowDTI["ID_H_TRANS_ITEM"] = id_hti;
+                                rowDTI["ID_ITEM"] = cc.getItemID();
+                                id_items.Add( cc.getItemID());
+                                rowDTI["JUMLAH"] = cc.getQuantity();
+                                rowDTI["ID_KURIR"] = scc.getIDKurir();
+                                rowDTI["STATUS"] = "W";
+                                if (updateStok.ContainsKey(cc.getItemID()))
+                                {
+                                    updateStok[cc.getItemID()] += Convert.ToInt32(cc.getQuantity());
+                                }
+                                else
+                                {
+                                    updateStok.Add(cc.getItemID(),Convert.ToInt32(cc.getQuantity()));
+                                }
+                                dti.insert(rowDTI);
+                            }
+                        }
+                        Transaction.Commit();
+                        //Update Stok
+                        foreach (var val in updateStok)
+                        {
+                            string id_item = val.Key;
+                            int qty = val.Value;
+                            // MessageBox.Show(id_item + " - " + qty);
+                            ItemModel im = new ItemModel();
+                            DataRow item = im.Table.Select($"ID ='{id_item}'").FirstOrDefault();
+                            if (item != null)
+                            {
+                                item["STOK"] = Convert.ToInt32(item["STOK"]) - qty;
+                            }
+                            im.update();
+                        }
+                        //TODO tambah ke history trans :) 
+                        foreach (string id_item in id_items)
+                        {
+                            deleteItemFromCart(Convert.ToInt32(id_item),false);
+                        }
+                        loadCartItem(spCart);
+                        updateGrandTotal();
+                        
                     }
-                    //TODO Kalau Berhasil bersikan cart, tambah ke history trans :) + Check Apakah masuk db?
-                }
-                catch (OracleException e)
-                {
-                    Transaction.Rollback();
-                    MessageBox.Show(e.Message);
-                }
-            };
+                    catch (OracleException e)
+                    {
+                        Transaction.Rollback();
+                        MessageBox.Show(e.Message);
+                    }
+                };
+                App.closeConnection(out _);
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
             
+        }
+
+        public static string validateProceedCheckout()
+        {
+            int jmlBrg = 0;
+            int jmlKurir = 0;
+            string message = "Success";
+            foreach (ShopCartComponent scc in list_shopcart)
+            {
+                foreach (CartComponent cc in scc.getCarts())
+                {
+                    if (scc.getIDKurir() != "") jmlKurir++;
+                    jmlBrg++;
+                }
+            }
+
+            if (jmlBrg <= 0)
+            {
+                message="Pilihlah minimal 1 barang untuk dibeli!";
+            }
+            else if (jmlKurir != jmlBrg)
+            {
+                message = "Pilihlah kurir terlebih dahulu!";
+            }
+            else if (cbPayment.SelectedIndex<0)
+            {
+                message = "Pilihlah payment method terlebih dahulu!";
+            }
+            
+            return message;
         }
 
         public static void initPaymentMethod(ComboBox comboBox)
@@ -302,11 +387,12 @@ namespace Tukupedia.ViewModels.Customer
             comboBox.SelectedValuePath = "ID";
         }
 
-        public static void checkPromotion(Promo p)
+        public static bool checkPromotion(Promo p, bool toggle=true)
         {
+            bool valid = false;
             if (promo != null)
             {
-                bool valid = true;
+                valid = true;
                 foreach (ShopCartComponent scc in list_shopcart)
                 {
                     string id_kurir = scc.getIDKurir();
@@ -320,8 +406,9 @@ namespace Tukupedia.ViewModels.Customer
 
                     valid &= hargaSebelumOngkir >= p.HARGA_MIN;
                 }
-                togglePromotionError(valid);
+                if(toggle)togglePromotionError(valid);
             }
+            return valid;
         }
         public static void togglePromotionError(bool valid)
         {

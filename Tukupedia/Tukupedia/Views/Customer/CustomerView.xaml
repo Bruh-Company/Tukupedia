@@ -94,8 +94,16 @@
                 </Grid>
 
             </Grid>
-            <Grid x:Name="grid_Transactions" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="2558,0,0,0" Background="#FFEE9D9D"/>
-            <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="3837,0,0,0" Background="#FF94CCF4"/>
-        </Grid>
+            <Grid x:Name="grid_Transactions" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="2558,0,0,0" Background="#FFEE9D9D">
+                <Grid HorizontalAlignment="Left" Height="601" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254" Background="#FF404040">
+                    <Label Content="My Transactions" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="3837,0,0,0" Background="#FF94CCF4">
+                <Grid HorizontalAlignment="Left" Height="601" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254" Background="#FF404040"/>
+            </Grid>
+
+
+            </Grid>
     </Grid>
 </Window>
