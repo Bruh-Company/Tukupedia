@@ -9,12 +9,16 @@
         mc:Ignorable="d"
         Title="HomeAdminView" Height="720" Width="1280" Loaded="Window_Loaded">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="127*"/>
+        </Grid.ColumnDefinitions>
         <Label Content="Welcome Admin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Button Style="{StaticResource btn-primary}" x:Name="btHome" Content="Home" HorizontalAlignment="Left" Margin="215,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btHome_Click"/>
         <Button Style="{StaticResource btn-primary}" x:Name="btCategory" Content="Category" HorizontalAlignment="Left" Margin="300,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCategory_Click"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btCustomer" Content="Customer" HorizontalAlignment="Left" Margin="412,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCustomer_Click"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btSeller" Content="Seller" HorizontalAlignment="Left" Margin="528,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btSeller_Click"/>
-        <Canvas  x:Name="CanvasHome" HorizontalAlignment="Left" Height="624" Margin="2999,86,-2979,-21" VerticalAlignment="Top" Width="1252">
+        <Button Style="{StaticResource btn-primary}" x:Name="btCustomer" Content="Customer" HorizontalAlignment="Left" Margin="412,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCustomer_Click" Grid.ColumnSpan="2"/>
+        <Button Style="{StaticResource btn-primary}" x:Name="btSeller" Content="Seller" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btSeller_Click" Grid.Column="1"/>
+        <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="2489,86,-2979,-21" VerticalAlignment="Top" Width="1252" Grid.Column="1">
             <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="35"/>
             <Label Content="Jumlah Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="30" Canvas.Top="313"/>
             <Label Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="119" Canvas.Top="204" FontWeight="Bold"/>
@@ -23,7 +27,7 @@
             <Label Content="Jumlah Toko Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="890" Canvas.Top="300"/>
             <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
         </Canvas>
-        <Canvas x:Name="CanvasCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
             <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Category" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Nama Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
@@ -73,8 +77,8 @@
                 </ComboBox>
             </Canvas>
         </Canvas>
-        <Button Style="{StaticResource btn-primary}" x:Name="btTransaction" Content="Transaction" HorizontalAlignment="Left" Margin="610,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btTransaction_Click"/>
-        <Canvas x:Name="CanvasTransaction" HorizontalAlignment="Left" Height="624" Margin="1335,785,-1315,-720" VerticalAlignment="Top" Width="1252">
+        <Button Style="{StaticResource btn-primary}" x:Name="btTransaction" Content="Transaction" HorizontalAlignment="Left" Margin="100,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btTransaction_Click" Grid.Column="1"/>
+        <Canvas x:Name="CanvasrootTransaction" HorizontalAlignment="Left" Height="624" Margin="825,785,-1315,-720" VerticalAlignment="Top" Width="1252" Grid.Column="1">
             <DataGrid x:Name="dgH_Trans" Height="559" Canvas.Left="10" Canvas.Top="55" Width="601" MouseDoubleClick="dgH_Trans_MouseDoubleClick" SelectedCellsChanged="dgH_Trans_SelectedCellsChanged"/>
             <Label Content="Tukupedia Transaction Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Canvas x:Name="canvasD_Trans" Height="589" Canvas.Left="648" Canvas.Top="25" Width="604">
@@ -89,9 +93,9 @@
                 <Label x:Name="lbTotal" Content="Tanggal Transaksi" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="279" Canvas.Top="431"/>
             </Canvas>
         </Canvas>
-        <Button Style="{StaticResource btn-primary}" x:Name="btKurir" Content="Kurir" HorizontalAlignment="Left" Margin="740,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btKurir_Click"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btJenisPembayaran" Content="Jenis Pembayaran" HorizontalAlignment="Left" Margin="817,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btJenisPembayaran_Click"/>
-        <Canvas x:Name="CanvasrootCourier" HorizontalAlignment="Left" Height="624" Margin="10,1019,0,-954" VerticalAlignment="Top" Width="1252">
+        <Button Style="{StaticResource btn-primary}" x:Name="btKurir" Content="Kurir" HorizontalAlignment="Left" Margin="230,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btKurir_Click" Grid.Column="1"/>
+        <Button Style="{StaticResource btn-primary}" x:Name="btJenisPembayaran" Content="Jenis Pembayaran" HorizontalAlignment="Left" Margin="307,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btJenisPembayaran_Click" Grid.Column="1"/>
+        <Canvas x:Name="CanvasrootCourier" HorizontalAlignment="Left" Height="624" Margin="10,1019,0,-954" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
             <DataGrid x:Name="dgCourier" Height="549" Canvas.Left="10" Canvas.Top="65" Width="869" FontSize="14" SelectedCellsChanged="dgCourier_SelectedCellsChanged" MouseDoubleClick="dgCourier_MouseDoubleClick"/>
             <Label Content="Tukupedia Courier Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Canvas x:Name="canvasCustomer1" Height="549" Canvas.Left="884" Canvas.Top="67" Width="358">
@@ -104,7 +108,7 @@
                 <Button Style="{StaticResource btn-primary}" x:Name="btInsertCourier" Content="Insert Courier" Canvas.Left="10" Canvas.Top="234" Width="300" FontSize="18" Click="btInsertCourier_Click"/>
             </Canvas>
         </Canvas>
-        <Canvas x:Name="CanvasJenisPembayaran" HorizontalAlignment="Left" Height="624" Margin="-1620,-1279,0,0" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootJenisPembayaran" HorizontalAlignment="Left" Height="624" Margin="-1620,-1279,0,0" VerticalAlignment="Top" Width="1252">
             <DataGrid x:Name="dgJenisPembayaran" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgJenisPembayaran_MouseDoubleClick" SelectedCellsChanged="dgJenisPembayaran_SelectedCellsChanged"/>
             <Label Content="Tukupedia Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Label Content="Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="681" Canvas.Top="134"/>
@@ -113,8 +117,8 @@
             <Button Style="{StaticResource btn-primary}" x:Name="btUpdateJenisPembayaran" Content="Update" Canvas.Left="681" Canvas.Top="397" Width="143" Click="btUpdateJenisPembayaran_Click"/>
             <Button Style="{StaticResource btn-danger}" x:Name="btToggleJenisPembayaran" Content="Matikan" Canvas.Left="829" Canvas.Top="397" Width="143" Click="btToggleJenisPembayaran_Click"/>
         </Canvas>
-        <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="999,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click"/>
-        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="0,86,0,-21" VerticalAlignment="Top" Width="1252">
+        <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="489,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click" Grid.Column="1"/>
+        <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="0,86,0,-21" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
             <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">
                 <Label Content="Tukupedia Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="48"/>
                 <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseDoubleClick="dgJenisPromo_MouseDoubleClick"/>
@@ -161,7 +165,7 @@
                 <ComboBox x:Name="cbJenisPromo" Canvas.Left="918" Canvas.Top="322" Width="227"/>
             </Canvas>
         </Canvas>
-        <Canvas x:Name="CanvasOfficialStore" HorizontalAlignment="Left" Height="613" Margin="4024,1437,-4004,-1361" VerticalAlignment="Top" Width="1252">
+        <Canvas x:Name="CanvasrootOfficialStore" HorizontalAlignment="Left" Height="613" Margin="2489,785,-2979,-709" VerticalAlignment="Top" Width="1252" Grid.Column="1">
             <DataGrid x:Name="dgOS" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseDoubleClick="dgOS_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"/>
             <Label Content="Tukupedia Official Store Manager" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
             <Canvas x:Name="CanvasDetailOfficialStore" Height="546" Canvas.Left="655" Canvas.Top="34" Width="551">
@@ -181,7 +185,7 @@
                 <TextBox x:Name="tbMendaftarSejakOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="336" Width="284" FontSize="20" IsReadOnly="True"/>
             </Canvas>
         </Canvas>
-        <Button Style="{StaticResource btn-primary}" x:Name="btOfficialStore" Content="Official Store" HorizontalAlignment="Left" Margin="1090,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btOfficialStore_Click"/>
+        <Button Style="{StaticResource btn-primary}" x:Name="btOfficialStore" Content="Official Store" HorizontalAlignment="Left" Margin="580,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btOfficialStore_Click" Grid.Column="1"/>
 
     </Grid>
 </Window>

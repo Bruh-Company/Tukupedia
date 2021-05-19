@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.ViewModels;
 using Tukupedia.ViewModels.Admin;
 
 namespace Tukupedia.Views.Admin
@@ -31,29 +32,113 @@ namespace Tukupedia.Views.Admin
         PromoViewModel pvm;
         JenisPromoViewModel jpvm;
         OfficialStoreViewModel osvm;
+        Canvas[] canvas;
+
+        private const int transFPS = 100;
+        private const double speedMargin = 0.3;
+        private const double speedOpacity = 0.4;
+        private const double multiplier = 80;
+
+        private static Transition transition;
         public HomeAdminView()
         {
             InitializeComponent();
+            transition = new Transition(transFPS);
             
         }
-        void hideall()
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            CanvasCategory.Visibility = Visibility.Hidden;
-            CanvasrootCustomer.Visibility = Visibility.Hidden;
-            CanvasHome.Visibility = Visibility.Hidden;
-            CanvasrootSeller.Visibility = Visibility.Hidden;
+            initState();
+        }
+
+        void initState()
+        {
+            canvas = new Canvas[] { CanvasrootHome, CanvasrootCategory, CanvasrootCustomer, CanvasrootSeller, CanvasrootTransaction, CanvasrootCourier, CanvasrootJenisPembayaran, CanvasrootPromo, CanvasrootOfficialStore};
+            CanvasrootHome.Margin = MarginPosition.Middle;
+            CanvasrootCategory.Margin = MarginPosition.Right;//
+            CanvasrootCustomer.Margin = MarginPosition.Right;
+            CanvasrootSeller.Margin = MarginPosition.Right;
+            CanvasrootJenisPembayaran.Margin = MarginPosition.Right;//
+            CanvasrootPromo.Margin = MarginPosition.Right;
+            CanvasrootCourier.Margin = MarginPosition.Right;
+            CanvasrootTransaction.Margin = MarginPosition.Right;
+            CanvasrootOfficialStore.Margin = MarginPosition.Right;
+
+            ComponentHelper.changeVisibilityComponent(CanvasrootHome, Visibility.Visible);
+            ComponentHelper.changeVisibilityComponent(CanvasrootCategory, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootCustomer, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootSeller, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootJenisPembayaran, Visibility.Hidden);
+
+            ComponentHelper.changeVisibilityComponent(CanvasrootPromo, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootCourier, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootTransaction, Visibility.Hidden);
+            ComponentHelper.changeVisibilityComponent(CanvasrootOfficialStore, Visibility.Hidden);
 
 
+        }
+
+        public void setCanvas(int pos)
+        {
+            for(int i = 0; i< canvas.Length; i++)
+            {
+                if(i == pos)
+                {
+                    setTransform(canvas[i], Visibility.Visible, MarginPosition.Middle);
+                }
+                else if(i<pos)
+                {
+                    setTransform(canvas[i], Visibility.Hidden, MarginPosition.Left);
+                }
+                else
+                {
+                    setTransform(canvas[i], Visibility.Hidden, MarginPosition.Right);
+                }
+            }
+            transition.playTransition();
+
+            for(int i = 0; i<canvas.Length; i++)
+            {
+                if(i == pos)
+                {
+                    ComponentHelper.changeZIndexComponent(canvas[i],Visibility.Visible);
+                }
+                else
+                {
+                    ComponentHelper.changeZIndexComponent(canvas[i],Visibility.Hidden);
+                }
+            }
+        }
+        private static void setTransform(FrameworkElement fe, Visibility v, Thickness m)
+        {
+            if (m == null) m = MarginPosition.Middle;
+            if (v == Visibility.Visible)
+            {
+                transition.makeTransition(fe,
+                    m, 1,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            }
+            else
+            {
+                transition.makeTransition(fe,
+                    m, 0,
+                    speedMargin * multiplier / transFPS,
+                    speedOpacity * multiplier / transFPS,
+                    "with previous");
+            }
         }
 
         private void btHome_Click(object sender, RoutedEventArgs e)
         {
-            CanvasHome.Visibility = Visibility.Visible;
+            setCanvas(0);
             HomeViewModel.initHome();
         }
 
         private void btCategory_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(1);
             reloadCategory();
             btTambahKategori.Visibility = Visibility.Visible;
             btToggleKategori.Visibility = Visibility.Hidden;
@@ -67,18 +152,21 @@ namespace Tukupedia.Views.Admin
 
         private void btCustomer_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(2);
             reloadCustomer();
             canvasCustomer.Visibility = Visibility.Hidden;
         }
 
         private void btSeller_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(3);
             reloadSeller();
             canvasSeller.Visibility = Visibility.Hidden;
         }
 
         private void btTransaction_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(4);
             reloadTransaction();
             canvasD_Trans.Visibility = Visibility.Hidden;
         }
@@ -302,13 +390,11 @@ namespace Tukupedia.Views.Admin
             }
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
 
         private void btKurir_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(5);
             reloadCourier();
             btUpdateCourier.Visibility = Visibility.Hidden;
             btBanCourier.Visibility = Visibility.Hidden;
@@ -432,6 +518,7 @@ namespace Tukupedia.Views.Admin
 
         private void btJenisPembayaran_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(6);
             reloadJenisPembayaran();
             tbNamaJenisPembayaran.Text = "";
             btToggleJenisPembayaran.Visibility = Visibility.Hidden;
@@ -446,7 +533,8 @@ namespace Tukupedia.Views.Admin
 
         private void btPromoroot_Click(object sender, RoutedEventArgs e)
         {
-
+            setCanvas(7);
+            reloadPromo();
         }
         void reloadPromo()
         {
@@ -885,6 +973,7 @@ namespace Tukupedia.Views.Admin
 
         private void btOfficialStore_Click(object sender, RoutedEventArgs e)
         {
+            setCanvas(8);
             reloadOfficialStore();
         }
         void reloadOfficialStore()
