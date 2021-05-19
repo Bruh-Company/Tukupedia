@@ -5,11 +5,11 @@ using System.Data;
 using System.Windows.Media;
 using System.Windows.Controls;
 using System;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using Tukupedia.Helpers.Utils;
 using System.Windows;
 using Oracle.DataAccess.Client;
+using System.Collections.Generic;
+using Tukupedia.Components;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageProduk {
@@ -17,6 +17,8 @@ namespace Tukupedia.ViewModels.Seller {
         private ItemModel itemModel;
         private DataRow seller;
         private bool toggleBtnInsertProduk = true;
+        private string imagePath;
+        private int itemId;
 
         public PageProduk(SellerView viewComponent, DataRow seller) {
             ViewComponent = viewComponent;
@@ -39,7 +41,7 @@ namespace Tukupedia.ViewModels.Seller {
             fillCmbBerat();
             switchBtnInsert();
 
-            //DEBUG();
+            DEBUG();
         }
 
         public void fillCmbKategori() {
@@ -119,6 +121,18 @@ namespace Tukupedia.ViewModels.Seller {
             if (selectedIndex == 3) itemModel.Table.DefaultView.Sort = "NAMA BARANG desc";
         }
 
+        public void insertImage() {
+            imagePath = ImageHelper.openFileDialog(ViewComponent.imageProduk);
+        }
+
+        public void cancelProduk() {
+            itemId = -1;
+            toggleBtnInsertProduk = true;
+            ViewComponent.spanelDiscussion.Children.Clear();
+            switchBtnInsert();
+            resetPageProduk();
+        }
+
         public void selectProduk() {
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
             if (selectedIndex == -1) return;
@@ -134,48 +148,40 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxKategori.SelectedIndex = Convert.ToInt32(row["ID_CATEGORY"].ToString()) - 1;
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
-            ViewComponent.imageProduk.Source = Utility.loadImageItem(row["IMAGE"].ToString());
 
+            imagePath = row["IMAGE"].ToString();
+            ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString());
+
+            itemId = Convert.ToInt32(row["ID"].ToString());
+            loadDiskusi(itemId);
+            
             toggleBtnInsertProduk = false;
             switchBtnInsert();
         }
 
-        public void insertImage() {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                if (openFileDialog.FileName == "") return;
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                ViewComponent.imageProduk.Source = new BitmapImage(fileUri);
-            }
-        }
-
-        public void cancelProduk() {
-            toggleBtnInsertProduk = true;
-            switchBtnInsert();
-            resetPageProduk();
-        }
-
         public void insertProduk() {
-            string[] data = getData();
+            List<string> data = getData();
             if (!dataValidation(data)) return;
 
             string nama = data[0],
-                deskripsi = data[5],
-                imageUri = data[6];
+                deskripsi = data[5];
             int idCategory = Convert.ToInt32(data[1]),
                 harga = Convert.ToInt32(data[2]),
                 stok = Convert.ToInt32(data[3]),
                 berat = Convert.ToInt32(data[4]);
-            char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? status = '0' : '1';
+            char status = ViewComponent.checkboxStatusProduk.IsChecked == false ? '0' : '1';
 
             StoredProcedure procedure = new StoredProcedure("GENERATE_KODE_ITEM");
             procedure.addParam("R", "ret", 30, OracleDbType.Varchar2);
             procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
 
+            string img = ImageHelper.saveImage(imagePath, procedure.getValue(), ImageHelper.target.item);
+
             ItemModel model = new ItemModel();
             model.init();
+
             DataRow newItem = model.Table.NewRow();
-            newItem["ID"] = 0;
+            newItem["ID"] = 1;
             newItem["KODE"] = " ";
             newItem["NAMA"] = nama.ToUpper();
             newItem["DESKRIPSI"] = deskripsi.ToUpper();
@@ -185,23 +191,21 @@ namespace Tukupedia.ViewModels.Seller {
             newItem["BERAT"] = berat;
             newItem["HARGA"] = harga;
             newItem["STATUS"] = status;
-            newItem["IMAGE"] = Utility.saveImage(imageUri, procedure.getValue("ret"), 'i');
+            newItem["IMAGE"] = img;
             model.insert(newItem);
 
             resetPageProduk();
         }
 
         public void updateProduk() {
-            string[] data = getData();
+            List<string> data = getData();
             if (!dataValidation(data)) return;
 
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
-            if (selectedIndex == -1)
-                return;
+            if (selectedIndex == -1) return;
 
             string nama = data[0],
-                deskripsi = data[5],
-                imageUri = data[6];
+                deskripsi = data[5];                
             int idCategory = Convert.ToInt32(data[1]),
                 harga = Convert.ToInt32(data[2]),
                 stok = Convert.ToInt32(data[3]),
@@ -212,19 +216,20 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
+                string img = ImageHelper.saveImage(imagePath, row["KODE"].ToString(), ImageHelper.target.item);
                 model.updateRow(
-                    row, 
-                    "NAMA", nama, 
-                    "DESKRIPSI", deskripsi, 
-                    "ID_CATEGORY", idCategory, 
-                    "STOK", stok, 
-                    "BERAT", berat, 
-                    "HARGA", harga, 
+                    row,
+                    "NAMA", nama,
+                    "DESKRIPSI", deskripsi,
+                    "ID_CATEGORY", idCategory,
+                    "STOK", stok,
+                    "BERAT", berat,
+                    "HARGA", harga,
                     "STATUS", status,
-                    "IMAGE", Utility.saveImage(imageUri, row["IMAGE"].ToString(), 'i')
+                    "IMAGE", img
                 );
             }
-            resetPageProduk();
+            cancelProduk();
         }
 
         public void checkRow(DataGridRow dgRow) {
@@ -243,12 +248,34 @@ namespace Tukupedia.ViewModels.Seller {
                     Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
                     dgRow.Background = new SolidColorBrush(color);
                 }
-
             }
         }
 
-        // PRIVATE METHODS
+        public void resetDiskusi() {
+            ViewComponent.spanelDiscussion.Children.Clear();
+            loadDiskusi(itemId);
+        }
 
+        public void loadDiskusi(int id) {
+            H_DiskusiModel model = new H_DiskusiModel();
+            model.addWhere("ID_ITEM", id.ToString());
+            model.addOrderBy("CREATED_AT ASC");
+            foreach (DataRow row in model.get()) {
+                DiscussionCard dc = new DiscussionCard(ViewComponent.spanelDiscussion.ActualWidth);
+                DataRow customer = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
+                dc.initMainComment(
+                    message: row["MESSAGE"].ToString(),
+                    commenterName: customer["NAMA"].ToString(),
+                    date: Utility.formatDate(row["CREATED_AT"].ToString()),
+                    url: customer["IMAGE"].ToString()
+                    );
+                dc.initComments(Convert.ToInt32(row["ID"]));
+                ViewComponent.spanelDiscussion.Children.Add(dc);
+            }
+
+        }
+
+        // PRIVATE METHODS
         private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;
@@ -262,31 +289,25 @@ namespace Tukupedia.ViewModels.Seller {
             }
         }
 
-        private string[] getData() {
-            string 
-                nama = ViewComponent.textboxNamaProduk.Text,
-                idCategory = (ViewComponent.comboboxKategori.SelectedIndex + 1) + "",
-                harga = ViewComponent.textboxHarga.Text,
-                stok = ViewComponent.textboxStok.Text,
-                berat = ViewComponent.textboxBerat.Text,
-                deskripsi = ViewComponent.textboxDeskripsi.Text,
-                imageUri = ViewComponent.imageProduk.Source == null ? "" : ViewComponent.imageProduk.Source.ToString();
+        private List<string> getData() {
+            List<string> data = new List<string>();
+            data.Add(ViewComponent.textboxNamaProduk.Text);
+            data.Add((ViewComponent.comboboxKategori.SelectedIndex + 1).ToString());
+            data.Add(ViewComponent.textboxHarga.Text);
+            data.Add(ViewComponent.textboxStok.Text);
 
-            if (ViewComponent.comboboxBerat.SelectedIndex == 1)
-                berat = (Convert.ToInt32(ViewComponent.textboxBerat.Text) / 1000) + "";
+            if (ViewComponent.comboboxBerat.SelectedIndex == 0)
+                data.Add(ViewComponent.textboxBerat.Text);
+            else data.Add((Convert.ToInt32(ViewComponent.textboxBerat.Text) * 1000).ToString());
+            data.Add(ViewComponent.textboxDeskripsi.Text);
 
-            string[] data = { nama, idCategory, harga, stok, berat, deskripsi, imageUri };
             return data;
         }
 
-        private bool dataValidation(string[] data) {
-            if (data.Length < 6) return false;
-            foreach (string item in data) {
-                if (item == "") {
-                    return false;
-                }
-            }
-            return true;
+        private bool dataValidation(List<string> data) {
+            foreach (string item in data)
+                if (item == "") return false;
+            return imagePath == "" ? false : true;
         }
 
         private void resetPageProduk() {

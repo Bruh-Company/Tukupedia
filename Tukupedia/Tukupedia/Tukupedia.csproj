@@ -95,6 +95,7 @@
     <Compile Include="Helpers\DatabaseHelpers\StoredProcedure.cs" />
     <Compile Include="Helpers\Utils\ComponentHelper.cs" />
     <Compile Include="Helpers\Utils\EmptyAnimation.cs" />
+    <Compile Include="Helpers\Utils\ImageHelper.cs" />
     <Compile Include="Helpers\Utils\Transition.cs" />
     <Compile Include="Helpers\Utils\Session.cs" />
     <Compile Include="Helpers\Utils\Utility.cs" />
@@ -134,7 +135,6 @@
     <Compile Include="ViewModels\Customer\SettingViewModel.cs" />
     <Compile Include="ViewModels\Customer\TransactionViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\Seller\PageDiskusi.cs" />
     <Compile Include="ViewModels\Seller\PageInfoToko.cs" />
     <Compile Include="ViewModels\Seller\PagePesanan.cs" />
     <Compile Include="ViewModels\Seller\PageProduk.cs" />

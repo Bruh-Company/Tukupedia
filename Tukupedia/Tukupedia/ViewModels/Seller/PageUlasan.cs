@@ -39,6 +39,12 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.textboxBalasUlasan.IsEnabled = true;
         }
 
+        public void searchUlasan() {
+            string keyword = ViewComponent.textboxCariUlasan.Text;
+            if (keyword != "") fillDgvUlasan(keyword);
+            else fillDgvUlasan();
+        }
+
         public void replyUlasan() {
             int selectedIndex = ViewComponent.datagridUlasan.SelectedIndex;
             if (selectedIndex == -1) return;
@@ -75,6 +81,29 @@ namespace Tukupedia.ViewModels.Seller {
                 $"and u.ID_D_TRANS_ITEM = d.ID " +
                 $"and d.ID_H_TRANS_ITEM = h.ID " +
                 $"and u.ID_SELLER = '{seller["ID"]}'";
+
+            ulasanModel = new UlasanModel();
+            ulasanModel.initAdapter(statement);
+
+            ViewComponent.datagridUlasan.ItemsSource = "";
+            ViewComponent.datagridUlasan.ItemsSource = ulasanModel.Table.DefaultView;
+            ViewComponent.datagridUlasan.Columns[0].Visibility = Visibility.Hidden;
+        }
+
+        private void fillDgvUlasan(string keyword) {
+            string statement = $"SELECT " +
+                $"U.ID as \"ID\", " +
+                $"h.KODE as \"KODE TRANSAKSI\", " +
+                $"c.NAMA as \"NAMA PEMBELI\", " +
+                $"u.RATING as \"RATING\" " +
+                $"FROM ULASAN u, CUSTOMER c, D_TRANS_ITEM d, H_TRANS_ITEM h " +
+                $"WHERE u.ID_CUSTOMER = c.ID " +
+                $"and u.ID_D_TRANS_ITEM = d.ID " +
+                $"and d.ID_H_TRANS_ITEM = h.ID " +
+                $"and u.ID_SELLER = '{seller["ID"]}' " +
+                $"and ( " +
+                $"h.kode = '{keyword}' or " +
+                $"c.NAMA = '{keyword}'";
 
             ulasanModel = new UlasanModel();
             ulasanModel.initAdapter(statement);

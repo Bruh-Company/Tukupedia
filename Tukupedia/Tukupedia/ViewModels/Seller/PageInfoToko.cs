@@ -3,13 +3,9 @@ using Tukupedia.Views.Seller;
 using Tukupedia.Helpers.DatabaseHelpers;
 using System.Windows;
 using System.Data;
-using System.Windows.Media;
-using System.Windows.Controls;
 using System;
 using System.Collections.Generic;
 using Oracle.DataAccess.Client;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
 using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.ViewModels.Seller {
@@ -20,6 +16,7 @@ namespace Tukupedia.ViewModels.Seller {
         private DataTable lbKurirTable;
         private DataTable cbKurirTable;
         private bool toggleChange = false;
+        private string imagePath;
 
         public PageInfoToko(SellerView viewComponent, DataRow seller) {
             ViewComponent = viewComponent;
@@ -29,7 +26,6 @@ namespace Tukupedia.ViewModels.Seller {
         public void initPageInfoToko() {
             sellerModel = new SellerModel();
             sellerModel.init();
-
             resetInfo();
             changeState();
         }
@@ -40,8 +36,20 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void registerOS() {
-            if (System.Windows.MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
-                transOS();
+            if (MessageBox.Show("Yakin untuk daftar sebagai Official Store?", "Konfirmasi", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes) {
+                App.openConnection(out _);
+                using (OracleTransaction trans = App.connection.BeginTransaction()) {
+                    try {
+                        Trans_OSModel model = new Trans_OSModel();
+                        model.init();
+                        model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
+                        trans.Commit();
+                    }
+                    catch (OracleException) {
+                        trans.Rollback();
+                    }
+                }
+                App.closeConnection(out _);
             }
         }
 
@@ -80,28 +88,25 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void changeTokoPic() {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                if (openFileDialog.FileName == "") return;
-                Uri fileUri = new Uri(openFileDialog.FileName);
-                ViewComponent.imageInfo.Source = new BitmapImage(fileUri);
-            }
+            imagePath = ImageHelper.openFileDialog(ViewComponent.imageInfo);
         }
 
         public void initImageToko() {
-            if (seller["IMAGE"].ToString() == "") ViewComponent.imageToko.Source = Utility.loadImageCheems();
-            else ViewComponent.imageToko.Source = Utility.loadImageSeller(seller["IMAGE"].ToString());
+            if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageToko);
+            else ImageHelper.loadImage(ViewComponent.imageToko, seller["IMAGE"].ToString());
         }
+
 
         // Private Void
         private void resetInfo() {
-            string id = seller["ID"].ToString();
-            seller = new DB("SELLER").select().where("ID", id).getFirst();
+            seller = new DB("SELLER").select().where("ID", seller["ID"].ToString()).getFirst();
+            imagePath = seller["IMAGE"].ToString();
+            ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
             lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
 
             initImageToko();
             fillTextbox();
-            reloadImage();
+            reloadImageInfo();
             resetKurir();
         }
 
@@ -110,27 +115,13 @@ namespace Tukupedia.ViewModels.Seller {
             fillCmbKurir();
         }
 
-        private void transOS() {
-            using (OracleTransaction trans = App.connection.BeginTransaction()) {
-                try {
-                    Trans_OSModel model = new Trans_OSModel();
-                    model.init();
-                    model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
-                    trans.Commit();
-                }
-                catch (OracleException) {
-                    trans.Rollback();
-                }
-            }
-        }
-
         private void saveKurirSeller() {
             Kurir_SellerModel model = new Kurir_SellerModel();
             model.init();
             model.addWhere("ID_SELLER", seller["ID"].ToString());
             foreach (DataRow row in model.get()) {
+                new DB("KURIR_SELLER").delete(seller["ID"].ToString()).execute();
             }
-            new DB("KURIR_SELLER").delete(seller["ID"].ToString()).execute();
 
             foreach (DataRow row in lbKurirTable.Rows) {
                 DataRow target = new DB("KURIR_SELLER").select("count(*)").where("ID_SELLER", seller["ID"].ToString()).where("ID_KURIR", row["ID"].ToString()).getFirst();
@@ -141,7 +132,7 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         private void saveDataSeller() {
-            string[] data = getData();
+            List<string> data = getData();
             if (!dataValidation(data)) return;
 
             string idSeller = seller["ID"].ToString();
@@ -150,7 +141,8 @@ namespace Tukupedia.ViewModels.Seller {
             model.init();
             model.addWhere("ID", idSeller, "=", false);
             foreach (DataRow row in model.get()) {
-                string img = Utility.saveImage(data[5], seller["KODE"].ToString(), 's');
+                string img = "";
+                if (imagePath != "") img = ImageHelper.saveImage(imagePath, seller["KODE"].ToString(), ImageHelper.target.seller, true);
                 model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4], "IMAGE", img);
             }
         }
@@ -188,10 +180,9 @@ namespace Tukupedia.ViewModels.Seller {
             }
         }
 
-        private void reloadImage() {
-            string img = seller["IMAGE"].ToString();
-            if (img == "") ViewComponent.imageInfo.Source = Utility.loadImageCheems();
-            else ViewComponent.imageInfo.Source = Utility.loadImageSeller(img);
+        private void reloadImageInfo() {
+            if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageInfo);
+            else ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString());
         }
 
         private void fillTextbox() {
@@ -241,26 +232,19 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.listboxListKurirInfo.SelectedValuePath = "ID";
         }
 
-        private string[] getData() {
-            string
-                namaToko = ViewComponent.textboxNamaToko.Text.ToUpper(),
-                namaPenjual = ViewComponent.textboxNamaPenjual.Text.ToUpper(),
-                email = ViewComponent.textboxEmailInfo.Text,
-                noTelp = ViewComponent.textboxNoTelpInfo.Text,
-                alamat = ViewComponent.textboxAlamatInfo.Text.ToUpper(),
-                imageUri = ViewComponent.imageInfo.Source == null ? "" : ViewComponent.imageInfo.Source.ToString();
-
-            string[] data = { namaToko, namaPenjual, email, noTelp, alamat, imageUri};
+        private List<string> getData() {
+            List<string> data = new List<string>();
+            data.Add(ViewComponent.textboxNamaToko.Text.ToUpper());
+            data.Add(ViewComponent.textboxNamaPenjual.Text.ToUpper());
+            data.Add(ViewComponent.textboxEmailInfo.Text);
+            data.Add(ViewComponent.textboxNoTelpInfo.Text);
+            data.Add(ViewComponent.textboxAlamatInfo.Text);
             return data;
         }
 
-        private bool dataValidation(string[] data) {
-            if (data.Length < 5) return false;
-            foreach (string item in data) {
-                if (item == "") {
-                    return false;
-                }
-            }
+        private bool dataValidation(List<string> data) {
+            foreach (string item in data)
+                if (item == "") return false;
             return true;
         }
     }

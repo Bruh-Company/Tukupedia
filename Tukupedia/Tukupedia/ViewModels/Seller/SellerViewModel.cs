@@ -11,11 +11,10 @@ using System.Windows.Media.Imaging;
 
 namespace Tukupedia.ViewModels.Seller {
     public static class SellerViewModel {
-        public enum page { Pesanan, Produk, InfoToko, Ulasan, Diskusi }
+        public enum page { Pesanan, Produk, InfoToko, Ulasan }
         public static PagePesanan pagePesanan;
         public static PageProduk pageProduk;
         public static PageUlasan pageUlasan;
-        public static PageDiskusi pageDiskusi;
         public static PageInfoToko pageInfoToko;
 
         private static SellerView ViewComponent;
@@ -28,15 +27,12 @@ namespace Tukupedia.ViewModels.Seller {
 
 
         public static void InitializeView(SellerView view) {
+            TESTING();
             seller = Session.User;
             ViewComponent = view;
-
-            TESTING();
-
             pagePesanan = new PagePesanan(view, seller);
             pageProduk = new PageProduk(view, seller);
             pageUlasan = new PageUlasan(view, seller);
-            pageDiskusi = new PageDiskusi(view, seller);
             pageInfoToko = new PageInfoToko(view, seller);
             transition = new Transition(transFPS);
             initState();
@@ -45,20 +41,19 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public static void TESTING() {
-            seller = new DB("SELLER").select().where("ID", "1").getFirst();
+            Session.User = new DB("SELLER").select().where("ID", "1").getFirst();
+            Session.role = "SELLER";
         }
 
         public static void initState() {
             ViewComponent.canvasPesanan.Margin = MarginPosition.Middle;
             ViewComponent.canvasProduk.Margin = MarginPosition.Right;
             ViewComponent.canvasUlasan.Margin = MarginPosition.Right;
-            ViewComponent.canvasDiskusi.Margin = MarginPosition.Right;
             ViewComponent.canvasInfoToko.Margin = MarginPosition.Right;
 
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasPesanan, Visibility.Visible);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasProduk, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasUlasan, Visibility.Hidden);
-            ComponentHelper.changeVisibilityComponent(ViewComponent.canvasDiskusi, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasInfoToko, Visibility.Hidden);
         }
 
@@ -74,7 +69,7 @@ namespace Tukupedia.ViewModels.Seller {
         
         public static void logout() {
             Session.Logout();
-            //new LoginRegisterView().Show();
+            new LoginRegisterView().Show();
             ViewComponent.Close();
         }
 
@@ -82,7 +77,6 @@ namespace Tukupedia.ViewModels.Seller {
             if (p == page.Pesanan) swapToPagePesanan();
             if (p == page.Produk) swapToPageProduk();
             if (p == page.Ulasan) swapToPageUlasan();
-            if (p == page.Diskusi) swapToPageDiskusi();
             if (p == page.InfoToko) swapToPageInfoToko();
         }
 
@@ -107,12 +101,6 @@ namespace Tukupedia.ViewModels.Seller {
                 speedOpacity * multiplier / transFPS,
                 "with previous");
 
-            transition.makeTransition(ViewComponent.canvasDiskusi,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
             transition.makeTransition(ViewComponent.canvasInfoToko,
                 MarginPosition.Right, 0,
                 speedMargin * multiplier / transFPS,
@@ -128,9 +116,6 @@ namespace Tukupedia.ViewModels.Seller {
                 Visibility.Hidden);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasUlasan,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasDiskusi,
                 Visibility.Hidden);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasInfoToko,
@@ -158,12 +143,6 @@ namespace Tukupedia.ViewModels.Seller {
                 speedOpacity * multiplier / transFPS,
                 "with previous");
 
-            transition.makeTransition(ViewComponent.canvasDiskusi,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
             transition.makeTransition(ViewComponent.canvasInfoToko,
                 MarginPosition.Right, 0,
                 speedMargin * multiplier / transFPS,
@@ -179,9 +158,6 @@ namespace Tukupedia.ViewModels.Seller {
                 Visibility.Hidden);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasUlasan,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasDiskusi,
                 Visibility.Hidden);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasInfoToko,
@@ -209,12 +185,6 @@ namespace Tukupedia.ViewModels.Seller {
                 speedOpacity * multiplier / transFPS,
                 "with previous");
 
-            transition.makeTransition(ViewComponent.canvasDiskusi,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
             transition.makeTransition(ViewComponent.canvasInfoToko,
                 MarginPosition.Right, 0,
                 speedMargin * multiplier / transFPS,
@@ -231,60 +201,6 @@ namespace Tukupedia.ViewModels.Seller {
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasProduk,
                 Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasDiskusi,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasInfoToko,
-                Visibility.Hidden);
-        }
-
-        public static void swapToPageDiskusi() {
-            transition.setCallback(pageDiskusi.initPageDiskusi);
-
-            transition.makeTransition(ViewComponent.canvasDiskusi,
-                MarginPosition.Middle, 1,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
-            transition.makeTransition(ViewComponent.canvasPesanan,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
-            transition.makeTransition(ViewComponent.canvasProduk,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
-            transition.makeTransition(ViewComponent.canvasUlasan,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
-            transition.makeTransition(ViewComponent.canvasInfoToko,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
-            transition.playTransition();
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasPesanan,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasProduk,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasUlasan,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasDiskusi,
-                Visibility.Visible);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasInfoToko,
                 Visibility.Hidden);
@@ -317,12 +233,6 @@ namespace Tukupedia.ViewModels.Seller {
                 speedOpacity * multiplier / transFPS,
                 "with previous");
 
-            transition.makeTransition(ViewComponent.canvasDiskusi,
-                MarginPosition.Right, 0,
-                speedMargin * multiplier / transFPS,
-                speedOpacity * multiplier / transFPS,
-                "with previous");
-
             transition.playTransition();
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasInfoToko,
@@ -335,9 +245,6 @@ namespace Tukupedia.ViewModels.Seller {
                 Visibility.Hidden);
             ComponentHelper.changeZIndexComponent(
                 ViewComponent.canvasUlasan,
-                Visibility.Hidden);
-            ComponentHelper.changeZIndexComponent(
-                ViewComponent.canvasDiskusi,
                 Visibility.Hidden);
         }
     }

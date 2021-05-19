@@ -50,16 +50,25 @@ namespace Tukupedia.Components
                 bool isPenjual;
                 isPenjual = row["SENDER"].ToString() == "C" ? false : true;
                 Comment com = new Comment(isPenjual);
-                string date;
                 DataRow user;
-                if (isPenjual) user = new DB("SELLER").select().@where("ID", row["ID_SELLER"].ToString()).getFirst();
-                else user = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
-                com.init(
-                    message:row["MESSAGE"].ToString(),
-                    commenterName:user["NAMA"].ToString(),
-                    date:Utility.formatDate(row["CREATED_AT"].ToString()),
-                    url:user["IMAGE"].ToString()
+                if (isPenjual) {
+                    user = new DB("SELLER").select().@where("ID", row["ID_SELLER"].ToString()).getFirst();
+                    com.init(
+                    message: row["MESSAGE"].ToString(),
+                    commenterName: user["NAMA_SELLER"].ToString(),
+                    date: Utility.formatDate(row["CREATED_AT"].ToString()),
+                    url: user["IMAGE"].ToString()
                     );
+                }
+                else {
+                    user = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
+                    com.init(
+                        message: row["MESSAGE"].ToString(),
+                        commenterName: user["NAMA"].ToString(),
+                        date: Utility.formatDate(row["CREATED_AT"].ToString()),
+                        url: user["IMAGE"].ToString()
+                        );
+                }
                 spComments.Children.Add(com);
             }
 
