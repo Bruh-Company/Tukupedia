@@ -24,10 +24,10 @@
             <Setter Property="BorderBrush" Value="#FFFFFF"/>
         </Style>
     </Window.Resources>
-    
+
     <Grid>
         <!--HEADER-->
-        <Canvas HorizontalAlignment="Left" Height="100" Width="1280" VerticalAlignment="Top" Background="#65c65b">
+        <Canvas HorizontalAlignment="Left" Height="100" Width="1280" Margin="0" VerticalAlignment="Top" Background="#65c65b">
             <Image  Name="imageToko" Height="72" Width="72" Canvas.Left="30" Canvas.Top="15"/>
             <Label  Name="labelNamaToko"    Content="NAMA TOKO"     Canvas.Left="125"   Canvas.Top="0" Style="{StaticResource h2}" Width="600"/>
             <Label  Name="labelStatusToko"  Content="STATUS TOKO"   Canvas.Left="125"   Canvas.Top="40" Style="{StaticResource lg}"/>
@@ -76,8 +76,8 @@
                 <Label Content="Alamat Tujuan" Canvas.Left="10" Canvas.Top="180" Style="{StaticResource md-secondary}"/>
                 <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="10" Canvas.Top="210" Width="320" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsReadOnly="True"/>
 
-                <Label Content="Produk" Canvas.Left="870" Canvas.Top="330" Style="{StaticResource md-secondary}"/>
-                <DataGrid Name="datagridProdukPesanan" Canvas.Left="345" Canvas.Top="10" Width="675" Height="220" MouseDoubleClick="datagridProdukPesanan_MouseDoubleClick" LoadingRow="datagridProdukPesanan_LoadingRow" Background="{x:Null}"/>
+                <Label Content="Produk" Canvas.Left="345" Canvas.Top="6" Style="{StaticResource md-secondary}"/>
+                <DataGrid Name="datagridProdukPesanan" Canvas.Left="345" Canvas.Top="43" Width="675" Height="187" MouseDoubleClick="datagridProdukPesanan_MouseDoubleClick" LoadingRow="datagridProdukPesanan_LoadingRow" Background="{x:Null}"/>
 
                 <Label Content="Total" Canvas.Left="700" Canvas.Top="240" Style="{StaticResource xl-secondary}"/>
                 <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Canvas.Left="765" Canvas.Top="240" Width="250"  Height="30" Style="{StaticResource tb-noborder}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right" IsReadOnly="True"/>
@@ -91,9 +91,9 @@
 
         <!--PAGE PRODUK-->
         <Canvas Name="canvasProduk" HorizontalAlignment="Center" Height="590" Margin="1920,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
-            <ScrollViewer Width="1280" Height="590" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
-                <Canvas Width="1280" Height="1180">
-                    <Canvas Width="1280" Height="590" Canvas.Top="0">
+            <ScrollViewer Width="{Binding ActualWidth, ElementName=canvasProduk}" Height="{Binding ActualHeight, ElementName=canvasProduk}" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+                <Grid Width="1280">
+                    <Canvas Width="1280">
                         <TextBox Name="textboxCariProduk" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="300" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
                         <Button Name="btnCariProduk" Content="Cari" FontSize="18" Canvas.Left="325" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariProduk_Click"/>
                         <ComboBox Name="comboboxSortProduk" Canvas.Left="445" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
@@ -132,18 +132,13 @@
                         <Button Name="btnInsert" Content="Insert" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnInsert_Click"/>
                         <Button Name="btnUpdate" Content="Update" FontSize="20" Width="235" Height="40" Canvas.Left="1010" Canvas.Top="530" Style="{StaticResource btn-primary}" Click="btnUpdate_Click"/>
                     </Canvas>
-                    
-                    <!--PAGE DISKUSI-->
-                    <Canvas Name="canvasDiskusi" Width="1280" Height="590" Canvas.Top="590">
-                        <ScrollViewer Width="Auto" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top">
-                            <StackPanel Margin="5,5,5,10" Width="1080" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center" x:Name="spanelDiscussion">
 
-                            </StackPanel>
-                        </ScrollViewer>
-                    </Canvas>
-                </Canvas>
+                    <!--DISKUSI-->
+                    <Label Content="Diskusi" Margin="50,600,50,100" Style="{StaticResource h3-success}"/>
+                    <StackPanel Width="1180" Margin="50,640,50,100" Canvas.Left="50" Canvas.Top="640" VerticalAlignment="Center" HorizontalAlignment="Center" Name="spanelDiscussion"></StackPanel>
+                </Grid>
+                
             </ScrollViewer>
-            
         </Canvas>
 
         <!--PAGE INFO TOKO-->

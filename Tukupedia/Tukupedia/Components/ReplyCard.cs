@@ -6,6 +6,7 @@ using MaterialDesignThemes.Wpf;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 using Tukupedia.ViewModels.Customer;
+using Tukupedia.ViewModels.Seller;
 
 namespace Tukupedia.Components
 {
@@ -91,7 +92,12 @@ namespace Tukupedia.Components
                 "ID_H_DISKUSI",id_h_diskusi,
                 "CREATED_AT",DateTime.Now.ToString()
             );
-            ItemDetailViewModel.resetDiscussion();
+            if (Session.role.ToUpper() == "SELLER") {
+                SellerViewModel.pageProduk.resetDiskusi();
+            }
+            else {
+                ItemDetailViewModel.resetDiscussion();
+            }
         }
     }
 }

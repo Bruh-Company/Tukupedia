@@ -131,7 +131,6 @@
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Customer\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
-    <Compile Include="ViewModels\Seller\PageDiskusi.cs" />
     <Compile Include="ViewModels\Seller\PageInfoToko.cs" />
     <Compile Include="ViewModels\Seller\PagePesanan.cs" />
     <Compile Include="ViewModels\Seller\PageProduk.cs" />

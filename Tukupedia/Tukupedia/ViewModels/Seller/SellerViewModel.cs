@@ -15,7 +15,6 @@ namespace Tukupedia.ViewModels.Seller {
         public static PagePesanan pagePesanan;
         public static PageProduk pageProduk;
         public static PageUlasan pageUlasan;
-        public static PageDiskusi pageDiskusi;
         public static PageInfoToko pageInfoToko;
 
         private static SellerView ViewComponent;
@@ -28,11 +27,9 @@ namespace Tukupedia.ViewModels.Seller {
 
 
         public static void InitializeView(SellerView view) {
+            TESTING();
             seller = Session.User;
             ViewComponent = view;
-
-            TESTING();
-
             pagePesanan = new PagePesanan(view, seller);
             pageProduk = new PageProduk(view, seller);
             pageUlasan = new PageUlasan(view, seller);
@@ -44,20 +41,19 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public static void TESTING() {
-            seller = new DB("SELLER").select().where("ID", "1").getFirst();
+            Session.User = new DB("SELLER").select().where("ID", "1").getFirst();
+            Session.role = "SELLER";
         }
 
         public static void initState() {
             ViewComponent.canvasPesanan.Margin = MarginPosition.Middle;
             ViewComponent.canvasProduk.Margin = MarginPosition.Right;
             ViewComponent.canvasUlasan.Margin = MarginPosition.Right;
-            ViewComponent.canvasDiskusi.Margin = MarginPosition.Right;
             ViewComponent.canvasInfoToko.Margin = MarginPosition.Right;
 
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasPesanan, Visibility.Visible);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasProduk, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasUlasan, Visibility.Hidden);
-            ComponentHelper.changeVisibilityComponent(ViewComponent.canvasDiskusi, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(ViewComponent.canvasInfoToko, Visibility.Hidden);
         }
 

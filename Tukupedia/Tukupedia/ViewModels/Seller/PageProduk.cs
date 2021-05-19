@@ -9,15 +9,16 @@ using Tukupedia.Helpers.Utils;
 using System.Windows;
 using Oracle.DataAccess.Client;
 using System.Collections.Generic;
+using Tukupedia.Components;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageProduk {
         private SellerView ViewComponent;
         private ItemModel itemModel;
         private DataRow seller;
-        private PageDiskusi pageDiskusi;
         private bool toggleBtnInsertProduk = true;
         private string imagePath;
+        private int itemId;
 
         public PageProduk(SellerView viewComponent, DataRow seller) {
             ViewComponent = viewComponent;
@@ -125,8 +126,9 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void cancelProduk() {
+            itemId = -1;
             toggleBtnInsertProduk = true;
-            ViewComponent.canvasDiskusi.Visibility = Visibility.Hidden;
+            ViewComponent.spanelDiscussion.Children.Clear();
             switchBtnInsert();
             resetPageProduk();
         }
@@ -150,9 +152,9 @@ namespace Tukupedia.ViewModels.Seller {
             imagePath = row["IMAGE"].ToString();
             ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString());
 
-            ViewComponent.canvasDiskusi.Visibility = Visibility.Visible;
-            pageDiskusi = new PageDiskusi(ViewComponent, seller, row["ID"].ToString());
-
+            itemId = Convert.ToInt32(row["ID"].ToString());
+            loadDiskusi(itemId);
+            
             toggleBtnInsertProduk = false;
             switchBtnInsert();
         }
@@ -200,8 +202,7 @@ namespace Tukupedia.ViewModels.Seller {
             if (!dataValidation(data)) return;
 
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
-            if (selectedIndex == -1)
-                return;
+            if (selectedIndex == -1) return;
 
             string nama = data[0],
                 deskripsi = data[5];                
@@ -247,12 +248,34 @@ namespace Tukupedia.ViewModels.Seller {
                     Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
                     dgRow.Background = new SolidColorBrush(color);
                 }
-
             }
         }
 
-        // PRIVATE METHODS
+        public void resetDiskusi() {
+            ViewComponent.spanelDiscussion.Children.Clear();
+            loadDiskusi(itemId);
+        }
 
+        public void loadDiskusi(int id) {
+            H_DiskusiModel model = new H_DiskusiModel();
+            model.addWhere("ID_ITEM", id.ToString());
+            model.addOrderBy("CREATED_AT ASC");
+            foreach (DataRow row in model.get()) {
+                DiscussionCard dc = new DiscussionCard(ViewComponent.spanelDiscussion.ActualWidth);
+                DataRow customer = new DB("CUSTOMER").select().@where("ID", row["ID_CUSTOMER"].ToString()).getFirst();
+                dc.initMainComment(
+                    message: row["MESSAGE"].ToString(),
+                    commenterName: customer["NAMA"].ToString(),
+                    date: Utility.formatDate(row["CREATED_AT"].ToString()),
+                    url: customer["IMAGE"].ToString()
+                    );
+                dc.initComments(Convert.ToInt32(row["ID"]));
+                ViewComponent.spanelDiscussion.Children.Add(dc);
+            }
+
+        }
+
+        // PRIVATE METHODS
         private void switchBtnInsert() {
             if (!toggleBtnInsertProduk) {
                 ViewComponent.btnCancel.Visibility = Visibility.Visible;
