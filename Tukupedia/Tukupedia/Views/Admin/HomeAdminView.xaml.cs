@@ -23,6 +23,8 @@ namespace Tukupedia.Views.Admin
     /// </summary>
     public partial class HomeAdminView : Window
     {
+        private delegate void swapCallback();
+
         CustomerViewModel cvm;
         SellerViewModel svm;
         CategoryViewModel cavm;
@@ -76,17 +78,18 @@ namespace Tukupedia.Views.Admin
             ComponentHelper.changeVisibilityComponent(CanvasrootOfficialStore, Visibility.Hidden);
 
             SwapJenisPromo(0);
-
+            swapPromoCallback(0)();
 
         }
 
-        public void SwapJenisPromo(int pos)
+        private void SwapJenisPromo(int pos)
         {
             
             if(pos == 0)
             {
                 setTransform(CanvasJenisPromo, Visibility.Hidden, MarginPosition.Left);
                 setTransform(CanvasPromo, Visibility.Hidden, MarginPosition.Right);
+                transition.setCallback(swapPromoCallback(pos));
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Hidden);
                 ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Hidden);
@@ -95,6 +98,7 @@ namespace Tukupedia.Views.Admin
             {
                 setTransform(CanvasJenisPromo, Visibility.Visible, MarginPosition.Middle);
                 setTransform(CanvasPromo, Visibility.Hidden, MarginPosition.Right);
+                transition.setCallback(swapPromoCallback(pos));
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Visible);
                 ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Hidden);
@@ -104,10 +108,39 @@ namespace Tukupedia.Views.Admin
             {
                 setTransform(CanvasJenisPromo, Visibility.Hidden, MarginPosition.Left);
                 setTransform(CanvasPromo, Visibility.Visible, MarginPosition.Middle);
+                transition.setCallback(swapPromoCallback(pos));
                 transition.playTransition();
                 ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Hidden);
                 ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Visible);
 
+            }
+        }
+
+        private Action swapPromoCallback(int i)
+        {
+            if (i == 1)
+            {
+                void fun() {
+                    ComponentHelper.changeVisibilityComponent(CanvasJenisPromo, Visibility.Visible);
+                    ComponentHelper.changeVisibilityComponent(CanvasPromo, Visibility.Hidden);
+                }
+                return fun;
+            }
+            else if (i == 2)
+            {
+                void fun() {
+                    ComponentHelper.changeVisibilityComponent(CanvasJenisPromo, Visibility.Hidden);
+                    ComponentHelper.changeVisibilityComponent(CanvasPromo, Visibility.Visible);
+                }
+                return fun;
+            }
+            else
+            {
+                void fun() {
+                    ComponentHelper.changeVisibilityComponent(CanvasJenisPromo, Visibility.Hidden);
+                    ComponentHelper.changeVisibilityComponent(CanvasPromo, Visibility.Hidden);
+                }
+                return fun;
             }
         }
 

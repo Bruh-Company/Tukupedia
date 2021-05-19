@@ -125,12 +125,10 @@ namespace Tukupedia.Helpers.Utils
 
     public class Transition
     {
-        public delegate void transitionCallbackDelegate();
-
         private readonly int transitionFPS;
         private DispatcherTimer transitionTimer;
         private TransitionQueue transQueue;
-        private transitionCallbackDelegate transCallback;
+        private Action transCallback;
         bool reset = true;
 
         public Transition(int FPS)
@@ -163,7 +161,7 @@ namespace Tukupedia.Helpers.Utils
                 order);
         }
 
-        public void setCallback(transitionCallbackDelegate callback)
+        public void setCallback(Action callback)
         {
             transCallback = callback;
         }
