@@ -69,6 +69,12 @@ namespace Tukupedia.Views.Customer
             CartViewModel.initPaymentMethod(cbPaymentMethod);
             CartViewModel.initPromotion(cbPromotion, tbDiscount,tbErrorPromotion);
             CartViewModel.updateHarga(0,0,0);
+            
+            //Init Transaction Page
+
+
+            //Init Settings Page
+
 
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);
@@ -95,6 +101,7 @@ namespace Tukupedia.Views.Customer
             Session.Logout();
             this.Close();
         }
+
         //Transition Settings
 
         private void goToHome(object sender, RoutedEventArgs e)

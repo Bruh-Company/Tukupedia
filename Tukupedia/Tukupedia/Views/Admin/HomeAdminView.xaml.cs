@@ -462,16 +462,17 @@ namespace Tukupedia.Views.Admin
         {
             setCanvas(5);
             reloadCourier();
-            btUpdateCourier.Visibility = Visibility.Hidden;
-            btBanCourier.Visibility = Visibility.Hidden;
-            btInsertCourier.Visibility = Visibility.Visible;
-            resetCourier();
+            
         }
         void reloadCourier()
         {
             covm = new CourierViewModel();
             
             dgCourier.ItemsSource = covm.getDataTable().DefaultView;
+            btUpdateCourier.Visibility = Visibility.Hidden;
+            btBanCourier.Visibility = Visibility.Hidden;
+            btInsertCourier.Visibility = Visibility.Visible;
+            resetCourier();
         }
 
         private void btInsertCourier_Click(object sender, RoutedEventArgs e)
@@ -1109,6 +1110,15 @@ namespace Tukupedia.Views.Admin
             else
             {
                 cbMetodePembayaran.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btLogout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult dr = MessageBox.Show("Apakah anda yakin mau logout", "Logout", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if(dr == MessageBoxResult.Yes)
+            {
+                this.Close();
             }
         }
     }
