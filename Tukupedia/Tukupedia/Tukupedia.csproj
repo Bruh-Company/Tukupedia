@@ -88,6 +88,8 @@
     <Compile Include="Components\ReplyCard.cs" />
     <Compile Include="Components\ReviewCard.cs" />
     <Compile Include="Components\ShopCartComponent.cs" />
+    <Compile Include="Helpers\Classes\Detail_Trans_Item.cs" />
+    <Compile Include="Helpers\Classes\Header_Trans_Item.cs" />
     <Compile Include="Helpers\Classes\Promo.cs" />
     <Compile Include="Helpers\DatabaseHelpers\DB.cs" />
     <Compile Include="Helpers\DatabaseHelpers\StoredProcedure.cs" />
@@ -129,6 +131,8 @@
     <Compile Include="ViewModels\Customer\CartViewModel.cs" />
     <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Customer\ItemDetailViewModel.cs" />
+    <Compile Include="ViewModels\Customer\SettingViewModel.cs" />
+    <Compile Include="ViewModels\Customer\TransactionViewModel.cs" />
     <Compile Include="ViewModels\LoginRegisterViewModel.cs" />
     <Compile Include="ViewModels\Seller\PageDiskusi.cs" />
     <Compile Include="ViewModels\Seller\PageInfoToko.cs" />
