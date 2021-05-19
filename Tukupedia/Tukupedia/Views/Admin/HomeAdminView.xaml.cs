@@ -75,6 +75,8 @@ namespace Tukupedia.Views.Admin
             ComponentHelper.changeVisibilityComponent(CanvasrootTransaction, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(CanvasrootOfficialStore, Visibility.Hidden);
 
+            SwapJenisPromo(0);
+
 
         }
 
