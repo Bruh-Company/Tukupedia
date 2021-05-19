@@ -13,12 +13,6 @@
             <ColumnDefinition Width="85*"/>
             <ColumnDefinition Width="127*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Welcome Admin" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btHome" Content="Home" HorizontalAlignment="Left" Margin="215,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btHome_Click"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btCategory" Content="Category" HorizontalAlignment="Left" Margin="300,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCategory_Click"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btCustomer" Content="Customer" HorizontalAlignment="Left" Margin="412,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btCustomer_Click" Grid.ColumnSpan="2"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btSeller" Content="Seller" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btSeller_Click" Grid.Column="1"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btOfficialStore" Content="Official Store" HorizontalAlignment="Left" Margin="580,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btOfficialStore_Click" Grid.Column="1"/>
         <Grid HorizontalAlignment="Left" Height="638" Margin="0,52,-0.4,0" VerticalAlignment="Top" Width="1274" Grid.ColumnSpan="2">
             <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="2489,86,-2979,-21" VerticalAlignment="Top" Width="1252" Grid.Column="1">
                 <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="35"/>
@@ -184,10 +178,19 @@
                 </Canvas>
             </Canvas>
         </Grid>
-        <Button Style="{StaticResource btn-primary}" x:Name="btTransaction" Content="Transaction" HorizontalAlignment="Left" Margin="99.6,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btTransaction_Click" Grid.Column="1"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btKurir" Content="Kurir" HorizontalAlignment="Left" Margin="229.6,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btKurir_Click" Grid.Column="1"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btJenisPembayaran" Content="Jenis Pembayaran" HorizontalAlignment="Left" Margin="306.6,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btJenisPembayaran_Click" Grid.Column="1"/>
-        <Button Style="{StaticResource btn-primary}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" Margin="488.6,9,0,0" VerticalAlignment="Top" Height="Auto" FontSize="18" Click="btPromoroot_Click" Grid.Column="1"/>
+        <Canvas HorizontalAlignment="Left" Height="47" Margin="0,0,-2,0" VerticalAlignment="Top" Width="1274" Grid.ColumnSpan="2" Background="#FF65C65B">
+            <Label Content="Welcome Admin" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="6" Canvas.Top="1"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btHome" Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btHome_Click" Canvas.Left="190" Width="81"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btCategory" Content="Category" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btCategory_Click" Canvas.Left="271" Width="112"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btCustomer" Content="Customer" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btCustomer_Click" Canvas.Left="383"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btSeller" Content="Seller" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btSeller_Click" Canvas.Left="499" Canvas.Top="1"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btOfficialStore" Content="Official Store" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btOfficialStore_Click" Canvas.Left="1041"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btTransaction" Content="Transaction" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btTransaction_Click" Canvas.Left="581"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btKurir" Content="Kurir" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btKurir_Click" Canvas.Left="706" Canvas.Top="1"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btJenisPembayaran" Content="Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btJenisPembayaran_Click" Canvas.Left="778" Canvas.Top="1"/>
+            <Button Style="{StaticResource btn-navbar}" x:Name="btPromoroot" Content="Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btPromoroot_Click" Canvas.Left="955"/>
+            <Button Style="{StaticResource btn-danger}" x:Name="btLogout" Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Height="47" FontSize="18" Click="btLogout_Click" Canvas.Left="1178" Width="96"/>
+        </Canvas>
 
     </Grid>
 </Window>
