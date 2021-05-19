@@ -128,7 +128,7 @@
                     <CheckBox x:Name="cebeKategori" Content="Kategori" Canvas.Left="679" Canvas.Top="205" FontSize="24" Click="cebeKategori_Click"/>
                     <CheckBox x:Name="cebeKurir" Content="Kurir" Canvas.Left="679" Canvas.Top="244" FontSize="24" Click="cebeKurir_Click"/>
                     <CheckBox x:Name="cebeSeller" Content="Seller" Canvas.Left="679" Canvas.Top="278" FontSize="24" Click="cebeSeller_Click"/>
-                    <CheckBox x:Name="cebeMetodePembayaran" Content="Metode Pembayaran" Canvas.Left="679" Canvas.Top="317" FontSize="24" Checked="cebeMetodePembayaran_Checked"/>
+                    <CheckBox x:Name="cebeMetodePembayaran" Content="Metode Pembayaran" Canvas.Left="679" Canvas.Top="317" FontSize="24" Click="cebeMetodePembayaran_Click"/>
                     <ComboBox x:Name="cbKategori" Canvas.Left="946" Canvas.Top="205" Width="199"/>
                     <ComboBox x:Name="cbKurir" Canvas.Left="946" Canvas.Top="244" Width="199"/>
                     <ComboBox x:Name="cbSeller" Canvas.Left="946" Canvas.Top="281" Width="199"/>

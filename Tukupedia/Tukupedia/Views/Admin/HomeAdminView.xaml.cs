@@ -78,6 +78,37 @@ namespace Tukupedia.Views.Admin
 
         }
 
+        public void SwapJenisPromo(int pos)
+        {
+            
+            if(pos == 0)
+            {
+                setTransform(CanvasJenisPromo, Visibility.Hidden, MarginPosition.Left);
+                setTransform(CanvasPromo, Visibility.Hidden, MarginPosition.Right);
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Hidden);
+            }
+            if (pos == 1)
+            {
+                setTransform(CanvasJenisPromo, Visibility.Visible, MarginPosition.Middle);
+                setTransform(CanvasPromo, Visibility.Hidden, MarginPosition.Right);
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Visible);
+                ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Hidden);
+
+            }
+            if (pos == 2)
+            {
+                setTransform(CanvasJenisPromo, Visibility.Hidden, MarginPosition.Left);
+                setTransform(CanvasPromo, Visibility.Visible, MarginPosition.Middle);
+                transition.playTransition();
+                ComponentHelper.changeZIndexComponent(CanvasJenisPromo, Visibility.Hidden);
+                ComponentHelper.changeZIndexComponent(CanvasPromo, Visibility.Visible);
+
+            }
+        }
+
         public void setCanvas(int pos)
         {
             for(int i = 0; i< canvas.Length; i++)
@@ -366,8 +397,8 @@ namespace Tukupedia.Views.Admin
                 canvasD_Trans.Visibility = Visibility.Visible;
                 DataRow dr = tvm.selectData(dgH_Trans.SelectedIndex);
                 if (dr == null) return;
-                lbTanggalTransaksi.Content = dr[4].ToString();
-                lbNamaUser.Content = dr[2].ToString();
+                lbTanggalTransaksi.Content = dr[2].ToString();
+                lbNamaUser.Content = dr[1].ToString();
                 DataTable dt = tvm.getDTrans();
                 int jumlah = 0, total = 0;
                 foreach(DataRow deer in dt.Rows)
@@ -533,6 +564,7 @@ namespace Tukupedia.Views.Admin
 
         private void btPromoroot_Click(object sender, RoutedEventArgs e)
         {
+            SwapJenisPromo(0);
             setCanvas(7);
             reloadPromo();
         }
@@ -546,6 +578,8 @@ namespace Tukupedia.Views.Admin
         }
         private void btPromo_Click(object sender, RoutedEventArgs e)
         {
+            SwapJenisPromo(2);
+
             reloadPromo();
             btTambahPromo.Visibility = Visibility.Visible;
             btUpdatePromo.Visibility = Visibility.Hidden;
@@ -624,7 +658,11 @@ namespace Tukupedia.Views.Admin
             {
                 if(pvm.insert(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value))
                 {
-                    btPromo_Click(null, null);
+                    reloadPromo();
+                    btTambahPromo.Visibility = Visibility.Visible;
+                    btUpdatePromo.Visibility = Visibility.Hidden;
+                    btHapusPromo.Visibility = Visibility.Hidden;
+                    resetPromo();
                 }
 
             }
@@ -659,8 +697,12 @@ namespace Tukupedia.Views.Admin
             else
             {
                 pvm.update(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value);
-                btPromo_Click(null, null);
-                
+                reloadPromo();
+                btTambahPromo.Visibility = Visibility.Visible;
+                btUpdatePromo.Visibility = Visibility.Hidden;
+                btHapusPromo.Visibility = Visibility.Hidden;
+                resetPromo();
+
 
             }
         }
@@ -668,7 +710,11 @@ namespace Tukupedia.Views.Admin
         private void btHapusPromo_Click(object sender, RoutedEventArgs e)
         {
             pvm.delete();
-            btPromo_Click(null, null);
+            reloadPromo();
+            btTambahPromo.Visibility = Visibility.Visible;
+            btUpdatePromo.Visibility = Visibility.Hidden;
+            btHapusPromo.Visibility = Visibility.Hidden;
+            resetPromo();
         }
 
         private void dgPromo_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -764,6 +810,7 @@ namespace Tukupedia.Views.Admin
 
         private void btJenisPromo_Click(object sender, RoutedEventArgs e)
         {
+            SwapJenisPromo(1);
             reloadJenisPromo();
             resetJenisPromo();
         }
@@ -846,14 +893,7 @@ namespace Tukupedia.Views.Admin
 
         private void cebeMetodePembayaran_Checked(object sender, RoutedEventArgs e)
         {
-            if(cebeMetodePembayaran.IsChecked == true)
-            {
-                cbMetodePembayaran.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                cbMetodePembayaran.Visibility = Visibility.Hidden;
-            }
+            
         }
 
         private void btTambahJenisPromo_Click(object sender, RoutedEventArgs e)
@@ -1023,6 +1063,18 @@ namespace Tukupedia.Views.Admin
             osvm.ChangeStatus(true);
             CanvasDetailOfficialStore.Visibility = Visibility.Hidden;
             reloadOfficialStore();
+        }
+
+        private void cebeMetodePembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            if (cebeMetodePembayaran.IsChecked == true)
+            {
+                cbMetodePembayaran.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                cbMetodePembayaran.Visibility = Visibility.Hidden;
+            }
         }
     }
 }

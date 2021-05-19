@@ -26,7 +26,7 @@ namespace Tukupedia.ViewModels.Admin
         void reload()
         {
             forid.initAdapter($"select ID from METODE_PEMBAYARAN where STATUS = '1' order by NAMA");
-            cm.initAdapter($"select NAMA as \"Jenis Pembayaran\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kategori\" from METODE_PEMBAYARAN where STATUS = '1' order by NAMA");
+            cm.initAdapter($"select NAMA as \"Jenis Pembayaran\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Pembayaran\" from METODE_PEMBAYARAN where STATUS = '1' order by NAMA");
         }
 
         public DataTable getDataTable()

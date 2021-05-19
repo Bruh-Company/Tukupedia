@@ -21,7 +21,7 @@ namespace Tukupedia.ViewModels.Admin
 
         void reloadHtrans()
         {
-            hm.initAdapter($"select h.ID as \"No\", h.KODE as \"Kode\", c.NAMA as \"Nama Customer\", k.NAMA as \"Nama Toko\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\",case h.STATUS when 'W' then 'Waiting Payment' when 'C' then 'Canceled' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, CUSTOMER c, KURIR k where h.ID_CUSTOMER = c.ID and k.ID = h.ID_KURIR");
+            hm.initAdapter($"select h.KODE as \"Kode\", c.NAMA as \"Nama Customer\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\",case h.STATUS when 'W' then 'Waiting Payment' when 'C' then 'Canceled' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, CUSTOMER c where h.ID_CUSTOMER = c.ID");
         }
 
         public DataTable getHtrans()
@@ -45,7 +45,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             DataRow dr = hm.Table.Rows[selected];
             dm = new D_Trans_ItemModel();
-            dm.initAdapter($"select i.NAMA as \"Nama Item\", s.NAMA as \"Nama Seller\", i.HARGA as \"Harga\", d.JUMLAH as \"Jumlah\", to_number(d.JUMLAH) * to_number(i.HARGA) as \"Total\" from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_H_TRANS_ITEM = '{dr[0].ToString()}'");
+            dm.initAdapter($"select i.NAMA as \"Nama Item\", s.NAMA_SELLER as \"Nama Seller\", i.HARGA as \"Harga\", d.JUMLAH as \"Jumlah\", to_number(d.JUMLAH) * to_number(i.HARGA) as \"Total\" from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_H_TRANS_ITEM = '{dr[0].ToString()}'");
             return dm.Table;
         }
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir, int official)
