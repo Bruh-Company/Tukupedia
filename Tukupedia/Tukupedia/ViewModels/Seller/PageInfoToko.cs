@@ -42,7 +42,7 @@ namespace Tukupedia.ViewModels.Seller {
                     try {
                         Trans_OSModel model = new Trans_OSModel();
                         model.init();
-                        model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", '1', "ID_SELLER", seller["ID"].ToString());
+                        model.insert("ID", 0, "KODE", "", "TANGGAL_TRANSAKSI", DateTime.Now, "STATUS", 'R', "ID_SELLER", seller["ID"].ToString());
                         trans.Commit();
                     }
                     catch (OracleException) {
