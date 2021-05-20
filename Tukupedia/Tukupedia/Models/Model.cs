@@ -51,8 +51,15 @@ namespace Tukupedia.Models
         }
         public void update()
         {
-            Builder = new OracleCommandBuilder(Adapter);
-            Adapter.Update(Table);
+            try
+            {
+                Builder = new OracleCommandBuilder(Adapter);
+                Adapter.Update(Table);
+            }
+            catch
+            {
+
+            }
         }
         public void deleteRowAt(int idx)
         {

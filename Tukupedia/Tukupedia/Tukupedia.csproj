@@ -112,6 +112,7 @@
     <Compile Include="Models\Kurir_SellerModel.cs" />
     <Compile Include="Models\Metode_PembayaranModel.cs" />
     <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\PromoModel.cs" />
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
@@ -145,6 +146,9 @@
     </Compile>
     <Compile Include="Views\Customer\CustomerView.xaml.cs">
       <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangePasswordView.xaml.cs">
+      <DependentUpon>ChangePasswordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\ItemDetailView.xaml.cs">
       <DependentUpon>ItemDetailView.xaml</DependentUpon>
@@ -183,6 +187,10 @@
     <Page Include="Views\Customer\CustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangePasswordView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Customer\ItemDetailView.xaml">
       <SubType>Designer</SubType>
