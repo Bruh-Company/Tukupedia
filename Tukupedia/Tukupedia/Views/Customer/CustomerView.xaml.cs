@@ -69,9 +69,10 @@ namespace Tukupedia.Views.Customer
             CartViewModel.initPaymentMethod(cbPaymentMethod);
             CartViewModel.initPromotion(cbPromotion, tbDiscount,tbErrorPromotion);
             CartViewModel.updateHarga(0,0,0);
-            
-            //Init Transaction Page
 
+            //Init Transaction Page
+            TransactionViewModel.initTransaction(this);
+            TransactionViewModel.initH_Trans();
 
             //Init Settings Page
 
@@ -277,6 +278,27 @@ namespace Tukupedia.Views.Customer
         private void cbPaymentMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CartViewModel.checkPromotion(CartViewModel.promo);
+        }
+        //Transaction Events
+        private void grid_H_Trans_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            TransactionViewModel.loadD_Trans(grid_H_Trans.SelectedIndex);
+        }
+
+        
+        private void btnBayarTrans_Click(object sender, RoutedEventArgs e)
+        {
+            TransactionViewModel.bayarTrans(grid_H_Trans.SelectedIndex);
+        }
+
+        private void btnCancelTrans_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnCetakInvoice_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
