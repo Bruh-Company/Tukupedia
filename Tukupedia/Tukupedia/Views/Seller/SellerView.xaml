@@ -177,6 +177,7 @@
                     <Button Name="btnBatalInfo" Content="Batal" Canvas.Left="260" Canvas.Top="1050" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnBatalInfo_Click"/>
                     <Image  Name="imageInfo" Width="300" Height="300" Canvas.Left="750" Canvas.Top="150"/>
                     <Button Name="btnChangeImage" Content="Pilih Gambar" Canvas.Left="750" Canvas.Top="473" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Click="btnChangeImage_Click"/>
+                    <Button x:Name="btnChangePassword" Content="Ganti Password" Canvas.Left="750" Canvas.Top="518" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-warning}" Click="btnChangePassword_Click"/>
                 </Canvas>
             </ScrollViewer>
         </Canvas>
@@ -185,7 +186,7 @@
         <Canvas Name="canvasUlasan" HorizontalAlignment="Center" Height="590" Margin="4480,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
             <TextBox Name="textboxCariUlasan" Canvas.Left="25"  Canvas.Top="20"  Height="30" Width="315" FontSize="14" Foreground="#FFFFFF" BorderBrush="#65c65b"/>
             <Button Name="btnCariUlasan" Content="Cari" FontSize="18" Canvas.Left="340" Canvas.Top="20" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariUlasan_Click"/>
-            <ComboBox Name="comboboxSortUlasan" Canvas.Left="480" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortProduk_SelectionChanged"/>
+            <ComboBox Name="comboboxSortUlasan" Canvas.Left="480" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortUlasan_SelectionChanged"/>
 
             <DataGrid Name="datagridUlasan" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridUlasan_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 

@@ -224,5 +224,15 @@ namespace Tukupedia.Views.Seller {
         private void textboxBalasUlasan_TextChanged(object sender, TextChangedEventArgs e) {
             SellerViewModel.pageUlasan.checkTextboxUlasan();
         }
+
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            SellerViewModel.pageInfoToko.ChangePassword();
+        }
+
+        private void comboboxSortUlasan_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SellerViewModel.pageUlasan.sortUlasan();
+        }
     }
 }
