@@ -157,7 +157,7 @@
                     <Image  x:Name="imageInfo" Margin="750,150,204,151"/>
                     <Button x:Name="btnSave" Content="Save" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-primary}" Margin="470,25,684,541" Click="btnSave_Click"/>
                     <Button x:Name="btnCancel" Content="Cancel" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-danger}" Margin="575,25,579,541" Click="btnCancel_Click"/>
-                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Margin="750,518,204,43"/>
+                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Margin="750,518,204,43" Click="btnChangePassword_Click"/>
                 </Grid>
             </Grid>
 
