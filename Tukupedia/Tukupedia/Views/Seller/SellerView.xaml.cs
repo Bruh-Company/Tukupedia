@@ -220,5 +220,9 @@ namespace Tukupedia.Views.Seller {
         private void btnCariUlasan_Click(object sender, RoutedEventArgs e) {
             SellerViewModel.pageUlasan.searchUlasan();
         }
+
+        private void textboxBalasUlasan_TextChanged(object sender, TextChangedEventArgs e) {
+            SellerViewModel.pageUlasan.checkTextboxUlasan();
+        }
     }
 }

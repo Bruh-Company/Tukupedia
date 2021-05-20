@@ -137,7 +137,7 @@
                     <Label Content="Diskusi" Margin="50,600,50,100" Style="{StaticResource h3-success}"/>
                     <StackPanel Width="1180" Margin="50,640,50,100" Canvas.Left="50" Canvas.Top="640" VerticalAlignment="Center" HorizontalAlignment="Center" Name="spanelDiscussion"></StackPanel>
                 </Grid>
-                
+
             </ScrollViewer>
         </Canvas>
 
@@ -189,14 +189,16 @@
 
             <DataGrid Name="datagridUlasan" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridUlasan_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 
-            <Label Content="Ulasan" Canvas.Left="750" Canvas.Top="70" Style="{StaticResource xl-success}"/>
-            <TextBox Name="textboxIsiUlasan" Canvas.Left="750" Canvas.Top="120" Height="150" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
+            <Label Content="Ulasan" Canvas.Left="750" Canvas.Top="112" Style="{StaticResource xl-success}"/>
+            <TextBox Name="textboxIsiUlasan" Canvas.Left="750" Canvas.Top="154" Height="150" Width="500" IsReadOnly="True" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
-            <Label Content="Balas" Canvas.Left="750" Canvas.Top="300" Style="{StaticResource xl-success}"/>
-            <TextBox Name="textboxBalasUlasan" Canvas.Left="750" Canvas.Top="350" Height="150" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
+            <Label Content="Balas" Canvas.Left="750" Canvas.Top="309" Style="{StaticResource xl-success}"/>
+            <TextBox Name="textboxBalasUlasan" Canvas.Left="750" Canvas.Top="350" Height="150" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap" TextChanged="textboxBalasUlasan_TextChanged"/>
 
             <Button Name="btnBalasUlasan" Content="Balas" Canvas.Left="800" Canvas.Top="530" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnBalasUlasan_Click"/>
             <Button Name="btnCancelUlasan" Content="Batal" Canvas.Left="1010" Canvas.Top="530" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnCancelUlasan_Click"/>
+            <Label Content="Rating" Canvas.Left="750" Canvas.Top="70" Style="{StaticResource xl-success}"/>
+            <materialDesign:RatingBar Canvas.Left="850" Canvas.Top="80" Foreground="#FFC548" Name="ratingbarUlasan"/>
         </Canvas>
     </Grid>
 </Window>
