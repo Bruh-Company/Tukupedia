@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using Oracle.DataAccess.Client;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.Views;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageInfoToko {
@@ -162,6 +163,7 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnTambahKurirInfo.Visibility = Visibility.Visible;
                 ViewComponent.btnKurangKurirInfo.Visibility = Visibility.Visible;
                 ViewComponent.btnChangeImage.Visibility = Visibility.Visible;
+                ViewComponent.btnChangePassword.Visibility = Visibility.Visible;
             }
             else {
                 ViewComponent.textboxNamaToko.IsReadOnly = true;
@@ -177,6 +179,9 @@ namespace Tukupedia.ViewModels.Seller {
                 ViewComponent.btnTambahKurirInfo.Visibility = Visibility.Hidden;
                 ViewComponent.btnKurangKurirInfo.Visibility = Visibility.Hidden;
                 ViewComponent.btnChangeImage.Visibility = Visibility.Hidden;
+                ViewComponent.btnChangePassword.Visibility = Visibility.Hidden;
+
+
             }
         }
 
@@ -246,6 +251,15 @@ namespace Tukupedia.ViewModels.Seller {
             foreach (string item in data)
                 if (item == "") return false;
             return true;
+        }
+
+        public void ChangePassword()
+        {
+            ChangePasswordView cp = new ChangePasswordView("SELLER", seller["ID"].ToString());
+            ViewComponent.Hide();
+            cp.ShowDialog();
+            ViewComponent.Show();
+
         }
     }
 }

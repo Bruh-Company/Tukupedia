@@ -26,5 +26,18 @@ namespace Tukupedia.Views
             pm = new PasswordModel(tabel, id);
             InitializeComponent();
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            if(pm.changePassword(tbPasswordLama.Password, tbPasswordBaru.Password, tbConfirmPassword.Password))
+            {
+                this.Close();
+            }
+        }
     }
 }
