@@ -298,6 +298,7 @@ namespace Tukupedia.ViewModels.Customer
                         }
                         loadCartItem(spCart);
                         updateGrandTotal();
+                        TransactionViewModel.initH_Trans();
                         
                     }
                     catch (OracleException e)

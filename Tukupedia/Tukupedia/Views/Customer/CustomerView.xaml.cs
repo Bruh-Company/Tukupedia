@@ -320,17 +320,27 @@ namespace Tukupedia.Views.Customer
 
         private void btnCancelTrans_Click(object sender, RoutedEventArgs e)
         {
-
+            TransactionViewModel.cancelTrans(grid_H_Trans.SelectedIndex);
         }
 
         private void btnCetakInvoice_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        private void grid_D_Trans_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            TransactionViewModel.loadItem(grid_D_Trans.SelectedIndex);
+        }
 
+        private void btnBeriUlasan_Click(object sender, RoutedEventArgs e)
+        {
+            TransactionViewModel.beriUlasan(grid_D_Trans.SelectedIndex);
+        }
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordView cp = new ChangePasswordView("CUSTOMER", Session.User["ID"].ToString());
         }
+
+        
     }
 }

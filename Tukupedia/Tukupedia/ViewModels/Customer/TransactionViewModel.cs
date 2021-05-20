@@ -19,12 +19,15 @@ namespace Tukupedia.ViewModels.Customer
         public static List<Header_Trans_Item> list_htrans;
         public static List<Detail_Trans_Item> list_dtrans;
         public static CustomerView ViewComponent;
+        private static int idxH_Trans;
+        private static int idxItem;
         public static void initTransaction(CustomerView cv)
         {
             ViewComponent = cv;
         }
         public static void initH_Trans()
         {
+            resetItem();
             list_htrans = new List<Header_Trans_Item>();
             H_Trans_ItemModel hti = new H_Trans_ItemModel();
             foreach (DataRow item in hti.Table.Select($"ID_CUSTOMER ='{Session.User["ID"]}'","TANGGAL_TRANSAKSI ASC"))
@@ -116,6 +119,7 @@ namespace Tukupedia.ViewModels.Customer
             //Jika sudah,  buat btn enable false?
             if (idx >= 0)
             {
+                idxH_Trans = idx;
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
                 if (row["STATUS"].ToString() == "W")
@@ -124,7 +128,7 @@ namespace Tukupedia.ViewModels.Customer
                     row["STATUS"] = "P";
                     hti.update();
                     initH_Trans();
-                    MessageBox.Show("Berhasil membayar!");
+                    MessageBox.Show("Transaksi berhasil di bayar !");
                 }
                 else
                 {
@@ -140,19 +144,115 @@ namespace Tukupedia.ViewModels.Customer
             //Jika sudah,  tidak boleh di cancel
             if (idx >= 0)
             {
+                idxH_Trans = idx;
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
                 if (row["STATUS"].ToString() == "W")
                 {
-                    //Bayar
-                    row["STATUS"] = "C";
-                    hti.update();
-                    initH_Trans();
-                    MessageBox.Show("Berhasil membayar!");
+                    //Check kalau sudah ada yang S 
+                    D_Trans_ItemModel dti = new D_Trans_ItemModel();
+                    bool valid = true;
+                    foreach (DataRow rowDTI in dti.Table.Select($"ID_H_TRANS_ITEM = '{row["ID"]}'"))
+                    {
+                        if (rowDTI["STATUS"].ToString() != "W")
+                        {
+                            valid = false;
+                        }
+                    }
+                    if (valid)
+                    {
+                        //Cancel
+                        row["STATUS"] = "C";
+                        foreach (DataRow rowDTI in dti.Table.Select($"ID_H_TRANS_ITEM = '{row["ID"]}'"))
+                        {
+                            rowDTI["STATUS"] = "C";
+                        }
+                        dti.update();
+                        hti.update();
+                        initH_Trans();
+                        loadD_Trans(idx);
+                        MessageBox.Show("Transaksi berhasil di cancel !");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Tidak bisa dicancel !");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Gagal Cancel!");
+                    MessageBox.Show("Gagal Cancel !");
+                }
+            }
+        }
+        public static void resetItem()
+        {
+            ViewComponent.tbKurirItem.Text = "-";
+            ViewComponent.tbNamaItem.Text = "-";
+            ViewComponent.tbJumlahItem.Text = "-";
+            ViewComponent.tbStatusItem.Text = "-";
+        }
+        public static void loadItem(int idx)
+        {
+            if (idx >= 0)
+            {
+                idxItem = idx;
+                Detail_Trans_Item dti = list_dtrans[idx];
+                ViewComponent.tbKurirItem.Text = dti.namaKurir;
+                ViewComponent.tbNamaItem.Text = dti.namaItem;
+                ViewComponent.tbJumlahItem.Text = dti.jumlah;
+                ViewComponent.tbStatusItem.Text = dti.status;
+            }
+        }
+        public static void beriUlasan(int idx)
+        {
+            if (idx >= 0)
+            {
+                idxItem = idx;
+                Detail_Trans_Item dti = list_dtrans[idx];
+                //Check kalau DTRANS HARUS SUDAH SELESAI
+                if (dti.status == "FINISHED")
+                {
+                    UlasanModel um = new UlasanModel();
+                    if (um.Table.Select($"ID_D_TRANS_ITEM = '{dti.id}' AND ID_CUSTOMER = '{Session.User["ID"]}'").Length > 0)
+                    {
+                        MessageBox.Show("Barang sudah di ulas!");
+                    }
+                    else
+                    {
+                        //TODO KENAPA KOK PAKAI UM TIDAK BISAAAA
+                        DataRow row = um.Table.NewRow();
+                        row["ID"] = 0;
+                        row["ID_CUSTOMER"] = Session.User["ID"].ToString();
+                        row["MESSAGE"] = Utility.StringFromRichTextBox(ViewComponent.rtbUlasan);
+                        row["RATING"] = ViewComponent.ratingUlasan.Value;
+                        row["ID_D_TRANS_ITEM"] = dti.id;
+                        um.Table.Rows.Add(row);
+                        um.update();
+                        //um.insert(
+                        //    "ID",0,
+                        //    "ID_CUSTOMER", Session.User["ID"].ToString(),
+                        //    "MESSAGE", Utility.StringFromRichTextBox(ViewComponent.rtbUlasan),
+                        //    "RATING", ViewComponent.ratingUlasan.Value,
+                        //    "ID_D_TRANS_ITEM", dti.id
+                        //    );
+                        //new DB("ULASAN").insert(
+                        //    "ID", 0,
+                        //    "ID_CUSTOMER", Session.User["ID"].ToString(),
+                        //    "MESSAGE", Utility.StringFromRichTextBox(ViewComponent.rtbUlasan),
+                        //    "RATING", ViewComponent.ratingUlasan.Value,
+                        //    "ID_D_TRANS_ITEM", dti.id
+                        //    ).execute();
+
+                        //reset input ulasan
+                        resetItem();
+                        MessageBox.Show("Berhasil Memberi Ulasan!");
+
+                    }
+                }
+                else
+                {
+                    // Selain selesai
+                    MessageBox.Show("ERROR");
                 }
             }
         }
