@@ -18,6 +18,7 @@ using Tukupedia.ViewModels;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
 using Tukupedia.Helpers.Classes;
+using System.Data;
 
 namespace Tukupedia.Views.Customer
 {
@@ -33,7 +34,6 @@ namespace Tukupedia.Views.Customer
 
         private const int GWL_STYLE = -16;
         private const int WS_MAXIMIZEBOX = 0x10000;
-
         Transition transition;
         const double speedMargin = 0.2;
         const double speedOpacity = 0.3;
@@ -76,6 +76,7 @@ namespace Tukupedia.Views.Customer
 
             //Init Settings Page
 
+            SettingViewModel.init(this);
 
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);
@@ -224,6 +225,7 @@ namespace Tukupedia.Views.Customer
 
         private void goToSettings(object sender, RoutedEventArgs e)
         {
+            SettingViewModel.reload();
             transition.makeTransition(grid_Home,
                     MarginPosition.Left, 0,
                     speedMargin * multiplier / transFPS,
@@ -279,6 +281,31 @@ namespace Tukupedia.Views.Customer
         {
             CartViewModel.checkPromotion(CartViewModel.promo);
         }
+
+        private void btnUbahInfoCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            SettingViewModel.editing(true);
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SettingViewModel.update();
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            SettingViewModel.reload();
+        }
+
+        private void btnChangeImage_Click(object sender, RoutedEventArgs e)
+        {
+            SettingViewModel.changeImage();
+        }
+
+
+
+
+        
         //Transaction Events
         private void grid_H_Trans_MouseUp(object sender, MouseButtonEventArgs e)
         {
