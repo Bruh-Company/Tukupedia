@@ -110,7 +110,6 @@ namespace Tukupedia.ViewModels.Seller {
 
             ulasanModel = new UlasanModel();
             ulasanModel.initAdapter(statement);
-
             ViewComponent.datagridUlasan.ItemsSource = "";
             ViewComponent.datagridUlasan.ItemsSource = ulasanModel.Table.DefaultView;
             ViewComponent.datagridUlasan.Columns[0].Visibility = Visibility.Hidden;

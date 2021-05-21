@@ -414,6 +414,7 @@ namespace Tukupedia.Views.Admin
         private void btToogleKategori_Click(object sender, RoutedEventArgs e)
         {
             cavm.delete();
+            reloadCategory();
         }
 
         private void dgCategory_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
@@ -767,6 +768,17 @@ namespace Tukupedia.Views.Admin
                 
                 if (dr == null) return;
                 tbJenisPromo.Text = dr[0].ToString();
+                if(dr["Status"].ToString() == "Aktif")
+                {
+                    btHapusJenisPromo.Content = "Matikan";
+                    btHapusJenisPromo.Style = (Style)Application.Current.Resources["btn-danger"];
+                }
+                else
+                {
+                    btHapusJenisPromo.Content = "Nyalakan";
+                    btHapusJenisPromo.Style = (Style)Application.Current.Resources["btn-primary"];
+
+                }
                 if (dr["Kategori"].ToString() != "-")
                 {
                     foreach (DataRow dr1 in jpvm.getCategory().Rows)
@@ -1121,5 +1133,13 @@ namespace Tukupedia.Views.Admin
                 this.Close();
             }
         }
+
+        private void btHapusJenisPromo_Click(object sender, RoutedEventArgs e)
+        {
+            jpvm.delete();
+            reloadJenisPromo();
+            resetJenisPromo();
+        }
+
     }
 }

@@ -11,18 +11,26 @@ using MaterialDesignThemes.Wpf;
 using Tukupedia.Components;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Models;
+using Tukupedia.Views.Customer;
 
 namespace Tukupedia.ViewModels.Customer
 {
     public class CustomerViewModel
     {
-        private static ItemModel items = new ItemModel();
-        private static CategoryModel categories = new CategoryModel();
+        private static ItemModel items;
+        private static CategoryModel categories;
         private static DataRow[] filteredItems;
+        private static CustomerView ViewComponent;
         private static bool isFiltered=false;
+        
+
+        public static void initCustomerViewModel(CustomerView view) {
+            ViewComponent = view;
+        }
         
         public static void loadItems(WrapPanel wp)
         {
+            wp.Children.Clear();
             if (isFiltered)
             {
                 foreach(DataRow item in filteredItems)
@@ -43,6 +51,7 @@ namespace Tukupedia.ViewModels.Customer
                         card.setRating(Convert.ToInt32(item["RATING"]));
                     }
                     card.setJual($"Terjual : {jml}");
+                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.deploy();
                     wp.Children.Add(card);
                 }
@@ -58,6 +67,7 @@ namespace Tukupedia.ViewModels.Customer
                     card.setNamaBarang(item["NAMA"].ToString());
                     card.setRating(5);
                     card.setJual($"Terjual : {jml}");
+                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.setItem(item);
                     card.deploy();
                     wp.Children.Add(card);
@@ -65,21 +75,85 @@ namespace Tukupedia.ViewModels.Customer
             }
         }
 
-        public static void searchItems()
+        public static void searchItems(string keyword, int minPrice, int maxPrice, List<int> categoryIDs)
         {
-            filteredItems = items.Table.Select(items.where);
+            string cmd =
+                "SELECT " +
+                "i.ID as ID, " +
+                "i.HARGA as HARGA, " +
+                "i.NAMA as NAMA " +
+                "FROM ITEM i, SELLER s, CATEGORY c " +
+                "WHERE i.ID_SELLER = s.ID " +
+                "and i.ID_CATEGORY = c.ID ";
+
+            string where = "";
+            if (keyword != "") {
+                where += $"and (i.NAMA like '%{keyword}%' " +
+                    $"or s.NAMA_TOKO like '%{keyword}%' ";
+            }
+            if (minPrice < maxPrice) {
+                if (minPrice > 0) {
+                    if (where == "") where += $"and (i.HARGA > {minPrice} ";
+                    else where += $" or i.HARGA > {minPrice} ";
+                    
+                }
+                if (maxPrice > 0) {
+                    if (where == "") where += $"and (i.HARGA > {maxPrice} ";
+                    else where += $" or i.HARGA > {maxPrice} ";
+                }
+                if (categoryIDs != null && categoryIDs.Count > 0) {
+                    foreach (int id in categoryIDs) {
+                        if (where == "") where += $"and (c.ID = {id} ";
+                        else where += $" or c.ID = {id} ";
+                    }
+                }
+            }
+            where += where == "" ? "" : ")";
+            cmd += where;
+
+            MessageBox.Show(cmd);
+            items = new ItemModel();
+            items.initAdapter(cmd);
+            filteredItems = items.Table.Select();
+            if (keyword != "") {
+                
+            }
+            loadItems(ViewComponent.PanelItems);
+            isFiltered = false;
         }
     
-        public static void loadCategory(ComboBox cb)
+        public static void loadCategory(StackPanel sp)
         {
-            foreach (DataRow row in categories.Table.Select("STATUS='1'"))
-            {
+            categories = new CategoryModel();
+            categories.addWhere("STATUS", "1");
+            categories.init();
+
+            foreach (DataRow row in categories.Table.Rows) {
                 CheckBox checkBox = new CheckBox();
+                checkBox.Name = "cb" + row["ID"].ToString();
                 checkBox.Content = row["NAMA"].ToString();
-                checkBox.Tag = row["ID"];
-                checkBox.IsChecked = true;
-                cb.Items.Add(checkBox);
+                sp.Children.Add(checkBox);
             }
+        }
+
+        public static void filterItems() {
+            string keyword = ViewComponent.tbSearch.Text;
+            int minPrice = (int)ViewComponent.SliderMin.Value;
+            int maxPrice = (int)ViewComponent.SliderMax.Value;
+
+            List<int> listCategoryID = new List<int>();
+            foreach (DataRow row in categories.Table.Rows) {
+                int id = Convert.ToInt32(row["ID"].ToString()) - 1;
+                if (ViewComponent.spCategory.Children[id] != null) {
+                    CheckBox cb = (CheckBox)ViewComponent.spCategory.Children[id];
+                    if (cb.IsChecked == true) listCategoryID.Add(id);
+                }
+            }
+            
+            if (keyword == "" && minPrice == 0 && maxPrice == 0 && listCategoryID == null && listCategoryID.Count <= 0) 
+                isFiltered = false;
+            else isFiltered = true;
+            searchItems(keyword, minPrice, maxPrice, listCategoryID);
         }
     }
 }

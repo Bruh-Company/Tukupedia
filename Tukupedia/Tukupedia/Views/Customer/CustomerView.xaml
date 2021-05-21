@@ -32,21 +32,26 @@
             <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274">
                 <Grid HorizontalAlignment="Left" Height="596" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
-                    <ComboBox x:Name="cbCategory" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top" Width="173"/>
-                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000"  ValueChanged="SliderMax_OnValueChanged" x:Name="SliderMax" HorizontalAlignment="Left" Margin="10,247,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
-                    <TextBox Text="0,00" x:Name="tbMaxPrice" HorizontalAlignment="Left" Height="27" Margin="36,209,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"  FontSize="16"/>
-                    <Label Content="Maximum Price" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
-                    <Button x:Name="btnFilter" Style="{StaticResource btn-primary}" Content="Filter" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="173" Height="32" BorderBrush="#FF404040"/>
-                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000" ValueChanged="SliderMin_OnValueChanged" x:Name="SliderMin" HorizontalAlignment="Left" Margin="10,154,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16" SmallChange="0"/>
-                    <TextBox Text="0,00" x:Name="tbMinPrice" HorizontalAlignment="Left" Height="27" Margin="36,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontSize="16"/>
-                    <Label Content="Minimum Price" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
-                    <Label Content="Rp" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
-                    <Label Content="Rp" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000"  ValueChanged="SliderMax_OnValueChanged" x:Name="SliderMax" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
+                    <TextBox Text="0,00" x:Name="tbMaxPrice" HorizontalAlignment="Left" Height="27" Margin="36,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"  FontSize="16" IsReadOnly="True"/>
+                    <Label Content="Maximum Price" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
+                    <Button x:Name="btnFilter" Style="{StaticResource btn-primary}" Content="Filter" HorizontalAlignment="Left" Margin="10,450,0,0" VerticalAlignment="Top" Width="173" Height="32" BorderBrush="#FF404040" Click="btnFilter_Click"/>
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000" ValueChanged="SliderMin_OnValueChanged" x:Name="SliderMin" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16" SmallChange="0"/>
+                    <TextBox Text="0,00" x:Name="tbMinPrice" HorizontalAlignment="Left" Height="27" Margin="36,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontSize="16" IsReadOnly="True"/>
+
+                    <Grid HorizontalAlignment="Left" Margin="10,50,0,350" Width="173" Height="200">
+                        <ScrollViewer Height="200" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                            <StackPanel HorizontalAlignment="Left" Margin="0" Width="173" x:Name="spCategory"></StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                    <Label Content="Minimum Price" HorizontalAlignment="Left" Margin="10,262,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
+                    <Label Content="Rp" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
+                    <Label Content="Rp" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
                 </Grid>
                 <Grid HorizontalAlignment="Left" Height="596" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
                     <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1036">
-                        <Button Content="Search" HorizontalAlignment="Left" Margin="786,10,0,0" VerticalAlignment="Top" Width="240" Height="36" Style="{StaticResource btn-primary}"/>
-                        <TextBox Style="{StaticResource tb-border-1}" HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B"/>
+                        <Button Content="Search" HorizontalAlignment="Left" Margin="786,10,0,0" VerticalAlignment="Top" Width="240" Height="36" Style="{StaticResource btn-primary}" x:Name="btnSearch" Click="btnSearch_Click"/>
+                        <TextBox Style="{StaticResource tb-border-1}" HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B" x:Name="tbSearch"/>
                     </Grid>
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="515" Margin="10,71,0,0" VerticalAlignment="Top" Width="1032">
                         <WrapPanel x:Name="PanelItems" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1070"/>

@@ -90,7 +90,7 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = cm.Table.Rows[selected];
-            if (dr["Status"].ToString() == "Aktif")
+            if (true)
             {
                 new DB("KURIR").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
             }

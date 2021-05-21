@@ -114,13 +114,13 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = forid.Table.Rows[selected];
-            if (dr["Status"].ToString() == "Aktif")
+            if (cm.Table.Rows[selected]["Status"].ToString() == "Aktif")
             {
-                new DB("PROMO").update("STATUS", "0").where("ID", dr[0].ToString()).execute();
+                new DB("JENIS_PROMO").update("STATUS", "0").where("ID", dr[0].ToString()).execute();
             }
             else
             {
-                new DB("PROMO").update("STATUS", "1").where("ID", dr[0].ToString()).execute();
+                new DB("JENIS_PROMO").update("STATUS", "1").where("ID", dr[0].ToString()).execute();
             }
         }
     }
