@@ -54,9 +54,17 @@ namespace Tukupedia.Views.Customer
         public void initDetail(string urlImage, DataRow item)
         {
             //Load Image
-            ImageItem.Source = new BitmapImage(new Uri(
-                AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
+            
             this.item = item;
+            if (item["IMAGE"].ToString() == "")
+            {
+                ImageItem.Source = new BitmapImage(new Uri(
+                AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            }
+            else
+            {
+                ImageHelper.loadImage(ImageItem, item["IMAGE"].ToString());
+            }
             maxQty = Convert.ToInt32(item["STOK"]);
             loadDetails();
             
@@ -136,6 +144,8 @@ namespace Tukupedia.Views.Customer
             int id_item = Convert.ToInt32(item["ID"]);
             ItemDetailViewModel.kirimDiskusi(message, id_item);
             ItemDetailViewModel.resetDiscussion();
+            Utility.setRichTextBoxString(rtbDiskusi, "");
+
         }
         private void hideInputReply()
         {
@@ -150,6 +160,25 @@ namespace Tukupedia.Views.Customer
         private void BtnBeliLangsung_OnClick(object sender, RoutedEventArgs e)
         {
             //TODO Beli Langsung ke Checkout
+        }
+
+        private void rtbDiskusi_GotFocus(object sender, RoutedEventArgs e)
+        {
+            string val = Utility.StringFromRichTextBox(rtbDiskusi);
+            if (val.Contains("Ask Here!"))
+            {
+                Utility.setRichTextBoxString(rtbDiskusi, "");
+            }
+        }
+
+        private void rtbDiskusi_LostFocus(object sender, RoutedEventArgs e)
+        {
+            
+            string val = Utility.StringFromRichTextBox(rtbDiskusi);
+            if (val.Length <= 2)
+            {
+                Utility.setRichTextBoxString(rtbDiskusi, "Ask Here!");
+            }
         }
     }
 }

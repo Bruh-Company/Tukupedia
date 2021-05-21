@@ -147,7 +147,7 @@
                     <TextBlock Style="{StaticResource textblockblock-md}" HorizontalAlignment="Left" Margin="848,369,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286"/>
                     <TextBlock Style="{StaticResource textblockblock-md}" HorizontalAlignment="Left" Margin="848,340,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286"/>
                     <TextBlock Style="{StaticResource textblockblock-md}" HorizontalAlignment="Left" Margin="848,425,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24"/>
-                    <RichTextBox x:Name="rtbUlasan" HorizontalAlignment="Left" Height="46" Margin="691,500,0,0" VerticalAlignment="Top" Width="540">
+                    <RichTextBox GotFocus="rtbUlasan_GotFocus" LostFocus="rtbUlasan_LostFocus" x:Name="rtbUlasan" HorizontalAlignment="Left" Height="46" Margin="691,500,0,0" VerticalAlignment="Top" Width="540">
                         <FlowDocument>
                             <Paragraph>
                                 <Run Text="Tulis Ulasan Disini"/>

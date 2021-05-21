@@ -86,7 +86,6 @@ namespace Tukupedia.ViewModels.Customer
         public static void kirimDiskusi(string message,int id_item)
         {
             H_DiskusiModel hd = new H_DiskusiModel();
-            MessageBox.Show(message);
             hd.insert(
                 "ID",0,
                 "ID_CUSTOMER",Session.User["ID"].ToString(),
@@ -95,6 +94,7 @@ namespace Tukupedia.ViewModels.Customer
                 "STATUS",1,
                 "CREATED_AT",DateTime.Now.ToString()
                 );
+           
         }
     }
 }

@@ -58,10 +58,10 @@
                         </ScrollViewer>
                     </TabItem>
                 </TabControl>
-                <RichTextBox x:Name="rtbDiskusi" Height="74" BorderThickness="1,1,1,1" FontSize="16">
+                <RichTextBox GotFocus="rtbDiskusi_GotFocus" LostFocus="rtbDiskusi_LostFocus" x:Name="rtbDiskusi" Height="74" BorderThickness="1,1,1,1" FontSize="16">
                     <FlowDocument>
                         <Paragraph>
-                            <Run Text="Tanya disini :D"/>
+                            <Run Text="Ask Here!"/>
                         </Paragraph>
                     </FlowDocument>
                 </RichTextBox>

@@ -34,7 +34,7 @@ namespace Tukupedia.Components
             _image = new Image();
             _image.Source =
                 new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
+                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
             _image.Width = 150;
             _image.Height = 150;
             // Label Nama Barang
@@ -94,9 +94,7 @@ namespace Tukupedia.Components
         
         public void setImage(string url)
         {
-            _image.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + url));
+            ImageHelper.loadImage(_image, url);
         }
         public void setNamaBarang(string nama)
         {

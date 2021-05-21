@@ -28,11 +28,20 @@ namespace Tukupedia.ViewModels.Customer
                 foreach(DataRow item in filteredItems)
                 {
                     ItemCard card = new ItemCard();
-                    int jml = new DB("D_TRANS_ITEM").select()
-                        .where("ID_ITEM", item["ID"].ToString()).count();
+                    int jml = Convert.ToInt32(new DB("D_TRANS_ITEM")
+                        .select("SUM(JUMLAH) as JML")
+                        .where("ID_ITEM", item["ID"].ToString())
+                        .getFirst()["JML"]);
                     card.setHarga(Convert.ToInt32(item["HARGA"]));
                     card.setNamaBarang(item["NAMA"].ToString());
-                    card.setRating(5);
+                    if (item["RATING"].ToString() == "")
+                    {
+                        card.setRating(0);
+                    }
+                    else
+                    {
+                        card.setRating(Convert.ToInt32(item["RATING"]));
+                    }
                     card.setJual($"Terjual : {jml}");
                     card.deploy();
                     wp.Children.Add(card);

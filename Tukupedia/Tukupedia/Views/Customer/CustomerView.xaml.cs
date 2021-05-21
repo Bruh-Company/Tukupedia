@@ -344,6 +344,22 @@ namespace Tukupedia.Views.Customer
             this.Show();
         }
 
-        
+        private void rtbUlasan_GotFocus(object sender, RoutedEventArgs e)
+        {
+            string val = Utility.StringFromRichTextBox(rtbUlasan);
+            if (val.Contains("Tulis Ulasan Disini"))
+            {
+                Utility.setRichTextBoxString(rtbUlasan, "");
+            }
+        }
+
+        private void rtbUlasan_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string val = Utility.StringFromRichTextBox(rtbUlasan);
+            if (val.Length <= 2)
+            {
+                Utility.setRichTextBoxString(rtbUlasan, "Tulis Ulasan Disini");
+            }
+        }
     }
 }

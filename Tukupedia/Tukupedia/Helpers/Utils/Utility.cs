@@ -157,6 +157,11 @@ namespace Tukupedia.Helpers.Utils
             }
             return false;
         }
+        public static void setRichTextBoxString(RichTextBox rtb,string str)
+        {
+            rtb.Document.Blocks.Clear();
+            rtb.Document.Blocks.Add(new Paragraph(new Run(str)));
+        }
 
     }
 }

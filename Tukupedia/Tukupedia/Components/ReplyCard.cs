@@ -50,10 +50,31 @@ namespace Tukupedia.Components
             btnKirim.VerticalAlignment = VerticalAlignment.Center;
             btnKirim.HorizontalAlignment = HorizontalAlignment.Center;
             btnKirim.Margin = new Thickness(15,0,0,0);
+            richTextBox.GotFocus += RichTextBox_GotFocus;
+            richTextBox.LostFocus += RichTextBox_LostFocus;
+            Utility.setRichTextBoxString(richTextBox, "Reply Here");
             richTextBox.Width = 450;
             richTextBox.Height = 100;
 
 
+        }
+
+        private void RichTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string val = Utility.StringFromRichTextBox(richTextBox);
+            if (val.Length <= 2)
+            {
+                Utility.setRichTextBoxString(richTextBox, "Reply Here");
+            }
+        }
+
+        private void RichTextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            string val = Utility.StringFromRichTextBox(richTextBox);
+            if (val.Contains("Reply Here"))
+            {
+                Utility.setRichTextBoxString(richTextBox, "");
+            }
         }
 
         public void initCard(int id_h_diskusi, string url="")
@@ -92,6 +113,7 @@ namespace Tukupedia.Components
                 "ID_H_DISKUSI",id_h_diskusi,
                 "CREATED_AT",DateTime.Now.ToString()
             );
+            Utility.setRichTextBoxString(richTextBox, "");
             if (Session.role.ToUpper() == "SELLER") {
                 SellerViewModel.pageProduk.resetDiskusi();
             }
