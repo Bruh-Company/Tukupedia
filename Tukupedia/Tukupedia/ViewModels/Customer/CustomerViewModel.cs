@@ -36,10 +36,11 @@ namespace Tukupedia.ViewModels.Customer
                 foreach(DataRow item in filteredItems)
                 {
                     ItemCard card = new ItemCard();
-                    int jml = Convert.ToInt32(new DB("D_TRANS_ITEM")
+                    DataRow jmlItem = new DB("D_TRANS_ITEM")
                         .select("SUM(JUMLAH) as JML")
                         .where("ID_ITEM", item["ID"].ToString())
-                        .getFirst()["JML"]);
+                        .getFirst();
+                    int jml = jmlItem["JML"].ToString()!=""?Convert.ToInt32(jmlItem["JML"]):0;
                     card.setHarga(Convert.ToInt32(item["HARGA"]));
                     card.setNamaBarang(item["NAMA"].ToString());
                     if (item["RATING"].ToString() == "")
@@ -61,14 +62,23 @@ namespace Tukupedia.ViewModels.Customer
                 foreach(DataRow item in new ItemModel().Table.Rows)
                 {
                     ItemCard card = new ItemCard();
-                    int jml = new DB("D_TRANS_ITEM").select()
-                        .where("ID_ITEM", item["ID"].ToString()).count();
+                    DataRow jmlItem = new DB("D_TRANS_ITEM")
+                        .select("SUM(JUMLAH) as JML")
+                        .where("ID_ITEM", item["ID"].ToString())
+                        .getFirst();
+                    int jml = jmlItem["JML"].ToString() != "" ? Convert.ToInt32(jmlItem["JML"]) : 0;
                     card.setHarga(Convert.ToInt32(item["HARGA"]));
                     card.setNamaBarang(item["NAMA"].ToString());
-                    card.setRating(5);
+                    if (item["RATING"].ToString() == "")
+                    {
+                        card.setRating(0);
+                    }
+                    else
+                    {
+                        card.setRating(Convert.ToInt32(item["RATING"]));
+                    }
                     card.setJual($"Terjual : {jml}");
                     //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
-                    card.setItem(item);
                     card.deploy();
                     wp.Children.Add(card);
                 }
@@ -80,7 +90,17 @@ namespace Tukupedia.ViewModels.Customer
             string cmd =
                 "SELECT " +
                 "i.ID as ID, " +
+                "i.KODE as KODE, " +
+                "i.ID_CATEGORY as ID_CATEGORY, " +
                 "i.HARGA as HARGA, " +
+                "i.STATUS as STATUS, " +
+                "i.DESKRIPSI as DESKRIPSI, " +
+                "i.ID_SELLER as ID_SELLER, " +
+                "i.BERAT as BERAT, " +
+                "i.STOK as STOK, " +
+                "i.RATING as RATING, " +
+                "i.IMAGE as IMAGE, " +
+                "i.CREATED_AT as CREATED_AT, " +
                 "i.NAMA as NAMA " +
                 "FROM ITEM i, SELLER s, CATEGORY c " +
                 "WHERE i.ID_SELLER = s.ID " +
@@ -88,8 +108,8 @@ namespace Tukupedia.ViewModels.Customer
 
             string where = "";
             if (keyword != "") {
-                where += $"and (i.NAMA like '%{keyword}%' " +
-                    $"or s.NAMA_TOKO like '%{keyword}%' ";
+                where += $"and (i.NAMA like '%{keyword.ToUpper()}%' " +
+                    $"or s.NAMA_TOKO like '%{keyword.ToUpper()}%' ";
             }
             if (minPrice < maxPrice) {
                 if (minPrice > 0) {
