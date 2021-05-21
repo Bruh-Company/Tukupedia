@@ -147,8 +147,8 @@
                     <Label Content="Jenis Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="288"/>
                     <Label Content="Periode" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="354"/>
                     <ComboBox x:Name="cbJenisPotongan" Canvas.Left="682" Canvas.Top="322" Width="210">
-                        <ComboBoxItem Content="Discount"/>
-                        <ComboBoxItem Content="Cashback"/>
+                        <ComboBoxItem Content="Persenan"/>
+                        <ComboBoxItem Content="Fixed"/>
                     </ComboBox>
                     <DatePicker x:Name="dpAwalPromo" Canvas.Left="682" Canvas.Top="388" Width="210"/>
                     <DatePicker x:Name="dpAkhirPromo" Canvas.Left="944" Canvas.Top="388" Width="201"/>

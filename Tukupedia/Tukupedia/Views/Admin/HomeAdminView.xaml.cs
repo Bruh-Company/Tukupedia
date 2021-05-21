@@ -646,7 +646,7 @@ namespace Tukupedia.Views.Admin
                 tbHargaMin.Text = dr["Harga Minimal"].ToString();
                 // 0 = Discount
                 // 1 = Cashback
-                cbJenisPotongan.SelectedIndex = dr["Jenis Potongan"].ToString() == "Discount" ? 0 : 1;
+                cbJenisPotongan.SelectedIndex = dr["Jenis Potongan"].ToString() == "Persenan" ? 0 : 1;
                 int konter = 0;
                 foreach (DataRow dr1 in pvm.getForCb().Rows)
                 {
@@ -676,7 +676,7 @@ namespace Tukupedia.Views.Admin
             string potonganmax = tbPotonganMax.Text;
             string hargamin = tbHargaMin.Text;
             
-            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "D" : "C";
+            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "P" : "F";
             string id_jenis_promo = cbJenisPromo.SelectedValue.ToString();
             if (cbJenisPotongan.SelectedIndex == -1)
             {
