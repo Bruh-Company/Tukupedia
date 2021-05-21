@@ -220,14 +220,14 @@ namespace Tukupedia.ViewModels.Customer
                     else
                     {
                         //TODO KENAPA KOK PAKAI UM TIDAK BISAAAA
-                        DataRow row = um.Table.NewRow();
-                        row["ID"] = 0;
-                        row["ID_CUSTOMER"] = Session.User["ID"].ToString();
-                        row["MESSAGE"] = Utility.StringFromRichTextBox(ViewComponent.rtbUlasan);
-                        row["RATING"] = ViewComponent.ratingUlasan.Value;
-                        row["ID_D_TRANS_ITEM"] = dti.id;
-                        um.Table.Rows.Add(row);
-                        um.update();
+                        //DataRow row = um.Table.NewRow();
+                        //row["ID"] = 0;
+                        //row["ID_CUSTOMER"] = Session.User["ID"].ToString();
+                        //row["MESSAGE"] = Utility.StringFromRichTextBox(ViewComponent.rtbUlasan);
+                        //row["RATING"] = ViewComponent.ratingUlasan.Value;
+                        //row["ID_D_TRANS_ITEM"] = dti.id;
+                        //um.Table.Rows.Add(row);
+                        //um.update();
                         //um.insert(
                         //    "ID",0,
                         //    "ID_CUSTOMER", Session.User["ID"].ToString(),
@@ -235,13 +235,14 @@ namespace Tukupedia.ViewModels.Customer
                         //    "RATING", ViewComponent.ratingUlasan.Value,
                         //    "ID_D_TRANS_ITEM", dti.id
                         //    );
-                        //new DB("ULASAN").insert(
-                        //    "ID", 0,
-                        //    "ID_CUSTOMER", Session.User["ID"].ToString(),
-                        //    "MESSAGE", Utility.StringFromRichTextBox(ViewComponent.rtbUlasan),
-                        //    "RATING", ViewComponent.ratingUlasan.Value,
-                        //    "ID_D_TRANS_ITEM", dti.id
-                        //    ).execute();
+                        new DB("ULASAN").insert(
+                            "ID", 0,
+                            "ID_CUSTOMER", Session.User["ID"].ToString(),
+                            "MESSAGE", Utility.StringFromRichTextBox(ViewComponent.rtbUlasan),
+                            "RATING", ViewComponent.ratingUlasan.Value,
+                            "ID_D_TRANS_ITEM", dti.id
+                            ).execute();
+                        //Kalau pake DB, harus reset ulang Data Table
 
                         //reset input ulasan
                         resetItem();
