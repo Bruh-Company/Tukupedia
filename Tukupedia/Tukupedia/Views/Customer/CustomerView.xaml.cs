@@ -48,7 +48,7 @@ namespace Tukupedia.Views.Customer
         private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
             CustomerViewModel.loadItems(PanelItems);
-            CustomerViewModel.loadCategory(cbCategory);
+            CustomerViewModel.loadCategory(spCategory);
             debugMode();
             labelWelcome.Content = "Welcome "+ Session.User["NAMA"].ToString();
             grid_Home.Margin = MarginPosition.Middle;
@@ -61,6 +61,9 @@ namespace Tukupedia.Views.Customer
             ComponentHelper.changeVisibilityComponent(grid_Cart, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(grid_Transactions, Visibility.Hidden);
             ComponentHelper.changeVisibilityComponent(grid_Settings, Visibility.Hidden);
+
+            //Init Customer View Model
+            CustomerViewModel.initCustomerViewModel(this);
             
             //Init Cart
             CartViewModel.initCart();
@@ -268,7 +271,6 @@ namespace Tukupedia.Views.Customer
             CartViewModel.proceedToCheckout();
         }
 
-        
         private void cbPromotion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Promo p = (Promo) cbPromotion.SelectedItem;
@@ -344,6 +346,20 @@ namespace Tukupedia.Views.Customer
             this.Show();
         }
 
-        
+        private void btnSearch_Click(object sender, RoutedEventArgs e) {
+            CustomerViewModel.filterItems();
+        }
+        private void btnFilter_Click(object sender, RoutedEventArgs e) {
+            CustomerViewModel.filterItems();
+        }
+
+        private void tbMaxPrice_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbMinPrice_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
     }
 }
