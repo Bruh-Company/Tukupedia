@@ -42,7 +42,7 @@ namespace Tukupedia.ViewModels.Customer
                     card.setNamaBarang(item["NAMA"].ToString());
                     card.setRating(5);
                     card.setJual($"Terjual : {jml}");
-                    if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
+                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.deploy();
                     wp.Children.Add(card);
                 }
@@ -58,7 +58,7 @@ namespace Tukupedia.ViewModels.Customer
                     card.setNamaBarang(item["NAMA"].ToString());
                     card.setRating(5);
                     card.setJual($"Terjual : {jml}");
-                    if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
+                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.setItem(item);
                     card.deploy();
                     wp.Children.Add(card);
@@ -79,28 +79,31 @@ namespace Tukupedia.ViewModels.Customer
 
             string where = "";
             if (keyword != "") {
-                where += $"( i.NAMA like '%{keyword}%' " +
+                where += $"and (i.NAMA like '%{keyword}%' " +
                     $"or s.NAMA_TOKO like '%{keyword}%' ";
             }
             if (minPrice < maxPrice) {
                 if (minPrice > 0) {
-                    if (where == "") where += $" i.HARGA > {minPrice} ";
+                    if (where == "") where += $"and (i.HARGA > {minPrice} ";
                     else where += $" or i.HARGA > {minPrice} ";
                     
                 }
-                if (maxPrice <= 0) {
-                    if (where == "") where += $" i.HARGA > {maxPrice} ";
+                if (maxPrice > 0) {
+                    if (where == "") where += $"and (i.HARGA > {maxPrice} ";
                     else where += $" or i.HARGA > {maxPrice} ";
                 }
                 if (categoryIDs != null && categoryIDs.Count > 0) {
                     foreach (int id in categoryIDs) {
-                        if (where == "") where += $" c.ID = {id} ";
+                        if (where == "") where += $"and (c.ID = {id} ";
                         else where += $" or c.ID = {id} ";
                     }
                 }
             }
             where += where == "" ? "" : ")";
+            cmd += where;
 
+            MessageBox.Show(cmd);
+            items = new ItemModel();
             items.initAdapter(cmd);
             filteredItems = items.Table.Select();
             if (keyword != "") {
