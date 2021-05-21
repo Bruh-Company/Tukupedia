@@ -55,7 +55,7 @@
 
             <ComboBox   Name="comboboxSortPesanan"  Canvas.Left="1000"  Canvas.Top="50"  Width="250"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortPesanan_SelectionChanged"/>
 
-            <DataGrid   Name="datagridPesanan"      Canvas.Left="25"   Canvas.Top="90"   Width="1225"  Height="200" SelectedCellsChanged="datagridPesanan_SelectedCellsChanged"/>
+            <DataGrid   Name="datagridPesanan"      Canvas.Left="25"   Canvas.Top="90"   Width="1225"  Height="200" SelectedCellsChanged="datagridPesanan_SelectedCellsChanged" IsReadOnly="True"/>
 
             <Canvas Name="canvasDetailPesanan" Canvas.Left="25" Canvas.Top="295" Width="1225" Height="285">
                 <Label Content="Kode Pesanan" Canvas.Left="10" Canvas.Top="10" Style="{StaticResource md-secondary}"/>
@@ -77,7 +77,7 @@
                 <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="10" Canvas.Top="210" Width="320" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsReadOnly="True"/>
 
                 <Label Content="Produk" Canvas.Left="345" Canvas.Top="6" Style="{StaticResource md-secondary}"/>
-                <DataGrid Name="datagridProdukPesanan" Canvas.Left="345" Canvas.Top="43" Width="675" Height="187" MouseDoubleClick="datagridProdukPesanan_MouseDoubleClick" LoadingRow="datagridProdukPesanan_LoadingRow" Background="{x:Null}"/>
+                <DataGrid Name="datagridProdukPesanan" Canvas.Left="345" Canvas.Top="43" Width="675" Height="187" MouseDoubleClick="datagridProdukPesanan_MouseDoubleClick" LoadingRow="datagridProdukPesanan_LoadingRow" Background="{x:Null}" IsReadOnly="True"/>
 
                 <Label Content="Total" Canvas.Left="700" Canvas.Top="240" Style="{StaticResource xl-secondary}"/>
                 <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Canvas.Left="765" Canvas.Top="240" Width="250"  Height="30" Style="{StaticResource tb-noborder}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right" IsReadOnly="True"/>

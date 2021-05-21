@@ -124,7 +124,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 1;
             ViewComponent.textboxCariPesanan.Text = "";
             //MessageBox.Show(seller["ID"].ToString());
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
             status = "";
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -136,7 +136,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 2;
             ViewComponent.textboxCariPesanan.Text = "";
 
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'W' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
 
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -150,7 +150,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 3;
             ViewComponent.textboxCariPesanan.Text = "";
 
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'P' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'P' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
 
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -165,7 +165,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 3;
             ViewComponent.textboxCariPesanan.Text = "";
 
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'S' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'S' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
 
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -180,7 +180,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 4;
             ViewComponent.textboxCariPesanan.Text = "";
 
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'D' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'D' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
 
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -195,7 +195,7 @@ namespace Tukupedia.ViewModels.Seller
             lastclick = 5;
             ViewComponent.textboxCariPesanan.Text = "";
 
-            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'C' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA {orderby}");
+            htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", sum(i.HARGA * d.JUMLAH) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR and d.STATUS = 'C' {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
 
             ViewComponent.datagridPesanan.ItemsSource = htrans.Table.DefaultView;
@@ -317,7 +317,16 @@ namespace Tukupedia.ViewModels.Seller
             if (d_trans_selected == -1 && d_trans_selected < dtrans.Table.Rows.Count) return;
             DataRow dr = dtrans.Table.Rows[d_trans_selected];
             DataRow dr_trans = htrans.Table.Rows[h_trans_selected];
-            
+            if(dr_trans["Status"].ToString() == "Canceled")
+            {
+                MessageBox.Show("Tidak bisa terima pesanan karena pesanan di cancel");
+                return;
+            }
+            else if(dr_trans["Status"].ToString() == "Waiting Payment")
+            {
+                MessageBox.Show("Tidak bisa terima pesanan karena pesanan belum dibayar");
+                return;
+            }
             ViewComponent.labelStatusPesanan.Content = dr[4].ToString();
             DataRow drHelper = dtrans_helper.Table.Rows[d_trans_selected];
             string statuses = drHelper[1].ToString();
@@ -346,7 +355,19 @@ namespace Tukupedia.ViewModels.Seller
         }
         public void terimasemua(bool ya)
         {
-            for(int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
+            DataRow dr_trans = htrans.Table.Rows[h_trans_selected];
+
+            if (dr_trans["Status"].ToString() == "Canceled")
+            {
+                MessageBox.Show("Tidak bisa terima pesanan karena pesanan di cancel");
+                return;
+            }
+            else if (dr_trans["Status"].ToString() == "Waiting Payment")
+            {
+                MessageBox.Show("Tidak bisa terima pesanan karena pesanan belum dibayar");
+                return;
+            }
+            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
             {
                 DataRow drhelper = dtrans_helper.Table.Rows[i], dr = dtrans.Table.Rows[i];
                 if (drhelper[1].ToString() == "W" || dr[1].ToString() == "SC")

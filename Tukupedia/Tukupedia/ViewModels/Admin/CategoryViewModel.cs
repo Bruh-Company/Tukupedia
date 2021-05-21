@@ -85,13 +85,13 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = cm.Table.Rows[selected];
-            if (dr["Status"].ToString() == "Aktif")
+            if (true)
             {
-                new DB("customer").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
+                new DB("category").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
             }
             else
             {
-                new DB("customer").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
+                new DB("category").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
             }
         }
         public int nice(DataTable nice, string kode)
