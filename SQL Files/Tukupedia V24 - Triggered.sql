@@ -4,6 +4,27 @@
 --------------------------------------------------------
 --  DDL for Trigger AUTO_ID_CATEGORY
 --------------------------------------------------------
+CREATE OR REPLACE FUNCTION GENERATE_KODE_ITEM (
+    nama varchar2)
+    return varchar2
+is
+    new_code varchar2(30);
+    jumlah number;
+begin
+    if nama like '%' || ' ' || '%' then
+            new_code := substr(nama, 1, 1) || substr(nama, instr(nama, ' ') + 1, 1);
+        else
+            new_code := substr(nama, 1, 2);
+        end if;
+        new_code := upper(new_code);
+    select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
+            into jumlah
+            from ITEM
+            where KODE like '%' || new_code || '%';
+            new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
+    return new_code;
+end GENERATE_KODE_ITEM;
+/
 
 CREATE OR REPLACE TRIGGER "AUTO_ID_CATEGORY"
     FOR insert or update
