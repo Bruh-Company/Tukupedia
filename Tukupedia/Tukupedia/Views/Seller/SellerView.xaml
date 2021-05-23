@@ -143,7 +143,7 @@
 
         <!--PAGE INFO TOKO-->
         <Canvas Name="canvasInfoToko" HorizontalAlignment="Center" Height="590" Margin="3200,0,0,0" VerticalAlignment="Bottom" Width="1280" Visibility="Visible">
-            <ScrollViewer Width="1280" Height="1169" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
+            <ScrollViewer Width="1280" Height="590" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden">
                 <Canvas Height="1200" Width="1280">
                     <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
                     <Button Name="btnUbahInfoPenjual" Content="Ubah" Canvas.Left="240" Canvas.Top="23" Width="100" Height="35" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Click="btnUbahInfoPenjual_Click"/>
