@@ -17,7 +17,7 @@ namespace Tukupedia.Models
         public OracleCommandBuilder Builder { get; set; }
         public string statement { get; set; }
         public string where { get; set; }
-        public string Sort { get; set; }
+        public string sort { get; set; }
 
         public Model()
         {
@@ -109,7 +109,7 @@ namespace Tukupedia.Models
 
         public void resetSort()
         {
-            this.Sort = "";
+            this.sort = "";
         }
         public void addWhere(string column, string val,string opera="=", bool apostrophe=true)
         {
@@ -124,15 +124,15 @@ namespace Tukupedia.Models
             where += $" {or} {column} {opera} {apos}{val}{apos} ";
         }
 
-        public void addOrderBy(string OrderBy)
+        public void addOrderBy(string orderBy)
         {
             string comma = "";
-            if (this.Sort != "") comma = ",";
-            this.Sort += $" {comma} {OrderBy} ";
+            if (this.sort != "") comma = ",";
+            this.sort += $" {comma} {orderBy} ";
         }
         public DataRow[] get()
         {
-            return Table.Select(where,Sort);
+            return Table.Select(where, sort);
         }
         
     }

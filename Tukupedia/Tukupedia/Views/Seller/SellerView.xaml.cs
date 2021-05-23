@@ -109,7 +109,6 @@ namespace Tukupedia.Views.Seller {
         private void checkboxTerimaSemua_Click(object sender, RoutedEventArgs e)
         {
             SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked);
-
         }
 
         private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
@@ -139,6 +138,10 @@ namespace Tukupedia.Views.Seller {
 
         private void datagridProduk_LoadingRow(object sender, DataGridRowEventArgs e) {
             SellerViewModel.pageProduk.checkRow(e.Row);
+        }
+
+        private void comboboxBerat_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            SellerViewModel.pageProduk.changeBerat();
         }
 
         private void btnPilihGambarProduk_Click(object sender, RoutedEventArgs e) {

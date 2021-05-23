@@ -10,6 +10,8 @@ using System.Windows;
 using Oracle.DataAccess.Client;
 using System.Collections.Generic;
 using Tukupedia.Components;
+using MaterialDesignThemes.Wpf;
+using Tukupedia.Helpers.Classes;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageProduk {
@@ -67,30 +69,26 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxBerat.SelectedIndex = 0;
         }
 
-        public void fillDgvProduk() {
-            string statement = $"SELECT " +
+        public void initDgvProduk(string keyword = "") {
+            string statement;
+            if (keyword == "") {
+                statement = $"SELECT " +
+                    $"i.KODE as \"KODE BARANG\", " +
+                    $"i.NAMA as \"NAMA BARANG\", " +
+                    $"TO_CHAR(i.HARGA) as \"HARGA\", " +
+                    $"c.NAMA as \"KATEGORI\", " +
+                    $"NVL(i.RATING, 0) as \"RATING\", " +
+                    $"(CASE WHEN i.STATUS = '0' THEN 'TIDAK AKTIF' ELSE 'AKTIF' END) as \"STATUS\" " +
+                    $"FROM ITEM i, CATEGORY c " +
+                    $"WHERE i.ID_SELLER = '{seller["ID"]}' " +
+                    $"and i.ID_CATEGORY = c.ID";
+            } else {
+                statement = $"SELECT " +
                 $"i.KODE as \"KODE BARANG\", " +
                 $"i.NAMA as \"NAMA BARANG\", " +
-                $"i.HARGA as \"HARGA\", " +
-                $"i.RATING as \"RATING\", " +
-                $"(CASE WHEN i.STATUS = '0' THEN 'TIDAK AKTIF' ELSE 'AKTIF' END) as \"STATUS\" " +
-                $"FROM ITEM i, CATEGORY c " +
-                $"WHERE i.ID_SELLER = '{seller["ID"]}' " +
-                $"and i.ID_CATEGORY = c.ID";
-
-            itemModel = new ItemModel();
-            itemModel.initAdapter(statement);
-
-            ViewComponent.datagridProduk.ItemsSource = null;
-            ViewComponent.datagridProduk.ItemsSource = itemModel.Table.DefaultView;
-        }
-
-        public void fillDgvProduk(string keyword) {
-            string statement = $"SELECT " +
-                $"i.KODE as \"KODE BARANG\", " +
-                $"i.NAMA as \"NAMA BARANG\", " +
+                $"TO_CHAR(i.HARGA) as \"HARGA\", " +
                 $"c.NAMA as \"KATEGORI\", " +
-                $"i.RATING as \"RATING\", " +
+                $"NVL(i.RATING, 0) as \"RATING\", " +
                 $"(CASE WHEN i.STATUS = '0' THEN 'TIDAK AKTIF' ELSE 'AKTIF' END) as \"STATUS\" " +
                 $"FROM ITEM i, CATEGORY c " +
                 $"WHERE i.ID_SELLER = '{seller["ID"]}' " +
@@ -98,18 +96,31 @@ namespace Tukupedia.ViewModels.Seller {
                 $"and (i.NAMA like '%{keyword}%' " +
                 $"or c.NAMA like '%{keyword}%' " +
                 $"or i.KODE like '%{keyword}%')";
-
+            }
+            if (statement == "") {
+                Console.WriteLine("Failed init DGV PRODUK");
+                return;
+            }
             itemModel = new ItemModel();
             itemModel.initAdapter(statement);
+        }
 
-            ViewComponent.datagridProduk.ItemsSource = null;
+        public void fillDgvProduk(string keyword = "") {
+            initDgvProduk(keyword);
+            formatNumberCell();
+            ViewComponent.datagridProduk.ItemsSource = "";
             ViewComponent.datagridProduk.ItemsSource = itemModel.Table.DefaultView;
         }
 
+        private void formatNumberCell() {
+            foreach (DataRow dr in itemModel.Table.Rows) {
+                dr["HARGA"] = "Rp " + Utility.formatNumber(Convert.ToInt32(dr["HARGA"].ToString()));
+            }
+        }
+
         public void searchProduk() {
-            string keyword = ViewComponent.textboxCariProduk.Text.ToUpper();
-            if (keyword == "") fillDgvProduk();
-            else fillDgvProduk(keyword);
+            string keyword = ViewComponent.textboxCariProduk.Text.ToUpper(); 
+            fillDgvProduk(keyword);
         }
 
         public void sortProduk() {
@@ -146,6 +157,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.textboxBerat.Text = row["BERAT"].ToString();
             ViewComponent.textboxDeskripsi.Text = row["DESKRIPSI"].ToString();
             ViewComponent.comboboxKategori.SelectedIndex = Convert.ToInt32(row["ID_CATEGORY"].ToString()) - 1;
+            ViewComponent.comboboxBerat.SelectedIndex = 0;
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
 
@@ -233,8 +245,7 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void checkRow(DataGridRow dgRow) {
-            DataRowView item = dgRow.Item as DataRowView;
-            if (item != null) {
+            if (dgRow.Item is DataRowView item) {
                 DataRow row = item.Row;
                 DataRow data = new DB("ITEM").select().where("KODE", row["KODE BARANG"].ToString()).getFirst();
                 int stok = Convert.ToInt32(data["STOK"].ToString());
@@ -248,6 +259,17 @@ namespace Tukupedia.ViewModels.Seller {
                     Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
                     dgRow.Background = new SolidColorBrush(color);
                 }
+
+            }
+        }
+
+        public void changeBerat() {
+            if (ViewComponent.textboxBerat.Text != "") {
+                if (ViewComponent.comboboxBerat.SelectedIndex == 0)
+                    MessageBox.Show(ViewComponent.textboxBerat.Text);
+                ViewComponent.textboxBerat.Text = (Convert.ToInt32(ViewComponent.textboxBerat.Text) * 1000).ToString();
+                if (ViewComponent.comboboxBerat.SelectedIndex == 1)
+                    ViewComponent.textboxBerat.Text = (Convert.ToInt32(ViewComponent.textboxBerat.Text) / 1000).ToString();
             }
         }
 
@@ -272,7 +294,6 @@ namespace Tukupedia.ViewModels.Seller {
                 dc.initComments(Convert.ToInt32(row["ID"]));
                 ViewComponent.spanelDiscussion.Children.Add(dc);
             }
-
         }
 
         // PRIVATE METHODS
@@ -306,8 +327,11 @@ namespace Tukupedia.ViewModels.Seller {
 
         private bool dataValidation(List<string> data) {
             foreach (string item in data)
-                if (item == "") return false;
-            return imagePath == "" ? false : true;
+                if (item == "") {
+                    Console.WriteLine("ERROR! data invalid");
+                    return false;
+                }
+            return imagePath != "";
         }
 
         private void resetPageProduk() {
@@ -317,9 +341,11 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.textboxBerat.Text = "";
             ViewComponent.textboxDeskripsi.Text = "";
             ViewComponent.comboboxKategori.SelectedIndex = -1;
+            ViewComponent.comboboxBerat.SelectedIndex = 0;
             ViewComponent.checkboxStatusProduk.IsChecked = false;
             ViewComponent.datagridProduk.SelectedIndex = -1;
             ViewComponent.imageProduk.Source = null;
+            imagePath = "";
             fillDgvProduk();
         }
     }
