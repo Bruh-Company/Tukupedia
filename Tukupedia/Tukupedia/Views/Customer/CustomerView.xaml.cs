@@ -48,7 +48,7 @@ namespace Tukupedia.Views.Customer
         {
             CustomerViewModel.loadItems(PanelItems);
             CustomerViewModel.loadCategory(spCategory);
-            debugMode();
+            //debugMode();
             labelWelcome.Content = "Welcome "+ Session.User["NAMA"].ToString();
             grid_Home.Margin = MarginPosition.Middle;
             grid_Cart.Margin = MarginPosition.Right;

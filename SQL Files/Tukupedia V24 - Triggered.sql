@@ -4,24 +4,24 @@
 --------------------------------------------------------
 --  DDL for Trigger AUTO_ID_CATEGORY
 --------------------------------------------------------
-CREATE OR REPLACE FUNCTION GENERATE_KODE_ITEM (
+CREATE OR REPLACE FUNCTION GENERATE_KODE_ITEM(
     nama varchar2)
     return varchar2
-is
+    is
     new_code varchar2(30);
-    jumlah number;
+    jumlah   number;
 begin
     if nama like '%' || ' ' || '%' then
-            new_code := substr(nama, 1, 1) || substr(nama, instr(nama, ' ') + 1, 1);
-        else
-            new_code := substr(nama, 1, 2);
-        end if;
-        new_code := upper(new_code);
+        new_code := substr(nama, 1, 1) || substr(nama, instr(nama, ' ') + 1, 1);
+    else
+        new_code := substr(nama, 1, 2);
+    end if;
+    new_code := upper(new_code);
     select NVL(MAX(ltrim(substr(KODE, 5), '0')), 0) + 1
-            into jumlah
-            from ITEM
-            where KODE like '%' || new_code || '%';
-            new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
+    into jumlah
+    from ITEM
+    where KODE like '%' || new_code || '%';
+    new_code := 'IT' || new_code || lpad(jumlah, 3, '0');
     return new_code;
 end GENERATE_KODE_ITEM;
 /
@@ -34,10 +34,16 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_CATEGORY"
     new_code varchar2(30);
     jumlah number;
     old_id number := -1;
+    jml number := -1;
 BEFORE STATEMENT IS
 BEGIN
     if inserting then
-        select nvl(max(id), 0) + 1 into new_id from CATEGORY;
+        select count(*) into jml from CATEGORY;
+        if (jml = 0) then
+            new_id := 1;
+        else
+            select nvl(max(id), 0) + 1 into new_id from CATEGORY;
+        end if;
     end if;
 END BEFORE STATEMENT;
 
@@ -98,10 +104,16 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_CUSTOMER"
     new_code varchar2(30);
     jumlah number;
     old_id number := -1;
+    jml number := -1;
 BEFORE STATEMENT IS
 BEGIN
     if inserting then
-        select nvl(max(id), 0) + 1 into new_id from CUSTOMER;
+        select count(*) into jml from CUSTOMER;
+        if (jml = 0) then
+            new_id := 1;
+        else
+            select nvl(max(id), 0) + 1 into new_id from CUSTOMER;
+        end if;
     end if;
 END BEFORE STATEMENT;
 
@@ -159,9 +171,15 @@ CREATE OR REPLACE TRIGGER AUTO_ID_D_DISKUSI
     for each row
 DECLARE
     new_id number;
+    jml    number := -1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from D_DISKUSI;
-    :new.ID := new_id;
+    select count(*) into jml from D_DISKUSI;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from D_DISKUSI;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_D_DISKUSI;
 /
 --ALTER TRIGGER "AUTO_ID_D_DISKUSI" ENABLE
@@ -175,9 +193,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_D_TRANS_ITEM"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from D_TRANS_ITEM;
-    :new.ID := new_id;
+    select count(*) into jml from D_TRANS_ITEM;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from D_TRANS_ITEM;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_D_TRANS_ITEM;
 /
 --ALTER TRIGGER "AUTO_ID_D_TRANS_ITEM" ENABLE
@@ -191,9 +215,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_H_DISKUSI"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from H_DISKUSI;
-    :new.ID := new_id;
+    select count(*) into jml from H_DISKUSI;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from H_DISKUSI;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_H_DISKUSI;
 /
 --ALTER TRIGGER "AUTO_ID_H_DISKUSI" ENABLE
@@ -209,14 +239,20 @@ DECLARE
     new_id   number;
     new_code varchar2(30);
     jumlah   number;
+    jml number:=-1;
 BEGIN
     new_code := 'HTI' || to_char(sysdate, 'ddmmyyyy');
     select NVL(MAX(substr(KODE, 12)), 0) + 1
     into jumlah
     from H_TRANS_ITEM
     where KODE like '%' || new_code || '%';
-    select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
-    :new.ID := new_id;
+    select count(*) into jml from H_TRANS_ITEM;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from H_TRANS_ITEM;
+    end if;
+    :NEW.ID := new_id;
     :new.kode := new_code || lpad(jumlah, 5, '0');
 END AUTO_ID_H_TRANS_ITEM;
 /
@@ -233,10 +269,16 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_ITEM"
     new_code varchar2(30);
     jumlah number;
     old_id number := -1;
+    jml number:=-1;
 BEFORE STATEMENT IS
 BEGIN
     if inserting then
-        select nvl(max(id), 0) + 1 into new_id from ITEM;
+        select count(*) into jml from ITEM;
+        if (jml = 0) then
+            new_id := 1;
+        else
+            select nvl(max(id), 0) + 1 into new_id from ITEM;
+        end if;
     end if;
 END BEFORE STATEMENT;
 
@@ -294,9 +336,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_JENIS_PROMO"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from JENIS_PROMO;
-    :new.ID := new_id;
+    select count(*) into jml from JENIS_PROMO;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from JENIS_PROMO;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_JENIS_PROMO;
 /
 
@@ -312,10 +360,16 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR"
     new_code varchar2(30);
     jumlah number;
     old_id number := -1;
+    jml number:=-1;
 BEFORE STATEMENT IS
 BEGIN
     if inserting then
-        select nvl(max(id), 0) + 1 into new_id from KURIR;
+        select count(*) into jml from KURIR;
+        if (jml = 0) then
+            new_id := 1;
+        else
+            select nvl(max(id), 0) + 1 into new_id from KURIR;
+        end if;
     end if;
 END BEFORE STATEMENT;
 
@@ -373,9 +427,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_METODE_PEMBAYARAN"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from METODE_PEMBAYARAN;
-    :new.ID := new_id;
+    select count(*) into jml from METODE_PEMBAYARAN;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from METODE_PEMBAYARAN;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_METODE_PEMBAYARAN;
 /
 --ALTER TRIGGER "AUTO_ID_METODE_PEMBAYARAN" ENABLE
@@ -389,9 +449,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_PROMO"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from PROMO;
-    :new.ID := new_id;
+    select count(*) into jml from PROMO;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from PROMO;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_PROMO;
 /
 --ALTER TRIGGER "AUTO_ID_PROMO" ENABLE
@@ -407,10 +473,16 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_SELLER"
     new_code varchar2(30);
     jumlah number;
     old_id number := -1;
+    jml number:=-1;
 BEFORE STATEMENT IS
 BEGIN
     if inserting then
-        select nvl(max(id), 0) + 1 into new_id from SELLER;
+        select count(*) into jml from SELLER;
+        if (jml = 0) then
+            new_id := 1;
+        else
+            select nvl(max(id), 0) + 1 into new_id from SELLER;
+        end if;
     end if;
 END BEFORE STATEMENT;
 
@@ -470,14 +542,20 @@ DECLARE
     new_id   number;
     new_code varchar2(30);
     jumlah   number;
+    jml number:=-1;
 BEGIN
     new_code := 'TOS' || to_char(sysdate, 'ddmmyyyy');
     select NVL(MAX(substr(KODE, 12)), 0) + 1
     into jumlah
     from TRANS_OS
     where KODE like '%' || new_code || '%';
-    select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
-    :new.ID := new_id;
+    select count(*) into jml from TRANS_OS;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from TRANS_OS;
+    end if;
+    :NEW.ID := new_id;
     :new.kode := new_code || lpad(jumlah, 5, '0');
 END AUTO_ID_TRANS_OS;
 /
@@ -492,9 +570,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_ULASAN"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from ULASAN;
-    :new.ID := new_id;
+    select count(*) into jml from ULASAN;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from ULASAN;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_ULASAN;
 /
 --ALTER TRIGGER "AUTO_ID_ULASAN" ENABLE
@@ -505,9 +589,15 @@ CREATE OR REPLACE TRIGGER "AUTO_ID_KURIR_SELLER"
     for each row
 DECLARE
     new_id number;
+    jml number:=-1;
 BEGIN
-    select nvl(max(id), 0) + 1 into new_id from KURIR_SELLER;
-    :new.ID := new_id;
+    select count(*) into jml from KURIR_SELLER;
+    if (jml = 0) then
+        new_id := 1;
+    else
+        select nvl(max(id), 0) + 1 into new_id from KURIR_SELLER;
+    end if;
+    :NEW.ID := new_id;
 END AUTO_ID_KURIR_SELLER;
 /
 
