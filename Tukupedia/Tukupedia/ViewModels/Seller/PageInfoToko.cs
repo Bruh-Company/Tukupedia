@@ -122,8 +122,8 @@ namespace Tukupedia.ViewModels.Seller {
             Trans_OSModel model = new Trans_OSModel();
             model.addWhere($"ID_SELLER", seller["ID"].ToString(), "=", false);
             model.addOrderBy("TANGGAL_TRANSAKSI desc");
+            if (model.get().Length <= 0) return;
             DataRow row = model.get()[0];
-
             if (row == null) return;
             ViewComponent.labelOSMessage.Visibility = Visibility.Visible;
             if (row["STATUS"].ToString() == "R") {

@@ -266,8 +266,7 @@ namespace Tukupedia.ViewModels.Seller {
         public void changeBerat() {
             if (ViewComponent.textboxBerat.Text != "") {
                 if (ViewComponent.comboboxBerat.SelectedIndex == 0)
-                    MessageBox.Show(ViewComponent.textboxBerat.Text);
-                ViewComponent.textboxBerat.Text = (Convert.ToInt32(ViewComponent.textboxBerat.Text) * 1000).ToString();
+                    ViewComponent.textboxBerat.Text = (Convert.ToInt32(ViewComponent.textboxBerat.Text) * 1000).ToString();
                 if (ViewComponent.comboboxBerat.SelectedIndex == 1)
                     ViewComponent.textboxBerat.Text = (Convert.ToInt32(ViewComponent.textboxBerat.Text) / 1000).ToString();
             }
