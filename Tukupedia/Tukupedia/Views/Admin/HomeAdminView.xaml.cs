@@ -50,6 +50,8 @@ namespace Tukupedia.Views.Admin
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            parent.Height = 638;
+            parent.Width = 1274;
             initState();
         }
 
@@ -707,7 +709,7 @@ namespace Tukupedia.Views.Admin
 
         private void tbPotongan_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Utility.TextBoxNumeric(tbPotongan);
+            //Utility.NumberValidationTextBox(tbPotongan);
         }
 
         private void btUpdatePromo_Click(object sender, RoutedEventArgs e)
@@ -1141,5 +1143,39 @@ namespace Tukupedia.Views.Admin
             resetJenisPromo();
         }
 
+        private void tbPotongan_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbPotonganMax_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbHargaMin_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbNotelpSeller_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbNotelpCustomer_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbHargaKurir_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void tbNoTelpOS_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Utility.NumberValidationTextBox(sender, e);
+        }
     }
 }

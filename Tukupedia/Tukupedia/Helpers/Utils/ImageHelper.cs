@@ -54,6 +54,10 @@ namespace Tukupedia.Helpers.Utils {
             // return image path
             // cara pakai
             // string path = ImageHelper.saveImage(originPath, row["IMAGE"].ToString(), ImageHelper.target.item)
+            if (originPath == "") {
+                Console.WriteLine("originPath is null");
+                return null;
+            }
             Uri oldUri = new Uri(originPath);
             if (!oldUri.IsFile) return null;
 
@@ -96,6 +100,10 @@ namespace Tukupedia.Helpers.Utils {
         public static void loadImage(Image elem, string path) {
             // CARA PAKAI
             // loadImage(<component image>, path)
+            if (path == "") {
+                MessageBox.Show("ERR! Can't load image :)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             path = new Uri(path).LocalPath;
             using (var stream = new FileStream(path, FileMode.Open)) {
                 BitmapImage bitmapImage = new BitmapImage();

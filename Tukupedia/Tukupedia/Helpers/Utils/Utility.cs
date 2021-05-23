@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Tukupedia.Helpers.Utils
@@ -161,6 +162,27 @@ namespace Tukupedia.Helpers.Utils
         {
             rtb.Document.Blocks.Clear();
             rtb.Document.Blocks.Add(new Paragraph(new Run(str)));
+        }
+
+        public static void TraverseVisualTree(Visual myMainWindow)
+        {
+            int childrenCount = VisualTreeHelper.GetChildrenCount(myMainWindow);
+            for (int i = 0; i < childrenCount; i++)
+            {
+                var visualChild = (Visual)VisualTreeHelper.GetChild(myMainWindow, i);
+                if (visualChild is TextBox)
+                {
+                    TextBox tb = (TextBox)visualChild;
+                    tb.Clear();
+                }
+                if (visualChild is PasswordBox)
+                {
+                    PasswordBox pb = (PasswordBox)visualChild;
+                    pb.Clear();
+
+                }
+                TraverseVisualTree(visualChild);
+            }
         }
 
     }

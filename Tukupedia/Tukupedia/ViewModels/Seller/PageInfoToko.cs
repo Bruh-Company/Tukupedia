@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Oracle.DataAccess.Client;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Views;
+using System.Windows.Media;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageInfoToko {
@@ -101,14 +102,46 @@ namespace Tukupedia.ViewModels.Seller {
         // Private Void
         private void resetInfo() {
             seller = new DB("SELLER").select().where("ID", seller["ID"].ToString()).getFirst();
-            imagePath = seller["IMAGE"].ToString();
+
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").get();
+            imagePath = seller["IMAGE"].ToString();
+
+            lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_SELLER", "=", "ID").where("ID_SELLER", seller["ID"].ToString()).get();
 
             initImageToko();
             fillTextbox();
             reloadImageInfo();
             resetKurir();
+            resetOSMessage();
+        }
+
+        private void resetOSMessage() {
+            ViewComponent.labelOSMessage.Visibility = Visibility.Hidden;
+            ViewComponent.btnDaftarOS.Visibility = Visibility.Visible;
+
+            Trans_OSModel model = new Trans_OSModel();
+            model.addWhere($"ID_SELLER", seller["ID"].ToString(), "=", false);
+            model.addOrderBy("TANGGAL_TRANSAKSI desc");
+            DataRow row = model.get()[0];
+
+            if (row == null) return;
+            ViewComponent.labelOSMessage.Visibility = Visibility.Visible;
+            if (row["STATUS"].ToString() == "R") {
+                ViewComponent.labelOSMessage.Content = "Pendaftaran Official Store masih diproses";
+                Color color = (Color)ColorConverter.ConvertFromString("#FFC548");
+                ViewComponent.labelOSMessage.Foreground = new SolidColorBrush(color);
+                ViewComponent.btnDaftarOS.IsEnabled = false;
+            }
+            else if (row["STATUS"].ToString() == "D") {
+                ViewComponent.labelOSMessage.Content = "Pendaftaran Official Store ditolak";
+                Color color = (Color)ColorConverter.ConvertFromString("#E23434");
+                ViewComponent.labelOSMessage.Foreground = new SolidColorBrush(color);
+                ViewComponent.btnDaftarOS.IsEnabled = true;
+            }
+            else {
+                ViewComponent.labelOSMessage.Visibility = Visibility.Hidden;
+                ViewComponent.btnDaftarOS.Visibility = Visibility.Hidden;
+            }
         }
 
         private void resetKurir() {
@@ -119,9 +152,9 @@ namespace Tukupedia.ViewModels.Seller {
         private void saveKurirSeller() {
             Kurir_SellerModel model = new Kurir_SellerModel();
             model.init();
-            model.addWhere("ID_SELLER", seller["ID"].ToString());
+            model.addWhere("ID_SELLER", seller["ID"].ToString(), "=", false);
             foreach (DataRow row in model.get()) {
-                new DB("KURIR_SELLER").delete(seller["ID"].ToString()).execute();
+                new DB("KURIR_SELLER").delete(row["ID"].ToString()).execute();
             }
 
             foreach (DataRow row in lbKurirTable.Rows) {
@@ -253,8 +286,7 @@ namespace Tukupedia.ViewModels.Seller {
             return true;
         }
 
-        public void ChangePassword()
-        {
+        public void ChangePassword() {
             ChangePasswordView cp = new ChangePasswordView("SELLER", seller["ID"].ToString());
             ViewComponent.Hide();
             cp.ShowDialog();

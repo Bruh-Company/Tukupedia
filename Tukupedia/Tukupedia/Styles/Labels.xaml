@@ -36,27 +36,27 @@
     -->
     
     <!--Base-->
-    <Style TargetType="Label">
+    <Style TargetType="Label" BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="Foreground" Value="#FFFFFF"/>
     </Style>
 
     <!--text-success-->
-    <Style TargetType="Label" x:Key="text-success">
+    <Style TargetType="Label" x:Key="text-success" BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="Foreground" Value="#65C65B"/>
     </Style>
 
     <!--text-secondary-->
-    <Style TargetType="Label" x:Key="text-secondary">
+    <Style TargetType="Label" x:Key="text-secondary" BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="Foreground" Value="#9A9A9A"/>
     </Style>
 
     <!--text-danger-->
-    <Style TargetType="Label" x:Key="text-danger">
+    <Style TargetType="Label" x:Key="text-danger" BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="Foreground" Value="#E23434"/>
     </Style>
 
     <!--text-warning-->
-    <Style TargetType="Label" x:Key="text-warning">
+    <Style TargetType="Label" x:Key="text-warning" BasedOn="{StaticResource MaterialDesignLabel}">
         <Setter Property="Foreground" Value="#FFC548"/>
     </Style>
 

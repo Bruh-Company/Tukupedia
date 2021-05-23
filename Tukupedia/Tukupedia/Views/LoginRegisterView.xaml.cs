@@ -104,9 +104,12 @@ namespace Tukupedia.Views
                     CustomerView cv = new CustomerView();
                     cv.ShowDialog();
                 }
+                Utility.TraverseVisualTree(this);
                 this.Show();
             }
         }
+        
+
         //Button Seller Login
         private void btnSellerLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -128,6 +131,8 @@ namespace Tukupedia.Views
                     sv.ShowDialog();
                 }
                 this.Show();
+                Utility.TraverseVisualTree(this);
+
             }
         }
 
