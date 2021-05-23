@@ -44,7 +44,6 @@ namespace Tukupedia.Views.Customer
             InitializeComponent();
         }
 
-
         private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
             CustomerViewModel.loadItems(PanelItems);
@@ -84,6 +83,10 @@ namespace Tukupedia.Views.Customer
             IntPtr hwnd = new WindowInteropHelper(sender as Window).Handle;
             int value = GetWindowLong(hwnd, GWL_STYLE);
             SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
+            //COBA SESUATU :)
+            
+           
+
         }
 
         void debugMode()

@@ -144,11 +144,7 @@
                         <Storyboard >
                             <ColorAnimation
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                              From="Transparent" To="#FFFFFF" Duration="0:0:0.3"
-                              RepeatBehavior="1x" />
-                            <ColorAnimation
-                              Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#FFFFFF" To="#65C65B" Duration="0:0:0.3"
+                              From="Transparent" To="#76DE6B" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -158,11 +154,7 @@
                         <Storyboard >
                             <ColorAnimation
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                              From="#FFFFFF" To="Transparent" Duration="0:0:0.3"
-                              RepeatBehavior="1x" />
-                            <ColorAnimation
-                              Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#65C65B" To="#FFFFFF" Duration="0:0:0.3"
+                              From="#76DE6B" To="Transparent" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -170,15 +162,15 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <SolidColorBrush x:Key="primary-color" Color="#65C65B" />
     <!--White Button-->
     <Style BasedOn="{StaticResource MaterialDesignRaisedDarkButton}"
            TargetType="Button"
            x:Key="btn-white">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Foreground" Value="#65C65B"/>
-        <Setter Property="BorderBrush" Value="#FFFFFF"/>
-        <Setter Property="Background" Value="#FFFFFF"/>
-        <Setter Property="Foreground" Value="#65C65B"/>
+        <Setter Property="Foreground" Value="{DynamicResource MyFillBrush}" />
+        <Setter Property="BorderBrush" Value="#343434"/>
+        <Setter Property="Background" Value="#343434"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
@@ -186,11 +178,11 @@
                         <Storyboard >
                             <ColorAnimation
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                              From="#FFFFFF" To="#E2E2E2" Duration="0:0:0.2"
+                              From="#343434" To="#595959" Duration="0:0:0.2"
                               RepeatBehavior="1x" />
                             <ColorAnimation
                               Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#65C65B" To="#65C65B" Duration="0:0:0.3"
+                              From="#65C65B" To="#FFFFFF" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
@@ -200,11 +192,11 @@
                         <Storyboard >
                             <ColorAnimation
                               Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                              From="#E2E2E2" To="#FFFFFF" Duration="0:0:0.2"
+                              From="#595959" To="#343434" Duration="0:0:0.2"
                               RepeatBehavior="1x" />
                             <ColorAnimation
                               Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"
-                              From="#65C65B" To="#65C65B" Duration="0:0:0.3"
+                              From="#FFFFFF" To="#65C65B" Duration="0:0:0.3"
                               RepeatBehavior="1x" />
                         </Storyboard>
                     </BeginStoryboard>
