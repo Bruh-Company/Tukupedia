@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:Tukupedia.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Tukupedia.Views.LoginRegisterView"
         Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
         Title="LoginPage" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxHeight="720" MaxWidth="1280" Loaded="Window_Loaded">
     <Grid>
@@ -87,7 +86,7 @@
                                         </TransformGroup>
                                     </Button.RenderTransform>
                                 </Button>
-                                <Button  Style="{StaticResource btn-white}" x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0"/>
+                                <Button  Style="{StaticResource btn-white}" Foreground="{StaticResource primary-color}"  x:Name="btnCustomerToRegister" Content="Register New Account" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Click="btnToRegister1_click" Margin="10" HorizontalContentAlignment="Center" Width="300" BorderThickness="0"/>
                             </StackPanel>
                         </Grid>
                         <Grid x:Name="GridRegisterCustomer1" HorizontalAlignment="Center" Margin="418,10,-398,10" VerticalAlignment="Center" Height="413">

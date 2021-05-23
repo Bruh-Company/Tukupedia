@@ -43,6 +43,7 @@ namespace Tukupedia.ViewModels.Customer
                     int jml = jmlItem["JML"].ToString()!=""?Convert.ToInt32(jmlItem["JML"]):0;
                     card.setHarga(Convert.ToInt32(item["HARGA"]));
                     card.setNamaBarang(item["NAMA"].ToString());
+                    card.setItem(item);
                     if (item["RATING"].ToString() == "")
                     {
                         card.setRating(0);
@@ -67,6 +68,7 @@ namespace Tukupedia.ViewModels.Customer
                         .where("ID_ITEM", item["ID"].ToString())
                         .getFirst();
                     int jml = jmlItem["JML"].ToString() != "" ? Convert.ToInt32(jmlItem["JML"]) : 0;
+                    card.setItem(item);
                     card.setHarga(Convert.ToInt32(item["HARGA"]));
                     card.setNamaBarang(item["NAMA"].ToString());
                     if (item["RATING"].ToString() == "")

@@ -1,6 +1,7 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaterialDesignThemes.Wpf;
 using Tukupedia.Helpers.Utils;
@@ -55,6 +56,7 @@ namespace Tukupedia.Components
             Utility.setRichTextBoxString(richTextBox, "Reply Here");
             richTextBox.Width = 450;
             richTextBox.Height = 100;
+            richTextBox.Foreground = new SolidColorBrush(Colors.White);
 
 
         }
