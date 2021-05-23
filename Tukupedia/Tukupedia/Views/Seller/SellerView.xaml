@@ -12,7 +12,7 @@
     <Window.Resources>
         <!--Base-->
         <Style TargetType="{x:Type Label}">
-            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Foreground" Value="#F2F2F2"/>
         </Style>
 
         <Style TargetType="{x:Type ComboBox}"
@@ -148,7 +148,7 @@
                     <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
                     <Button Name="btnUbahInfoPenjual" Content="Ubah" Canvas.Left="240" Canvas.Top="23" Width="100" Height="35" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Click="btnUbahInfoPenjual_Click"/>
 
-                    <Label Content="OS Message" Canvas.Left="750" Canvas.Top="100" Style="{StaticResource xl}" Name="labelOSMessage"/>
+                    <Label Content="OS Message" Canvas.Left="750" Canvas.Top="100" Style="{StaticResource lg}" Name="labelOSMessage"/>
                     <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="750" Canvas.Top="150" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnDaftarOS_Click"/>
 
                     <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
