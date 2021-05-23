@@ -188,7 +188,7 @@ namespace Tukupedia.ViewModels.Seller {
             procedure.addParam("I", "nama", nama, 255, OracleDbType.Varchar2);
 
             string img = ImageHelper.saveImage(imagePath, procedure.getValue(), ImageHelper.target.item);
-
+            if (img == null) return;
             ItemModel model = new ItemModel();
             model.init();
 
@@ -229,6 +229,7 @@ namespace Tukupedia.ViewModels.Seller {
             model.addWhere("KODE", itemModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
                 string img = ImageHelper.saveImage(imagePath, row["KODE"].ToString(), ImageHelper.target.item);
+                if (img == null) return;
                 model.updateRow(
                     row,
                     "NAMA", nama,

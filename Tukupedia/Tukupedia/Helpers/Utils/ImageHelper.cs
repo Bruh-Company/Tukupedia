@@ -54,7 +54,7 @@ namespace Tukupedia.Helpers.Utils {
             // return image path
             // cara pakai
             // string path = ImageHelper.saveImage(originPath, row["IMAGE"].ToString(), ImageHelper.target.item)
-            if (originPath == "") {
+            if (originPath == "" || originPath == null) {
                 Console.WriteLine("originPath is null");
                 return null;
             }
