@@ -250,9 +250,9 @@ namespace Tukupedia.ViewModels.Seller
                 ViewComponent.textboxAlamatPesanan.Text = dr[4].ToString();
                 ViewComponent.textboxAlamatPesanan.IsReadOnly = true;
                 dtrans = new D_Trans_ItemModel();
-                dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when 'W' then 'Pesanan Baru' when 'P' then 'Siap Kirim' when 'S' then 'Dalam Pengiriman' when 'D' then 'Pesanan Selesai' when 'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
+                dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when 'W' then 'Pesanan Baru' when 'P' then 'Siap Kirim' when 'S' then 'Dalam Pengiriman' when 'D' then 'Pesanan Selesai' when 'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
                 dtrans_helper = new D_Trans_ItemModel();
-                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH, i.ID from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
+                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH, i.ID from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
                 ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
                 ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Visible;
                 hitungTotal();
