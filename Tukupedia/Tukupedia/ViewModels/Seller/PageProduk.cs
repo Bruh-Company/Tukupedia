@@ -284,6 +284,17 @@ namespace Tukupedia.ViewModels.Seller {
         public void loadDiskusi(int id) {
             H_DiskusiModel model = new H_DiskusiModel();
             model.addWhere("ID_ITEM", id.ToString());
+            if (model.get().Length <= 0) {
+                ViewComponent.textblockDiskusiProduk.Text = "BELUM ADA DISKUSI";
+                Color color = (Color)ColorConverter.ConvertFromString("#E23434");
+                ViewComponent.textblockDiskusiProduk.Foreground = new SolidColorBrush(color);
+                return;
+            }
+            else {
+                ViewComponent.textblockDiskusiProduk.Text = "DISKUSI";
+                Color color = (Color)ColorConverter.ConvertFromString("#FFFFFF");
+                ViewComponent.textblockDiskusiProduk.Foreground = new SolidColorBrush(color);
+            }
             model.addOrderBy("CREATED_AT ASC");
             foreach (DataRow row in model.get()) {
                 DiscussionCard dc = new DiscussionCard(ViewComponent.spanelDiscussion.ActualWidth);

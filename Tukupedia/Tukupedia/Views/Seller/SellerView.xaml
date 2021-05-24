@@ -134,7 +134,7 @@
                     </Canvas>
 
                     <!--DISKUSI-->
-                    <TextBlock Text="Diskusi" Margin="50,600,50,100" Style="{StaticResource textblock-h3-success}"/>
+                    <TextBlock Text="Diskusi" Margin="50,600,50,100" Style="{StaticResource textblock-h3-success}" Name="textblockDiskusiProduk"/>
                     <StackPanel Width="1180" Margin="50,640,50,100" Canvas.Left="50" Canvas.Top="640" VerticalAlignment="Center" HorizontalAlignment="Center" Name="spanelDiscussion"></StackPanel>
                 </Grid>
             </ScrollViewer>
