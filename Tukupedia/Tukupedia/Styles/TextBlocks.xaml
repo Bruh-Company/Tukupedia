@@ -9,28 +9,28 @@
     </Style>
     
     <!--textblock-success-->
-    <Style TargetType="TextBlock" x:Key="textblock-success">
+    <Style TargetType="TextBlock" x:Key="success">
         <Setter Property="Foreground" Value="#65c65b"/>
     </Style>
 
     <!--textblock-secondary-->
-    <Style TargetType="TextBlock" x:Key="textblock-secondary">
+    <Style TargetType="TextBlock" x:Key="secondary">
         <Setter Property="Foreground" Value="#E7E7E7"/>
     </Style>
 
     <!--textblock-danger-->
-    <Style TargetType="TextBlock" x:Key="textblock-danger">
+    <Style TargetType="TextBlock" x:Key="danger">
         <Setter Property="Foreground" Value="#E23434"/>
     </Style>
 
     <!--textblock-warning-->
-    <Style TargetType="TextBlock" x:Key="textblock-warning">
+    <Style TargetType="TextBlock" x:Key="warning">
         <Setter Property="Foreground" Value="#FFC548"/>
     </Style>
 
     <!--textblock-h1-->
     <Style TargetType="TextBlock"
-           x:Key="textblock-h1"
+           x:Key="h1"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -38,39 +38,39 @@
 
     <!--textblockblock-h1-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h1-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="h1-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h1-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h1-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="h1-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h1-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h1-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="h1-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h1-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h1-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="h1-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="36"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h2-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h2"
+           x:Key="h2"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -78,39 +78,39 @@
 
     <!--textblockblock-h2-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h2-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="h2-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-textblockblock-h2-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h2-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="h2-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h2-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h2-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="h2-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h2-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h2-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="h2-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="30"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h3-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h3"
+           x:Key="h3"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontWeight" Value="Bold"/>
@@ -118,32 +118,32 @@
 
     <!--textblockblock-h3-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h3-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="h3-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h3-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h3-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="h3-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h3-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h3-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="h3-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
 
     <!--textblockblock-h3-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-h3-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="h3-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="24"/>
         <Setter Property="FontWeight" Value="Bold"/>
     </Style>
@@ -151,7 +151,7 @@
 
     <!--textblockblock-xl-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-xl"
+           x:Key="xl"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
@@ -159,39 +159,39 @@
 
     <!--textblockblock-xl-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-xl-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="xl-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <!--textblockblock-xl-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-xl-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="xl-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <!--textblockblock-xl-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-xl-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="xl-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <!--textblockblock-xl-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-xl-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="xl-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="SemiBold"/>
     </Style>
 
     <!--textblockblock-lg-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-lg"
+           x:Key="lg"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
@@ -199,39 +199,39 @@
 
     <!--textblockblock-lg-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-lg-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="lg-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-lg-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-lg-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="lg-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-lg-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-lg-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="lg-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-lg-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-lg-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="lg-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-md-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-md"
+           x:Key="md"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
@@ -239,39 +239,39 @@
 
     <!--textblockblock-md-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-md-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="md-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-md-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-md-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="md-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-md-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-md-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="md-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-md-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-md-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="md-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
     
     <!--textblockblock-sm-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-sm"
+           x:Key="sm"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
@@ -279,32 +279,32 @@
 
     <!--textblockblock-sm-secondary-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-sm-secondary"
-           BasedOn="{StaticResource textblock-secondary}">
+           x:Key="sm-secondary"
+           BasedOn="{StaticResource secondary}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-sm-success-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-sm-success"
-           BasedOn="{StaticResource textblock-success}">
+           x:Key="sm-success"
+           BasedOn="{StaticResource success}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-sm-danger-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-sm-danger"
-           BasedOn="{StaticResource textblock-danger}">
+           x:Key="sm-danger"
+           BasedOn="{StaticResource danger}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
 
     <!--textblockblock-sm-warning-->
     <Style TargetType="TextBlock"
-           x:Key="textblockblock-sm-warning"
-           BasedOn="{StaticResource textblock-warning}">
+           x:Key="sm-warning"
+           BasedOn="{StaticResource warning}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
     </Style>
