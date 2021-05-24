@@ -4,7 +4,9 @@
     <projectFile>Tukupedia/Tukupedia.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="" />
+    <list default="true" id="248f6c52-b994-481e-beb7-18b139406388" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Tukupedia/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +52,6 @@
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/DatabaseHelpers/DB.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Session.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Utils/Utility.cs" />
-      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/CartComponent.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/Helpers/Classes/Promo.cs" />
@@ -60,6 +61,7 @@
       <option value="$PROJECT_DIR$/Tukupedia/App.xaml" />
       <option value="$PROJECT_DIR$/Tukupedia/Components/ShopCartComponent.cs" />
       <option value="$PROJECT_DIR$/Tukupedia/ViewModels/Customer/CartViewModel.cs" />
+      <option value="$PROJECT_DIR$/Tukupedia/Views/Customer/CustomerView.xaml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sOISevqbMznla25Es35WmIAyAW" />
@@ -118,6 +120,7 @@
       <workItem from="1621315287610" duration="8628000" />
       <workItem from="1621430861016" duration="313000" />
       <workItem from="1621766428308" duration="6000" />
+      <workItem from="1621833247144" duration="668000" />
     </task>
     <servers />
   </component>

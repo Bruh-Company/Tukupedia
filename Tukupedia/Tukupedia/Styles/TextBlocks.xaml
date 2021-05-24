@@ -270,7 +270,7 @@
     
     <!--textblock-sm-->
     <Style TargetType="TextBlock"
-           x:Key="sm"
+           x:Key="textblock-sm"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="FontWeight" Value="Regular"/>
