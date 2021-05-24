@@ -103,12 +103,9 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.pagePesanan.checkStatus(e.Row);
         }
 
-        private void checkboxTerimaSemua_Checked(object sender, RoutedEventArgs e) {
-            SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked.Value);
-        }
         private void checkboxTerimaSemua_Click(object sender, RoutedEventArgs e)
         {
-            SellerViewModel.pagePesanan.terimasemua((bool)checkboxTerimaSemua.IsChecked.Value);
+            SellerViewModel.pagePesanan.terimasemua();
         }
 
         private void btnKonfirmasiPesanan_Click(object sender, RoutedEventArgs e) {
