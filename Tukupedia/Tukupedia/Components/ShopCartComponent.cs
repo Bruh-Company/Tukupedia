@@ -88,7 +88,7 @@ namespace Tukupedia.Components
             if (r.Next(2)==0) ImageHelper.loadImageCheems(imgToko);
             else ImageHelper.loadImageSwole(imgToko);
             
-            namaToko.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
+            namaToko.Style = Application.Current.TryFindResource("textblock-md-success") as Style;
             namaToko.VerticalAlignment = VerticalAlignment.Center;
             tbisOfficial.Text = "Official";
             tbisOfficial.Background = new SolidColorBrush(Color.FromRgb(127, 55, 215));
@@ -96,22 +96,22 @@ namespace Tukupedia.Components
             tbisOfficial.Margin = new Thickness(10, 0, 0, 0);
             tbisOfficial.Padding = new Thickness(4, 4, 4, 4);
             tbisOfficial.VerticalAlignment = VerticalAlignment.Center;
-            tbisOfficial.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            tbisOfficial.Style = Application.Current.TryFindResource("textblock-sm") as Style;
             pilihDurasi.FontWeight = FontWeights.Bold;
             pilihDurasi.Text = "Pilih Durasi ";
-            pilihDurasi.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            pilihDurasi.Style = Application.Current.TryFindResource("textblock-sm") as Style;
             labelsubTotal.Text = "Subtotal : ";
-            labelsubTotal.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
-            subTotal.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            labelsubTotal.Style = Application.Current.TryFindResource("textblock-sm") as Style;
+            subTotal.Style = Application.Current.TryFindResource("textblock-sm") as Style;
             subTotal.Text = Utility.formatMoney(0);
             cbKurir.Width = 200;
             spCart.Margin = new Thickness(50, 10, 20, 10);
             spCart.Width = 500;
-            labelsubTotal.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            labelsubTotal.Style = Application.Current.TryFindResource("textblock-md") as Style;
             labelsubTotal.VerticalAlignment = VerticalAlignment.Center;
             subTotal.VerticalAlignment = VerticalAlignment.Center;
             subTotal.HorizontalAlignment = HorizontalAlignment.Right;
-            subTotal.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            subTotal.Style = Application.Current.TryFindResource("textblock-md") as Style;
             
             this.Padding = new Thickness(5, 7, 5, 7);
             this.Margin = new Thickness(0, 0, 0, 10);

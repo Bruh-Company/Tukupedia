@@ -39,11 +39,11 @@ namespace Tukupedia.Components
             _image.Height = 150;
             // Label Nama Barang
             namaBarang = new TextBlock();
-            namaBarang.Style = Application.Current.TryFindResource("textblockblock-lg") as Style;
+            namaBarang.Style = Application.Current.TryFindResource("textblock-lg") as Style;
             
             // Label Harga
             harga = new TextBlock();
-            harga.Style = Application.Current.TryFindResource("textblockblock-md-danger") as Style;
+            harga.Style = Application.Current.TryFindResource("textblock-md-danger") as Style;
             harga.FontSize = 16;
             harga.Foreground = new SolidColorBrush(Color.FromRgb(232,112,89));
             harga.FontWeight = FontWeights.Bold;
@@ -57,7 +57,7 @@ namespace Tukupedia.Components
             rating.Max = 5;
             tbRating = new MyTextBlock();
             tbRating.Text = Utility.formatNumber(0);
-            tbRating.Style = Application.Current.TryFindResource("textblockblock-sm") as Style;
+            tbRating.Style = Application.Current.TryFindResource("textblock-sm") as Style;
             tbRating.VerticalAlignment = VerticalAlignment.Center;
             tbRating.Margin = new Thickness(3, 0, 0, 0);
             spRating.Children.Add(rating);
@@ -65,7 +65,7 @@ namespace Tukupedia.Components
             spRating.Orientation = Orientation.Horizontal;
             // Label Tejual 
             terjual = new TextBlock();
-            terjual.Style = Application.Current.TryFindResource("textblockblock-md-danger") as Style;
+            terjual.Style = Application.Current.TryFindResource("textblock-md-danger") as Style;
             terjual.FontSize = 16;
             terjual.Foreground = new SolidColorBrush(Color.FromRgb(200,200,200));
             // Button Lihat Item

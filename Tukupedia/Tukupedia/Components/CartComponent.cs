@@ -86,8 +86,8 @@ namespace Tukupedia.Components
                     AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
             itemImage.Width = 75;
             itemImage.Height = 75;
-            tbnamaItem.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
-            tbHarga.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            tbnamaItem.Style = Application.Current.TryFindResource("textblock-md") as Style;
+            tbHarga.Style = Application.Current.TryFindResource("textblock-md") as Style;
             tbHarga.Foreground = new SolidColorBrush(Color.FromRgb(232,112,89));
             tbHarga.FontWeight = FontWeights.Bold;
             btnDelete.Content = "Remove";
@@ -100,7 +100,7 @@ namespace Tukupedia.Components
             btnPlus.Style = Application.Current.TryFindResource("btn-primary") as Style;
             btnPlus.Margin = new Thickness(10, 0, 10, 0);
             tbQty.VerticalAlignment = VerticalAlignment.Center;
-            tbQty.Style = Application.Current.TryFindResource("textblockblock-md") as Style;
+            tbQty.Style = Application.Current.TryFindResource("textblock-md") as Style;
             spContent.Margin = new Thickness(10, 0, 0, 0);
 
             spCondition.Margin = new Thickness(0,10, 0, 10);

@@ -27,10 +27,10 @@
         </Grid>
         <Grid Grid.Column="1"  Grid.Row="0" >
             <StackPanel Margin="0,50,0,0" Orientation="Vertical">
-                <TextBlock Style="{StaticResource textblockblock-h2}" x:Name="tbNamaItem" Text="Nama Item yang Keren"></TextBlock>
+                <TextBlock Style="{StaticResource textblock-h2}" x:Name="tbNamaItem" Text="Nama Item yang Keren"></TextBlock>
                 <materialDesign:RatingBar x:Name="RatingBar" IsReadOnly="True" Foreground="Yellow" Min="1" Max="5" Margin="0,4,0,0"/>
-                <TextBlock Style="{StaticResource textblockblock-sm}" x:Name="tbTerjual" Text="Terjual : " Foreground="#C8C8C8" Margin="0,4,0,0"></TextBlock>
-                <TextBlock Style="{StaticResource textblockblock-lg}" x:Name="tbHarga" Text="Rp69.000,00" Foreground="#E87059" Margin="0,4,0,0"></TextBlock>
+                <TextBlock Style="{StaticResource textblock-sm}" x:Name="tbTerjual" Text="Terjual : " Foreground="#C8C8C8" Margin="0,4,0,0"></TextBlock>
+                <TextBlock Style="{StaticResource textblock-lg}" x:Name="tbHarga" Text="Rp69.000,00" Foreground="#E87059" Margin="0,4,0,0"></TextBlock>
                 <TabControl Background="Transparent" Foreground="Black" BorderBrush="#FFACACAC" Height="360" FontSize="16" FontWeight="Bold" Margin="0,15,0,0" >
                     <TabControl.Resources>
                         <Style TargetType="TabItem">
@@ -60,10 +60,10 @@
                     <TabItem MouseUp="TabDescription_OnMouseUp" Name="tabDescription" Foreground="Black" Header="Description">
                         <!-- Berat, Kategori, Desc-->
                         <StackPanel>
-                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbKategori" Text="Kategori : " Foreground="#C8C8C8"/>
-                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbBerat" Text="Berat : " Foreground="#C8C8C8"/>
-                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbTitleDescription" Text="Description : " Foreground="#C8C8C8"/>
-                            <TextBlock Margin="5,2,5.4,2" Style="{StaticResource textblockblock-sm}" x:Name="tbDescription" Text="Wow Keren" FontSize="14" Foreground="#C8C8C8" Height="247" TextWrapping="WrapWithOverflow"/>
+                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblock-sm}" x:Name="tbKategori" Text="Kategori : " Foreground="#C8C8C8"/>
+                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblock-sm}" x:Name="tbBerat" Text="Berat : " Foreground="#C8C8C8"/>
+                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblock-sm}" x:Name="tbTitleDescription" Text="Description : " Foreground="#C8C8C8"/>
+                            <TextBlock Margin="5,2,5.4,2" Style="{StaticResource textblock-sm}" x:Name="tbDescription" Text="Wow Keren" FontSize="14" Foreground="#C8C8C8" Height="247" TextWrapping="WrapWithOverflow"/>
                         </StackPanel>
                     </TabItem>
                     <TabItem MouseUp="TabReview_OnMouseUp" Name="tabReview" Foreground="Black" Header="Review">
@@ -96,10 +96,10 @@
         </Grid>
         <Grid Grid.Column="2" Grid.Row="0" >
             <StackPanel>
-                <TextBlock Margin="10,43,0,0" Style="{StaticResource textblockblock-md}" x:Name="tbJumlah" Text="Jumlah"></TextBlock>
+                <TextBlock Margin="10,43,0,0" Style="{StaticResource textblock-md}" x:Name="tbJumlah" Text="Jumlah"></TextBlock>
                 <StackPanel HorizontalAlignment="Center" Width="auto" Height="50" Orientation="Horizontal">
                     <Button Click="BtnMin_OnClick" x:Name="btnMin" Width="40" Content="-" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <TextBlock x:Name="tbQuantity" Margin="10,0,10,0" Style="{StaticResource textblockblock-md}" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="tbQuantity" Margin="10,0,10,0" Style="{StaticResource textblock-md}" Text="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Button Click="BtnPlus_OnClick" x:Name="btnPlus" Width="40" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </StackPanel>
                 <Button Click="BtnAddCart_OnClick" x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-primary}"/>
