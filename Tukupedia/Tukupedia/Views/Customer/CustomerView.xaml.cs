@@ -387,5 +387,10 @@ namespace Tukupedia.Views.Customer
         {
             
         }
+
+        private void btnTerimaBarang_Click(object sender, RoutedEventArgs e)
+        {
+            TransactionViewModel.terimaBarang(grid_D_Trans.SelectedIndex);
+        }
     }
 }

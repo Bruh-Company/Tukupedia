@@ -9,6 +9,13 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d" Loaded="CustomerView_OnLoaded" Closing="Window_Closing"
         Title="CustomerView" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
+    <Window.Resources>
+        <!--Base-->
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="#ffffff"/>
+        </Style>
+
+    </Window.Resources>
     <Grid>
         <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1274" Background="#FF65C65B" Margin="0,0,-0.4,0">
             <Label Name="labelWelcome" Content="Welcome Customer" Margin="14,10,0,10" VerticalAlignment="Center" FontSize="24" HorizontalAlignment="Left" Height="44" FontWeight="Bold"/>
@@ -129,27 +136,33 @@
                     <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="176,418,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24"/>
                     <Button Click="btnCancelTrans_Click" x:Name="btnCancelTrans" Style="{StaticResource btn-danger}" Content="Cancel Transaksi" HorizontalAlignment="Left" Margin="178,551,0,0" VerticalAlignment="Top" Width="154"/>
                     <Button Click="btnCetakInvoice_Click" x:Name="btnCetakInvoice" Style="{StaticResource btn-warning}" Content="Cetak Invoice" HorizontalAlignment="Left" Margin="339,551,0,0" VerticalAlignment="Top" Width="154"/>
-                    <Button Click="btnBeriUlasan_Click" Name="btnBeriUlasan" Style="{StaticResource btn-primary}" Content="Beri Ulasan" HorizontalAlignment="Left" Margin="686,551,0,0" VerticalAlignment="Top" Width="545"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="691,339,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Width="154" Height="26" Text="Nama Item"/>
-                    <TextBlock x:Name="tbNamaItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="867,339,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="691,371,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Height="26" Text="Jumlah Item"/>
-                    <TextBlock x:Name="tbJumlahItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="868,371,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="691,397,0,0" TextWrapping="Wrap" Text="Kurir" VerticalAlignment="Top" FontWeight="Bold" Height="20"/>
-                    <TextBlock x:Name="tbKurirItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="868,397,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center" Height="20"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="691,425,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Height="20" Text="Status Item"/>
-                    <TextBlock x:Name="tbStatusItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="868,425,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" RenderTransformOrigin="3.465,1.104" TextAlignment="Center"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="848,395,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="23"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="848,369,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="848,340,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286"/>
-                    <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="848,425,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24"/>
-                    <RichTextBox GotFocus="rtbUlasan_GotFocus" LostFocus="rtbUlasan_LostFocus" x:Name="rtbUlasan" HorizontalAlignment="Left" Height="46" Margin="691,500,0,0" VerticalAlignment="Top" Width="540" FontSize="14">
-                        <FlowDocument>
-                            <Paragraph>
-                                <Run Text="Tulis Ulasan Disini"/>
-                            </Paragraph>
-                        </FlowDocument>
-                    </RichTextBox>
-                    <materialDesign:RatingBar x:Name="ratingUlasan" HorizontalAlignment="Left" Margin="686,478,0,0" VerticalAlignment="Top" Height="22" Width="118" Foreground="#FFE9F30F"/>
+                    <Grid x:Name="grid_DTrans" HorizontalAlignment="Left" Height="244" Margin="691,339,0,0" VerticalAlignment="Top" Width="540">
+
+                        <Button Click="btnTerimaBarang_Click" x:Name="btnTerimaBarang" Style="{StaticResource btn-warning}" Content="Terima Barang" HorizontalAlignment="Left" Margin="0,212,0,0" VerticalAlignment="Top" Width="540" Grid.ColumnSpan="2"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Width="154" Height="26" Text="Nama Item" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="tbNamaItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="130.6,0,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Height="26" Text="Jumlah Item" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="tbJumlahItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="131.6,32,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,58,0,0" TextWrapping="Wrap" Text="Kurir" VerticalAlignment="Top" FontWeight="Bold" Height="20"/>
+                        <TextBlock x:Name="tbKurirItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="131.6,58,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" TextAlignment="Center" Height="20" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" Height="20" Text="Status Item" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="tbStatusItem"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="131.6,86,0,0" TextWrapping="Wrap" Text="-" VerticalAlignment="Top" RenderTransformOrigin="3.465,1.104" TextAlignment="Center" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="111.6,56,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="23" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="111.6,30,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="111.6,1,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" RenderTransformOrigin="0.5,0.286" Grid.Column="1"/>
+                        <TextBlock Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="111.6,86,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" FontWeight="Bold" Height="24" Grid.Column="1"/>
+                        <RichTextBox GotFocus="rtbUlasan_GotFocus" LostFocus="rtbUlasan_LostFocus" x:Name="rtbUlasan" HorizontalAlignment="Left" Height="46" Margin="0,161,0,0" VerticalAlignment="Top" Width="540" FontSize="14" Grid.ColumnSpan="2">
+                            <FlowDocument>
+                                <Paragraph>
+                                    <Run Text="Tulis Ulasan Disini"/>
+                                </Paragraph>
+                            </FlowDocument>
+                        </RichTextBox>
+                        <materialDesign:RatingBar x:Name="ratingUlasan" HorizontalAlignment="Left" Margin="-5,139,0,0" VerticalAlignment="Top" Height="22" Width="118" Foreground="#FFE9F30F" Grid.ColumnSpan="2"/>
+                        <Button Click="btnBeriUlasan_Click" x:Name="btnBeriUlasan" Style="{StaticResource btn-primary}" Content="Beri Ulasan" HorizontalAlignment="Left" Margin="0,212,0,0" VerticalAlignment="Top" Width="540" Grid.ColumnSpan="2"/>
+                        <TextBlock x:Name="tbSudahUlas"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,115,0,0" TextWrapping="Wrap" Text="(Barang sudah diulas!)" VerticalAlignment="Top" RenderTransformOrigin="3.465,1.104" TextAlignment="Center" FontSize="16" FontWeight="Bold"/>
+
+                    </Grid>
                 </Grid>
             </Grid>
             <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="3837,0,0,0">

@@ -272,7 +272,7 @@ namespace Tukupedia.ViewModels.Seller
                 //MessageBox.Show(drHelper[2].ToString());
                 //MessageBox.Show(drHelper[3].ToString());
 
-                if (Convert.ToInt32(drHelper[2].ToString()) < Convert.ToInt32(drHelper[3].ToString()))
+                if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
                 {
                     MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
                     return;

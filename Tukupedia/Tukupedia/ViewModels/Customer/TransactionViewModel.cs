@@ -24,6 +24,10 @@ namespace Tukupedia.ViewModels.Customer
         public static void initTransaction(CustomerView cv)
         {
             ViewComponent = cv;
+            ViewComponent.btnTerimaBarang.Visibility = Visibility.Hidden;
+            ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
+            ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
+            ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
         }
         public static void initH_Trans()
         {
@@ -110,7 +114,6 @@ namespace Tukupedia.ViewModels.Customer
                 ViewComponent.grid_D_Trans.Columns[3].Header = "Kurir";
                 ViewComponent.grid_D_Trans.Columns[4].Header = "Status";
                 ViewComponent.grid_D_Trans.Columns[0].Visibility = Visibility.Hidden;
-                
             }
         }
         public static void bayarTrans(int idx)
@@ -201,6 +204,51 @@ namespace Tukupedia.ViewModels.Customer
                 ViewComponent.tbNamaItem.Text = dti.namaItem;
                 ViewComponent.tbJumlahItem.Text = dti.jumlah;
                 ViewComponent.tbStatusItem.Text = dti.status;
+                if (dti.status == "WAITING FOR CONFIRMATION")
+                {
+                    ViewComponent.tbSudahUlas.Visibility = Visibility.Hidden;
+                    ViewComponent.btnTerimaBarang.Visibility = Visibility.Hidden;
+                    ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
+                }
+                else if(dti.status == "SHIPPING")
+                {
+                    ViewComponent.tbSudahUlas.Visibility = Visibility.Hidden;
+                    ViewComponent.btnTerimaBarang.Visibility = Visibility.Visible;
+                    ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
+                }
+                else if (dti.status == "FINISHED")
+                {
+                    UlasanModel um = new UlasanModel();
+                    if (um.Table.Select($"ID_D_TRANS_ITEM = '{dti.id}' AND ID_CUSTOMER = '{Session.User["ID"]}'").Length > 0)
+                    {
+                        //Kalau sudah diulas
+                        ViewComponent.tbSudahUlas.Visibility = Visibility.Visible;
+                        ViewComponent.btnTerimaBarang.Visibility = Visibility.Hidden;
+                        ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
+                        ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
+                        ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        ViewComponent.tbSudahUlas.Visibility = Visibility.Hidden;
+                        ViewComponent.btnTerimaBarang.Visibility = Visibility.Hidden;
+                        ViewComponent.btnBeriUlasan.Visibility = Visibility.Visible;
+                        ViewComponent.ratingUlasan.Visibility = Visibility.Visible;
+                        ViewComponent.rtbUlasan.Visibility = Visibility.Visible;
+                    }
+                }
+                else if (dti.status == "CANCELED")
+                {
+                    ViewComponent.tbSudahUlas.Visibility = Visibility.Hidden;
+                    ViewComponent.btnTerimaBarang.Visibility = Visibility.Hidden;
+                    ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
+                    ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
+                }
             }
         }
         public static void beriUlasan(int idx)
@@ -237,6 +285,56 @@ namespace Tukupedia.ViewModels.Customer
                 else
                 {
                     // Selain selesai
+                    MessageBox.Show("ERROR");
+                }
+            }
+        }
+        public static void terimaBarang(int idx)
+        {
+            if (idx >= 0)
+            {
+                idxItem = idx;
+                Detail_Trans_Item dti = list_dtrans[idx];
+                //Check kalau DTRANS HARUS SUDAH SELESAI
+                if (dti.status == "SHIPPING")
+                {
+                    D_Trans_ItemModel dtim = new D_Trans_ItemModel();
+                    DataRow row = dtim.Table.Select($"ID = '{dti.id}'").FirstOrDefault();
+                    row["STATUS"] = "D";
+                    dtim.update();
+                    //Check if status D_Trans sudah D semua ato blm
+                    // Kalau D semua nanti penjual dpt duit
+                    bool valid = true;
+                    foreach (DataRow item in dtim.Table.Select($"ID_H_TRANS_ITEM = '{row["ID_H_TRANS_ITEM"]}'"))
+                    {
+                        if (item["STATUS"].ToString() != "D")
+                        {
+                            valid = false;
+                        }
+                    }
+                    if (valid)
+                    {
+                        MessageBox.Show("Valid trans");
+                        foreach (DataRow rowDTI in dtim.Table.Select($"ID_H_TRANS_ITEM = '{row["ID_H_TRANS_ITEM"]}'"))
+                        {
+                            ItemModel im = new ItemModel();
+                            DataRow item = im.Table.Select($"ID = '{rowDTI["ID_ITEM"]}'").FirstOrDefault();
+                            SellerModel sm = new SellerModel();
+                            DataRow seller = sm.Table.Select($"ID = '{item["ID_SELLER"]}'").FirstOrDefault(); ;
+                            int saldo = Convert.ToInt32(row["JUMLAH"]) * Convert.ToInt32(item["HARGA"]);
+                            saldo += Convert.ToInt32(seller["SALDO"]);
+
+                            seller["SALDO"] = saldo;
+                            MessageBox.Show($"Seller {seller["NAMA_TOKO"]} punya saldo {Utility.formatMoney(saldo)} segini sekarang");
+                            sm.update();
+                        }
+                    }
+                    loadD_Trans(idx);
+
+                }
+                else
+                {
+                    // Selain Shipping
                     MessageBox.Show("ERROR");
                 }
             }
