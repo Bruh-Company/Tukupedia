@@ -23,12 +23,13 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kurir\", HARGA as \"Harga\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kurir\" from KURIR where STATUS = '1' order by KODE");
+            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kurir\", to_char(HARGA) as \"Harga\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kurir\" from KURIR where STATUS = '1' order by KODE");
             //foreach (DataRow dr in cm.Table.Rows)
             //{
             //    dr[2] = dr[2].ToString();
             //}
             //MessageBox.Show(cm.Table.Rows[0][2].ToString());
+            Utility.toCurrency(cm.Table, 2);
         }
 
         public DataTable getDataTable()

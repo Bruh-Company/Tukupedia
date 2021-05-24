@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
 
 namespace Tukupedia.ViewModels.Admin
@@ -11,17 +12,20 @@ namespace Tukupedia.ViewModels.Admin
     class TransactionViewModel
     {
         H_Trans_ItemModel hm;
+        H_Trans_ItemModel hm_helper;
         D_Trans_ItemModel dm;
         int selected = -1;
         public TransactionViewModel()
         {
             hm = new H_Trans_ItemModel();
+            hm_helper = new H_Trans_ItemModel();
             reloadHtrans();
         }
 
         void reloadHtrans()
         {
             hm.initAdapter($"select h.KODE as \"Kode\", c.NAMA as \"Nama Customer\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\",case h.STATUS when 'W' then 'Waiting Payment' when 'C' then 'Canceled' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, CUSTOMER c where h.ID_CUSTOMER = c.ID");
+            hm_helper.initAdapter($"select h.id from H_TRANS_ITEM h, CUSTOMER c where h.ID_CUSTOMER = c.ID");
         }
 
         public DataTable getHtrans()
@@ -43,9 +47,15 @@ namespace Tukupedia.ViewModels.Admin
         }
         public DataTable getDTrans()
         {
-            DataRow dr = hm.Table.Rows[selected];
+            DataRow dr = hm_helper.Table.Rows[selected];
             dm = new D_Trans_ItemModel();
-            dm.initAdapter($"select i.NAMA as \"Nama Item\", s.NAMA_SELLER as \"Nama Seller\", i.HARGA as \"Harga\", d.JUMLAH as \"Jumlah\", to_number(d.JUMLAH) * to_number(i.HARGA) as \"Total\" from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_H_TRANS_ITEM = '{dr[0].ToString()}'");
+            dm.initAdapter($"select i.NAMA as \"Nama Item\"" +
+                $", s.NAMA_SELLER as \"Nama Seller\"" +
+                $", to_char(i.HARGA) as \"Harga\"" +
+                $", to_char(d.JUMLAH) as \"Jumlah\"" +
+                $", to_char(d.JUMLAH * i.HARGA) as \"Total\" " +
+                $"from D_TRANS_ITEM d, ITEM i, SELLER s where d.ID_ITEM = i.ID and s.ID = i.ID_SELLER and d.ID_H_TRANS_ITEM = '{dr[0].ToString()}'");
+            
             return dm.Table;
         }
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir, int official)

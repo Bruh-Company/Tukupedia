@@ -445,7 +445,10 @@ namespace Tukupedia.Views.Admin
                     total += Convert.ToInt32(deer[4].ToString());
                 }
                 lbJumlah.Content = jumlah.ToString();
-                lbTotal.Content = total.ToString();
+                lbTotal.Content = Utility.formatMoney(Convert.ToInt32(total.ToString()));
+                Utility.toCurrency(dt, 2);
+                Utility.toCurrency(dt, 4);
+                dgD_Trans.ItemsSource = dt.DefaultView;
 
 
             }
@@ -512,7 +515,7 @@ namespace Tukupedia.Views.Admin
                 DataRow dr = covm.selectData(dgCourier.SelectedIndex);
                 if (dr == null) return;
                 tbNamaKurir.Text = dr[1].ToString();
-                tbHargaKurir.Text = dr[2].ToString();
+                tbHargaKurir.Text = Utility.toNumber(dr[2].ToString());
                 btBanCourier.Visibility = Visibility.Visible;
                 btInsertCourier.Visibility = Visibility.Hidden;
                 btUpdateCourier.Visibility = Visibility.Visible;

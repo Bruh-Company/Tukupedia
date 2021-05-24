@@ -281,11 +281,13 @@ namespace Tukupedia.ViewModels.Seller
                 //3 = Barang Yang dibeli
                 //MessageBox.Show(drHelper[2].ToString());
                 //MessageBox.Show(drHelper[3].ToString());
-
-                if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
+                if (drHelper[1].ToString() == "SC")
                 {
-                    MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
-                    return;
+                    if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
+                    {
+                        MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
+                        return;
+                    }
                 }
             }
             //menghitung pesanan yang tidak diterima

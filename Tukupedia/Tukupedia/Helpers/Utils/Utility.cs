@@ -191,6 +191,10 @@ namespace Tukupedia.Helpers.Utils
                 dr[row] = Utility.formatMoney(Convert.ToInt32(dr[row].ToString()));
             }
         }
+        public static string toNumber(string duek)
+        {
+            return int.Parse(duek, NumberStyles.Currency).ToString();
+        }
 
     }
 }

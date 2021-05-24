@@ -82,7 +82,7 @@
                           IsReadOnly="True"/>
                 <Label Content="Tukupedia Transaction Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
                 <Canvas x:Name="canvasD_Trans" Height="589" Canvas.Left="648" Canvas.Top="25" Width="604">
-                    <DataGrid x:Name="dgD_Trans" Height="252" Canvas.Left="13" Canvas.Top="110" Width="591"
+                    <DataGrid x:Name="dgD_Trans" Height="252" Canvas.Left="10" Canvas.Top="99" Width="581"
                               IsReadOnly="True"/>
                     <Label Content="Tanggal Transaksi" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="9" Canvas.Left="20"/>
                     <Label Content="Nama Cutomer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="23" Canvas.Top="54"/>
