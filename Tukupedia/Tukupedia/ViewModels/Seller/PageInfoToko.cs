@@ -109,7 +109,11 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
             imagePath = seller["IMAGE"].ToString();
 
-            lbKurirTable = new DB("KURIR_SELLER").select().join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID").where("ID_SELLER", seller["ID"].ToString()).get();
+            lbKurirTable = new DB("KURIR_SELLER")
+                .select("KURIR.ID as ID", "KURIR.NAMA as NAMA")
+                .join("KURIR", "KURIR_SELLER", "ID_KURIR", "=", "ID")
+                .where("ID_SELLER", seller["ID"].ToString())
+                .get();
 
             initImageToko();
             fillTextbox();
@@ -250,11 +254,14 @@ namespace Tukupedia.ViewModels.Seller {
             KurirModel model = new KurirModel();
             for (int i = 0; i < model.Table.Rows.Count; i++) { 
                 DataRow row = model.Table.Rows[i];
+
                 bool valid = true;
                 foreach (DataRow lbRow in lbKurirTable.Rows) {
                     string lbID = lbRow["ID"].ToString();
                     string tempID = row["ID"].ToString();
-                    if (lbID == tempID) valid = false;
+                    if (lbID == tempID) {
+                        valid = false;
+                    }
                 }
                 if (valid) {
                     DataRow newRow = cbKurirTable.NewRow();
