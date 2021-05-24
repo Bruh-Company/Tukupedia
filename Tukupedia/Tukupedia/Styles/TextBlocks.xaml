@@ -15,7 +15,7 @@
 
     <!--textblock-secondary-->
     <Style TargetType="TextBlock" x:Key="textblock-secondary">
-        <Setter Property="Foreground" Value="#E7E7E7"/>
+        <Setter Property="Foreground" Value="#9A9A9A"/>
     </Style>
 
     <!--textblock-danger-->
