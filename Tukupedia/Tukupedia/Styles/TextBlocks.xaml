@@ -191,7 +191,7 @@
 
     <!--textblockblock-lg-->
     <Style TargetType="TextBlock"
-           x:Key="lg"
+           x:Key="textblock-lg"
            BasedOn="{StaticResource {x:Type TextBlock}}">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="FontWeight" Value="Regular"/>
