@@ -20,6 +20,7 @@ namespace Tukupedia.ViewModels.Seller {
         public PageUlasan(SellerView viewComponent, DataRow seller) {
             ViewComponent = viewComponent;
             this.seller = seller;
+            initPageUlasan();
         }
 
         public void initPageUlasan() {

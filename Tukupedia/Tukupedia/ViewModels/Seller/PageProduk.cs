@@ -25,6 +25,7 @@ namespace Tukupedia.ViewModels.Seller {
         public PageProduk(SellerView viewComponent, DataRow seller) {
             ViewComponent = viewComponent;
             this.seller = seller;
+            //initPageProduk();
         }
 
         private void DEBUG() {
@@ -43,7 +44,7 @@ namespace Tukupedia.ViewModels.Seller {
             fillCmbBerat();
             switchBtnInsert();
 
-            DEBUG();
+            //DEBUG();
         }
 
         public void fillCmbKategori() {
@@ -60,6 +61,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.comboboxSortProduk.Items.Add("Harga Terendah");
             ViewComponent.comboboxSortProduk.Items.Add("Nama: A-Z");
             ViewComponent.comboboxSortProduk.Items.Add("Nama: Z-A");
+            ViewComponent.comboboxSortProduk.Items.Add("Status");
         }
 
         public void fillCmbBerat() {
@@ -130,6 +132,7 @@ namespace Tukupedia.ViewModels.Seller {
             if (selectedIndex == 1) itemModel.Table.DefaultView.Sort = "HARGA asc";
             if (selectedIndex == 2) itemModel.Table.DefaultView.Sort = "NAMA BARANG asc";
             if (selectedIndex == 3) itemModel.Table.DefaultView.Sort = "NAMA BARANG desc";
+            if (selectedIndex == 4) itemModel.Table.DefaultView.Sort = "STATUS asc";
         }
 
         public void insertImage() {

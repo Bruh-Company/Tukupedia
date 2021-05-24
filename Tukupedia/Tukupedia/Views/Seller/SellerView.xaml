@@ -58,28 +58,28 @@
             <DataGrid   Name="datagridPesanan"      Canvas.Left="25"   Canvas.Top="90"   Width="1225"  Height="200" SelectedCellsChanged="datagridPesanan_SelectedCellsChanged" IsReadOnly="True"/>
 
             <Canvas Name="canvasDetailPesanan" Canvas.Left="25" Canvas.Top="295" Width="1225" Height="285">
-                <Label Content="Kode Pesanan" Canvas.Left="10" Canvas.Top="10" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Kode Pesanan" Canvas.Left="10" Canvas.Top="10" Style="{StaticResource textblock-md-secondary}"/>
                 <Label Name="labelKodePesanan"  Content="PE69420" Canvas.Left="155" Canvas.Top="10"  Style="{StaticResource lg}" FontWeight="SemiBold"/>
 
-                <Label Content="Status Pesanan" Canvas.Left="10" Canvas.Top="43" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Status Pesanan" Canvas.Left="10" Canvas.Top="43" Style="{StaticResource textblock-md-secondary}"/>
                 <Label Name="labelStatusPesanan" Content="Pesanan Baru" Canvas.Left="155" Canvas.Top="43"  Style="{StaticResource lg}" FontWeight="SemiBold"/>
 
-                <Label Content="Tanggal Transaksi" Canvas.Left="10" Canvas.Top="77" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Tanggal Transaksi" Canvas.Left="10" Canvas.Top="77" Style="{StaticResource textblock-md-secondary}"/>
                 <Label Name="labelTanggalTransaksi" Content="PE69420" Canvas.Left="155" Canvas.Top="77" Style="{StaticResource lg}" FontWeight="SemiBold"/>
 
-                <Label Content="Kurir" Canvas.Left="10" Canvas.Top="110" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Kurir" Canvas.Left="10" Canvas.Top="110" Style="{StaticResource textblock-md-secondary}"/>
                 <Label Name="labelKurir" Content="JEK_GO" Canvas.Left="155" Canvas.Top="110" Style="{StaticResource lg}" FontWeight="SemiBold"/>
 
-                <Label Content="Nama Pembeli" Canvas.Left="10" Canvas.Top="144" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Nama Pembeli" Canvas.Left="10" Canvas.Top="144" Style="{StaticResource textblock-md-secondary}"/>
                 <Label Name="labelNamaPembeli" Content="SHUE CHEN" Canvas.Left="155" Canvas.Top="144" Style="{StaticResource lg}" FontWeight="SemiBold"/>
 
-                <Label Content="Alamat Tujuan" Canvas.Left="10" Canvas.Top="180" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Alamat Tujuan" Canvas.Left="10" Canvas.Top="180" Style="{StaticResource textblock-md-secondary}"/>
                 <TextBox Name="textboxAlamatPesanan" Text="Long Beach S10/36, Pakuwon City, Kota Surabaya, 60420" Canvas.Left="10" Canvas.Top="210" Width="320" Height="60" FontSize="18" FontWeight="SemiBold" Foreground="#FFFFFF" Padding="5,0,0,0" TextWrapping="Wrap" IsReadOnly="True"/>
 
-                <Label Content="Produk" Canvas.Left="345" Canvas.Top="6" Style="{StaticResource md-secondary}"/>
+                <TextBlock Text="Produk" Canvas.Left="345" Canvas.Top="6" Style="{StaticResource textblock-md-secondary}"/>
                 <DataGrid Name="datagridProdukPesanan" Canvas.Left="345" Canvas.Top="43" Width="675" Height="187" MouseDoubleClick="datagridProdukPesanan_MouseDoubleClick" LoadingRow="datagridProdukPesanan_LoadingRow" Background="{x:Null}" IsReadOnly="True"/>
 
-                <Label Content="Total" Canvas.Left="700" Canvas.Top="240" Style="{StaticResource xl-secondary}"/>
+                <TextBlock Text="Total" Canvas.Left="700" Canvas.Top="240" Style="{StaticResource textblock-xl-secondary}"/>
                 <TextBox Name="textboxTotalPesanan" Text="Rp 69.000" Canvas.Left="765" Canvas.Top="240" Width="250"  Height="30" Style="{StaticResource tb-noborder}" FontSize="20" FontWeight="SemiBold" TextAlignment="Right" IsReadOnly="True"/>
 
                 <CheckBox Name="checkboxTerimaSemua" Content="Terima Semua" Canvas.Left="1040" Canvas.Top="17" FontSize="20" FontWeight="SemiBold" Click="checkboxTerimaSemua_Click"/>
@@ -100,32 +100,32 @@
 
                         <DataGrid Name="datagridProduk" Height="500" Width="720" FontSize="11" Canvas.Left="10" Canvas.Top="70" LoadingRow="datagridProduk_LoadingRow" SelectedCellsChanged="datagridProduk_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
 
-                        <Label Content="Info Produk" Canvas.Left="765" Canvas.Top="24" Style="{StaticResource xl-secondary}"/>
+                        <TextBlock Text="Info Produk" Canvas.Left="765" Canvas.Top="24" Style="{StaticResource textblock-xl-secondary}"/>
 
-                        <Label Content="Nama Produk" Canvas.Left="765" Canvas.Top="80" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Nama Produk" Canvas.Left="765" Canvas.Top="80" Style="{StaticResource textblock-md-secondary}"/>
                         <TextBox Name="textboxNamaProduk" Canvas.Left="900"  Canvas.Top="80" Height="35" Width="350" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                        <Label Content="Kategori" Canvas.Left="765" Canvas.Top="130" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Kategori" Canvas.Left="765" Canvas.Top="130" Style="{StaticResource textblock-md-secondary}"/>
                         <ComboBox Name="comboboxKategori"  Canvas.Left="900" Canvas.Top="130" Height="35" Width="350" BorderBrush="#FFFFFF"/>
 
                         <Image Name="imageProduk" Canvas.Left="765" Canvas.Top="190" Width="150" Height="150"/>
                         <Button Name="btnPilihGambarProduk" Content="Pilih Gambar Produk" Canvas.Left="765" Canvas.Top="346" Width="150" Height="25" Foreground="#65C65B" Background="Transparent" FontSize="14" Padding="0" Click="btnPilihGambarProduk_Click"/>
 
-                        <Label Content="Harga" Canvas.Left="930" Canvas.Top="190" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Harga" Canvas.Left="930" Canvas.Top="190" Style="{StaticResource textblock-md-secondary}"/>
                         <Label Content="Rp" Canvas.Left="1020" Canvas.Top="190" Style="{StaticResource md}"/>
                         <TextBox Name="textboxHarga" Canvas.Left="1050"  Canvas.Top="190" Height="30" Width="200" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxHarga_PreviewTextInput"/>
 
-                        <Label Content="Stok" Canvas.Left="930" Canvas.Top="240" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Stok" Canvas.Left="930" Canvas.Top="240" Style="{StaticResource textblock-md-secondary}"/>
                         <TextBox Name="textboxStok" Canvas.Left="1020"  Canvas.Top="240"  Height="30" Width="230" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxStok_PreviewTextInput"/>
 
-                        <Label Content="Berat" Canvas.Left="930" Canvas.Top="290" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Berat" Canvas.Left="930" Canvas.Top="290" Style="{StaticResource textblock-md-secondary}"/>
                         <ComboBox Name="comboboxBerat" Canvas.Left="1020" Canvas.Top="290" Height="35" Width="50" BorderBrush="#FFFFFF" FontSize="14" Foreground="#9A9A9A" SelectionChanged="comboboxBerat_SelectionChanged"/>
                         <TextBox Name="textboxBerat" Canvas.Left="1075"  Canvas.Top="290" Height="35" Width="175" FontSize="18" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxBerat_PreviewTextInput"/>
 
-                        <Label Content="Status Produk" Canvas.Left="930" Canvas.Top="340" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Status Produk" Canvas.Left="930" Canvas.Top="340" Style="{StaticResource textblock-md-secondary}"/>
                         <CheckBox Name="checkboxStatusProduk" Content="Aktif" Canvas.Left="1050" Canvas.Top="340" Height="35" FontSize="16" FontWeight="SemiBold"/>
 
-                        <Label Content="Deskripsi" Canvas.Left="765" Canvas.Top="380" Style="{StaticResource md-secondary}"/>
+                        <TextBlock Text="Deskripsi" Canvas.Left="765" Canvas.Top="380" Style="{StaticResource textblock-md-secondary}"/>
                         <TextBox Name="textboxDeskripsi" Canvas.Left="765"  Canvas.Top="410"  Height="100" Width="480" FontSize="16" FontWeight="SemiBold" Foreground="#FFFFFF" BorderBrush="#FFFFFF" Padding="5,0,0,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
                         <Button Name="btnCancel" Content="Cancel" FontSize="20" Width="235" Height="40" Canvas.Left="765" Canvas.Top="530" Style="{StaticResource btn-secondary}" Click="btnCancel_Click"/>
@@ -134,10 +134,9 @@
                     </Canvas>
 
                     <!--DISKUSI-->
-                    <Label Content="Diskusi" Margin="50,600,50,100" Style="{StaticResource h3-success}"/>
+                    <TextBlock Text="Diskusi" Margin="50,600,50,100" Style="{StaticResource textblock-h3-success}"/>
                     <StackPanel Width="1180" Margin="50,640,50,100" Canvas.Left="50" Canvas.Top="640" VerticalAlignment="Center" HorizontalAlignment="Center" Name="spanelDiscussion"></StackPanel>
                 </Grid>
-
             </ScrollViewer>
         </Canvas>
 
@@ -148,28 +147,28 @@
                     <Label Content="INFO TOKO" Canvas.Left="50" Canvas.Top="10" Style="{StaticResource h2-success}"/>
                     <Button Name="btnUbahInfoPenjual" Content="Ubah" Canvas.Left="240" Canvas.Top="23" Width="100" Height="35" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Click="btnUbahInfoPenjual_Click"/>
 
-                    <Label Content="OS Message" Canvas.Left="750" Canvas.Top="100" Style="{StaticResource lg}" Name="labelOSMessage"/>
+                    <TextBlock Canvas.Left="750" Canvas.Top="100" Style="{StaticResource textblock-lg}" Name="labelOSMessage"/>
                     <Button Name="btnDaftarOS" Content="Daftar OS" Canvas.Left="750" Canvas.Top="150" Width="300" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnDaftarOS_Click"/>
 
-                    <Label Content="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Nama Toko" Canvas.Left="50" Canvas.Top="60" Style="{StaticResource textblock-xl-secondary}"/>
                     <TextBox Name="textboxNamaToko" Canvas.Left="50"  Canvas.Top="100" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                    <Label Content="Email" Canvas.Left="50" Canvas.Top="160" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Email" Canvas.Left="50" Canvas.Top="160" Style="{StaticResource textblock-xl-secondary}"/>
                     <TextBox Name="textboxEmailInfo" Canvas.Left="50"  Canvas.Top="200" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                    <Label Content="Nomor Telepon" Canvas.Left="50" Canvas.Top="280" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Nomor Telepon" Canvas.Left="50" Canvas.Top="280" Style="{StaticResource textblock-xl-secondary}"/>
                     <TextBox Name="textboxNoTelpInfo" Canvas.Left="215"  Canvas.Top="267" Height="50" Width="335" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="textboxNoTelpInfo_PreviewTextInput"/>
 
-                    <Label Content="Alamat" Canvas.Left="50" Canvas.Top="335" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Alamat" Canvas.Left="50" Canvas.Top="335" Style="{StaticResource textblock-xl-secondary}"/>
                     <TextBox Name="textboxAlamatInfo" Canvas.Left="50" Canvas.Top="375" Height="100" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
-                    <Label Content="Buka Sejak" Canvas.Left="50" Canvas.Top="500" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Buka Sejak" Canvas.Left="50" Canvas.Top="500" Style="{StaticResource textblock-xl-secondary}"/>
                     <Label Name="labelBukaSejak" Content="06 September 2021" Canvas.Left="50" Canvas.Top="540" Style="{StaticResource h3}"/>
 
-                    <Label Content="Nama Penjual" Canvas.Left="50" Canvas.Top="610" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Nama Penjual" Canvas.Left="50" Canvas.Top="610" Style="{StaticResource textblock-xl-secondary}"/>
                     <TextBox Name="textboxNamaPenjual" Canvas.Left="50"  Canvas.Top="650" Height="50" Width="500" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center"/>
 
-                    <Label Content="Layanan Kurir" Canvas.Left="50" Canvas.Top="750" Style="{StaticResource xl-secondary}"/>
+                    <TextBlock Text="Layanan Kurir" Canvas.Left="50" Canvas.Top="750" Style="{StaticResource textblock-xl-secondary}"/>
                     <ComboBox Name="comboboxKurirInfo" Canvas.Left="450" Canvas.Top="800" Width="300" Height="30" Style="{StaticResource combobox-green}"/>
                     <ListBox Name="listboxListKurirInfo" Width="360" Height="200" Canvas.Left="50" Canvas.Top="800"/>
                     <Button Name="btnTambahKurirInfo" Content="Tambah Kurir" Canvas.Left="450" Canvas.Top="850" Width="145" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnTambahKurirInfo_Click"/>
@@ -191,17 +190,18 @@
             <ComboBox Name="comboboxSortUlasan" Canvas.Left="480" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortUlasan_SelectionChanged"/>
 
             <DataGrid Name="datagridUlasan" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridUlasan_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
-
-            <Label Content="Ulasan" Canvas.Left="750" Canvas.Top="112" Style="{StaticResource xl-success}"/>
+            
+            <TextBlock Text="Rating" Canvas.Left="750" Canvas.Top="70" Style="{StaticResource textblock-xl-success}"/>
+            <materialDesign:RatingBar Canvas.Left="850" Canvas.Top="80" Foreground="#FFC548" Name="ratingbarUlasan" IsReadOnly="True"/>
+            
+            <TextBlock Text="Ulasan" Canvas.Left="750" Canvas.Top="112" Style="{StaticResource textblock-xl-success}"/>
             <TextBox Name="textboxIsiUlasan" Canvas.Left="750" Canvas.Top="154" Height="150" Width="500" IsReadOnly="True" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
-            <Label Content="Balas" Canvas.Left="750" Canvas.Top="309" Style="{StaticResource xl-success}"/>
+            <TextBlock Text="Balas" Canvas.Left="750" Canvas.Top="309" Style="{StaticResource textblock-xl-success}"/>
             <TextBox Name="textboxBalasUlasan" Canvas.Left="750" Canvas.Top="350" Height="150" Width="500" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap" TextChanged="textboxBalasUlasan_TextChanged"/>
 
             <Button Name="btnBalasUlasan" Content="Balas" Canvas.Left="800" Canvas.Top="530" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-primary}" Click="btnBalasUlasan_Click"/>
             <Button Name="btnCancelUlasan" Content="Batal" Canvas.Left="1010" Canvas.Top="530" Width="200" Height="40" FontSize="18" Padding="0" Style="{StaticResource btn-danger}" Click="btnCancelUlasan_Click"/>
-            <Label Content="Rating" Canvas.Left="750" Canvas.Top="70" Style="{StaticResource xl-success}"/>
-            <materialDesign:RatingBar Canvas.Left="850" Canvas.Top="80" Foreground="#FFC548" Name="ratingbarUlasan" IsReadOnly="True"/>
         </Canvas>
     </Grid>
 </Window>
