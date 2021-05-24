@@ -119,6 +119,7 @@ namespace Tukupedia.ViewModels.Seller
             }
             
         }
+
         public void viewSemuaPesanan(string keyword = "")
         {
             lastclick = 1;
@@ -228,7 +229,13 @@ namespace Tukupedia.ViewModels.Seller
                 //3 = Barang Yang dibeli
                 if (statuses == "SC" || statuses == "S" || statuses == "D")
                 {
-                    total += Convert.ToInt32(dr["Total"].ToString());
+                    try
+                    {
+                        total += Convert.ToInt32(drHelper["Total"].ToString());
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             ViewComponent.textboxTotalPesanan.Text = Utility.formatMoney(total);
@@ -250,10 +257,13 @@ namespace Tukupedia.ViewModels.Seller
                 ViewComponent.textboxAlamatPesanan.Text = dr[4].ToString();
                 ViewComponent.textboxAlamatPesanan.IsReadOnly = true;
                 dtrans = new D_Trans_ItemModel();
-                dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when 'W' then 'Pesanan Baru' when 'P' then 'Siap Kirim' when 'S' then 'Dalam Pengiriman' when 'D' then 'Pesanan Selesai' when 'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
+                dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", to_char(i.HARGA) as \"Harga\", to_char(i.HARGA * d.JUMLAH) as \"Total\", case d.STATUS when 'W' then 'Pesanan Baru' when 'P' then 'Siap Kirim' when 'S' then 'Dalam Pengiriman' when 'D' then 'Pesanan Selesai' when 'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
                 dtrans_helper = new D_Trans_ItemModel();
-                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH, i.ID from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
+                dtrans_helper.initAdapter($"select d.ID , d.STATUS, i.STOK, d.JUMLAH, i.ID, to_char(i.HARGA * d.JUMLAH) as \"Total\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' and i.ID_SELLER = '{seller["ID"]}' {status}");
                 ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
+
+                Utility.toCurrency(dtrans.Table, 2);
+                Utility.toCurrency(dtrans.Table, 3);
                 ViewComponent.canvasDetailPesanan.Visibility = System.Windows.Visibility.Visible;
                 hitungTotal();
             }
@@ -297,15 +307,15 @@ namespace Tukupedia.ViewModels.Seller
             {
                 foreach (DataRow dr in dtrans_helper.Table.Rows)
                 {
-                    int stock = Convert.ToInt32(dr[2].ToString()) - Convert.ToInt32(dr[3].ToString());
+                    //int stock = Convert.ToInt32(dr[2].ToString()) - Convert.ToInt32(dr[3].ToString());
                     if (dr[1].ToString() == "SC")
                         new DB("D_TRANS_ITEM").update("STATUS", "S").where("ID", dr[0].ToString()).execute();
-                    new DB("ITEM").update("STOK", stock).where("ID", dr[4].ToString()).execute();
+                    //new DB("ITEM").update("STOK", stock).where("ID", dr[4].ToString()).execute();
                 }
 
-                DataRow drrow = new DB("SELLER").select("SALDO").where("ID", seller["ID"].ToString()).getFirst();
-                int saldo = Convert.ToInt32(drrow[0].ToString()) - hitungTotal();
-                new DB("SELLER").update("SALDO", saldo).where("ID", seller["ID"].ToString()).execute();
+                //DataRow drrow = new DB("SELLER").select("SALDO").where("ID", seller["ID"].ToString()).getFirst();
+                //int saldo = Convert.ToInt32(drrow[0].ToString()) - hitungTotal();
+                //new DB("SELLER").update("SALDO", saldo).where("ID", seller["ID"].ToString()).execute();
                 reloadHtrans();
             }
 
@@ -353,8 +363,10 @@ namespace Tukupedia.ViewModels.Seller
             hitungTotal();
 
         }
-        public void terimasemua(bool ya)
+        public void terimasemua()
         {
+            bool ischecked = (bool) ViewComponent.checkboxTerimaSemua.IsChecked;
+            //MessageBox.Show(ischecked.ToString());
             DataRow dr_trans = htrans.Table.Rows[h_trans_selected];
 
             if (dr_trans["Status"].ToString() == "Canceled")
@@ -370,12 +382,12 @@ namespace Tukupedia.ViewModels.Seller
             for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
             {
                 DataRow drhelper = dtrans_helper.Table.Rows[i], dr = dtrans.Table.Rows[i];
-                if (drhelper[1].ToString() == "W" || dr[1].ToString() == "SC")
+                if (drhelper[1].ToString() == "W" || drhelper[1].ToString() == "SC")
                 {
-                    if (ya) drhelper[1] = "SC";
+                    if (ischecked) drhelper[1] = "SC";
                     else drhelper[1] = "W";
 
-                    if (ya) dr[4] = "Dalam Pengiriman *";
+                    if (ischecked) dr[4] = "Dalam Pengiriman *";
                     else dr[4] = "Pesanan Baru";
                 }
             }

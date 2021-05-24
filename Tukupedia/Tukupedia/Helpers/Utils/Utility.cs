@@ -184,6 +184,13 @@ namespace Tukupedia.Helpers.Utils
                 TraverseVisualTree(visualChild);
             }
         }
+        public static void toCurrency(DataTable dt, int row)
+        {
+            foreach (DataRow dr in dt.Rows)
+            {
+                dr[row] = Utility.formatMoney(Convert.ToInt32(dr[row].ToString()));
+            }
+        }
 
     }
 }
