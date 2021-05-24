@@ -14,7 +14,9 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.Models;
 using Tukupedia.ViewModels.Customer;
 
 namespace Tukupedia.Views.Customer
@@ -51,7 +53,7 @@ namespace Tukupedia.Views.Customer
             SetWindowLong(hwnd, GWL_STYLE, value & ~WS_MAXIMIZEBOX);
         }
 
-        public void initDetail(string urlImage, DataRow item)
+        public void initDetail(DataRow item)
         {
             //Load Image
             
@@ -77,8 +79,10 @@ namespace Tukupedia.Views.Customer
             //Load Item Name
             tbNamaItem.Text = item["NAMA"].ToString();
             tbHarga.Text = Utility.formatMoney(Convert.ToInt32(item["HARGA"]));
-            //Load Rating TODO Ganti setelah sudah ganti DB
-            // RatingBar.Value = Convert.ToInt32(item["RATING"]);
+            if(item["RATING"].ToString()!="")RatingBar.Value = Convert.ToInt32(item["RATING"]);
+            tbBerat.Text = "Berat " + item["BERAT"].ToString() + " gram";
+            DataRow kat = new DB("CATEGORY").select().where("ID", item["ID_CATEGORY"].ToString()).getFirst();
+            tbKategori.Text = "Kategori : "+kat["NAMA"].ToString();
             hideInputReply();
 
         }

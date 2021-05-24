@@ -53,14 +53,14 @@ namespace Tukupedia.ViewModels.Customer
                         card.setRating(Convert.ToInt32(item["RATING"]));
                     }
                     card.setJual($"Terjual : {jml}");
-                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
+                    if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.deploy();
                     wp.Children.Add(card);
                 }
             }
             else
             {
-                foreach(DataRow item in new ItemModel().Table.Rows)
+                foreach(DataRow item in new ItemModel().Table.Select("STATUS = '1'"))
                 {
                     ItemCard card = new ItemCard();
                     DataRow jmlItem = new DB("D_TRANS_ITEM")
@@ -80,7 +80,7 @@ namespace Tukupedia.ViewModels.Customer
                         card.setRating(Convert.ToInt32(item["RATING"]));
                     }
                     card.setJual($"Terjual : {jml}");
-                    //if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
+                    if (item["IMAGE"].ToString() != "") card.setImage(item["IMAGE"].ToString());
                     card.deploy();
                     wp.Children.Add(card);
                 }
