@@ -145,6 +145,7 @@ namespace Tukupedia.Components
             this.qty = qty;
             tbnamaItem.Text = item["NAMA"].ToString();
             tbHarga.Text = Utility.formatMoney(Convert.ToInt32(item["HARGA"]));
+            ImageHelper.loadImage(itemImage, item["IMAGE"].ToString());
             updateQty();
 
         }

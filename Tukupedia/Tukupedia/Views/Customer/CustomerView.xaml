@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        mc:Ignorable="d" Loaded="CustomerView_OnLoaded"
+        mc:Ignorable="d" Loaded="CustomerView_OnLoaded" Closing="Window_Closing"
         Title="CustomerView" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
     <Grid>
         <Grid HorizontalAlignment="Left" Height="64" VerticalAlignment="Top" Width="1274" Background="#FF65C65B" Margin="0,0,-0.4,0">

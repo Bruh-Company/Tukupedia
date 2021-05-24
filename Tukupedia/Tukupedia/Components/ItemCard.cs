@@ -80,10 +80,7 @@ namespace Tukupedia.Components
             ItemDetailView itemDetailView = new ItemDetailView();
             //Berguna supaya tidak bisa di alt tab
             itemDetailView.Owner = Window.GetWindow((Window)PresentationSource.FromVisual(this).RootVisual);
-            itemDetailView.initDetail(
-                urlImage: "",
-                item:this.item
-                );
+            itemDetailView.initDetail(item:this.item);
             itemDetailView.ShowDialog();
         }
 

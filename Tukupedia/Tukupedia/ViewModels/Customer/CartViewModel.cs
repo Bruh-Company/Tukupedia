@@ -15,7 +15,7 @@ namespace Tukupedia.ViewModels.Customer
 {
     public class CartViewModel
     {
-        private static DataTable cart = new D_Trans_ItemModel().Table.Clone();
+        private static DataTable cart;
         private static int id_h_trans_item;
         public static StackPanel spCart;
         public static Label labelHarga;
@@ -71,6 +71,7 @@ namespace Tukupedia.ViewModels.Customer
                 newCart["ID_ITEM"] = item["ID"];
                 newCart["JUMLAH"] = jumlah;
                 cart.Rows.Add(newCart);
+               
             }
         }
 
@@ -127,15 +128,18 @@ namespace Tukupedia.ViewModels.Customer
             foreach (DataRow row in cart.Rows)
             {
                 DataRow item = new DB("ITEM").@select().@where("ID", row["ID_ITEM"].ToString()).getFirst();
+                //MessageBox.Show(item["NAMA"].ToString());
                 string id_toko = item["ID_SELLER"].ToString();
                 if (toko.ContainsKey(id_toko))
                 {
                     toko[id_toko].Add(item);
+                    //MessageBox.Show("Item masuk ke toko yang sama");
                 }
                 else
                 {
                     toko[id_toko] = new List<DataRow>();
                     toko[id_toko].Add(item);
+                    //MessageBox.Show("Item masuk ke toko baru");
                 }
                 
             }
@@ -146,7 +150,7 @@ namespace Tukupedia.ViewModels.Customer
                 ShopCartComponent scc = new ShopCartComponent();
                 scc.initToko(new DB("SELLER").@select().@where("ID",val.Key).getFirst());
                 scc.addItemCart(val.Value);
-                list_shopcart.Add(scc);;
+                list_shopcart.Add(scc);
                 sp.Children.Add(scc);
             }
 
@@ -418,6 +422,10 @@ namespace Tukupedia.ViewModels.Customer
                 if (valid) tbErrorPromotion.Visibility = Visibility.Hidden;
                 else tbErrorPromotion.Visibility = Visibility.Visible;
             }
+        }
+        public static void saveCart()
+        {
+            Session.setCart(Convert.ToInt32(Session.User["ID"]), cart);
         }
         
     }

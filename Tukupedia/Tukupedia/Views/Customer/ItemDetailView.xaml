@@ -63,7 +63,7 @@
                             <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbKategori" Text="Kategori : " Foreground="#C8C8C8"/>
                             <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbBerat" Text="Berat : " Foreground="#C8C8C8"/>
                             <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbTitleDescription" Text="Description : " Foreground="#C8C8C8"/>
-                            <TextBlock Margin="5,2,5,2" Style="{StaticResource textblockblock-sm}" x:Name="tbDescription" Text="Wow Keren" FontSize="14" Foreground="#C8C8C8"/>
+                            <TextBlock Margin="5,2,5.4,2" Style="{StaticResource textblockblock-sm}" x:Name="tbDescription" Text="Wow Keren" FontSize="14" Foreground="#C8C8C8" Height="247" TextWrapping="WrapWithOverflow"/>
                         </StackPanel>
                     </TabItem>
                     <TabItem MouseUp="TabReview_OnMouseUp" Name="tabReview" Foreground="Black" Header="Review">

@@ -84,9 +84,10 @@ namespace Tukupedia.Components
             //init Styles
             imgToko.Width = 50;
             imgToko.Height = 50;
-            imgToko.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            Random r = new Random();
+            if (r.Next(2)==0) ImageHelper.loadImageCheems(imgToko);
+            else ImageHelper.loadImageSwole(imgToko);
+            
             namaToko.Style = Application.Current.TryFindResource("textblockblock-md-success") as Style;
             namaToko.VerticalAlignment = VerticalAlignment.Center;
             tbisOfficial.Text = "Official";
@@ -133,9 +134,7 @@ namespace Tukupedia.Components
             if (!isOfficial) tbisOfficial.Visibility = Visibility.Hidden;
             if (toko["IMAGE"].ToString() != "")
             {
-                imgToko.Source =
-                    new BitmapImage(new Uri(
-                        AppDomain.CurrentDomain.BaseDirectory + toko["IMAGE"].ToString()));
+                ImageHelper.loadImage(imgToko, toko["IMAGE"].ToString());
             }
             Kurir_SellerModel ksm = new Kurir_SellerModel();
             DataRow[] rows = ksm.Table.Select($"ID_SELLER ='{toko["ID"]}'");

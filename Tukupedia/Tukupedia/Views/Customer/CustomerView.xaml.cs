@@ -106,6 +106,7 @@ namespace Tukupedia.Views.Customer
 
         private void BtnLogout_OnClick(object sender, RoutedEventArgs e)
         {
+            CartViewModel.saveCart();
             Session.Logout();
             this.Close();
         }
@@ -380,6 +381,11 @@ namespace Tukupedia.Views.Customer
             {
                 Utility.setRichTextBoxString(rtbUlasan, "Tulis Ulasan Disini");
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            
         }
     }
 }
