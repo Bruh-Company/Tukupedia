@@ -135,7 +135,7 @@ namespace Tukupedia.Views.Customer
                 return;
             }
             CartViewModel.addtoCart(item,qty,true);
-            CartViewModel.loadCartItem(CartViewModel.spCart);
+            CartViewModel.loadCartItem();
             CartViewModel.updateGrandTotal();
             
             MessageBox.Show($"{item["NAMA"]} berhasil di tambah ke cart!");

@@ -616,7 +616,7 @@ BEGIN
         )
         loop
             update ITEM
-            set RATING=ROUND(i.ratingBaru,2)
+            set RATING=i.ratingBaru
             where ID = i.ID_ITEM;
         end loop;
 END;

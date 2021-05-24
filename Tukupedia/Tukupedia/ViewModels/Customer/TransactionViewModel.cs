@@ -19,8 +19,8 @@ namespace Tukupedia.ViewModels.Customer
         public static List<Header_Trans_Item> list_htrans;
         public static List<Detail_Trans_Item> list_dtrans;
         public static CustomerView ViewComponent;
-        private static int idxH_Trans;
-        private static int idxItem;
+        public static int idxH_Trans;
+        public static int idxItem;
         public static void initTransaction(CustomerView cv)
         {
             ViewComponent = cv;
@@ -52,10 +52,11 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent.grid_H_Trans.Columns[2].Header = "Tanggal Transaksi";
             ViewComponent.grid_H_Trans.Columns[3].Header = "Status";
         }
-        public static void loadD_Trans(int idx)
+        public static void loadD_Trans()
         {
-            if (idx >= 0)
+            if (idxH_Trans >= 0)
             {
+                int idx = idxH_Trans;
                 //Init Labels
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
@@ -116,13 +117,13 @@ namespace Tukupedia.ViewModels.Customer
                 ViewComponent.grid_D_Trans.Columns[0].Visibility = Visibility.Hidden;
             }
         }
-        public static void bayarTrans(int idx)
+        public static void bayarTrans()
         {
             //Check trans apakah sudah dibayar atau belum
             //Jika sudah,  buat btn enable false?
+            int idx = idxH_Trans;
             if (idx >= 0)
             {
-                idxH_Trans = idx;
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
                 if (row["STATUS"].ToString() == "W")
@@ -139,15 +140,15 @@ namespace Tukupedia.ViewModels.Customer
                 }
             }
         }
-        public static void cancelTrans(int idx)
+        public static void cancelTrans()
         {
+            int idx = idxH_Trans;
             //Check trans apakah sudah dibayar atau belum
             // Kalau sudah bayar tpi mau cancel harus cek kalau d transnya sudah ada yang kirim
             // atau belum, Kemudian kalau cancel h trans, harus cancel di semua dtrans
             //Jika sudah,  tidak boleh di cancel
             if (idx >= 0)
             {
-                idxH_Trans = idx;
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
                 if (row["STATUS"].ToString() == "W")
@@ -173,7 +174,7 @@ namespace Tukupedia.ViewModels.Customer
                         dti.update();
                         hti.update();
                         initH_Trans();
-                        loadD_Trans(idx);
+                        loadD_Trans();
                         MessageBox.Show("Transaksi berhasil di cancel !");
                     }
                     else
@@ -194,11 +195,12 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent.tbJumlahItem.Text = "-";
             ViewComponent.tbStatusItem.Text = "-";
         }
-        public static void loadItem(int idx)
+        public static void loadItem()
         {
+            int idx = idxItem;
             if (idx >= 0)
             {
-                idxItem = idx;
+                MessageBox.Show("HTRANS : " + idxH_Trans + " D_TRANS " + idxItem);
                 Detail_Trans_Item dti = list_dtrans[idx];
                 ViewComponent.tbKurirItem.Text = dti.namaKurir;
                 ViewComponent.tbNamaItem.Text = dti.namaItem;
@@ -251,11 +253,12 @@ namespace Tukupedia.ViewModels.Customer
                 }
             }
         }
-        public static void beriUlasan(int idx)
+        public static void beriUlasan()
         {
+            int idx = idxItem;
             if (idx >= 0)
             {
-                idxItem = idx;
+                MessageBox.Show("HTRANS : " + idxH_Trans + " D_TRANS " + idxItem);
                 Detail_Trans_Item dti = list_dtrans[idx];
                 //Check kalau DTRANS HARUS SUDAH SELESAI
                 if (dti.status == "FINISHED")
@@ -279,7 +282,8 @@ namespace Tukupedia.ViewModels.Customer
                         //reset input ulasan
                         resetItem();
                         MessageBox.Show("Berhasil Memberi Ulasan!");
-
+                        loadD_Trans();
+                        loadItem();
                     }
                 }
                 else
@@ -289,11 +293,11 @@ namespace Tukupedia.ViewModels.Customer
                 }
             }
         }
-        public static void terimaBarang(int idx)
+        public static void terimaBarang()
         {
-            if (idx >= 0)
+            if (idxItem >= 0)
             {
-                idxItem = idx;
+                int idx = idxItem;
                 Detail_Trans_Item dti = list_dtrans[idx];
                 //Check kalau DTRANS HARUS SUDAH SELESAI
                 if (dti.status == "SHIPPING")
@@ -322,14 +326,16 @@ namespace Tukupedia.ViewModels.Customer
                             SellerModel sm = new SellerModel();
                             DataRow seller = sm.Table.Select($"ID = '{item["ID_SELLER"]}'").FirstOrDefault(); ;
                             int saldo = Convert.ToInt32(row["JUMLAH"]) * Convert.ToInt32(item["HARGA"]);
+                            MessageBox.Show(saldo.ToString());
                             saldo += Convert.ToInt32(seller["SALDO"]);
-
+                            MessageBox.Show("Saldo awal seller : " + seller["SALDO"].ToString());
                             seller["SALDO"] = saldo;
                             MessageBox.Show($"Seller {seller["NAMA_TOKO"]} punya saldo {Utility.formatMoney(saldo)} segini sekarang");
                             sm.update();
                         }
                     }
-                    loadD_Trans(idx);
+                    loadD_Trans();
+                    loadItem();
 
                 }
                 else

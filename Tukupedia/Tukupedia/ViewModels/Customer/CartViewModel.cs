@@ -10,6 +10,7 @@ using Tukupedia.Models;
 using Tukupedia.Components;
 using Tukupedia.Helpers.Classes;
 using Tukupedia.Helpers.DatabaseHelpers;
+using Tukupedia.Views.Customer;
 
 namespace Tukupedia.ViewModels.Customer
 {
@@ -29,10 +30,12 @@ namespace Tukupedia.ViewModels.Customer
         public static TextBlock tbDiscount;
         public static TextBlock tbErrorPromotion;
         public static int diskon;
+        public static CustomerView ViewComponent;
         
 
-        public static void initCart()
+        public static void initCart(CustomerView view)
         {
+            ViewComponent = view;
             int id_customer = Convert.ToInt32(Session.User["ID"]);
             cart = Session.getCart(id_customer);
             if (cart.Rows.Count == 0)
@@ -109,9 +112,8 @@ namespace Tukupedia.ViewModels.Customer
             return Utility.checkMax(new D_Trans_ItemModel().Table,"ID",0,0,"1=1");
         }
 
-        public static void loadCartItem(StackPanel sp)
+        public static void loadCartItem()
         {
-            if(spCart==null)spCart = sp;
             list_checked = new Dictionary<string, bool>();
             if (list_shopcart!=null&&list_shopcart.Count > 0)
             {
@@ -122,7 +124,7 @@ namespace Tukupedia.ViewModels.Customer
                 }
             }
             
-            sp.Children.Clear();
+            ViewComponent.spCart.Children.Clear();
             Dictionary<string, List<DataRow>> toko = new Dictionary<string, List<DataRow>>();
             //Check per Toko
             foreach (DataRow row in cart.Rows)
@@ -151,7 +153,7 @@ namespace Tukupedia.ViewModels.Customer
                 scc.initToko(new DB("SELLER").@select().@where("ID",val.Key).getFirst());
                 scc.addItemCart(val.Value);
                 list_shopcart.Add(scc);
-                sp.Children.Add(scc);
+                ViewComponent.spCart.Children.Add(scc);
             }
 
             foreach (var shopCart in list_shopcart)
@@ -189,7 +191,7 @@ namespace Tukupedia.ViewModels.Customer
             cart.Rows.Remove(row);
             if (update)
             {
-                loadCartItem(spCart);
+                loadCartItem();
                 updateGrandTotal();
             }
         }
@@ -300,7 +302,7 @@ namespace Tukupedia.ViewModels.Customer
                         {
                             deleteItemFromCart(Convert.ToInt32(id_item),false);
                         }
-                        loadCartItem(spCart);
+                        loadCartItem();
                         updateGrandTotal();
                         TransactionViewModel.initH_Trans();
                         

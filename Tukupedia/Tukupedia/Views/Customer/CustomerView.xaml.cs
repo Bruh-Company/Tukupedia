@@ -65,8 +65,8 @@ namespace Tukupedia.Views.Customer
             CustomerViewModel.initCustomerViewModel(this);
             
             //Init Cart
-            CartViewModel.initCart();
-            CartViewModel.loadCartItem(spCart);
+            CartViewModel.initCart(this);
+            CartViewModel.loadCartItem();
             CartViewModel.initHargaCart(labelTotal,tbSubTotal);
             CartViewModel.initPaymentMethod(cbPaymentMethod);
             CartViewModel.initPromotion(cbPromotion, tbDiscount,tbErrorPromotion);
@@ -315,18 +315,19 @@ namespace Tukupedia.Views.Customer
         //Transaction Events
         private void grid_H_Trans_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            TransactionViewModel.loadD_Trans(grid_H_Trans.SelectedIndex);
+            TransactionViewModel.idxH_Trans = grid_H_Trans.SelectedIndex;
+            TransactionViewModel.loadD_Trans();
         }
 
         
         private void btnBayarTrans_Click(object sender, RoutedEventArgs e)
         {
-            TransactionViewModel.bayarTrans(grid_H_Trans.SelectedIndex);
+            TransactionViewModel.bayarTrans();
         }
 
         private void btnCancelTrans_Click(object sender, RoutedEventArgs e)
         {
-            TransactionViewModel.cancelTrans(grid_H_Trans.SelectedIndex);
+            TransactionViewModel.cancelTrans();
         }
 
         private void btnCetakInvoice_Click(object sender, RoutedEventArgs e)
@@ -335,12 +336,13 @@ namespace Tukupedia.Views.Customer
         }
         private void grid_D_Trans_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            TransactionViewModel.loadItem(grid_D_Trans.SelectedIndex);
+            TransactionViewModel.idxItem = grid_D_Trans.SelectedIndex;
+            TransactionViewModel.loadItem();
         }
 
         private void btnBeriUlasan_Click(object sender, RoutedEventArgs e)
         {
-            TransactionViewModel.beriUlasan(grid_D_Trans.SelectedIndex);
+            TransactionViewModel.beriUlasan();
         }
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
@@ -390,7 +392,7 @@ namespace Tukupedia.Views.Customer
 
         private void btnTerimaBarang_Click(object sender, RoutedEventArgs e)
         {
-            TransactionViewModel.terimaBarang(grid_D_Trans.SelectedIndex);
+            TransactionViewModel.terimaBarang();
         }
     }
 }
