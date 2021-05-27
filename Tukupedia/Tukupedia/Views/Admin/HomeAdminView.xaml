@@ -1,9 +1,10 @@
-﻿<Window x:Class="Tukupedia.Views.Admin.HomeAdminView"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tukupedia.Views.Admin"
+        xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="Tukupedia.Views.Admin.HomeAdminView"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
@@ -15,14 +16,9 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="parent" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="637" Width="1262">
-            <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="2489,86,-2979,-21" VerticalAlignment="Top" Width="1252" Grid.Column="1">
-                <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="35"/>
-                <Label Content="Jumlah Customer" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="30" Canvas.Top="313"/>
-                <Label Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="119" Canvas.Top="204" FontWeight="Bold"/>
-                <Label Content="Jumlah Seller" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="456" Canvas.Top="305"/>
-                <Label Content="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="530" Canvas.Top="196" FontWeight="Bold"/>
-                <Label Content="Jumlah Toko Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="36" Canvas.Left="890" Canvas.Top="300"/>
-                <Label Content="10" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="72" Canvas.Left="990" Canvas.Top="196" FontWeight="Bold"/>
+            <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="1859,-10,-1849,0" VerticalAlignment="Top" Width="1252">
+                <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
+                <Viewer:CrystalReportsViewer x:Name="reportViewer" Height="564" Canvas.Left="10" Canvas.Top="50" Width="1232" ToggleSidePanel="None" ShowToggleSidePanelButton="False" ShowGoToPageButton="False" ShowLogo="False" ShowNextPageButton="False" ShowPrevPageButton="False" ShowRefreshButton="False" ShowStatusbar="False" ShowToolbar="False" Background="{DynamicResource primary-color}" BorderBrush="{DynamicResource primary-color}" Foreground="#DD533E3E"/>
             </Canvas>
             <Canvas x:Name="CanvasrootCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
                 <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseUp="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"

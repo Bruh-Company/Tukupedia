@@ -55,8 +55,16 @@ namespace Tukupedia.Views.Admin
             initState();
         }
 
+        private void initReport()
+        {
+            ReportAdmin cr = new ReportAdmin();
+            cr.SetDatabaseLogon(App.username, App.password, App.datasource, "");
+            reportViewer.ViewerCore.ReportSource = cr;
+        }
+
         void initState()
         {
+            initReport();
             canvas = new Canvas[] { CanvasrootHome, CanvasrootCategory, CanvasrootCustomer, CanvasrootSeller, CanvasrootTransaction, CanvasrootCourier, CanvasrootJenisPembayaran, CanvasrootPromo, CanvasrootOfficialStore};
             CanvasrootHome.Margin = MarginPosition.Middle;
             CanvasrootCategory.Margin = MarginPosition.Right;//
