@@ -16,14 +16,14 @@ namespace Tukupedia.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class SellerReport : ReportClass {
+    public class TemplateReport : ReportClass {
         
-        public SellerReport() {
+        public TemplateReport() {
         }
         
         public override string ResourceName {
             get {
-                return "SellerReport.rpt";
+                return "TemplateReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Tukupedia.Report {
         
         public override string FullResourceName {
             get {
-                return "Tukupedia.Report.SellerReport.rpt";
+                return "Tukupedia.Report.TemplateReport.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace Tukupedia.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedSellerReport : Component, ICachedReport {
+    public class CachedTemplateReport : Component, ICachedReport {
         
-        public CachedSellerReport() {
+        public CachedTemplateReport() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace Tukupedia.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            SellerReport rpt = new SellerReport();
+            TemplateReport rpt = new TemplateReport();
             rpt.Site = this.Site;
             return rpt;
         }
