@@ -43,7 +43,6 @@ namespace Tukupedia.Views.Customer
         {
             InitializeComponent();
             qty = 0;
-            
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
