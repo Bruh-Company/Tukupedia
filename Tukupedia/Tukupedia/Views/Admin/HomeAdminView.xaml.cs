@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,6 +36,7 @@ namespace Tukupedia.Views.Admin
         PromoViewModel pvm;
         JenisPromoViewModel jpvm;
         OfficialStoreViewModel osvm;
+        HomeViewModel hvm;
         Canvas[] canvas;
 
         private const int transFPS = 100;
@@ -53,17 +56,83 @@ namespace Tukupedia.Views.Admin
             parent.Height = 638;
             parent.Width = 1274;
             initState();
+            hvm = new HomeViewModel();
         }
-
+        public SeriesCollection SeriesCollection { get; set; }
+        public string[] Labels { get; set; }
+        public Func<double, string> YFormatter { get; set; }
         private void initReport()
         {
-            ReportAdmin cr = new ReportAdmin();
-            cr.SetDatabaseLogon(App.username, App.password, App.datasource, "");
-            reportViewer.ViewerCore.ReportSource = cr;
+            //ReportAdmin cr = new ReportAdmin();
+            //cr.SetDatabaseLogon(App.username, App.password, App.datasource, "");
+            //reportViewer.ViewerCore.ReportSource = cr;
+            //List<KeyValuePair<string, int>> k = new List<KeyValuePair<string, int>>();
+            //k.Add(new KeyValuePair<string, int>("Mei", 20));
+            //k.Add(new KeyValuePair<string, int>("Juni", 50));
+            //k.Add(new KeyValuePair<string, int>("Juli", 100));
+            //TransaksiperHari.ItemsSource = k;
+            List<string> s = new List<string>();
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Jumlah Transaksi",
+                    Values = hvm.getJumlahTransaksi(),
+                    DataLabels = true
+                }
+                //,
+                //new LineSeries
+                //{
+                //    Title = "Series 2",
+                //    Values = new ChartValues<double> { 6, 7, 3, 4 ,6 },
+                //    PointGeometry = null
+                //},
+                //new LineSeries
+                //{
+                //    Title = "Series 3",
+                //    Values = new ChartValues<double> { 4,2,7,2,7 },
+                //    PointGeometry = DefaultGeometries.Square,
+                //    PointGeometrySize = 15
+                //}
+            };
+
+            //Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
+            Labels = hvm.getLabelJumlahTransaksi().ToArray();
+            //YFormatter = value => value.ToString("C");
+
+            //modifying the series collection will animate and update the chart
+            //SeriesCollection.Add(new LineSeries
+            //{
+            //    Title = "Series 4",
+            //    Values = new ChartValues<double> { 5, 3, 2, 4 },
+            //    LineSmoothness = 0, //0: straight lines, 1: really smooth lines
+            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+            //    PointGeometrySize = 50,
+            //    PointForeground = Brushes.Gray
+            //});
+
+            //modifying any series values will also animate and update the chart
+            //SeriesCollection[3].Values.Add(5d);
+
+            DataContext = this;
+            chartJumlahTransaksi.Update(true, true);
+        }
+        void updateChart()
+        {
+            SeriesCollection[0].Values = null;
+            SeriesCollection[0].Values = hvm.getJumlahTransaksi();
+            Labels = null;
+            Labels = hvm.getLabelJumlahTransaksi().ToArray();
+            DataContext = Labels;
+            DataContext = this;
         }
 
         void initState()
         {
+            dpTanggalAwal.SelectedDate = DateTime.Now.AddDays(-7);
+            dpTanggalAkhir.SelectedDate = DateTime.Now;
+            hvm = new HomeViewModel();
+
             initReport();
             canvas = new Canvas[] { CanvasrootHome, CanvasrootCategory, CanvasrootCustomer, CanvasrootSeller, CanvasrootTransaction, CanvasrootCourier, CanvasrootJenisPembayaran, CanvasrootPromo, CanvasrootOfficialStore};
             CanvasrootHome.Margin = MarginPosition.Middle;
@@ -209,7 +278,8 @@ namespace Tukupedia.Views.Admin
         private void btHome_Click(object sender, RoutedEventArgs e)
         {
             setCanvas(0);
-            HomeViewModel.initHome();
+            hvm = new HomeViewModel();
+            initReport();
         }
 
         private void btCategory_Click(object sender, RoutedEventArgs e)
@@ -1187,6 +1257,15 @@ namespace Tukupedia.Views.Admin
         private void tbNoTelpOS_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Utility.NumberValidationTextBox(sender, e);
+        }
+
+        private void btSelectDate_Click(object sender, RoutedEventArgs e)
+        {
+            hvm.refreshJumlahTransaksi(dpTanggalAwal.SelectedDate.Value, dpTanggalAkhir.SelectedDate.Value);
+            //initReport();
+            //chartJumlahTransaksi.Update(true,true);
+            updateChart();
+
         }
     }
 }

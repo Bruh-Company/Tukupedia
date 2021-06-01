@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tukupedia.Views.Admin"
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer" x:Class="Tukupedia.Views.Admin.HomeAdminView"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         mc:Ignorable="d"
@@ -18,7 +19,21 @@
         <Grid x:Name="parent" HorizontalAlignment="Left" Margin="0,52,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="637" Width="1262">
             <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="1859,-10,-1849,0" VerticalAlignment="Top" Width="1252">
                 <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
-                <Viewer:CrystalReportsViewer x:Name="reportViewer" Height="564" Canvas.Left="10" Canvas.Top="50" Width="1232" ToggleSidePanel="None" ShowToggleSidePanelButton="False" ShowGoToPageButton="False" ShowLogo="False" ShowNextPageButton="False" ShowPrevPageButton="False" ShowRefreshButton="False" ShowStatusbar="False" ShowToolbar="False" Background="{DynamicResource primary-color}" BorderBrush="{DynamicResource primary-color}" Foreground="#DD533E3E"/>
+                <Grid/>
+                <lvc:CartesianChart x:Name="chartJumlahTransaksi" Series="{Binding SeriesCollection}" Height="446" Canvas.Left="10" Canvas.Top="168" Width="771" >
+                    <lvc:CartesianChart.AxisY>
+                        <lvc:Axis Title="Transaction" LabelFormatter="{Binding YFormatter}"/>
+                    </lvc:CartesianChart.AxisY>
+                    <lvc:CartesianChart.AxisX>
+                        <lvc:Axis Title="Tanggal" Labels="{Binding Labels}"/>
+                    </lvc:CartesianChart.AxisX>
+                </lvc:CartesianChart>
+                <DatePicker x:Name="dpTanggalAwal" Canvas.Left="36" Canvas.Top="123" Width="155" FontSize="16"/>
+                <DatePicker x:Name="dpTanggalAkhir" Canvas.Left="281" Canvas.Top="123" Width="155" FontSize="16"/>
+                <Label Content="Rekap Tanggal" Canvas.Left="36" Canvas.Top="68" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                <Label Content="s/d" Canvas.Left="218" Canvas.Top="121" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
+                <Button x:Name="btSelectDate" Content="Select Date" Canvas.Left="481" Canvas.Top="121" Width="140" FontSize="18" Click="btSelectDate_Click"/>
+
             </Canvas>
             <Canvas x:Name="CanvasrootCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
                 <DataGrid x:Name="dgCategory" Height="559" Canvas.Left="10" Canvas.Top="55" Width="640" MouseUp="dgCategory_MouseDoubleClick" SelectedCellsChanged="dgCategory_SelectedCellsChanged"
