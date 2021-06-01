@@ -118,10 +118,10 @@
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
     <Compile Include="Models\UlasanModel.cs" />
-    <Compile Include="Report\SellerReport.cs">
+    <Compile Include="Report\TemplateReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SellerReport.rpt</DependentUpon>
+      <DependentUpon>TemplateReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ViewModels\Admin\CategoryViewModel.cs" />
@@ -162,6 +162,9 @@
     </Compile>
     <Compile Include="Views\Customer\ItemDetailView.xaml.cs">
       <DependentUpon>ItemDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Seller\SellerView.xaml.cs">
       <DependentUpon>SellerView.xaml</DependentUpon>
@@ -222,6 +225,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Seller\SellerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -245,9 +252,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\SellerReport.rpt">
+    <EmbeddedResource Include="Report\TemplateReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>SellerReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Admin\ReportAdmin.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
