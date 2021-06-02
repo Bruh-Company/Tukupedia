@@ -206,12 +206,12 @@ namespace Tukupedia.Views
             {
                 if (tbCustomerFullNameRegister.Text.ToString() == "")
                     FE.Add(tbCustomerFullNameRegister);
-                if (tbCustomerEmailRegister.Text.ToString() == "")
+                if (!Validator.Email(tbCustomerEmailRegister.Text.ToString()))
                     FE.Add(tbCustomerEmailRegister);
             }
             else if (sender == btnCustomerRegisterNext2)
             {
-                if (tbCustomerPhoneNumberRegister.Text.ToString() == "")
+                if (!Validator.PhoneNumber(tbCustomerPhoneNumberRegister.Text.ToString()))
                     FE.Add(tbCustomerPhoneNumberRegister);
                 if (dpCustomerBornDateRegister.SelectedDate.ToString() == "")
                     FE.Add(dpCustomerBornDateRegister);
@@ -227,16 +227,16 @@ namespace Tukupedia.Views
             }
             else if (sender == btnSellerRegisterNext1)
             {
-                if (tbSellerShopEmailRegister.Text.ToString() == "")
+                if (!Validator.Email(tbSellerShopEmailRegister.Text.ToString()))
                     FE.Add(tbSellerShopEmailRegister);
                 if (tbSellerShopNameRegister.Text.ToString() == "")
                     FE.Add(tbSellerShopEmailRegister);
-                if (tbShopPhoneNumberRegister.Text.ToString() == "")
+                if (!Validator.PhoneNumber(tbShopPhoneNumberRegister.Text.ToString()))
                     FE.Add(tbShopPhoneNumberRegister);
             }
             else if (sender == btnSellerRegisterNext2)
             {
-                if (tbSellerIdentityNumberRegister.Text.ToString() == "")
+                if (!Validator.Numeric(tbSellerIdentityNumberRegister.Text.ToString()))
                     FE.Add(tbSellerIdentityNumberRegister);
                 if (tbSellerFullNameRegister.Text.ToString() == "")
                     FE.Add(tbSellerFullNameRegister);
@@ -275,7 +275,7 @@ namespace Tukupedia.Views
 
         //}
 
-        private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
+        private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
         {
             List<FrameworkElement> comp = validateRegister(sender);
 
@@ -291,14 +291,14 @@ namespace Tukupedia.Views
                 ea.makeAnimation(comp);
                 ea.playAnim();
 
-                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
-                lblCustomerPasswordCommenter.Opacity = 100;
+                lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblSellerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblSellerPasswordCommenter.Opacity = 100;
 
                 return;
             }
 
-            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
+            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Seller);
             // 0 = Masih kosong
             // 1 = Sudah benar
             // -1 = Salah
@@ -308,13 +308,14 @@ namespace Tukupedia.Views
             }
             else if(checkpassword == 1)
             {
-                bool success = LoginRegisterViewModel.RegisterCustomer(
-                    nama    : tbCustomerFullNameRegister.Text,
-                    email   : tbCustomerEmailRegister.Text,
-                    lahir   : dpCustomerBornDateRegister.SelectedDate ?? DateTime.Now,
-                    alamat  : tbCustomerAddressRegister.Text,
-                    notelp  : tbCustomerPhoneNumberRegister.Text,
-                    password: tbCustomerPasswordRegister.Password
+                bool success = LoginRegisterViewModel.RegisterSeller(
+                    namaSeller: tbSellerFullNameRegister.Text,
+                    namaToko: tbSellerShopNameRegister.Text,
+                    email: tbSellerShopEmailRegister.Text,
+                    alamat: tbSellerAddressRegister.Text,
+                    notelp: tbShopPhoneNumberRegister.Text,
+                    password: tbSellerPasswordRegister.Password,
+                    nikSeller: tbSellerIdentityNumberRegister.Text
                     );
 
                 if (success)
@@ -364,21 +365,73 @@ namespace Tukupedia.Views
             }
         }
 
-        private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
+        private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            
-            LoginRegisterViewModel.RegisterSeller(
-                namaSeller: tbSellerFullNameRegister.Text,
-                namaToko: tbSellerShopNameRegister.Text,
-                alamat: tbSellerAddressRegister.Text,
-                notelp: tbShopPhoneNumberRegister.Text,
-                password: tbSellerPasswordRegister.Password,
-                email: tbSellerShopEmailRegister.Text,
-                nikSeller: tbSellerIdentityNumberRegister.Text
-                );
-            LoginRegisterViewModel.swapPage(
+            List<FrameworkElement> comp = validateRegister(sender);
+
+            if (comp.Count > 0)
+            {
+                foreach (FrameworkElement nn in comp)
+                {
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
+                }
+                ea.makeAnimation(comp);
+                ea.playAnim();
+
+                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblCustomerPasswordCommenter.Opacity = 100;
+
+                return;
+            }
+
+            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
+            // 0 = Masih kosong
+            // 1 = Sudah benar
+            // -1 = Salah
+            if (checkpassword == 0)
+            {
+                MessageBox.Show("Password masih kosong");
+            }
+            else if (checkpassword == 1)
+            {
+                bool success = LoginRegisterViewModel.RegisterCustomer(
+                    nama: tbCustomerFullNameRegister.Text,
+                    email: tbCustomerEmailRegister.Text,
+                    lahir: dpCustomerBornDateRegister.SelectedDate ?? DateTime.Now,
+                    alamat: tbCustomerAddressRegister.Text,
+                    notelp: tbCustomerPhoneNumberRegister.Text,
+                    password: tbCustomerPasswordRegister.Password
+                    );
+
+                if (success)
+                {
+                    resetInputRegister();
+                    LoginRegisterViewModel.swapPage(
                         LoginRegisterViewModel.CardPage.LoginPage
                         );
+                }
+            }
+            else if (checkpassword == -1)
+            {
+                MessageBox.Show("Password dan confirm password tidak cocok");
+            }
+
+            //LoginRegisterViewModel.RegisterSeller(
+            //    namaSeller: tbSellerFullNameRegister.Text,
+            //    namaToko: tbSellerShopNameRegister.Text,
+            //    alamat: tbSellerAddressRegister.Text,
+            //    notelp: tbShopPhoneNumberRegister.Text,
+            //    password: tbSellerPasswordRegister.Password,
+            //    email: tbSellerShopEmailRegister.Text,
+            //    nikSeller: tbSellerIdentityNumberRegister.Text
+            //    );
+            //LoginRegisterViewModel.swapPage(
+            //            LoginRegisterViewModel.CardPage.LoginPage
+            //            );
         }
 
         private void dataChanged(object sender, EventArgs e)
@@ -388,35 +441,51 @@ namespace Tukupedia.Views
 
         private bool stronkPassword(string pass)
         {
-            bool valid = true;
-            valid &= pass.Length >= 8;
-
-            Regex rgx = new Regex(@"^(?=.*[a-zA-Z])(?=.*[0-9])");
-            valid &= rgx.Matches(pass).Count > 0;
-
-            return valid;
+            return Validator.Password(pass);
         }
 
-        private void validatePassword(object sender, RoutedEventArgs e)
+        private void validateCustomerPassword(object sender, RoutedEventArgs e)
         {
             string pass = tbCustomerPasswordRegister.Password;
             if (!stronkPassword(pass))
             {
                 lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblCustomerPasswordCommenter.Content = "password kok lemah amat";
+                lblCustomerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung minimal 1 digit numerik dan 1 karakter alfabet dan tidak boleh mengandung karakter spesial";
                 lblCustomerPasswordCommenter.Opacity = 100;
                 return;
             }
 
-            passwordChanged(sender, e);
+            customerPasswordChanged(sender, e);
         }
 
-        private void passwordChanged(object sender, RoutedEventArgs e)
+        private void validateSellerPassword(object sender, RoutedEventArgs e)
+        {
+            string pass = tbSellerPasswordRegister.Password;
+            if (!stronkPassword(pass))
+            {
+                lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblSellerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung minimal 1 digit numerik dan 1 karakter alfabet dan tidak boleh mengandung karakter spesial";
+                lblSellerPasswordCommenter.Opacity = 100;
+                return;
+            }
+
+            sellerPasswordChanged(sender, e);
+        }
+
+        private void customerPasswordChanged(object sender, RoutedEventArgs e)
         {
             dataChanged(sender, e);
 
-            lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 0, 255, 0));
-            lblCustomerPasswordCommenter.Content = "Hidup anda tenang";
+            lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(0, 0, 255, 0));
+            lblCustomerPasswordCommenter.Content = "";
+        }
+
+        private void sellerPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            dataChanged(sender, e);
+
+            lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(0, 0, 255, 0));
+            lblSellerPasswordCommenter.Content = "";
         }
     }
 }

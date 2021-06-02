@@ -106,6 +106,7 @@
     <Compile Include="Helpers\Utils\Transition.cs" />
     <Compile Include="Helpers\Utils\Session.cs" />
     <Compile Include="Helpers\Utils\Utility.cs" />
+    <Compile Include="Helpers\Utils\Validator.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\D_DiskusiModel.cs" />

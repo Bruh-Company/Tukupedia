@@ -27,26 +27,6 @@
             <Label Content="WELCOME TO TUKUPEDIA" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="150" Height="192" Width="1645" Canvas.Left="1012" Opacity="0.05" FontStyle="Italic"/>
             <Label Content="WELCOME TO TUKUPEDIA" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="150" Height="192" Width="2068" Canvas.Left="539" Canvas.Top="115" Opacity="0.05" FontStyle="Italic"/>
         </Canvas>
-        <Canvas x:Name="PanelRegister" HorizontalAlignment="Left" Height="669" Margin="1346,1151,-612,-1131" VerticalAlignment="Top" Width="538">
-            <Label Content="Welcome to Tukupedia" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontSize="20" Canvas.Left="160" Canvas.Top="10"/>
-            <Label Content="Email" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="56"/>
-            <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="262"/>
-            <TextBox Foreground="White" x:Name="tbEmailRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" FontSize="14" Canvas.Left="136" Canvas.Top="85"/>
-            <PasswordBox Foreground="White" x:Name="tbConfirmRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" Canvas.Left="136" Canvas.Top="286"/>
-            <Button x:Name="btnRegister" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="29" FontSize="14" FontWeight="Bold" Canvas.Left="137" Canvas.Top="628"/>
-            <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="134" Canvas.Top="190"/>
-            <PasswordBox Foreground="White" x:Name="tbPasswordRegister" HorizontalAlignment="Left" VerticalAlignment="Top" Width="290" Height="38" Canvas.Left="134" Canvas.Top="219" FontSize="14"/>
-            <Button x:Name="btnToLogin" Content="Login" HorizontalAlignment="Left" VerticalAlignment="Top" Width="114" Height="28" FontSize="14" FontWeight="Bold" Canvas.Left="312" Canvas.Top="628" />
-            <Label Content="Alamat" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="334"/>
-            <TextBox Foreground="White" x:Name="tbAlamatRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" Canvas.Left="134" Canvas.Top="358"/>
-            <Label Content="Nomor Telepon" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="409"/>
-            <TextBox Foreground="White" x:Name="tbNoTelpRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="289" Canvas.Left="136" Canvas.Top="438"/>
-            <Label Content="Mendaftar Sebagai" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="486"/>
-            <Label x:Name="lbTanggalLahir" Content="Tanggal Lahir" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="137" Canvas.Top="553"/>
-            <DatePicker x:Name="dpTanggalLahir" Canvas.Left="137" Canvas.Top="587" Width="285"/>
-            <Label Content="Nama" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Canvas.Left="136" Canvas.Top="125"/>
-            <TextBox Foreground="White" x:Name="tbNamaRegister" HorizontalAlignment="Left" Height="36" TextWrapping="Wrap" VerticalAlignment="Top" Width="288" Canvas.Left="134" Canvas.Top="149"/>
-        </Canvas>
         <Grid HorizontalAlignment="Left" Height="670" Margin="10,10,0,0" VerticalAlignment="Top" Width="1254">
             <Grid HorizontalAlignment="Left" Height="670" VerticalAlignment="Top" Width="441" d:IsLocked="True">
                 <Image x:Name="imgLogo" HorizontalAlignment="Center" Height="250" VerticalAlignment="Center" Width="250" Margin="0"/>
@@ -140,12 +120,12 @@
                                 <Label Content="Register" FontSize="32" HorizontalContentAlignment="Center" Margin="0,0,-0.2,0" Height="49" VerticalContentAlignment="Bottom" Padding="4,0,4,4"/>
                                 <Label Content="C u s t o m e r    (3  o f  3)" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
                                 <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <PasswordBox Foreground="White" x:Name="tbCustomerPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validatePassword"/>
+                                <PasswordBox Foreground="White" x:Name="tbCustomerPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validateCustomerPassword"/>
                                 <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <PasswordBox Foreground="White" x:Name="tbCustomerConfirmPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validatePassword"/>
+                                <PasswordBox Foreground="White" x:Name="tbCustomerConfirmPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validateCustomerPassword"/>
                                 <Label x:Name="lblCustomerPasswordCommenter" Content="asdasda" Margin="10,20,9.8,0" FontSize="10" Foreground="White" Background="#7FFF0000" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0"/>
                                 <Grid Height="72" Margin="0,20,-0.2,0">
-                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack2" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0" Click="btnToRegister2_click"/>
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnCustomerRegisterBack2" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="#FF343434" BorderThickness="0" Click="btnToRegister2_click"/>
                                     <Button Style="{StaticResource btn-primary}" x:Name="btnCustomerRegister" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0" Click="btnCustomerRegister_Click">
                                         <Button.RenderTransform>
                                             <TransformGroup>
@@ -252,13 +232,15 @@
                         <Grid x:Name="GridRegisterSeller3" HorizontalAlignment="Center" Margin="1260,10,-1240,10" VerticalAlignment="Center" Height="413">
                             <StackPanel VerticalAlignment="Center" Margin="10,10,9.8,10" Height="393">
                                 <Label Content="Register" FontSize="32" HorizontalContentAlignment="Center" Margin="0,0,-0.2,0" Height="49" VerticalContentAlignment="Bottom" Padding="4,0,4,4"/>
-                                <Label Content="C u s t o m e r    (3  o f  3)" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
+                                <Label Content="S e l l e r    (3  o f  3)" Margin="0,-8,-0.2,0" HorizontalContentAlignment="Center" FontWeight="Bold" VerticalContentAlignment="Center" Height="23" Padding="4,0,4,8" FontStyle="Italic" FontStretch="ExtraExpanded"/>
                                 <Label Content="Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <PasswordBox Foreground="White" x:Name="tbSellerPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
+                                <PasswordBox Foreground="White" x:Name="tbSellerPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validateSellerPassword"/>
                                 <Label Content="Confirm Password" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="0,0,-0.2,0" Width="357" Height="44" VerticalContentAlignment="Bottom" Padding="12,4,4,4" FontStyle="Italic"/>
-                                <PasswordBox Foreground="White" x:Name="tbSellerConfirmPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0"/>
-                                <Grid Height="72" Margin="0,84,-0.2,0">
-                                    <Button Style="{StaticResource btn-white}" x:Name="btnSellerRegisterBack2" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="White" BorderThickness="0" Click="btnToRegister2_click"/>
+                                <PasswordBox Foreground="White" x:Name="tbSellerConfirmPasswordRegister" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="337" FontSize="18" Margin="10,0,0,0" PasswordChanged="validateSellerPassword"/>
+                                <Label x:Name="lblSellerPasswordCommenter" Content="asdasda" Margin="10,20,9.8,0" FontSize="10" Foreground="White" Background="#7FFF0000" Height="44" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Opacity="0"/>
+                                <Grid Height="72" Margin="0,20,
+                                      -0.2,0">
+                                    <Button Style="{StaticResource btn-white}" x:Name="btnSellerRegisterBack2" Content="Back" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal"  Margin="10,10,253.8,10" HorizontalContentAlignment="Center" Width="93" Background="#FF343434" BorderThickness="0" Click="btnToRegister2_click"/>
                                     <Button Style="{StaticResource btn-primary}" x:Name="btnSellerRegister" Content="Register" HorizontalAlignment="Center" VerticalAlignment="Center" Height="40" FontSize="20" FontWeight="Normal" Margin="108,10,9.8,10" HorizontalContentAlignment="Center" Width="239" BorderThickness="0" Click="btnSellerRegister_Click">
                                         <Button.RenderTransform>
                                             <TransformGroup>
