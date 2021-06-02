@@ -275,7 +275,7 @@ namespace Tukupedia.Views
 
         //}
 
-        private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
+        private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
         {
             List<FrameworkElement> comp = validateRegister(sender);
 
@@ -291,14 +291,10 @@ namespace Tukupedia.Views
                 ea.makeAnimation(comp);
                 ea.playAnim();
 
-                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
-                lblCustomerPasswordCommenter.Opacity = 100;
-
                 return;
             }
 
-            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
+            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Seller);
             // 0 = Masih kosong
             // 1 = Sudah benar
             // -1 = Salah
@@ -308,13 +304,14 @@ namespace Tukupedia.Views
             }
             else if(checkpassword == 1)
             {
-                bool success = LoginRegisterViewModel.RegisterCustomer(
-                    nama    : tbCustomerFullNameRegister.Text,
-                    email   : tbCustomerEmailRegister.Text,
-                    lahir   : dpCustomerBornDateRegister.SelectedDate ?? DateTime.Now,
-                    alamat  : tbCustomerAddressRegister.Text,
-                    notelp  : tbCustomerPhoneNumberRegister.Text,
-                    password: tbCustomerPasswordRegister.Password
+                bool success = LoginRegisterViewModel.RegisterSeller(
+                    namaSeller: tbSellerFullNameRegister.Text,
+                    namaToko: tbSellerShopNameRegister.Text,
+                    email: tbSellerShopEmailRegister.Text,
+                    alamat: tbSellerAddressRegister.Text,
+                    notelp: tbShopPhoneNumberRegister.Text,
+                    password: tbSellerPasswordRegister.Password,
+                    nikSeller: tbSellerIdentityNumberRegister.Text
                     );
 
                 if (success)
@@ -364,21 +361,73 @@ namespace Tukupedia.Views
             }
         }
 
-        private void btnSellerRegister_Click(object sender, RoutedEventArgs e)
+        private void btnCustomerRegister_Click(object sender, RoutedEventArgs e)
         {
-            
-            LoginRegisterViewModel.RegisterSeller(
-                namaSeller: tbSellerFullNameRegister.Text,
-                namaToko: tbSellerShopNameRegister.Text,
-                alamat: tbSellerAddressRegister.Text,
-                notelp: tbShopPhoneNumberRegister.Text,
-                password: tbSellerPasswordRegister.Password,
-                email: tbSellerShopEmailRegister.Text,
-                nikSeller: tbSellerIdentityNumberRegister.Text
-                );
-            LoginRegisterViewModel.swapPage(
+            List<FrameworkElement> comp = validateRegister(sender);
+
+            if (comp.Count > 0)
+            {
+                foreach (FrameworkElement nn in comp)
+                {
+                    if (nn is Control)
+                    {
+                        ((Control)nn).BorderBrush = new SolidColorBrush(Color.FromArgb(255, 255, 0, 0));
+                    }
+                }
+                ea.makeAnimation(comp);
+                ea.playAnim();
+
+                lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
+                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblCustomerPasswordCommenter.Opacity = 100;
+
+                return;
+            }
+
+            int checkpassword = passwordCheck(LoginRegisterViewModel.CustomerSellerStage.Customer);
+            // 0 = Masih kosong
+            // 1 = Sudah benar
+            // -1 = Salah
+            if (checkpassword == 0)
+            {
+                MessageBox.Show("Password masih kosong");
+            }
+            else if (checkpassword == 1)
+            {
+                bool success = LoginRegisterViewModel.RegisterCustomer(
+                    nama: tbCustomerFullNameRegister.Text,
+                    email: tbCustomerEmailRegister.Text,
+                    lahir: dpCustomerBornDateRegister.SelectedDate ?? DateTime.Now,
+                    alamat: tbCustomerAddressRegister.Text,
+                    notelp: tbCustomerPhoneNumberRegister.Text,
+                    password: tbCustomerPasswordRegister.Password
+                    );
+
+                if (success)
+                {
+                    resetInputRegister();
+                    LoginRegisterViewModel.swapPage(
                         LoginRegisterViewModel.CardPage.LoginPage
                         );
+                }
+            }
+            else if (checkpassword == -1)
+            {
+                MessageBox.Show("Password dan confirm password tidak cocok");
+            }
+
+            //LoginRegisterViewModel.RegisterSeller(
+            //    namaSeller: tbSellerFullNameRegister.Text,
+            //    namaToko: tbSellerShopNameRegister.Text,
+            //    alamat: tbSellerAddressRegister.Text,
+            //    notelp: tbShopPhoneNumberRegister.Text,
+            //    password: tbSellerPasswordRegister.Password,
+            //    email: tbSellerShopEmailRegister.Text,
+            //    nikSeller: tbSellerIdentityNumberRegister.Text
+            //    );
+            //LoginRegisterViewModel.swapPage(
+            //            LoginRegisterViewModel.CardPage.LoginPage
+            //            );
         }
 
         private void dataChanged(object sender, EventArgs e)
