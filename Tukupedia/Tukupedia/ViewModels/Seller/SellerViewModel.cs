@@ -27,7 +27,7 @@ namespace Tukupedia.ViewModels.Seller {
 
 
         public static void InitializeView(SellerView view) {
-            //TESTING();
+            TESTING();
             seller = Session.User;
             ViewComponent = view;
             pagePesanan = new PagePesanan(view, seller);
@@ -41,7 +41,7 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public static void TESTING() {
-            Session.User = new DB("SELLER").select().where("ID", "2").getFirst();
+            Session.User = new DB("SELLER").select().where("ID", "1").getFirst();
             Session.role = "SELLER";
         }
 

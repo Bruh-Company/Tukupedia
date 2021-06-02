@@ -116,6 +116,10 @@ namespace Tukupedia.Views.Seller {
             SellerViewModel.pagePesanan.reloadHtrans();
         }
 
+        private void btnLaporan_Click(object sender, RoutedEventArgs e) {
+            SellerViewModel.pagePesanan.showLaporan();
+        }
+
         // Pesanan
 
         // Produk
@@ -234,5 +238,10 @@ namespace Tukupedia.Views.Seller {
         {
             SellerViewModel.pageUlasan.sortUlasan();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+
+        }
+
     }
 }

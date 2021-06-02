@@ -7,6 +7,8 @@ using System.Windows.Media;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
+using Tukupedia.Report;
+using Tukupedia.Views;
 using Tukupedia.Views.Seller;
 
 namespace Tukupedia.ViewModels.Seller
@@ -32,31 +34,15 @@ namespace Tukupedia.ViewModels.Seller
         {
             ViewComponent = viewComponent;
             this.seller = seller;
-            //MessageBox.Show(seller["ID"].ToString());
             htrans = new D_Trans_ItemModel();
             forselectdata = new D_Trans_ItemModel();
             dtrans = new D_Trans_ItemModel();
             dtrans_helper = new D_Trans_ItemModel();
-            //km = new KurirModel();
         }
 
         public void initPagePesanan()
         {
-            //seller = Session.User;
             viewSemuaPesanan();
-            //ViewComponent.textboxCariPesanan.Text = "Cari nama pembeli atau kode pesanan";
-            //km.initAdapter("select ID, NAMA from KURIR");
-            //DataRow dr = km.Table.NewRow();
-            //dr["ID"] = "0";
-            //dr["NAMA"] = "Semua Kurir";
-            //km.Table.Rows.InsertAt(dr, 0);
-            //ViewComponent..ItemsSource = km.Table.DefaultView;
-            //ViewComponent.comboboxFilterKurir.DisplayMemberPath = "NAMA";
-            //ViewComponent.comboboxFilterKurir.SelectedValuePath = "ID";
-            //ViewComponent.comboboxFilterKurir.SelectedIndex = 0;
-            //    cbMetodePembayaran.DisplayMemberPath = "NAMA";
-            //cbMetodePembayaran.SelectedValuePath = "ID";
-
             ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Transaksi Terbaru");
             ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Transaksi Terlama");
             ViewComponent.comboboxSortPesanan.Items.Add("Urutkan dari Nama Customer A-Z");
@@ -124,7 +110,6 @@ namespace Tukupedia.ViewModels.Seller
         {
             lastclick = 1;
             ViewComponent.textboxCariPesanan.Text = "";
-            //MessageBox.Show(seller["ID"].ToString());
             htrans.initAdapter($"select distinct h.KODE as \"Kode Pesanan\", c.NAMA as \"Nama Customer\", to_char(sum(i.HARGA * d.JUMLAH)) as \"Total\", h.TANGGAL_TRANSAKSI as \"Tanggal Transaksi\", k.NAMA as \"Kurir\", case h.STATUS when 'C' then 'Canceled' when 'W' then 'Waiting Payment' when 'P' then 'Paid' end as \"Status\" from H_TRANS_ITEM h, D_TRANS_ITEM d, CUSTOMER c, ITEM i, KURIR k where i.ID = d.ID_ITEM and h.ID = d.ID_H_TRANS_ITEM and c.ID = h.ID_CUSTOMER and i.ID_SELLER = '{seller["ID"]}' and k.ID = d.ID_KURIR {keyword} group by h.KODE, c.NAMA, h.TANGGAL_TRANSAKSI, k.NAMA, h.STATUS {orderby}");
             toCurrencyHtrans();
             status = "";
@@ -213,20 +198,10 @@ namespace Tukupedia.ViewModels.Seller
         public int hitungTotal()
         {
             int total = 0;
-            //- W = Pesanan Baru
-            //- S = Dalam Pengiriman
-            //- SC = Dalam Pengiriman blom confirm
-
-            //- D = Pesanan Selesai
-            //- [//baru](//baru) untuk admin
-            //-C = Pesanan Dibatalkan
-            //-CC = Pesanan Dibatalkan blom confirm
             for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
             {
                 DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
                 string statuses = drHelper[1].ToString();
-                //2 = Stock
-                //3 = Barang Yang dibeli
                 if (statuses == "SC" || statuses == "S" || statuses == "D")
                 {
                     try
@@ -277,10 +252,6 @@ namespace Tukupedia.ViewModels.Seller
             for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
             {
                 DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
-                //2 = Stock
-                //3 = Barang Yang dibeli
-                //MessageBox.Show(drHelper[2].ToString());
-                //MessageBox.Show(drHelper[3].ToString());
                 if (drHelper[1].ToString() == "SC")
                 {
                     if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
@@ -290,7 +261,6 @@ namespace Tukupedia.ViewModels.Seller
                     }
                 }
             }
-            //menghitung pesanan yang tidak diterima
             foreach (DataRow dr in dtrans_helper.Table.Rows)
             {
                 if (dr[1].ToString() == "W") tidakterima++;
@@ -304,20 +274,13 @@ namespace Tukupedia.ViewModels.Seller
                     return;
                 }
             }
-            //merubah status di database
             if (trans != 0)
             {
                 foreach (DataRow dr in dtrans_helper.Table.Rows)
                 {
-                    //int stock = Convert.ToInt32(dr[2].ToString()) - Convert.ToInt32(dr[3].ToString());
                     if (dr[1].ToString() == "SC")
                         new DB("D_TRANS_ITEM").update("STATUS", "S").where("ID", dr[0].ToString()).execute();
-                    //new DB("ITEM").update("STOK", stock).where("ID", dr[4].ToString()).execute();
                 }
-
-                //DataRow drrow = new DB("SELLER").select("SALDO").where("ID", seller["ID"].ToString()).getFirst();
-                //int saldo = Convert.ToInt32(drrow[0].ToString()) - hitungTotal();
-                //new DB("SELLER").update("SALDO", saldo).where("ID", seller["ID"].ToString()).execute();
                 reloadHtrans();
             }
 
@@ -353,13 +316,6 @@ namespace Tukupedia.ViewModels.Seller
                 drHelper[1] = "W";
                 dr[4] = "Pesanan Baru";
             }
-            //- W = Pesanan Baru
-            //- S = Dalam Pengiriman
-            //- SC = Dalam Pengiriman blom confirm
-
-            //- D = Pesanan Selesai
-            //- [//baru](//baru) untuk admin
-            //-C = Pesanan Dibatalkan
             ViewComponent.datagridProdukPesanan.ItemsSource = "";
             ViewComponent.datagridProdukPesanan.ItemsSource = dtrans.Table.DefaultView;
             hitungTotal();
@@ -368,7 +324,6 @@ namespace Tukupedia.ViewModels.Seller
         public void terimasemua()
         {
             bool ischecked = (bool) ViewComponent.checkboxTerimaSemua.IsChecked;
-            //MessageBox.Show(ischecked.ToString());
             DataRow dr_trans = htrans.Table.Rows[h_trans_selected];
 
             if (dr_trans["Status"].ToString() == "Canceled")
@@ -404,12 +359,6 @@ namespace Tukupedia.ViewModels.Seller
             DataRowView item = dgRow.Item as DataRowView;
             if (item != null)
             {
-                //dtrans.initAdapter($"select d.JUMLAH as \"Jumlah\", i.NAMA as \"Nama Barang\", i.HARGA as \"Harga\", i.HARGA * d.JUMLAH as \"Total\", case d.STATUS when
-                //'W' then 'Pesanan Baru' when
-                //'P' then 'Siap Kirim' when
-                //'S' then 'Dalam Pengiriman' when
-                //'D' then 'Pesanan Selesai' when
-                //'C' then 'Pesanan Dibatalkan' end as \"Status\" from ITEM i, H_TRANS_ITEM h, D_TRANS_ITEM d where h.ID = d.ID_H_TRANS_ITEM and i.ID = d.ID_ITEM and h.KODE = '{dr[0].ToString()}' {status}");
                 DataRow row = item.Row;
                 string status = row["Status"].ToString();
                 if (status == "Pesanan Baru" || status == "Pesanan Dibatalkan")
@@ -423,10 +372,9 @@ namespace Tukupedia.ViewModels.Seller
                 }
             }
         }
-        public void updateStatus(string status)
-        {
-            //string id = forid.Table.Rows[0][0].ToString();
-            //new DB("D_TRANS_ITEM")
+
+        public void showLaporan() {
+            new LaporanView().ShowDialog();
         }
     }
 }

@@ -23,7 +23,6 @@ namespace Tukupedia.Views {
         private ReportClass report;
         public ReportView(ReportClass report) {
             InitializeComponent();
-
             this.report = report;
             this.report.SetDatabaseLogon(App.username, App.password, App.datasource, "");
         }
