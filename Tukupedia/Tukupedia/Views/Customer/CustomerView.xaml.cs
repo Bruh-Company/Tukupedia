@@ -332,7 +332,7 @@ namespace Tukupedia.Views.Customer
 
         private void btnCetakInvoice_Click(object sender, RoutedEventArgs e)
         {
-
+            TransactionViewModel.generateInvoice();
         }
         private void grid_D_Trans_MouseUp(object sender, MouseButtonEventArgs e)
         {

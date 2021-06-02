@@ -10,6 +10,8 @@ using Tukupedia.Helpers.Classes;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
+using Tukupedia.Report.Customer;
+using Tukupedia.Views;
 using Tukupedia.Views.Customer;
 
 namespace Tukupedia.ViewModels.Customer
@@ -344,6 +346,17 @@ namespace Tukupedia.ViewModels.Customer
                     MessageBox.Show("ERROR");
                 }
             }
+        }
+        public static void generateInvoice()
+        {
+            CustomerInvoice customerInvoice = new CustomerInvoice();
+            ReportView rv = new ReportView(customerInvoice);
+            int idx = idxH_Trans;
+            //Init Labels
+            H_Trans_ItemModel hti = new H_Trans_ItemModel();
+            DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
+            rv.setParam("kodeH_Trans", row["KODE"].ToString());
+            rv.ShowDialog();
         }
     }
 }

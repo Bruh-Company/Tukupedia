@@ -17,7 +17,7 @@ namespace Tukupedia
         private const string ErrCapt = "Oracle Connection Error";
 
         public static bool gagal = false;
-        public static string datasource, username, password;
+        public static string datasource="ORCL", username="projectpcs", password="pcs";
 
         public static OracleConnection connection = new OracleConnection()
         {
