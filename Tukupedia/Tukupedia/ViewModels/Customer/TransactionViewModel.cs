@@ -352,7 +352,7 @@ namespace Tukupedia.ViewModels.Customer
             int idx = idxH_Trans;
             H_Trans_ItemModel hti = new H_Trans_ItemModel();
             DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
-            if (row["STATUS"] == "P")
+            if (row["STATUS"].ToString() == "P")
             {
                 CustomerInvoice customerInvoice = new CustomerInvoice();
                 ReportView rv = new ReportView(customerInvoice);
