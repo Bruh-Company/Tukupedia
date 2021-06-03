@@ -243,6 +243,9 @@ namespace Tukupedia.ViewModels.Customer
                         List<string> id_items = new List<string>();
                         H_Trans_ItemModel hti = new H_Trans_ItemModel();
                         DataRow rowHTI = hti.Table.NewRow();
+                        ComboBoxItem cbiPembayaran = (ComboBoxItem)ViewComponent.cbPaymentMethod.SelectedItem;
+                        Metode_PembayaranModel mpm = new Metode_PembayaranModel();
+                        DataRow dr = mpm.Table.Select($"NAMA = '{cbiPembayaran.Content}'").First();
                         rowHTI["ID"] = 0;
                         rowHTI["ID_CUSTOMER"] = Session.User["ID"].ToString();
                         rowHTI["TANGGAL_TRANSAKSI"] = DateTime.Now;
@@ -255,6 +258,7 @@ namespace Tukupedia.ViewModels.Customer
                         rowHTI["SUBTOTAL"] = hargaSebelumOngkir;
                         rowHTI["ONGKOS_KIRIM"] = ongkos_kirim;
                         rowHTI["DISKON"] = diskon;
+                        rowHTI["ID_METODE_PEMBAYARAN"] = dr["ID"].ToString();
                         rowHTI["STATUS"] = "W";
                         hti.insert(rowHTI);
                         D_Trans_ItemModel dti = new D_Trans_ItemModel();

@@ -356,6 +356,17 @@ namespace Tukupedia.ViewModels.Customer
             H_Trans_ItemModel hti = new H_Trans_ItemModel();
             DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
             rv.setParam("kodeH_Trans", row["KODE"].ToString());
+            if (row["ID_PROMO"].ToString() == "")
+            {
+                rv.setParam("kodePromo", "-");
+            }
+            else
+            {
+                PromoModel pm = new PromoModel();
+                DataRow rowPromo = pm.Table.Select($"ID = '{row["ID_PROMO"]}'").First();
+                rv.setParam("kodePromo", rowPromo["KODE"].ToString());
+            }
+            
             rv.ShowDialog();
         }
     }
