@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tukupedia.Helpers.Utils;
+using Tukupedia.Report.Admin;
 using Tukupedia.ViewModels;
 using Tukupedia.ViewModels.Admin;
 
@@ -61,8 +62,42 @@ namespace Tukupedia.Views.Admin
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+
+        private void populateListBox(ListBox lb, List<CheckBox> lcb)
+        {
+            lb.Items.Clear();
+            foreach (CheckBox cb in lcb)
+            {
+                lb.Items.Add(cb);
+            }
+        }
+        private void initCReport()
+        {
+            populateListBox(lbJenisPembayaran, hvm.getJenisPembayaran());
+            populateListBox(lbKurir, hvm.getKurir());
+            populateListBox(lbJenisKategori, hvm.getKategori());
+            populateListBox(lbJenisPromo, hvm.getPromo());
+            dpTanggalAwalReport.SelectedDate = DateTime.Now.AddDays(-7);
+            dpTanggalAkhirReport.SelectedDate = DateTime.Now;
+            cbisOfficial.SelectedIndex = 0;
+        }
+        private List<int> getSelected(ListBox lb)
+        {
+            List<int> selected = new List<int>();
+            for (int i = 0; i < lb.Items.Count; i++)
+            {
+                var item = lb.Items[i];
+                CheckBox cb = (CheckBox)item;
+                if(cb.IsChecked.Value)
+                {
+                    selected.Add(i);
+                }
+            }
+            return selected;
+        }
         private void initReport()
         {
+            initCReport();
             //ReportAdmin cr = new ReportAdmin();
             //cr.SetDatabaseLogon(App.username, App.password, App.datasource, "");
             //reportViewer.ViewerCore.ReportSource = cr;
@@ -1266,6 +1301,15 @@ namespace Tukupedia.Views.Admin
             //chartJumlahTransaksi.Update(true,true);
             updateChart();
 
+        }
+
+        private void btGenerateReport_Click(object sender, RoutedEventArgs e)
+        {
+            AdminReport rpt = new AdminReport();
+            ReportView rv = new ReportView(rpt);
+            string query = hvm.generateQuery(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo),dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value,cbisOfficial.SelectedIndex);
+            rv.setParam<string>("query", query);
+            rv.ShowDialog();
         }
     }
 }

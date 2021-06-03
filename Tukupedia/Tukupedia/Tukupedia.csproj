@@ -125,6 +125,12 @@
     <Compile Include="Models\SellerModel.cs" />
     <Compile Include="Models\Trans_OSModel.cs" />
     <Compile Include="Models\UlasanModel.cs" />
+    <Compile Include="Report\Admin\AdminReport.cs">
+      <DependentUpon>AdminReport.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Report\Customer\CustomerInvoice.cs">
       <DependentUpon>CustomerInvoice.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -178,12 +184,6 @@
     <Compile Include="ViewModels\Seller\SellerViewModel.cs" />
     <Compile Include="Views\Admin\HomeAdminView.xaml.cs">
       <DependentUpon>HomeAdminView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Admin\ReportAdmin.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportAdmin.rpt</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Views\ChangePasswordView.xaml.cs">
       <DependentUpon>ChangePasswordView.xaml</DependentUpon>
@@ -290,6 +290,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\Admin\AdminReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AdminReport.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Customer\CustomerInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerInvoice.cs</LastGenOutput>
@@ -308,10 +312,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\TemplateReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Admin\ReportAdmin.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ReportAdmin.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

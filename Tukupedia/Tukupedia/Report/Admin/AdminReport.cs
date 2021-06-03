@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tukupedia.Views.Admin {
+namespace Tukupedia.Report.Admin {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace Tukupedia.Views.Admin {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ReportAdmin : ReportClass {
+    public class AdminReport : ReportClass {
         
-        public ReportAdmin() {
+        public AdminReport() {
         }
         
         public override string ResourceName {
             get {
-                return "ReportAdmin.rpt";
+                return "AdminReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Tukupedia.Views.Admin {
         
         public override string FullResourceName {
             get {
-                return "Tukupedia.Views.Admin.ReportAdmin.rpt";
+                return "Tukupedia.Report.Admin.AdminReport.rpt";
             }
             set {
                 // Do nothing
@@ -87,12 +87,36 @@ namespace Tukupedia.Views.Admin {
                 return this.ReportDefinition.Sections[4];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_minDate {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_maxDate {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_query {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedReportAdmin : Component, ICachedReport {
+    public class CachedAdminReport : Component, ICachedReport {
         
-        public CachedReportAdmin() {
+        public CachedAdminReport() {
         }
         
         [Browsable(false)]
@@ -129,7 +153,7 @@ namespace Tukupedia.Views.Admin {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ReportAdmin rpt = new ReportAdmin();
+            AdminReport rpt = new AdminReport();
             rpt.Site = this.Site;
             return rpt;
         }
