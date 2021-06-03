@@ -349,25 +349,33 @@ namespace Tukupedia.ViewModels.Customer
         }
         public static void generateInvoice()
         {
-            CustomerInvoice customerInvoice = new CustomerInvoice();
-            ReportView rv = new ReportView(customerInvoice);
             int idx = idxH_Trans;
-            //Init Labels
             H_Trans_ItemModel hti = new H_Trans_ItemModel();
             DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
-            rv.setParam("kodeH_Trans", row["KODE"].ToString());
-            if (row["ID_PROMO"].ToString() == "")
+            if (row["STATUS"] == "P")
             {
-                rv.setParam("kodePromo", "-");
+                CustomerInvoice customerInvoice = new CustomerInvoice();
+                ReportView rv = new ReportView(customerInvoice);
+
+                rv.setParam("kodeH_Trans", row["KODE"].ToString());
+                if (row["ID_PROMO"].ToString() == "")
+                {
+                    rv.setParam("kodePromo", "-");
+                }
+                else
+                {
+                    PromoModel pm = new PromoModel();
+                    DataRow rowPromo = pm.Table.Select($"ID = '{row["ID_PROMO"]}'").First();
+                    rv.setParam("kodePromo", rowPromo["KODE"].ToString());
+                }
+
+                rv.ShowDialog();
             }
             else
             {
-                PromoModel pm = new PromoModel();
-                DataRow rowPromo = pm.Table.Select($"ID = '{row["ID_PROMO"]}'").First();
-                rv.setParam("kodePromo", rowPromo["KODE"].ToString());
+                MessageBox.Show("Transaksi yang belum dibayar!");
             }
             
-            rv.ShowDialog();
         }
     }
 }
