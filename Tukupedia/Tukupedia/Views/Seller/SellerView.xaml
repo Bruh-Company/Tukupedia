@@ -52,8 +52,8 @@
 
             <TextBox    Name="textboxCariPesanan"   Canvas.Left="25"  Canvas.Top="50" Width="350" Height="30" Style="{StaticResource tb-border-1}" BorderBrush="#65c65b" Padding="10,0,10,0" VerticalContentAlignment="Center"/>
             <Button     Name="btnCariPesanan"       Content="Cari"                       Canvas.Left="375" Canvas.Top="50" Width="100" Height="30" Style="{StaticResource btn-primary}" Click="btnCariPesanan_Click"/>
-
-            <ComboBox   Name="comboboxSortPesanan"  Canvas.Left="1000"  Canvas.Top="50"  Width="250"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortPesanan_SelectionChanged"/>
+            <Button     Name="btnLaporan" Content="Lihat Laporan Penjualan" Canvas.Left="1050" Canvas.Top="50" Width="200" Height="30" Style="{StaticResource btn-warning}" Click="btnLaporan_Click"/>
+            <ComboBox   Name="comboboxSortPesanan"  Canvas.Left="512"  Canvas.Top="50"  Width="250"  Height="30"  Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortPesanan_SelectionChanged"/>
 
             <DataGrid   Name="datagridPesanan"      Canvas.Left="25"   Canvas.Top="90"   Width="1225"  Height="200" SelectedCellsChanged="datagridPesanan_SelectedCellsChanged" IsReadOnly="True"/>
 
@@ -87,6 +87,7 @@
                 <Button Name="btnKonfirmasiPesanan" Content="Konfirmasi" FontSize="18" Canvas.Left="1040" Canvas.Top="180" Width="160" Height="40" Style="{StaticResource btn-primary}" Click="btnKonfirmasiPesanan_Click"/>
                 <Button Name="btnBatalPesanan" Content="Batalkan" FontSize="18" Canvas.Left="1040" Canvas.Top="230" Width="160" Height="40" Style="{StaticResource btn-danger}"  Click="btnBatalPesanan_Click"/>
             </Canvas>
+
         </Canvas>
 
         <!--PAGE PRODUK-->
@@ -190,10 +191,10 @@
             <ComboBox Name="comboboxSortUlasan" Canvas.Left="480" Canvas.Top="20" Width="250" Height="30" Style="{StaticResource combobox-green}" SelectionChanged="comboboxSortUlasan_SelectionChanged"/>
 
             <DataGrid Name="datagridUlasan" Height="500" Width="720" Canvas.Left="10" Canvas.Top="70" SelectedCellsChanged="datagridUlasan_SelectedCellsChanged" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"/>
-            
+
             <TextBlock Text="Rating" Canvas.Left="750" Canvas.Top="70" Style="{StaticResource textblock-xl-success}"/>
             <materialDesign:RatingBar Canvas.Left="850" Canvas.Top="80" Foreground="#FFC548" Name="ratingbarUlasan" IsReadOnly="True"/>
-            
+
             <TextBlock Text="Ulasan" Canvas.Left="750" Canvas.Top="112" Style="{StaticResource textblock-xl-success}"/>
             <TextBox Name="textboxIsiUlasan" Canvas.Left="750" Canvas.Top="154" Height="150" Width="500" IsReadOnly="True" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap"/>
 
