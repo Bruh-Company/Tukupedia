@@ -27,7 +27,7 @@ namespace Tukupedia.ViewModels.Seller {
 
 
         public static void InitializeView(SellerView view) {
-            TESTING();
+            //TESTING();
             seller = Session.User;
             ViewComponent = view;
             pagePesanan = new PagePesanan(view, seller);
