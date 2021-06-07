@@ -202,7 +202,6 @@ namespace Tukupedia.ViewModels.Customer
             int idx = idxItem;
             if (idx >= 0)
             {
-                MessageBox.Show("HTRANS : " + idxH_Trans + " D_TRANS " + idxItem);
                 Detail_Trans_Item dti = list_dtrans[idx];
                 ViewComponent.tbKurirItem.Text = dti.namaKurir;
                 ViewComponent.tbNamaItem.Text = dti.namaItem;
@@ -260,7 +259,6 @@ namespace Tukupedia.ViewModels.Customer
             int idx = idxItem;
             if (idx >= 0)
             {
-                MessageBox.Show("HTRANS : " + idxH_Trans + " D_TRANS " + idxItem);
                 Detail_Trans_Item dti = list_dtrans[idx];
                 //Check kalau DTRANS HARUS SUDAH SELESAI
                 if (dti.status == "FINISHED")
@@ -320,7 +318,6 @@ namespace Tukupedia.ViewModels.Customer
                     }
                     if (valid)
                     {
-                        MessageBox.Show("Valid trans");
                         foreach (DataRow rowDTI in dtim.Table.Select($"ID_H_TRANS_ITEM = '{row["ID_H_TRANS_ITEM"]}'"))
                         {
                             ItemModel im = new ItemModel();
@@ -328,11 +325,8 @@ namespace Tukupedia.ViewModels.Customer
                             SellerModel sm = new SellerModel();
                             DataRow seller = sm.Table.Select($"ID = '{item["ID_SELLER"]}'").FirstOrDefault(); ;
                             int saldo = Convert.ToInt32(row["JUMLAH"]) * Convert.ToInt32(item["HARGA"]);
-                            MessageBox.Show(saldo.ToString());
                             saldo += Convert.ToInt32(seller["SALDO"]);
-                            MessageBox.Show("Saldo awal seller : " + seller["SALDO"].ToString());
                             seller["SALDO"] = saldo;
-                            MessageBox.Show($"Seller {seller["NAMA_TOKO"]} punya saldo {Utility.formatMoney(saldo)} segini sekarang");
                             sm.update();
                         }
                     }
