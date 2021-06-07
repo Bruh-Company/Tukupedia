@@ -292,7 +292,7 @@ namespace Tukupedia.Views
                 ea.playAnim();
 
                 lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblSellerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblSellerPasswordCommenter.Content = "Password dan confirm password tidak cocok";
                 lblSellerPasswordCommenter.Opacity = 100;
 
                 return;
@@ -330,14 +330,6 @@ namespace Tukupedia.Views
             {
                 MessageBox.Show("Password dan confirm password tidak cocok");
             }
-        }
-
-        private void resetInputLogin()
-        {
-            tbCustomerEmailLogin.Text = "";
-            tbCustomerPasswordLogin.Password = "";
-            tbSellerEmailLogin.Text = "";
-            tbSellerPasswordLogin.Password = "";
         }
 
         private void resetInputRegister()
@@ -382,7 +374,7 @@ namespace Tukupedia.Views
                 ea.playAnim();
 
                 lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblCustomerPasswordCommenter.Content = "GACOCOK BANGSAT!!!!!";
+                lblCustomerPasswordCommenter.Content = "Password dan confirm password tidak cocok";
                 lblCustomerPasswordCommenter.Opacity = 100;
 
                 return;
@@ -450,7 +442,7 @@ namespace Tukupedia.Views
             if (!stronkPassword(pass))
             {
                 lblCustomerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblCustomerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung minimal 1 digit numerik dan 1 karakter alfabet dan tidak boleh mengandung karakter spesial";
+                lblCustomerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung\nminimal 1 digit numerik dan 1 karakter alfabet\ndan tidak boleh mengandung karakter spesial";
                 lblCustomerPasswordCommenter.Opacity = 100;
                 return;
             }
@@ -464,7 +456,7 @@ namespace Tukupedia.Views
             if (!stronkPassword(pass))
             {
                 lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(127, 255, 0, 0));
-                lblSellerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung minimal 1 digit numerik dan 1 karakter alfabet dan tidak boleh mengandung karakter spesial";
+                lblSellerPasswordCommenter.Content = "password harus memiliki 8 hingga 40 karakter dan mengandung\nminimal 1 digit numerik dan 1 karakter alfabet\ndan tidak boleh mengandung karakter spesial";
                 lblSellerPasswordCommenter.Opacity = 100;
                 return;
             }
