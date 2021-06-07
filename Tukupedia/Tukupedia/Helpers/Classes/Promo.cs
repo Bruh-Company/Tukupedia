@@ -112,7 +112,7 @@ namespace Tukupedia.Helpers.Classes
             str += $"Promo berlaku selama periode {Utility.formatDate(TANGGAL_AWAL)} - {Utility.formatDate(TANGGAL_AKHIR)}\n";
             str += $"Promo berlaku saat minimal belanja sebesar {Utility.formatMoney(HARGA_MIN)} \n";
             if(JENIS_POTONGAN=="P")
-                str += $"Promo berupa diskon sebesar {POTONGAN} dengan potongan maksimal sebesar {Utility.formatMoney(POTONGAN_MAX)}\n";
+                str += $"Promo berupa diskon sebesar {POTONGAN}% dengan potongan maksimal sebesar {Utility.formatMoney(POTONGAN_MAX)}\n";
             else if(JENIS_POTONGAN=="F") 
                 str += $"Promo berupa diskon sebesar {Utility.formatMoney(POTONGAN)} \n"; 
             if (jenis["category"])

@@ -41,7 +41,8 @@ namespace Tukupedia.Helpers.Utils
 
         public static string formatMoney(int money)
         {
-            return money.ToString("C2", CultureInfo.CurrentCulture);
+            System.Globalization.CultureInfo cultureinfo = new System.Globalization.CultureInfo("id-ID");
+            return money.ToString("C2", cultureinfo);
         }
         public static string formatNumber(int val)
         {
