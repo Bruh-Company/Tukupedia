@@ -73,10 +73,18 @@ namespace Tukupedia.Views.Admin
         }
         private void initCReport()
         {
+            cbSemuaJenisPembayaran.IsChecked = true;
+            cbSemuaKategori.IsChecked = true;
+            cbSemuaKurir.IsChecked = true;
+            cbSemuaPromo.IsChecked = true;
             populateListBox(lbJenisPembayaran, hvm.getJenisPembayaran());
             populateListBox(lbKurir, hvm.getKurir());
             populateListBox(lbJenisKategori, hvm.getKategori());
             populateListBox(lbJenisPromo, hvm.getPromo());
+            lbJenisPembayaran.Visibility = Visibility.Hidden;
+            lbKurir.Visibility = Visibility.Hidden;
+            lbJenisKategori.Visibility = Visibility.Hidden;
+            lbJenisPromo.Visibility = Visibility.Hidden;
             dpTanggalAwalReport.SelectedDate = DateTime.Now.AddDays(-7);
             dpTanggalAkhirReport.SelectedDate = DateTime.Now;
             cbisOfficial.SelectedIndex = 0;
@@ -93,7 +101,17 @@ namespace Tukupedia.Views.Admin
                     selected.Add(i);
                 }
             }
+            if (selected.Count == lb.Items.Count) selected = new List<int>();
             return selected;
+        }
+        private void setChecked(ListBox lb,bool check)
+        {
+            for (int i = 0; i < lb.Items.Count; i++)
+            {
+                var item = lb.Items[i];
+                CheckBox cb = (CheckBox)item;
+                cb.IsChecked = check;
+            }
         }
         private void initReport()
         {
@@ -1303,12 +1321,65 @@ namespace Tukupedia.Views.Admin
 
         }
 
+        
+
+        private void cbSemuaPromo_Click(object sender, RoutedEventArgs e)
+        {
+            setChecked(lbJenisPromo, cbSemuaPromo.IsChecked.Value);
+            if(cbSemuaPromo.IsChecked == true)
+            {
+                lbJenisPromo.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lbJenisPromo.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void cbSemuaKategori_Click(object sender, RoutedEventArgs e)
+        {
+            setChecked(lbJenisKategori, cbSemuaKategori.IsChecked.Value);
+            if (cbSemuaKategori.IsChecked == true)
+            {
+                lbJenisKategori.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lbJenisKategori.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void cbSemuaKurir_Click(object sender, RoutedEventArgs e)
+        {
+            setChecked(lbKurir, cbSemuaKurir.IsChecked.Value);
+            if (cbSemuaKurir.IsChecked == true)
+            {
+                lbKurir.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lbKurir.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void cbSemuaJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            setChecked(lbJenisPembayaran, cbSemuaJenisPembayaran.IsChecked.Value);
+            if (cbSemuaJenisPembayaran.IsChecked == true)
+            {
+                lbJenisPembayaran.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lbJenisPembayaran.Visibility = Visibility.Visible;
+            }
+        }
         private void btGenerateReport_Click(object sender, RoutedEventArgs e)
         {
             AdminReport rpt = new AdminReport();
             ReportView rv = new ReportView(rpt);
-            string query = hvm.generateQuery(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo),dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value,cbisOfficial.SelectedIndex);
-            rv.setParam<string>("query", query);
+            //string query = hvm.generateQuery(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo),dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value,cbisOfficial.SelectedIndex);
+            //rv.setParam<string>("query", query);
             rv.ShowDialog();
         }
     }

@@ -37,14 +37,14 @@
                         <Label Content="s/d" Canvas.Left="218" Canvas.Top="511" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
                         <Button x:Name="btSelectDate" Content="Select Date" Canvas.Left="481" Canvas.Top="511" Width="140" FontSize="18" Click="btSelectDate_Click"/>
                         <Label Content="Jenis Pembayaran" Canvas.Left="36" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisPembayaran" Height="191" Canvas.Left="36" Canvas.Top="113" Width="201"/>
+                        <ListBox x:Name="lbJenisPembayaran" Height="163" Canvas.Left="36" Canvas.Top="141" Width="201"/>
                         <Label Content="Generate Report" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="36" Canvas.Top="36"/>
                         <Label Content="Kurir" Canvas.Left="262" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbKurir" Height="191" Canvas.Left="262" Canvas.Top="113" Width="201"/>
+                        <ListBox x:Name="lbKurir" Height="163" Canvas.Left="262" Canvas.Top="141" Width="201"/>
                         <Label Content="Jenis Kategori" Canvas.Left="481" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisKategori" Height="191" Canvas.Left="481" Canvas.Top="113" Width="281"/>
+                        <ListBox x:Name="lbJenisKategori" Height="163" Canvas.Left="481" Canvas.Top="141" Width="281"/>
                         <Label Content="Jenis Promo" Canvas.Left="781" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisPromo" Height="191" Canvas.Left="781" Canvas.Top="113" Width="201"/>
+                        <ListBox x:Name="lbJenisPromo" Height="163" Canvas.Left="781" Canvas.Top="141" Width="201"/>
                         <DatePicker x:Name="dpTanggalAwalReport" Canvas.Left="36" Canvas.Top="375" Width="155" FontSize="16"/>
                         <DatePicker x:Name="dpTanggalAkhirReport" Canvas.Left="281" Canvas.Top="375" Width="155" FontSize="16"/>
                         <Label Content="Tanggal Transaksi" Canvas.Left="36" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
@@ -56,6 +56,10 @@
                             <ComboBoxItem Content="Official"/>
                             <ComboBoxItem Content="Merchant"/>
                         </ComboBox>
+                        <CheckBox x:Name="cbSemuaJenisPembayaran" Content="Semua Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" Width="201" Canvas.Left="36" Canvas.Top="116" FontSize="16" Click="cbSemuaJenisPembayaran_Click"/>
+                        <CheckBox x:Name="cbSemuaKurir" Content="Semua Kurir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Canvas.Left="262" Canvas.Top="116" FontSize="16" Click="cbSemuaKurir_Click"/>
+                        <CheckBox x:Name="cbSemuaKategori" Content="Semua Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Canvas.Left="481" Canvas.Top="116" FontSize="16" Click="cbSemuaKategori_Click"/>
+                        <CheckBox x:Name="cbSemuaPromo" Content="Semua Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Canvas.Left="781" Canvas.Top="116" FontSize="16" Click="cbSemuaPromo_Click"/>
                     </Canvas>
                 </ScrollViewer>
 
