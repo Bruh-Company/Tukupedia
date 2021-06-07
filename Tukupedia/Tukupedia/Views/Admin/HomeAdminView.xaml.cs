@@ -101,7 +101,7 @@ namespace Tukupedia.Views.Admin
                     selected.Add(i);
                 }
             }
-            if (selected.Count == lb.Items.Count) selected = new List<int>();
+            
             return selected;
         }
         private void setChecked(ListBox lb,bool check)
@@ -1376,11 +1376,7 @@ namespace Tukupedia.Views.Admin
         }
         private void btGenerateReport_Click(object sender, RoutedEventArgs e)
         {
-            AdminReport rpt = new AdminReport();
-            ReportView rv = new ReportView(rpt);
-            //string query = hvm.generateQuery(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo),dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value,cbisOfficial.SelectedIndex);
-            //rv.setParam<string>("query", query);
-            rv.ShowDialog();
+            hvm.generateReport(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo), dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value, cbisOfficial.SelectedIndex);
         }
     }
 }

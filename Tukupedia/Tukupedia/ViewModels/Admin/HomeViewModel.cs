@@ -9,6 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
+using CrystalDecisions.Shared;
+using Tukupedia.Report.Admin;
+using Tukupedia.Views;
 
 namespace Tukupedia.ViewModels.Admin
 {
@@ -23,14 +26,11 @@ namespace Tukupedia.ViewModels.Admin
         public void refreshJumlahTransaksi(DateTime awal,DateTime akhir)
         {
             awal = awal == DateTime.Today ? DateTime.Now.AddDays(-7) : awal;
-            akhir = akhir == DateTime.Today ? DateTime.Today : akhir;
-            akhir = akhir.AddDays(1);
+            akhir.AddDays(1);
             int rownum = (akhir.Date - awal.Date).Days;
             DB sql = new DB();
-            //sql.statement = $"select k.dt, count(h.KODE) from (SELECT to_char(TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM),'dd-mm-yyyy') dt FROM DUAL CONNECT BY ROWNUM <= {rownum}) k left join H_TRANS_ITEM h on k.dt = to_char(h.TANGGAL_TRANSAKSI, 'dd-mm-yyyy') group by k.dt, h.TANGGAL_TRANSAKSI order by k.dt asc";
             sql.statement = $"select k.dt, count(h.KODE) from (SELECT TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM) as tanggal,to_char(TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM),'dd-mm-yyyy') as dt  FROM DUAL CONNECT BY ROWNUM <= {rownum} order by 1 desc) k left join H_TRANS_ITEM h on k.dt = to_char(h.TANGGAL_TRANSAKSI, 'dd-mm-yyyy') group by TANGGAL_TRANSAKSI,tanggal, k.dt order by k.tanggal asc";
             dtJumlahTransaksi = sql.get();
-            //return dtJumlahTransaksi;
         }
 
         public List<string> getLabelJumlahTransaksi()
@@ -57,7 +57,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             List<CheckBox> jp = new List<CheckBox>();
             DB sql = new DB();
-            sql.statement = $"select ID, NAMA from METODE_PEMBAYARAN order by 1 asc";
+            sql.statement = $"select ID, NAMA from METODE_PEMBAYARAN WHERE STATUS = 1 order by 1 asc";
             dtJenisPembayaran = sql.get();
             foreach(DataRow dt in dtJenisPembayaran.Rows)
             {
@@ -73,7 +73,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             List<CheckBox> jp = new List<CheckBox>();
             DB sql = new DB();
-            sql.statement = $"select ID, NAMA from KURIR order by 1 asc";
+            sql.statement = $"select ID, NAMA from KURIR WHERE STATUS = 1 order by 1 asc";
             dtKurir = sql.get();
             foreach (DataRow dt in dtKurir.Rows)
             {
@@ -88,7 +88,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             List<CheckBox> jp = new List<CheckBox>();
             DB sql = new DB();
-            sql.statement = $"select ID, NAMA from CATEGORY order by 1 asc";
+            sql.statement = $"select ID, NAMA from CATEGORY WHERE STATUS = 1 order by 1 asc";
             dtKategori = sql.get();
             foreach (DataRow dt in dtKategori.Rows)
             {
@@ -103,7 +103,7 @@ namespace Tukupedia.ViewModels.Admin
         {
             List<CheckBox> jp = new List<CheckBox>();
             DB sql = new DB();
-            sql.statement = $"select ID, KODE from PROMO order by 1 asc";
+            sql.statement = $"select ID, KODE from PROMO WHERE STATUS = 1 order by 1 asc";
             dtPromo = sql.get();
             foreach (DataRow dt in dtPromo.Rows)
             {
@@ -115,13 +115,17 @@ namespace Tukupedia.ViewModels.Admin
             return jp;
         }
 
-        public void generateQuery(List<int> jenisPembayaran, List<int> kurir, List<int> kategori, List<int> promo, DateTime awal, DateTime akhir, int isofficial)
+        public ParameterDiscreteValue getParamVal(Object val)
         {
-            List<string> jenisPembayarans = new List<string>();
-            List<string> kurirs = new List<string>();
-            List<string> kategoris = new List<string>();
-            List<string> promos = new List<string>();
-            
+            ParameterDiscreteValue param = new ParameterDiscreteValue();
+            param.Value = val;
+            return param;
+        }
+        public void generateReport(List<int> jenisPembayaran, List<int> kurir, List<int> kategori, List<int> promo, DateTime awal, DateTime akhir, int isofficial)
+        {
+            AdminReport report = new AdminReport();
+            ParameterValues pv = new ParameterValues();
+            ReportView rv = new ReportView(report);
             getKurir();
             getJenisPembayaran();
             getKategori();
@@ -129,32 +133,39 @@ namespace Tukupedia.ViewModels.Admin
             akhir = akhir.AddDays(1);
             awal = awal.AddDays(-1);
 
+            pv.Clear();
             foreach (int i in jenisPembayaran)
             {
                 DataRow dr = dtJenisPembayaran.Rows[i];
-                jenisPembayarans.Add(dr[0].ToString());
+                pv.Add(getParamVal(dr["ID"].ToString()));
             }
-
+            rv.setParam("payment_Methods", pv);
+            pv.Clear();
             foreach (int i in kurir)
             {
                 DataRow dr = dtKurir.Rows[i];
-                kurirs.Add(dr[0].ToString());
-
+                pv.Add(getParamVal(dr["ID"].ToString()));
             }
-
+            rv.setParam("Kurirs", pv);
+            pv.Clear();
             foreach (int i in kategori)
             {
                 DataRow dr = dtKategori.Rows[i];
-                kategoris.Add(dr[0].ToString());
-
+                pv.Add(getParamVal(dr["ID"].ToString()));
+                
             }
-
+            rv.setParam("Categories", pv);
+            pv.Clear();
             foreach (int i in promo)
             {
                 DataRow dr = dtPromo.Rows[i];
-                promos.Add(dr[0].ToString());
-
+                pv.Add(getParamVal(dr["ID"].ToString()));
             }
+            rv.setParam("Promos", pv);
+
+            rv.ShowDialog();
+
+
         }
     }
 }
