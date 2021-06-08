@@ -194,7 +194,11 @@ namespace Tukupedia.Helpers.Utils
         }
         public static string toNumber(string duek)
         {
-            return int.Parse(duek, NumberStyles.Currency).ToString();
+            duek = duek.Substring(2);
+            duek = duek.Replace(".", "");
+            duek = duek.Replace(",00", "");
+
+            return duek;
         }
 
     }

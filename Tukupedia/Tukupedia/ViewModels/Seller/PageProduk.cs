@@ -198,8 +198,8 @@ namespace Tukupedia.ViewModels.Seller {
             DataRow newItem = model.Table.NewRow();
             newItem["ID"] = 1;
             newItem["KODE"] = " ";
-            newItem["NAMA"] = nama.ToUpper();
-            newItem["DESKRIPSI"] = deskripsi.ToUpper();
+            newItem["NAMA"] = nama;
+            newItem["DESKRIPSI"] = deskripsi;
             newItem["ID_CATEGORY"] = idCategory;
             newItem["ID_SELLER"] = seller["ID"];
             newItem["STOK"] = stok;
