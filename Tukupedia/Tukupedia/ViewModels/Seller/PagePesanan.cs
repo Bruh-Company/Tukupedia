@@ -220,6 +220,7 @@ namespace Tukupedia.ViewModels.Seller
         {
             if(selected != -1 && selected < htrans.Table.Rows.Count)
             {
+                ViewComponent.checkboxTerimaSemua.IsChecked = false;
                 this.h_trans_selected = selected;
                 DataRow dr = htrans.Table.Rows[selected];
                 forselectdata = new D_Trans_ItemModel();

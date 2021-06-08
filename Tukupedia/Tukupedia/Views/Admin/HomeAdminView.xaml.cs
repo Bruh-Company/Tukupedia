@@ -339,6 +339,7 @@ namespace Tukupedia.Views.Admin
         {
             setCanvas(1);
             reloadCategory();
+            tbNamaKategori.Text = "";
             btTambahKategori.Visibility = Visibility.Visible;
             btToggleKategori.Visibility = Visibility.Hidden;
             btUpdateKategori.Visibility = Visibility.Hidden;
