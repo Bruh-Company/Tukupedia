@@ -25,6 +25,7 @@ namespace Tukupedia.Views {
             InitializeComponent();
             this.report = report;
             this.report.SetDatabaseLogon(App.username, App.password, App.datasource, "");
+            reportViewer.Owner = Window.GetWindow(this);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
