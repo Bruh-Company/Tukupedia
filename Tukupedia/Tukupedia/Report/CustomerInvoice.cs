@@ -16,14 +16,14 @@ namespace Tukupedia.Report {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class SellerReport : ReportClass {
+    public class CustomerInvoice : ReportClass {
         
-        public SellerReport() {
+        public CustomerInvoice() {
         }
         
         public override string ResourceName {
             get {
-                return "SellerReport.rpt";
+                return "CustomerInvoice.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Tukupedia.Report {
         
         public override string FullResourceName {
             get {
-                return "Tukupedia.Report.SellerReport.rpt";
+                return "Tukupedia.Report.CustomerInvoice.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,7 +90,23 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_minDate {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+            get {
+                return this.ReportDefinition.Sections[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_kodeH_Trans {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -98,7 +114,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_maxDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_kodePromo {
             get {
                 return this.DataDefinition.ParameterFields[1];
             }
@@ -106,9 +122,9 @@ namespace Tukupedia.Report {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedSellerReport : Component, ICachedReport {
+    public class CachedCustomerInvoice : Component, ICachedReport {
         
-        public CachedSellerReport() {
+        public CachedCustomerInvoice() {
         }
         
         [Browsable(false)]
@@ -145,7 +161,7 @@ namespace Tukupedia.Report {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            SellerReport rpt = new SellerReport();
+            CustomerInvoice rpt = new CustomerInvoice();
             rpt.Site = this.Site;
             return rpt;
         }

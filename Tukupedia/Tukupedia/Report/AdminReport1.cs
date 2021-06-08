@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tukupedia.Report.Customer {
+namespace Tukupedia.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace Tukupedia.Report.Customer {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CustomerInvoice : ReportClass {
+    public class AdminReport : ReportClass {
         
-        public CustomerInvoice() {
+        public AdminReport() {
         }
         
         public override string ResourceName {
             get {
-                return "CustomerInvoice.rpt";
+                return "AdminReport.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Tukupedia.Report.Customer {
         
         public override string FullResourceName {
             get {
-                return "Tukupedia.Report.Customer.CustomerInvoice.rpt";
+                return "Tukupedia.Report.AdminReport.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace Tukupedia.Report.Customer {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace Tukupedia.Report.Customer {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace Tukupedia.Report.Customer {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,23 +90,7 @@ namespace Tukupedia.Report.Customer {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_kodeH_Trans {
+        public CrystalDecisions.Shared.IParameterField Parameter_Categories {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -114,17 +98,33 @@ namespace Tukupedia.Report.Customer {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_kodePromo {
+        public CrystalDecisions.Shared.IParameterField Parameter_payment_Methods {
             get {
                 return this.DataDefinition.ParameterFields[1];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Kurirs {
+            get {
+                return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Promos {
+            get {
+                return this.DataDefinition.ParameterFields[3];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCustomerInvoice : Component, ICachedReport {
+    public class CachedAdminReport : Component, ICachedReport {
         
-        public CachedCustomerInvoice() {
+        public CachedAdminReport() {
         }
         
         [Browsable(false)]
@@ -161,7 +161,7 @@ namespace Tukupedia.Report.Customer {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CustomerInvoice rpt = new CustomerInvoice();
+            AdminReport rpt = new AdminReport();
             rpt.Site = this.Site;
             return rpt;
         }

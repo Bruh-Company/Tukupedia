@@ -2,14 +2,8 @@
 using Tukupedia.Views.Seller;
 using Tukupedia.Helpers.DatabaseHelpers;
 using System.Data;
-using System.Windows.Media;
-using System.Windows.Controls;
 using System;
-using System.Windows.Forms;
-using System.Windows.Media.Imaging;
-using Tukupedia.Helpers.Utils;
 using System.Windows;
-using Oracle.DataAccess.Client;
 
 namespace Tukupedia.ViewModels.Seller {
     public class PageUlasan {
@@ -24,7 +18,9 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void initPageUlasan() {
+            reset();
             fillDgvUlasan();
+            fillCbSortUlasan();
             ViewComponent.btnBalasUlasan.IsEnabled = false;
             ViewComponent.btnCancelUlasan.IsEnabled = false;
         }
@@ -84,6 +80,7 @@ namespace Tukupedia.ViewModels.Seller {
             model.addWhere("ID", ulasanModel.Table.Rows[selectedIndex][0].ToString());
             foreach (DataRow row in model.get()) {
                 model.updateRow(row, "REPLY", reply);
+                model.updateRow(row, "ID_SELLER", seller["ID"]);
             }
             reset();
         }
@@ -103,11 +100,12 @@ namespace Tukupedia.ViewModels.Seller {
                 $"h.KODE as \"KODE TRANSAKSI\", " +
                 $"c.NAMA as \"NAMA CUSTOMER\", " +
                 $"u.RATING as \"RATING\" " +
-                $"FROM ULASAN u, CUSTOMER c, D_TRANS_ITEM d, H_TRANS_ITEM h " +
+                $"FROM ULASAN u, CUSTOMER c, D_TRANS_ITEM d, H_TRANS_ITEM h, ITEM i " +
                 $"WHERE u.ID_CUSTOMER = c.ID " +
                 $"and u.ID_D_TRANS_ITEM = d.ID " +
                 $"and d.ID_H_TRANS_ITEM = h.ID " +
-                $"and u.ID_SELLER = '{seller["ID"]}'";
+                $"and d.ID_ITEM = i.ID " +
+                $"and i.ID_SELLER = '{seller["ID"]}'";
 
             ulasanModel = new UlasanModel();
             ulasanModel.initAdapter(statement);

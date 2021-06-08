@@ -20,7 +20,6 @@ namespace Tukupedia.Views.Seller {
             DateTime minDate = datePickerMulai.SelectedDate.Value;
             DateTime maxDate = datePickerAkhir.SelectedDate.Value;
             int id = Convert.ToInt32(Session.User["ID"].ToString());
-            MessageBox.Show(id.ToString());
             SellerPenjualanReport report = new SellerPenjualanReport();
             ReportView reportView = new ReportView(report);
             reportView.setParam("minDate", minDate);

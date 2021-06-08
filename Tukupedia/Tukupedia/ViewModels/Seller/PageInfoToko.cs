@@ -54,6 +54,7 @@ namespace Tukupedia.ViewModels.Seller {
                 }
                 App.closeConnection(out _);
             }
+            resetOSMessage();
         }
 
         public void addKurir() {

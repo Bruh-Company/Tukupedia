@@ -10,7 +10,7 @@ using Tukupedia.Helpers.Classes;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
 using Tukupedia.Models;
-using Tukupedia.Report.Customer;
+using Tukupedia.Report;
 using Tukupedia.Views;
 using Tukupedia.Views.Customer;
 

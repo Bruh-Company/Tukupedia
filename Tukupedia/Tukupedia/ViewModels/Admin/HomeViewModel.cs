@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Helpers.Utils;
 using CrystalDecisions.Shared;
-using Tukupedia.Report.Admin;
+using Tukupedia.Report;
 using Tukupedia.Views;
 
 namespace Tukupedia.ViewModels.Admin

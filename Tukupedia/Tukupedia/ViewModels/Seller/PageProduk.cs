@@ -38,6 +38,7 @@ namespace Tukupedia.ViewModels.Seller {
         }
 
         public void initPageProduk() {
+            resetPageProduk();
             fillCmbSort();
             fillCmbKategori();
             fillDgvProduk();
@@ -168,7 +169,7 @@ namespace Tukupedia.ViewModels.Seller {
             ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString());
 
             itemId = Convert.ToInt32(row["ID"].ToString());
-            loadDiskusi(itemId);
+            resetDiskusi();
             
             toggleBtnInsertProduk = false;
             switchBtnInsert();

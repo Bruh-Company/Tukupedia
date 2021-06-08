@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Tukupedia.Helpers.Utils;
-using Tukupedia.Report.Admin;
+using Tukupedia.Report;
 using Tukupedia.ViewModels;
 using Tukupedia.ViewModels.Admin;
 
