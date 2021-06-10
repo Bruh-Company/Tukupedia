@@ -89,7 +89,7 @@ namespace Tukupedia.Helpers.Utils {
                     if (File.Exists(movePath)) File.Delete(movePath);
                     if (oldName != newName) File.Move(newPath, movePath);
                 }
-                return movePath;
+                return newName;
             }
             catch (IOException copyError) {
                 MessageBox.Show(copyError.Message);
@@ -104,7 +104,7 @@ namespace Tukupedia.Helpers.Utils {
                 MessageBox.Show("ERR! Can't load image :)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            path = new Uri(path).LocalPath;
+            path = getItemImagePath(path);
             using (var stream = new FileStream(path, FileMode.Open)) {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
