@@ -99,7 +99,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         public void initImageToko() {
             if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageToko);
-            else ImageHelper.loadImage(ViewComponent.imageToko, seller["IMAGE"].ToString());
+            else ImageHelper.loadImage(ViewComponent.imageToko, seller["IMAGE"].ToString(), ImageHelper.target.seller);
         }
 
 
