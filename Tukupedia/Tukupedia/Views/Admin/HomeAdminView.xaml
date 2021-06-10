@@ -21,48 +21,49 @@
             <Canvas  x:Name="CanvasrootHome" HorizontalAlignment="Left" Height="624" Margin="1968,-143,-1958,0" VerticalAlignment="Top" Width="1252">
                 <Label Content="Tukupedia Statistic" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
                 <Grid/>
-
-                <ScrollViewer Height="551" Canvas.Top="50" Width="1232" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Left" Canvas.Left="10">
-                    <Canvas>
-                        <lvc:CartesianChart x:Name="chartJumlahTransaksi" Series="{Binding SeriesCollection}" Height="446" Canvas.Left="10" Canvas.Top="558" Width="771" >
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Title="Transaction" LabelFormatter="{Binding YFormatter}"/>
-                            </lvc:CartesianChart.AxisY>
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Title="Tanggal" Labels="{Binding Labels}"/>
-                            </lvc:CartesianChart.AxisX>
-                        </lvc:CartesianChart>
-                        <DatePicker x:Name="dpTanggalAwal" Canvas.Left="36" Canvas.Top="513" Width="155" FontSize="16"/>
-                        <DatePicker x:Name="dpTanggalAkhir" Canvas.Left="281" Canvas.Top="513" Width="155" FontSize="16"/>
-                        <Label Content="Rekap Tanggal" Canvas.Left="36" Canvas.Top="458" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <Label Content="s/d" Canvas.Left="218" Canvas.Top="511" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
-                        <Button x:Name="btSelectDate" Content="Select Date" Canvas.Left="481" Canvas.Top="511" Width="140" FontSize="18" Click="btSelectDate_Click"/>
-                        <Label Content="Jenis Pembayaran" Canvas.Left="36" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisPembayaran" Height="163" Canvas.Left="36" Canvas.Top="141" Width="201"/>
-                        <Label Content="Generate Report" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="36" Canvas.Top="36"/>
-                        <Label Content="Kurir" Canvas.Left="262" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbKurir" Height="163" Canvas.Left="262" Canvas.Top="141" Width="201"/>
-                        <Label Content="Jenis Kategori" Canvas.Left="481" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisKategori" Height="163" Canvas.Left="481" Canvas.Top="141" Width="281"/>
-                        <Label Content="Jenis Promo" Canvas.Left="781" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ListBox x:Name="lbJenisPromo" Height="163" Canvas.Left="781" Canvas.Top="141" Width="201"/>
-                        <DatePicker x:Name="dpTanggalAwalReport" Canvas.Left="36" Canvas.Top="375" Width="155" FontSize="16"/>
-                        <DatePicker x:Name="dpTanggalAkhirReport" Canvas.Left="281" Canvas.Top="375" Width="155" FontSize="16"/>
-                        <Label Content="Tanggal Transaksi" Canvas.Left="36" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <Label Content="s/d" Canvas.Left="218" Canvas.Top="373" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
-                        <Button x:Name="btGenerateReport" Content="Generate Report" Canvas.Left="763" Canvas.Top="373" Width="219" FontSize="18" Click="btGenerateReport_Click"/>
-                        <Label Content="Tanggal Transaksi" Canvas.Left="453" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
-                        <ComboBox x:Name="cbisOfficial" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Canvas.Left="462" Canvas.Top="373" FontSize="20">
-                            <ComboBoxItem Content="Semua"/>
-                            <ComboBoxItem Content="Official"/>
-                            <ComboBoxItem Content="Merchant"/>
-                        </ComboBox>
-                        <CheckBox x:Name="cbSemuaJenisPembayaran" Content="Semua Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" Width="201" Canvas.Left="36" Canvas.Top="116" FontSize="16" Click="cbSemuaJenisPembayaran_Click"/>
-                        <CheckBox x:Name="cbSemuaKurir" Content="Semua Kurir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Canvas.Left="262" Canvas.Top="116" FontSize="16" Click="cbSemuaKurir_Click"/>
-                        <CheckBox x:Name="cbSemuaKategori" Content="Semua Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Canvas.Left="481" Canvas.Top="116" FontSize="16" Click="cbSemuaKategori_Click"/>
-                        <CheckBox x:Name="cbSemuaPromo" Content="Semua Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Canvas.Left="781" Canvas.Top="116" FontSize="16" Click="cbSemuaPromo_Click"/>
-                    </Canvas>
-                </ScrollViewer>
+                <Grid>
+                    <ScrollViewer Height="551" Canvas.Top="50" Width="1232" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Left" Canvas.Left="10">
+                        <Canvas Height="1000">
+                            <lvc:CartesianChart x:Name="chartJumlahTransaksi" Series="{Binding SeriesCollection}" Height="446" Canvas.Left="10" Canvas.Top="558" Width="771" >
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Title="Transaction" LabelFormatter="{Binding YFormatter}"/>
+                                </lvc:CartesianChart.AxisY>
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Tanggal" Labels="{Binding Labels}"/>
+                                </lvc:CartesianChart.AxisX>
+                            </lvc:CartesianChart>
+                            <DatePicker x:Name="dpTanggalAwal" Canvas.Left="36" Canvas.Top="513" Width="155" FontSize="16"/>
+                            <DatePicker x:Name="dpTanggalAkhir" Canvas.Left="281" Canvas.Top="513" Width="155" FontSize="16"/>
+                            <Label Content="Rekap Tanggal" Canvas.Left="36" Canvas.Top="458" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <Label Content="s/d" Canvas.Left="218" Canvas.Top="511" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
+                            <Button x:Name="btSelectDate" Content="Select Date" Canvas.Left="481" Canvas.Top="511" Width="140" FontSize="18" Click="btSelectDate_Click"/>
+                            <Label Content="Jenis Pembayaran" Canvas.Left="36" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <ListBox x:Name="lbJenisPembayaran" Height="163" Canvas.Left="36" Canvas.Top="141" Width="201"/>
+                            <Label Content="Generate Report" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="36" Canvas.Top="36"/>
+                            <Label Content="Kurir" Canvas.Left="262" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <ListBox x:Name="lbKurir" Height="163" Canvas.Left="262" Canvas.Top="141" Width="201"/>
+                            <Label Content="Jenis Kategori" Canvas.Left="481" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <ListBox x:Name="lbJenisKategori" Height="163" Canvas.Left="481" Canvas.Top="141" Width="281"/>
+                            <Label Content="Jenis Promo" Canvas.Left="781" Canvas.Top="81" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <ListBox x:Name="lbJenisPromo" Height="163" Canvas.Left="781" Canvas.Top="141" Width="201"/>
+                            <DatePicker x:Name="dpTanggalAwalReport" Canvas.Left="36" Canvas.Top="375" Width="155" FontSize="16"/>
+                            <DatePicker x:Name="dpTanggalAkhirReport" Canvas.Left="281" Canvas.Top="375" Width="155" FontSize="16"/>
+                            <Label Content="Tanggal Transaksi" Canvas.Left="36" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <Label Content="s/d" Canvas.Left="218" Canvas.Top="373" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
+                            <Button x:Name="btGenerateReport" Content="Generate Report" Canvas.Left="763" Canvas.Top="373" Width="219" FontSize="18" Click="btGenerateReport_Click"/>
+                            <Label Content="is Official" Canvas.Left="453" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <ComboBox x:Name="cbisOfficial" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Canvas.Left="462" Canvas.Top="373" FontSize="20">
+                                <ComboBoxItem Content="Semua"/>
+                                <ComboBoxItem Content="Official"/>
+                                <ComboBoxItem Content="Merchant"/>
+                            </ComboBox>
+                            <CheckBox x:Name="cbSemuaJenisPembayaran" Content="Semua Jenis Pembayaran" HorizontalAlignment="Left" VerticalAlignment="Top" Width="201" Canvas.Left="36" Canvas.Top="116" FontSize="16" Click="cbSemuaJenisPembayaran_Click"/>
+                            <CheckBox x:Name="cbSemuaKurir" Content="Semua Kurir" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Canvas.Left="262" Canvas.Top="116" FontSize="16" Click="cbSemuaKurir_Click"/>
+                            <CheckBox x:Name="cbSemuaKategori" Content="Semua Kategori" HorizontalAlignment="Left" VerticalAlignment="Top" Width="140" Canvas.Left="481" Canvas.Top="116" FontSize="16" Click="cbSemuaKategori_Click"/>
+                            <CheckBox x:Name="cbSemuaPromo" Content="Semua Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Width="136" Canvas.Left="781" Canvas.Top="116" FontSize="16" Click="cbSemuaPromo_Click"/>
+                        </Canvas>
+                    </ScrollViewer>
+                </Grid>
 
             </Canvas>
             <Canvas x:Name="CanvasrootCategory" HorizontalAlignment="Left" Height="624" Margin="10,-1279,0,0" VerticalAlignment="Top" Width="1252" Grid.ColumnSpan="2">
