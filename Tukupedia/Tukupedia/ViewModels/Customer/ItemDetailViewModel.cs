@@ -70,8 +70,6 @@ namespace Tukupedia.ViewModels.Customer
                 if (row["REPLY"].ToString() != "")
                 {
                     DataRow seller = new DB("SELLER").@select().@where("ID", row["ID_SELLER"].ToString()).getFirst();
-                    MessageBox.Show(row["REPLY"].ToString());
-                    MessageBox.Show((seller == null).ToString());
                     rc.setSeller(seller["NAMA_TOKO"].ToString());
                     rc.setSellerDate(row["REPLY_AT"].ToString());
                     rc.setSellerReply(row["REPLY"].ToString());

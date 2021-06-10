@@ -27,7 +27,7 @@
             <Button Style="{StaticResource btn-navbar}" Content="My Transactions" HorizontalAlignment="Left" Margin="464,0,0,0" VerticalAlignment="Top" Width="159"  FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553" Click="goToTransactions"/>
             <Button Style="{StaticResource btn-navbar}" Content="Home" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Top" Width="82" FontSize="18" Height="64" FontWeight="Normal"  RenderTransformOrigin="-0.506,0.553" Click="goToHome"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="621" Margin="0,69,-3860.4,0" VerticalAlignment="Top" Width="5134">
+        <Grid HorizontalAlignment="Left" Height="621" Margin="0,69,-3892,0" VerticalAlignment="Top" Width="5172">
             <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274">
                 <Grid HorizontalAlignment="Left" Height="596" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
@@ -167,8 +167,8 @@
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="3837,0,0,0">
-                <Grid HorizontalAlignment="Left" Height="595" Margin="10,6,0,0" VerticalAlignment="Top" Width="1242" Background="#FF404040">
+            <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1302" Margin="3837,0,0,0">
+                <Grid HorizontalAlignment="Left" Height="605" Margin="10,6,0,0" VerticalAlignment="Top" Width="1261" Background="#FF404040">
                     <Label Content="INFO CUSTOMER" Style="{StaticResource h2-success}" Margin="50,10,940,541"/>
                     <Button x:Name="btnUbahInfoCustomer" Content="Ubah" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Margin="365,25,789,541" Click="btnUbahInfoCustomer_Click"/>
 
@@ -186,12 +186,12 @@
 
                     <Label Content="Tanggal Lahir" Style="{StaticResource xl-secondary}" Margin="50,446,1053,112"/>
 
-                    <Button x:Name="btnChangeImage" Content="Pilih Gambar" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Margin="750,473,204,88" Click="btnChangeImage_Click"/>
+                    <Button x:Name="btnChangeImage" Content="Pilih Gambar" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Margin="750,473,91,88" Click="btnChangeImage_Click"/>
                     <DatePicker x:Name="dpickerlahir" HorizontalAlignment="Left" Margin="50,488,0,0" VerticalAlignment="Top" Width="500" FontSize="16" Height="46"/>
-                    <Image  x:Name="imageInfo" Margin="750,150,204,151"/>
+                    <Image  x:Name="imageInfo" Margin="750,150,91,178"/>
                     <Button x:Name="btnSave" Content="Save" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-primary}" Margin="470,25,684,541" Click="btnSave_Click"/>
                     <Button x:Name="btnCancel" Content="Cancel" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-danger}" Margin="575,25,579,541" Click="btnCancel_Click"/>
-                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-warning}" Margin="750,518,204,43" Click="btnChangePassword_Click"/>
+                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-warning}" Margin="750,518,91,43" Click="btnChangePassword_Click"/>
                 </Grid>
             </Grid>
 

@@ -77,15 +77,28 @@ namespace Tukupedia.Components
             }
         }
 
-        public void initCard(int id_h_diskusi, string url="")
+        public void initCard(int id_h_diskusi)
         {
             this.id_h_diskusi = id_h_diskusi;
-            if (url != "")
+            if (Session.User["IMAGE"].ToString() != "")
             {
-                profilePic.Source =
-                    new BitmapImage(new Uri(
-                        AppDomain.CurrentDomain.BaseDirectory + url));
+                if (Session.role == "Seller")
+                {
+
+                    ImageHelper.loadImage(profilePic, Session.User["IMAGE"].ToString(), ImageHelper.target.seller);
+
+                }
+                else
+                {
+                    ImageHelper.loadImage(profilePic, Session.User["IMAGE"].ToString(), ImageHelper.target.customer);
+                }
             }
+            else
+            {
+                ImageHelper.loadImageSwole(profilePic);
+
+            }
+            
             
         }
         private void BtnKirimOnClick(object sender, RoutedEventArgs e)

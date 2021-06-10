@@ -43,11 +43,11 @@ namespace Tukupedia.Components
             D_DiskusiModel ddm = new D_DiskusiModel();
             ddm.addWhere("ID_H_DISKUSI",id_h_diskusi.ToString());
             // Dapatkan semua comment dengan id header diskusi yang diminta
-            
+            bool isPenjual;
             foreach (DataRow row in ddm.get())
             {
                 exist = true;
-                bool isPenjual;
+                
                 isPenjual = row["SENDER"].ToString() == "C" ? false : true;
                 Comment com = new Comment(isPenjual);
                 DataRow user;
