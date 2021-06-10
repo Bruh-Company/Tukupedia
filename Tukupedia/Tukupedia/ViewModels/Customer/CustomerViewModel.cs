@@ -28,8 +28,9 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent = view;
         }
         
-        public static void loadItems(WrapPanel wp)
+        public static void loadItems()
         {
+            WrapPanel wp = ViewComponent.PanelItems;
             wp.Children.Clear();
             if (isFiltered)
             {
@@ -133,14 +134,13 @@ namespace Tukupedia.ViewModels.Customer
             where += where == "" ? "" : ")";
             cmd += where;
 
-            MessageBox.Show(cmd);
             items = new ItemModel();
             items.initAdapter(cmd);
             filteredItems = items.Table.Select();
             if (keyword != "") {
                 
             }
-            loadItems(ViewComponent.PanelItems);
+            loadItems();
             isFiltered = false;
         }
     

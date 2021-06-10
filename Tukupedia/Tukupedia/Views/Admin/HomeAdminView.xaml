@@ -111,7 +111,7 @@
                     <TextBox x:Name="tbEmailSeller" Height="41" Canvas.Left="31" TextWrapping="Wrap" Canvas.Top="214" Width="300" FontSize="20"/>
                     <Label Content="No Telp" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="260"/>
                     <TextBox x:Name="tbNotelpSeller" Height="41" Canvas.Left="31" TextWrapping="Wrap" Canvas.Top="297" Width="300" FontSize="20" PreviewTextInput="tbNotelpSeller_PreviewTextInput"/>
-                    <Label Content="is Official" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="427"/>
+                    <Label Content="Tipe Seller" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="427"/>
                     <Button Style="{StaticResource btn-primary}" x:Name="btUpdateSeller" Content="Update Seller" Canvas.Left="31" Canvas.Top="562" Width="300" FontSize="18" Click="btUpdateSeller_Click"/>
                     <ComboBox x:Name="cbisOfficialSeller" Canvas.Left="31" Canvas.Top="464" Width="300" Height="31" FontSize="20">
                         <ComboBoxItem Content="No"/>
