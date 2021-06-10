@@ -88,10 +88,10 @@ namespace Tukupedia.Views
         
         private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
         {
-            LoginRegisterViewModel
+            bool success = LoginRegisterViewModel
                 .LoginCustomer
                 (tbCustomerEmailLogin.Text, tbCustomerPasswordLogin.Password);
-            if (Session.isLogin)
+            if (success && Session.isLogin)
             {
                 this.Hide();
                 if (Session.role.ToUpper() == "ADMIN")
@@ -113,10 +113,10 @@ namespace Tukupedia.Views
         //Button Seller Login
         private void btnSellerLogin_Click(object sender, RoutedEventArgs e)
         {
-            LoginRegisterViewModel
+            bool success = LoginRegisterViewModel
                 .LoginSeller
                 (tbSellerEmailLogin.Text, tbSellerPasswordLogin.Password);
-            if (Session.isLogin)
+            if (success && Session.isLogin)
             {
                 this.Hide();
                 if (Session.role.ToUpper() == "ADMIN")
@@ -132,7 +132,6 @@ namespace Tukupedia.Views
                 }
                 this.Show();
                 Utility.TraverseVisualTree(this);
-
             }
         }
 

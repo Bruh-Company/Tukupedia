@@ -112,7 +112,7 @@ namespace Tukupedia.ViewModels
             return kode.ToUpper() + Utility.translate(counter, 3);
         }
 
-        public static void LoginCustomer(string username, string password)
+        public static bool LoginCustomer(string username, string password)
         {
             if (username == "admin" && password == "admin")
             {
@@ -130,6 +130,8 @@ namespace Tukupedia.ViewModels
                 if (customer == null)
                 {
                     MessageBox.Show("Gagal Login Customer");
+
+                    return false;
                 }
                 else
                 {
@@ -139,9 +141,10 @@ namespace Tukupedia.ViewModels
                 }
             }
 
+            return true;
         }
 
-        public static void LoginSeller(string username, string password)
+        public static bool LoginSeller(string username, string password)
         {
             if (username == "admin" && password == "admin")
             {
@@ -159,6 +162,8 @@ namespace Tukupedia.ViewModels
                 if (seller == null)
                 {
                     MessageBox.Show("Gagal Login Seller");
+
+                    return false;
                 }
                 else
                 {
@@ -168,6 +173,7 @@ namespace Tukupedia.ViewModels
                 }
             }
 
+            return true;
         }
 
         public static bool RegisterCustomer(string email, string nama, DateTime lahir, string alamat, string notelp, string password)
