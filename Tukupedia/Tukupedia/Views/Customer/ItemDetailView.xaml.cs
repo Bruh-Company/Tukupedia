@@ -82,6 +82,12 @@ namespace Tukupedia.Views.Customer
             tbBerat.Text = "Berat " + item["BERAT"].ToString() + " gram";
             DataRow kat = new DB("CATEGORY").select().where("ID", item["ID_CATEGORY"].ToString()).getFirst();
             tbKategori.Text = "Kategori : "+kat["NAMA"].ToString();
+            DataRow jmlItem = new DB("D_TRANS_ITEM")
+                        .select("SUM(JUMLAH) as JML")
+                        .where("ID_ITEM", item["ID"].ToString())
+                        .getFirst();
+            int jml = jmlItem["JML"].ToString() != "" ? Convert.ToInt32(jmlItem["JML"]) : 0;
+            tbTerjual.Text = "Terjual : " + jml;
             hideInputReply();
 
         }

@@ -30,6 +30,7 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent.btnBeriUlasan.Visibility = Visibility.Hidden;
             ViewComponent.ratingUlasan.Visibility = Visibility.Hidden;
             ViewComponent.rtbUlasan.Visibility = Visibility.Hidden;
+            ViewComponent.btnCetakInvoice.Visibility = Visibility.Hidden;
         }
         public static void initH_Trans()
         {
@@ -62,6 +63,14 @@ namespace Tukupedia.ViewModels.Customer
                 //Init Labels
                 H_Trans_ItemModel hti = new H_Trans_ItemModel();
                 DataRow row = hti.Table.Select($"ID ='{list_htrans[idx].ID}'").FirstOrDefault();
+                if (row["STATUS"].ToString() == "P")
+                {
+                    ViewComponent.btnCetakInvoice.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    ViewComponent.btnCetakInvoice.Visibility = Visibility.Hidden;
+                }
                 ViewComponent.tbKodeTrans.Text = row["KODE"].ToString();
                 string idPromo = row["ID_PROMO"].ToString() == "" ? "none" : row["ID_PROMO"].ToString();
                 if (idPromo != "none")
@@ -362,7 +371,8 @@ namespace Tukupedia.ViewModels.Customer
                     DataRow rowPromo = pm.Table.Select($"ID = '{row["ID_PROMO"]}'").First();
                     rv.setParam("kodePromo", rowPromo["KODE"].ToString());
                 }
-
+                string path = (ImageHelper.getDebugPath() + "\\Resource\\Items\\");
+                rv.setParam("imagePath", path);
                 rv.ShowDialog();
             }
             else

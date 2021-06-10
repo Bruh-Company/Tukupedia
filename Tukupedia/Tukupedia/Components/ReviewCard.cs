@@ -78,9 +78,7 @@ namespace Tukupedia.Components
             imgSeller.Clip = geometry;
             imgSeller.HorizontalAlignment = HorizontalAlignment.Center;
             imgSeller.VerticalAlignment = VerticalAlignment.Top;
-            imgSeller.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + "Resource\\Logo\\TukupediaLogo.png"));
+            ImageHelper.loadImageCheems(imgSeller);
             stackPanelSellerProfile.Children.Add(imgSeller);
             stackPanelSellerProfile.Children.Add(stackPanelSeller);
 

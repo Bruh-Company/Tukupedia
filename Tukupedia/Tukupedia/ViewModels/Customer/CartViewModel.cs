@@ -309,7 +309,7 @@ namespace Tukupedia.ViewModels.Customer
                         loadCartItem();
                         updateGrandTotal();
                         TransactionViewModel.initH_Trans();
-                        
+                        CustomerViewModel.loadItems();
                     }
                     catch (OracleException e)
                     {

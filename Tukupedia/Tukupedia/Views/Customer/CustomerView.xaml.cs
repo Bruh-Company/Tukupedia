@@ -46,8 +46,7 @@ namespace Tukupedia.Views.Customer
 
         private void CustomerView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            CustomerViewModel.loadItems(PanelItems);
-            CustomerViewModel.loadCategory(spCategory);
+            
             //debugMode();
             labelWelcome.Content = "Welcome "+ Session.User["NAMA"].ToString();
             grid_Home.Margin = MarginPosition.Middle;
@@ -63,7 +62,9 @@ namespace Tukupedia.Views.Customer
 
             //Init Customer View Model
             CustomerViewModel.initCustomerViewModel(this);
-            
+            CustomerViewModel.loadItems();
+            CustomerViewModel.loadCategory(spCategory);
+
             //Init Cart
             CartViewModel.initCart(this);
             CartViewModel.loadCartItem();
