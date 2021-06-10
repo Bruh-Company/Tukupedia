@@ -175,6 +175,23 @@ namespace Tukupedia.ViewModels.Admin
             paramTanggal.EndValue = akhir;
             // pasang paramter tanggal saya ke dalam rpt
             rv.setParam("DateBetween", paramTanggal);
+            pv.Clear();
+            if (isofficial == 0)
+            {
+                pv.Add(getParamVal("0"));
+                pv.Add(getParamVal("1"));
+            }
+            else if (isofficial == 1)
+            {
+                pv.Add(getParamVal("1"));
+            }
+            else
+            {
+                pv.Add(getParamVal("0"));
+            }
+            
+            rv.setParam("SellerTypes", pv);
+            
             rv.ShowDialog();
 
 
