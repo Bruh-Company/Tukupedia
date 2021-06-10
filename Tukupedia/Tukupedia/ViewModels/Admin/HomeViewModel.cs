@@ -29,7 +29,7 @@ namespace Tukupedia.ViewModels.Admin
             akhir.AddDays(1);
             int rownum = (akhir.Date - awal.Date).Days;
             DB sql = new DB();
-            sql.statement = $"select k.dt, count(h.KODE) from (SELECT TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM) as tanggal,to_char(TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM),'dd-mm-yyyy') as dt  FROM DUAL CONNECT BY ROWNUM <= {rownum} order by 1 desc) k left join H_TRANS_ITEM h on k.dt = to_char(h.TANGGAL_TRANSAKSI, 'dd-mm-yyyy') group by TANGGAL_TRANSAKSI,tanggal, k.dt order by k.tanggal asc";
+            sql.statement = $"select k.dt, count(h.KODE) from (SELECT TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM) as tanggal,to_char(TRUNC (to_date('{Utility.formatDate(akhir)}','dd-mm-yyyy') - ROWNUM),'dd-mm-yyyy') as dt  FROM DUAL CONNECT BY ROWNUM <= {rownum} order by 1 desc) k left join H_TRANS_ITEM h on k.dt = to_char(h.TANGGAL_TRANSAKSI, 'dd-mm-yyyy') group by tanggal, k.dt order by k.tanggal asc";
             dtJumlahTransaksi = sql.get();
         }
 
