@@ -16,10 +16,8 @@ namespace Tukupedia.ViewModels.Customer
     {
         static CustomerModel cm = new CustomerModel();
         static CustomerView ViewComponent;
-        public SettingViewModel(CustomerView cv)
-        {
 
-        }
+        private static string imagePath;
         public static void init(CustomerView cv)
         {
             ViewComponent = cv;
@@ -45,6 +43,7 @@ namespace Tukupedia.ViewModels.Customer
             dr["EMAIL"] = ViewComponent.textboxEmailInfo.Text;
             dr["ALAMAT"] = ViewComponent.textboxAlamatInfo.Text;
             dr["NO_TELP"] = ViewComponent.textboxNoTelpInfo.Text;
+            dr["IMAGE"] = ImageHelper.saveImage(imagePath, Session.User["KODE"].ToString(), ImageHelper.target.customer);
             DateTime lahir = ViewComponent.dpickerlahir.SelectedDate.Value;
             new DB("customer").update("TANGGAL_LAHIR", lahir).execute();
             cm.update();
@@ -53,8 +52,7 @@ namespace Tukupedia.ViewModels.Customer
         }
         public static void changeImage()
         {
-            DataRow dr = cm.Table.Rows[0];
-            dr["IMAGE"] = ImageHelper.openFileDialog(ViewComponent.imageInfo);
+            imagePath = ImageHelper.openFileDialog(ViewComponent.imageInfo);
         }
         public static void editing(bool isEditing = false)
         {
@@ -68,6 +66,7 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent.btnChangeImage.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;
             ViewComponent.btnChangePassword.Visibility = isEditing ? Visibility.Visible : Visibility.Hidden;
             ViewComponent.dpickerlahir.IsEnabled = isEditing;
+            imagePath = "";
         }
     }
 }
