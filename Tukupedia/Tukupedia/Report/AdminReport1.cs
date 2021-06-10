@@ -130,7 +130,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Promos {
+        public CrystalDecisions.Shared.IParameterField Parameter_imageParam {
             get {
                 return this.DataDefinition.ParameterFields[3];
             }
@@ -138,7 +138,7 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_imageParam {
+        public CrystalDecisions.Shared.IParameterField Parameter_DateBetween {
             get {
                 return this.DataDefinition.ParameterFields[4];
             }

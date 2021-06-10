@@ -156,17 +156,25 @@ namespace Tukupedia.ViewModels.Admin
             }
             rv.setParam("Categories", pv);
             pv.Clear();
-            foreach (int i in promo)
-            {
-                DataRow dr = dtPromo.Rows[i];
-                pv.Add(getParamVal(dr["ID"].ToString()));
-            }
-            rv.setParam("Promos", pv);
-            pv.Clear();
+            //foreach (int i in promo)
+            //{
+            //    DataRow dr = dtPromo.Rows[i];
+            //    pv.Add(getParamVal(dr["ID"].ToString()));
+            //}
+            //rv.setParam("Promos", pv);
+            //pv.Clear();
+
             string path = (ImageHelper.getDebugPath() + "\\Resource\\Items\\");
             pv.Add(getParamVal(path));
             rv.setParam("imageParam", pv);
 
+            ParameterRangeValue paramTanggal = new ParameterRangeValue();
+            // Setup nilai start
+            paramTanggal.StartValue = awal;
+            // Setup nilai end
+            paramTanggal.EndValue = akhir;
+            // pasang paramter tanggal saya ke dalam rpt
+            rv.setParam("DateBetween", paramTanggal);
             rv.ShowDialog();
 
 
