@@ -97,14 +97,16 @@ namespace Tukupedia.Helpers.Utils {
             return null;
         }
 
-        public static void loadImage(Image elem, string path) {
+        public static void loadImage(Image elem, string path, target target) {
             // CARA PAKAI
             // loadImage(<component image>, path)
             if (path == "") {
                 MessageBox.Show("ERR! Can't load image :)", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            path = getItemImagePath(path);
+            if (target == target.item) path = getItemImagePath(path);
+            if (target == target.seller) path = getSellerImagePath(path);
+            if (target == target.customer) path = getCustomerImagePath(path);
             using (var stream = new FileStream(path, FileMode.Open)) {
                 BitmapImage bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
