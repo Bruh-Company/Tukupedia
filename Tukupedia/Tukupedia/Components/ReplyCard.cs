@@ -42,9 +42,7 @@ namespace Tukupedia.Components
             profilePic.Height = 50;
             profilePic.VerticalAlignment = VerticalAlignment.Top;
             profilePic.HorizontalAlignment = HorizontalAlignment.Center;
-            profilePic.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            ImageHelper.loadImageSwole(profilePic);
             btnKirim.Content = "Send";
             btnKirim.Style = Application.Current.TryFindResource("btn-primary") as Style;
             btnKirim.Width = 75;

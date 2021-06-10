@@ -134,7 +134,7 @@ namespace Tukupedia.Components
             if (!isOfficial) tbisOfficial.Visibility = Visibility.Hidden;
             if (toko["IMAGE"].ToString() != "")
             {
-                ImageHelper.loadImage(imgToko, toko["IMAGE"].ToString());
+                ImageHelper.loadImage(imgToko, toko["IMAGE"].ToString(),ImageHelper.target.seller);
             }
             Kurir_SellerModel ksm = new Kurir_SellerModel();
             DataRow[] rows = ksm.Table.Select($"ID_SELLER ='{toko["ID"]}'");

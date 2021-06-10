@@ -32,9 +32,7 @@ namespace Tukupedia.Components
             this.Padding = new Thickness(10, 4, 10, 4);
             _stackPanel = new StackPanel();
             _image = new Image();
-            _image.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            ImageHelper.loadImageSwole(_image);
             _image.Width = 150;
             _image.Height = 150;
             // Label Nama Barang
@@ -91,7 +89,7 @@ namespace Tukupedia.Components
         
         public void setImage(string url)
         {
-            ImageHelper.loadImage(_image, url);
+            ImageHelper.loadImage(_image, url,ImageHelper.target.item);
         }
         public void setNamaBarang(string nama)
         {

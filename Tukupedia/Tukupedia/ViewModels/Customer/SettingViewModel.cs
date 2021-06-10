@@ -35,7 +35,7 @@ namespace Tukupedia.ViewModels.Customer
             ViewComponent.textboxNoTelpInfo.Text = dr["NO_TELP"].ToString();
             ViewComponent.dpickerlahir.SelectedDate = DateTime.Parse(dr["TANGGAL_LAHIR"].ToString());
             if (dr["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageInfo);
-            else ImageHelper.loadImage(ViewComponent.imageInfo, dr["IMAGE"].ToString());
+            else ImageHelper.loadImage(ViewComponent.imageInfo, dr["IMAGE"].ToString(),ImageHelper.target.customer);
             editing();
         }
         public static void update()

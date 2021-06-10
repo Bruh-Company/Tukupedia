@@ -235,7 +235,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         private void reloadImageInfo() {
             if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageInfo);
-            else ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString());
+            else ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString(), ImageHelper.target.seller);
         }
 
         private void fillTextbox() {

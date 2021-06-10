@@ -64,7 +64,7 @@ namespace Tukupedia.Views.Customer
             }
             else
             {
-                ImageHelper.loadImage(ImageItem, item["IMAGE"].ToString());
+                ImageHelper.loadImage(ImageItem, item["IMAGE"].ToString(),ImageHelper.target.item);
             }
             maxQty = Convert.ToInt32(item["STOK"]);
             loadDetails();

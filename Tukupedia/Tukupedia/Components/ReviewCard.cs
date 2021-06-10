@@ -102,9 +102,7 @@ namespace Tukupedia.Components
             imgCust.Clip = geometry;
             imgCust.HorizontalAlignment = HorizontalAlignment.Center;
             imgCust.VerticalAlignment = VerticalAlignment.Top;
-            imgCust.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            ImageHelper.loadImageCheems(imgCust);
             stackPanelCustProfile.Children.Add(imgCust);
             stackPanelCustProfile.Children.Add(stackPanelCust);//End
 
@@ -179,15 +177,12 @@ namespace Tukupedia.Components
 
         public void setSellerImage(string url)
         {
-            imgSeller.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + url));
+            ImageHelper.loadImage(imgSeller, url, ImageHelper.target.seller);
         }
         public void setCustImage(string url)
         {
-            imgCust.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + url));
+            ImageHelper.loadImage(imgSeller, url, ImageHelper.target.customer);
+
         }
     }
 }

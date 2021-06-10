@@ -348,7 +348,6 @@ namespace Tukupedia.Views.Customer
         private void btnChangePassword_Click(object sender, RoutedEventArgs e)
         {
             ChangePasswordView cp = new ChangePasswordView("CUSTOMER", Session.User["ID"].ToString());
-            this.Hide();
             cp.ShowDialog();
             this.Show();
         }

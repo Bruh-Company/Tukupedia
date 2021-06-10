@@ -106,7 +106,7 @@
                 </StackPanel>
                 <Button Click="BtnAddCart_OnClick" x:Name="btnAddCart" Width="169" Content="Add to Cart" Style="{StaticResource btn-primary}"/>
             </StackPanel>
-            <Button Content="Back" HorizontalAlignment="Left" Margin="143,0,0,0" VerticalAlignment="Top" Width="75" Background="Red" BorderBrush="Red" Foreground="White" IsCancel="True" Click="Button_Click"/>
+            <Button Content="Back" HorizontalAlignment="Left" Margin="145,0,0,0" VerticalAlignment="Top" Width="75" Background="Red" BorderBrush="Red" Foreground="White" IsCancel="True" Click="Button_Click"/>
 
         </Grid>
     </Grid>

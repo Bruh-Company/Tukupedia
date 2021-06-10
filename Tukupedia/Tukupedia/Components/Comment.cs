@@ -18,9 +18,11 @@ namespace Tukupedia.Components
         private TextBlock date;
         private TextBlock keteranganPenjual;
         private Image profilePic;
+        private bool isPenjual;
 
         public Comment(bool isPenjual, bool transparent=false)
         {
+            this.isPenjual = isPenjual;
             this.spMain = new StackPanel();
             this.spMain.Orientation = Orientation.Horizontal;
             this.spContent = new StackPanel();
@@ -44,9 +46,7 @@ namespace Tukupedia.Components
             this.spMain.Children.Add(spContent);
             
             this.AddChild(spMain);
-            profilePic.Source =
-                new BitmapImage(new Uri(
-                    AppDomain.CurrentDomain.BaseDirectory + Utility.defaultPicture));
+            ImageHelper.loadImageCheems(profilePic);
             //Init Style
             this.profilePic.Width = 50;
             this.profilePic.Height = 50;
@@ -70,9 +70,15 @@ namespace Tukupedia.Components
             this.date.Text = date;
             if (url != "")
             {
-                profilePic.Source =
-                    new BitmapImage(new Uri(
-                        AppDomain.CurrentDomain.BaseDirectory + url));
+                if (isPenjual)
+                {
+                    ImageHelper.loadImage(profilePic, url, ImageHelper.target.seller);
+                }
+                else
+                {
+                    ImageHelper.loadImage(profilePic, url, ImageHelper.target.customer);
+                }
+                
             }
         }
 
