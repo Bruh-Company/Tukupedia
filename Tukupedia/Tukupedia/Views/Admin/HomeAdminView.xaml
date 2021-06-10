@@ -51,7 +51,7 @@
                             <Label Content="Tanggal Transaksi" Canvas.Left="36" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
                             <Label Content="s/d" Canvas.Left="218" Canvas.Top="373" RenderTransformOrigin="0.556,0.625" FontSize="18" Width="58"/>
                             <Button x:Name="btGenerateReport" Content="Generate Report" Canvas.Left="763" Canvas.Top="373" Width="219" FontSize="18" Click="btGenerateReport_Click"/>
-                            <Label Content="is Official" Canvas.Left="453" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
+                            <Label Content="Tipe Seller" Canvas.Left="453" Canvas.Top="320" RenderTransformOrigin="0.556,0.625" FontSize="18"/>
                             <ComboBox x:Name="cbisOfficial" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Canvas.Left="462" Canvas.Top="373" FontSize="20">
                                 <ComboBoxItem Content="Semua"/>
                                 <ComboBoxItem Content="Official"/>
