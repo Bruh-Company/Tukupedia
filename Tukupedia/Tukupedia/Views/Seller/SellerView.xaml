@@ -1,4 +1,6 @@
-﻿<Window x:Class="Tukupedia.Views.Seller.SellerView"
+﻿<Window WindowStyle="None"
+        ResizeMode="NoResize"
+        x:Class="Tukupedia.Views.Seller.SellerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,7 +10,7 @@
         mc:Ignorable="d"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
+        Title="Seller" Height="720" Width="1280" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" MinWidth="1280" MinHeight="720" MaxWidth="1280" MaxHeight="720">
     <Window.Resources>
         <!--Base-->
         <Style TargetType="{x:Type Label}">

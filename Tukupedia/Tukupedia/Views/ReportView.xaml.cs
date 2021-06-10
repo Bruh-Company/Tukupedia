@@ -35,5 +35,10 @@ namespace Tukupedia.Views {
         public void setParam<T>(string paramName, T paramValue) {
             report.SetParameterValue(paramName, paramValue);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

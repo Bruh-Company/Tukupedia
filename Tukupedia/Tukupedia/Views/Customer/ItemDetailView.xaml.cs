@@ -183,5 +183,10 @@ namespace Tukupedia.Views.Customer
                 Utility.setRichTextBoxString(rtbDiskusi, "Ask Here!");
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

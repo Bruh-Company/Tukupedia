@@ -1,4 +1,5 @@
-﻿<Window
+﻿<Window WindowStyle="None"
+        ResizeMode="NoResize"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Tukupedia.Views.LoginRegisterView"
         Background="{DynamicResource MaterialDesignPaper}"
         mc:Ignorable="d"
-        Title="LoginPage" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxHeight="720" MaxWidth="1280" Loaded="Window_Loaded">
+        Title="LoginPage" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxHeight="720" MaxWidth="1280" Loaded="Window_Loaded" BorderThickness="0">
     <Grid>
         <Canvas Margin="-1117,-157,-1583.4,81.4" RenderTransformOrigin="0.5,0.5" IsEnabled="False" IsManipulationEnabled="True" d:IsLocked="True">
             <Canvas.RenderTransform>
@@ -256,6 +257,7 @@
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
+                <Button Content="Close App" HorizontalAlignment="Left" Margin="691,10,0,0" VerticalAlignment="Top" Width="107" Background="Red" BorderBrush="Red" Foreground="White" Click="Button_Click"/>
             </Grid>
             <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="478" Margin="446,0,0,0" Stroke="White" VerticalAlignment="Center" Width="2" d:IsLocked="True"/>
         </Grid>

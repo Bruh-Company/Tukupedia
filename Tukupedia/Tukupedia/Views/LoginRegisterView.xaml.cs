@@ -75,12 +75,6 @@ namespace Tukupedia.Views
             dpCustomerBornDateRegister.DisplayDateEnd = DateTime.Now;
         }
 
-        public void closeThis()
-        {
-            this.Close();
-        }
-
-
         private void swapCard(object sender, RoutedEventArgs e)
         {
             LoginRegisterViewModel.swapCard();
@@ -477,6 +471,11 @@ namespace Tukupedia.Views
 
             lblSellerPasswordCommenter.Background = new SolidColorBrush(Color.FromArgb(0, 0, 255, 0));
             lblSellerPasswordCommenter.Content = "";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
