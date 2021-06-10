@@ -166,7 +166,7 @@ namespace Tukupedia.ViewModels.Seller {
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
 
             imagePath = row["IMAGE"].ToString();
-            ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString());
+            ImageHelper.loadImage(ViewComponent.imageProduk, row["IMAGE"].ToString(), ImageHelper.target.item);
 
             itemId = Convert.ToInt32(row["ID"].ToString());
             resetDiskusi();
