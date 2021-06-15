@@ -135,9 +135,16 @@ namespace Tukupedia.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Berhasil Login Customer \n Selamat Datang " + customer["NAMA"].ToString());
-                    Session.Login(customer, "customer");
-                    Session.isLogin = true;
+                    if (customer["STATUS"].ToString() == "1")
+                    {
+                        MessageBox.Show("Berhasil Login Customer \n Selamat Datang " + customer["NAMA"].ToString());
+                        Session.Login(customer, "customer");
+                        Session.isLogin = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Akun anda telah di ban, silahkan hubungan administrator");
+                    }
                 }
             }
 
@@ -167,9 +174,16 @@ namespace Tukupedia.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA_TOKO"].ToString());
-                    Session.Login(seller, "Seller");
-                    Session.isLogin = true;
+                    if (seller["STATUS"].ToString()=="1")
+                    {
+                        MessageBox.Show("Berhasil Login Seller \n Selamat Datang " + seller["NAMA_TOKO"].ToString());
+                        Session.Login(seller, "Seller");
+                        Session.isLogin = true;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Akun anda telah di ban, silahkan hubungan administrator");
+                    }
                 }
             }
 
