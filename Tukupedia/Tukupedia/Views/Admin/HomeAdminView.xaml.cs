@@ -812,8 +812,8 @@ namespace Tukupedia.Views.Admin
                     konter++;
                 }
                 DataRow drdate = pvm.getMasaBerlaku();
-                dpAwalPromo.SelectedDate = DateTime.Parse(drdate[0].ToString());
-                dpAkhirPromo.SelectedDate = DateTime.Parse(drdate[1].ToString());
+                dpAwalPromo.SelectedDate = DateTime.Parse(drdate[0].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                dpAkhirPromo.SelectedDate = DateTime.Parse(drdate[1].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 btTambahPromo.Visibility = Visibility.Hidden;
                 btUpdatePromo.Visibility = Visibility.Visible;
                 btHapusPromo.Visibility = Visibility.Visible;
