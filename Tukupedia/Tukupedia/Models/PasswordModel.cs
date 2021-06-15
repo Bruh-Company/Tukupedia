@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Tukupedia.Helpers.Utils;
 
 namespace Tukupedia.Models
 {
@@ -19,6 +20,12 @@ namespace Tukupedia.Models
             DataRow dr = Table.Rows[0];
             if(dr["PASSWORD"].ToString() == passwordLama)
             {
+                if (!Validator.Password(passwordBaru))
+                {
+                    MessageBox.Show("password harus memiliki 8 hingga 40 karakter dan mengandung\nminimal 1 digit numerik dan 1 karakter alfabet\ndan tidak boleh mengandung karakter spesial");
+                    return false;
+                }
+
                 if (passwordBaru == confirmPassword)
                 {
                     dr["PASSWORD"] = passwordBaru;
