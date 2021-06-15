@@ -281,12 +281,16 @@ namespace Tukupedia.Views.Customer
             Promo p = (Promo) cbPromotion.SelectedItem;
             CartViewModel.promo = p;
             tbDesc.Text = p.getDescription();
-            CartViewModel.checkPromotion(CartViewModel.promo);
+            bool validPromo =CartViewModel.checkPromotion(CartViewModel.promo);
+            if (validPromo)
+            {
+                CartViewModel.updateGrandTotal();
+            }
         }
 
         private void cbPaymentMethod_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CartViewModel.checkPromotion(CartViewModel.promo);
+            CartViewModel.updateGrandTotal();
         }
 
         private void btnUbahInfoCustomer_Click(object sender, RoutedEventArgs e)

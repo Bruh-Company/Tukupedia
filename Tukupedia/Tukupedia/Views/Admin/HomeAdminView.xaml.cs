@@ -882,7 +882,7 @@ namespace Tukupedia.Views.Admin
             string potonganmax = tbPotonganMax.Text;
             string hargamin = tbHargaMin.Text;
 
-            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "D" : "C";
+            string jenispotongan = cbJenisPotongan.SelectedIndex == 0 ? "P" : "F";
             string id_jenis_promo = cbJenisPromo.SelectedValue.ToString();
             if (cbJenisPotongan.SelectedIndex == -1)
             {
