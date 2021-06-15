@@ -29,6 +29,7 @@ namespace Tukupedia.Views.Seller {
             reportView.setParam("maxDate", maxDate);
             reportView.setParam("idHtrans", pValues);
             reportView.setParam("imagePath", ImageHelper.getDebugPath() + "\\Resource\\Items\\");
+            reportView.setParam("ID_SELLER", Session.User["ID"].ToString());
             reportView.Show();
             this.Close();
         }
@@ -40,10 +41,9 @@ namespace Tukupedia.Views.Seller {
 
         private ParameterValues GetParameterValues(string idSeller) {
             ParameterValues pValues = new ParameterValues();
-            H_Trans_ItemModel model = new H_Trans_ItemModel();
-            model.initAdapter($"select h.ID as ID from H_TRANS_ITEM h, D_TRANS_ITEM d, ITEM i where h.ID = d.ID_H_TRANS_ITEM and d.ID_ITEM = i.ID and i.ID_SELLER = {idSeller}");
-            model.init();
-            foreach (DataRow row in model.get()) {
+            Model model = new Model();
+            model.initAdapter($"SELECT hti.ID FROM H_TRANS_ITEM hti join D_TRANS_ITEM DTI on hti.ID = DTI.ID_H_TRANS_ITEM join ITEM I on I.ID = DTI.ID_ITEM WHERE I.ID_SELLER='{idSeller}' AND hti.STATUS ='P' group by hti.ID");
+            foreach (DataRow row in model.Table.Rows) {
                 pValues.Add(getParamVal(row["ID"].ToString()));
             }
             return pValues;
