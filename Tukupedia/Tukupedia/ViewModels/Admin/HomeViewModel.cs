@@ -175,8 +175,8 @@ namespace Tukupedia.ViewModels.Admin
             paramTanggal.EndValue = akhir;
             // pasang paramter tanggal saya ke dalam rpt
             rv.setParam("DateBetween", paramTanggal);
-            rv.setParam("awal", awal.AddDays(1));
-            rv.setParam("akhir", akhir.AddDays(-1));
+            rv.setParam("awal", awal);
+            rv.setParam("akhir", akhir);
             pv.Clear();
             if (isofficial == 0)
             {
