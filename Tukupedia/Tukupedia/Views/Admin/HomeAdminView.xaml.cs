@@ -617,6 +617,7 @@ namespace Tukupedia.Views.Admin
             btUpdateCourier.Visibility = Visibility.Hidden;
             btBanCourier.Visibility = Visibility.Hidden;
             btInsertCourier.Visibility = Visibility.Visible;
+            cancelCourier.Visibility = Visibility.Hidden;
             resetCourier();
         }
 
@@ -658,6 +659,7 @@ namespace Tukupedia.Views.Admin
                 btBanCourier.Visibility = Visibility.Visible;
                 btInsertCourier.Visibility = Visibility.Hidden;
                 btUpdateCourier.Visibility = Visibility.Visible;
+                cancelCourier.Visibility = Visibility.Visible;
                 if (dr[3].ToString() == "Aktif")
                 {
                     btBanCourier.Content = "Ban Kurir";
@@ -778,6 +780,7 @@ namespace Tukupedia.Views.Admin
             btTambahPromo.Visibility = Visibility.Visible;
             btUpdatePromo.Visibility = Visibility.Hidden;
             btHapusPromo.Visibility = Visibility.Hidden;
+            cancelPromo.Visibility = Visibility.Hidden;
             resetPromo();
         }
         void resetPromo()
@@ -823,6 +826,7 @@ namespace Tukupedia.Views.Admin
                 btTambahPromo.Visibility = Visibility.Hidden;
                 btUpdatePromo.Visibility = Visibility.Visible;
                 btHapusPromo.Visibility = Visibility.Visible;
+                cancelPromo.Visibility = Visibility.Visible;
                 if (dr["Status"].ToString() == "Aktif")
                 {
                     btHapusPromo.Content = "Matikan";
@@ -1012,6 +1016,7 @@ namespace Tukupedia.Views.Admin
                 konter = 0;
                 btTambahJenisPromo.Visibility = Visibility.Hidden;
                 btUpdateJenisPromo.Visibility = Visibility.Visible;
+                cancelJenisPromo.Visibility = Visibility.Visible;
                 btHapusJenisPromo.Visibility = Visibility.Visible;
 
             }
@@ -1057,7 +1062,7 @@ namespace Tukupedia.Views.Admin
             btTambahJenisPromo.Visibility = Visibility.Visible;
             btUpdateJenisPromo.Visibility = Visibility.Hidden;
             btHapusJenisPromo.Visibility = Visibility.Hidden;
-
+            cancelJenisPromo.Visibility = Visibility.Hidden;
             cebeKurir.IsChecked = false;
             cebeKategori.IsChecked = false;
             cebeSeller.IsChecked = false;
@@ -1417,6 +1422,16 @@ namespace Tukupedia.Views.Admin
         private void cancelCourier_Click(object sender, RoutedEventArgs e)
         {
             btKurir_Click(null, null);
+        }
+
+        private void cancelPromo_Click(object sender, RoutedEventArgs e)
+        {
+            btPromo_Click(null, null);
+        }
+
+        private void cancelJenisPromo_Click(object sender, RoutedEventArgs e)
+        {
+            resetJenisPromo();
         }
     }
 }
