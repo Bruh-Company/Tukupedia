@@ -144,6 +144,7 @@ namespace Tukupedia.ViewModels
                     else
                     {
                         MessageBox.Show("Akun anda telah di ban, silahkan hubungan administrator");
+                        return false;
                     }
                 }
             }
@@ -183,6 +184,7 @@ namespace Tukupedia.ViewModels
                     else
                     {
                         MessageBox.Show("Akun anda telah di ban, silahkan hubungan administrator");
+                        return false;
                     }
                 }
             }
