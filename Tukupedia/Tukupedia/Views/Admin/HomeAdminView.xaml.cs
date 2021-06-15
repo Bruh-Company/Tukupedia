@@ -916,6 +916,7 @@ namespace Tukupedia.Views.Admin
             btTambahPromo.Visibility = Visibility.Visible;
             btUpdatePromo.Visibility = Visibility.Hidden;
             btHapusPromo.Visibility = Visibility.Hidden;
+            cancelPromo.Visibility = Visibility.Hidden;
             resetPromo();
         }
 

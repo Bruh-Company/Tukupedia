@@ -123,6 +123,7 @@ namespace Tukupedia.ViewModels.Admin
                 if(datarow[0].ToString() == "0")
                 {
                     MessageBox.Show("Jenis Promo ini mati, tidak dapat menghidupkan promo");
+                    return;
                 }
                 new DB("PROMO").update("STATUS", "1").where("ID", id[0].ToString()).execute();
             }
