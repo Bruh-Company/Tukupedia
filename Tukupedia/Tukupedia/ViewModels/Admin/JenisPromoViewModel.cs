@@ -117,10 +117,12 @@ namespace Tukupedia.ViewModels.Admin
             if (cm.Table.Rows[selected]["Status"].ToString() == "Aktif")
             {
                 new DB("JENIS_PROMO").update("STATUS", "0").where("ID", dr[0].ToString()).execute();
+                new DB("PROMO").update("STATUS", "0").where("ID_JENIS_PROMO", dr[0].ToString()).execute();
             }
             else
             {
                 new DB("JENIS_PROMO").update("STATUS", "1").where("ID", dr[0].ToString()).execute();
+                new DB("PROMO").update("STATUS", "1").where("ID_JENIS_PROMO", dr[0].ToString()).execute();
             }
         }
     }
