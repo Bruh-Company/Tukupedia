@@ -233,6 +233,8 @@
                     <TextBox x:Name="tbNamaSellerOS" Height="42" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="274" Width="284" FontSize="20" IsReadOnly="True"/>
                     <Label Content="Mendaftar Sejak" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="336"/>
                     <TextBox x:Name="tbMendaftarSejakOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="336" Width="284" FontSize="20" IsReadOnly="True"/>
+                    <Label Content="Status" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="29" Canvas.Top="382"/>
+                    <TextBox x:Name="tbstatusOS" Height="41" Canvas.Left="230" TextWrapping="Wrap" Canvas.Top="382" Width="284" FontSize="20" IsReadOnly="True"/>
                 </Canvas>
             </Canvas>
         </Grid>

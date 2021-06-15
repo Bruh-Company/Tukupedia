@@ -1250,6 +1250,7 @@ namespace Tukupedia.Views.Admin
                 tbNoTelpOS.Text = dr[3].ToString();
                 tbNamaSellerOS.Text = dr[4].ToString();
                 tbMendaftarSejakOS.Text = dr[5].ToString();
+                tbstatusOS.Text = osvm.getOS_Status() ? "Official" : "Merchant";
                 CanvasDetailOfficialStore.Visibility = Visibility.Visible;
                 if (osvm.getOS_Status())
                 {
