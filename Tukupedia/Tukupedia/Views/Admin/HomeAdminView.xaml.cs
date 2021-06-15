@@ -3,8 +3,10 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -387,7 +389,7 @@ namespace Tukupedia.Views.Admin
                 tbAlamatCustomer.Text = dr[3].ToString();
                 tbEmailCustomer.Text = dr[1].ToString();
                 tbNotelpCustomer.Text = dr[4].ToString();
-                tbLahirCustomer.SelectedDate = DateTime.Parse(dr[5].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                tbLahirCustomer.SelectedDate = DateTime.ParseExact(dr[5].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 if (dr[6].ToString() == "Aktif")
                 {
                     btBanCustomer.Content = "Ban Customer";
@@ -812,8 +814,8 @@ namespace Tukupedia.Views.Admin
                     konter++;
                 }
                 DataRow drdate = pvm.getMasaBerlaku();
-                dpAwalPromo.SelectedDate = DateTime.Parse(drdate[0].ToString(), System.Globalization.CultureInfo.InvariantCulture);
-                dpAkhirPromo.SelectedDate = DateTime.Parse(drdate[1].ToString(), System.Globalization.CultureInfo.InvariantCulture);
+                dpAwalPromo.SelectedDate = DateTime.ParseExact(drdate[0].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                dpAkhirPromo.SelectedDate = DateTime.ParseExact(drdate[1].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
                 btTambahPromo.Visibility = Visibility.Hidden;
                 btUpdatePromo.Visibility = Visibility.Visible;
                 btHapusPromo.Visibility = Visibility.Visible;
