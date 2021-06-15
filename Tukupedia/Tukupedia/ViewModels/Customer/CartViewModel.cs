@@ -377,7 +377,7 @@ namespace Tukupedia.ViewModels.Customer
             PromoModel pm = new PromoModel();
 
             list_promo = new List<Promo>();
-            foreach (DataRow row in pm.Table.Rows)
+            foreach (DataRow row in pm.Table.Select("STATUS = '1'"))
             {
                 Promo p = new Promo(
                     id:row["ID"].ToString(),
