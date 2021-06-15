@@ -145,9 +145,11 @@ namespace Tukupedia.Components
                 {
                     ComboBoxItem cbi = new ComboBoxItem();
                     DataRow kurir = new DB("KURIR").@select().@where("ID", row["ID_KURIR"].ToString()).getFirst();
-                    cbi.Content = kurir["NAMA"].ToString();
-                    cbi.Tag = kurir["ID"].ToString();
-                    cbKurir.Items.Add(cbi);
+                    if (kurir["STATUS"].ToString() == "1") {
+                        cbi.Content = kurir["NAMA"].ToString();
+                        cbi.Tag = kurir["ID"].ToString();
+                        cbKurir.Items.Add(cbi);
+                    }
                 }
             }
             
