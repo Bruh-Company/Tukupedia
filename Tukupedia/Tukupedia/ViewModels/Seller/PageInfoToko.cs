@@ -108,7 +108,7 @@ namespace Tukupedia.ViewModels.Seller {
             seller = new DB("SELLER").select().where("ID", seller["ID"].ToString()).getFirst();
 
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            imagePath = seller["IMAGE"].ToString();
+            imagePath = ImageHelper.getSellerImagePath(seller["IMAGE"].ToString());
 
             lbKurirTable = new DB("KURIR_SELLER")
                 .select("KURIR.ID as ID", "KURIR.NAMA as NAMA")
@@ -303,10 +303,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         public void ChangePassword() {
             ChangePasswordView cp = new ChangePasswordView("SELLER", seller["ID"].ToString());
-            ViewComponent.Hide();
             cp.ShowDialog();
-            ViewComponent.Show();
-
         }
     }
 }

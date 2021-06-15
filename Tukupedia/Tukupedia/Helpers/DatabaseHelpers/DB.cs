@@ -258,8 +258,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-
+                Console.WriteLine(ex.ToString());
             }
         }
         public DataTable get( bool debug =false)
@@ -275,7 +274,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
             }
             return table;
         }
@@ -290,7 +289,7 @@ namespace Tukupedia.Helpers.DatabaseHelpers
             }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
             }
             return row;
 

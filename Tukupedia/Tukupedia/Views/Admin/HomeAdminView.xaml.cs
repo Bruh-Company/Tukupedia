@@ -386,6 +386,7 @@ namespace Tukupedia.Views.Admin
                 tbAlamatCustomer.Text = dr[3].ToString();
                 tbEmailCustomer.Text = dr[1].ToString();
                 tbNotelpCustomer.Text = dr[4].ToString();
+                MessageBox.Show(dr[5].ToString());
                 tbLahirCustomer.SelectedDate = DateTime.Parse(dr[5].ToString());
                 if (dr[6].ToString() == "Aktif")
                 {
