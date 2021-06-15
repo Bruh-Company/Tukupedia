@@ -25,8 +25,8 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            forid.initAdapter($"select ID from METODE_PEMBAYARAN where STATUS = '1' order by NAMA");
-            cm.initAdapter($"select NAMA as \"Jenis Pembayaran\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Pembayaran\" from METODE_PEMBAYARAN where STATUS = '1' order by NAMA");
+            forid.initAdapter($"select ID from METODE_PEMBAYARAN order by NAMA");
+            cm.initAdapter($"select NAMA as \"Jenis Pembayaran\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Pembayaran\" from METODE_PEMBAYARAN order by NAMA");
         }
 
         public DataTable getDataTable()
@@ -88,13 +88,14 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = forid.Table.Rows[selected];
-            if (true)
+            DataRow origin = cm.Table.Rows[selected];
+            if (origin[1].ToString() == "Aktif")
             {
                 new DB("METODE_PEMBAYARAN").update("STATUS", "0").where("ID", dr[0].ToString()).execute();
             }
             else
             {
-                new DB("METODE_PEMBAYARAN").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
+                new DB("METODE_PEMBAYARAN").update("STATUS", "1").where("ID", dr[0].ToString()).execute();
             }
         }
     }

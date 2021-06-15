@@ -23,7 +23,7 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kurir\", to_char(HARGA) as \"Harga\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kurir\" from KURIR where STATUS = '1' order by KODE");
+            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kurir\", to_char(HARGA) as \"Harga\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kurir\" from KURIR order by KODE");
             //foreach (DataRow dr in cm.Table.Rows)
             //{
             //    dr[2] = dr[2].ToString();
@@ -91,7 +91,7 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = cm.Table.Rows[selected];
-            if (true)
+            if (dr[3].ToString() == "Aktif")
             {
                 new DB("KURIR").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
             }

@@ -45,7 +45,7 @@ namespace Tukupedia.ViewModels.Customer
             dr["NO_TELP"] = ViewComponent.textboxNoTelpInfo.Text;
             dr["IMAGE"] = ImageHelper.saveImage(imagePath, Session.User["KODE"].ToString(), ImageHelper.target.customer);
             DateTime lahir = ViewComponent.dpickerlahir.SelectedDate.Value;
-            new DB("customer").update("TANGGAL_LAHIR", lahir).execute();
+            new DB("customer").update("TANGGAL_LAHIR", lahir).where("ID",dr[0].ToString()).execute();
             cm.update();
             reload();
 

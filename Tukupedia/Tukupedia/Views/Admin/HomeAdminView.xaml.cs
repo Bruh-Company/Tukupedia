@@ -348,6 +348,7 @@ namespace Tukupedia.Views.Admin
         {
             cavm = new CategoryViewModel();
             dgCategory.ItemsSource = cavm.getDataTable().DefaultView;
+            tbNamaKategori.Text = "";
         }
 
         private void btCustomer_Click(object sender, RoutedEventArgs e)
@@ -386,8 +387,7 @@ namespace Tukupedia.Views.Admin
                 tbAlamatCustomer.Text = dr[3].ToString();
                 tbEmailCustomer.Text = dr[1].ToString();
                 tbNotelpCustomer.Text = dr[4].ToString();
-                MessageBox.Show(dr[5].ToString());
-                tbLahirCustomer.SelectedDate = DateTime.Parse(dr[5].ToString());
+                tbLahirCustomer.SelectedDate = DateTime.Parse(dr[5].ToString(), System.Globalization.CultureInfo.InvariantCulture);
                 if (dr[6].ToString() == "Aktif")
                 {
                     btBanCustomer.Content = "Ban Customer";
@@ -528,6 +528,8 @@ namespace Tukupedia.Views.Admin
             btToggleKategori.Visibility = Visibility.Visible;
             btUpdateKategori.Visibility = Visibility.Visible;
             tbNamaKategori.Text = dr[1].ToString();
+            if (dr[2].ToString() == "Aktif") btToggleKategori.Content = "Matikan";
+            else btToggleKategori.Content = "Nyalakan";
         }
 
         private void btTambahKategori_Click(object sender, RoutedEventArgs e)
@@ -652,6 +654,11 @@ namespace Tukupedia.Views.Admin
                 btBanCourier.Visibility = Visibility.Visible;
                 btInsertCourier.Visibility = Visibility.Hidden;
                 btUpdateCourier.Visibility = Visibility.Visible;
+                if (dr[3].ToString() == "Aktif")
+                {
+                    btBanCourier.Content = "Ban Kurir";
+                }
+                else btBanCourier.Content = "Aktifkan Kurir";
             }
         }
 
@@ -708,6 +715,12 @@ namespace Tukupedia.Views.Admin
                 btToggleJenisPembayaran.Visibility = Visibility.Visible;
                 btUpdateJenisPembayaran.Visibility = Visibility.Visible;
                 btTambahJenisPembayaran.Visibility = Visibility.Hidden;
+                if (dr[1].ToString() == "Aktif")
+                {
+                    btToggleJenisPembayaran.Content = "Matikan";
+                }
+                else btToggleJenisPembayaran.Content = "Aktifkan";
+
             }
         }
 

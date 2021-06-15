@@ -114,8 +114,8 @@
                     <Label Content="Tipe Seller" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="427"/>
                     <Button Style="{StaticResource btn-primary}" x:Name="btUpdateSeller" Content="Update Seller" Canvas.Left="31" Canvas.Top="562" Width="300" FontSize="18" Click="btUpdateSeller_Click"/>
                     <ComboBox x:Name="cbisOfficialSeller" Canvas.Left="31" Canvas.Top="464" Width="300" Height="31" FontSize="20">
-                        <ComboBoxItem Content="No"/>
-                        <ComboBoxItem Content="Yes"/>
+                        <ComboBoxItem Content="Merchant"/>
+                        <ComboBoxItem Content="Official Store"/>
                     </ComboBox>
                 </Canvas>
             </Canvas>

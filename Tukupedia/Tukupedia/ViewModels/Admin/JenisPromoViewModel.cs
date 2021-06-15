@@ -32,8 +32,8 @@ namespace Tukupedia.ViewModels.Admin
 
         void reload()
         {
-            cm.initAdapter($"select jp.NAMA as \"Jenis Promo\", nvl(c.NAMA,'-') as \"Kategori\", nvl(k.NAMA,'-') as \"Kurir\", nvl(s.NAMA_TOKO,'-') as \"Seller\", nvl(m.NAMA,'-') as \"Metode Pembayaran\", case jp.STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status\" from JENIS_PROMO jp left join CATEGORY c on jp.ID_CATEGORY = c.ID left join KURIR k on k.ID = jp.ID_KURIR left join SELLER s on s.ID = jp.ID_SELLER left join METODE_PEMBAYARAN m on jp.ID_METODE_PEMBAYARAN = m.ID");
-            forid.initAdapter("select jp.ID from JENIS_PROMO jp left join CATEGORY c on jp.ID_CATEGORY = c.ID left join KURIR k on k.ID = jp.ID_KURIR left join SELLER s on s.ID = jp.ID_SELLER left join METODE_PEMBAYARAN m on jp.ID_METODE_PEMBAYARAN = m.ID");
+            cm.initAdapter($"select jp.NAMA as \"Jenis Promo\", nvl(c.NAMA,'-') as \"Kategori\", nvl(k.NAMA,'-') as \"Kurir\", nvl(s.NAMA_TOKO,'-') as \"Seller\", nvl(m.NAMA,'-') as \"Metode Pembayaran\", case jp.STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status\" from JENIS_PROMO jp left join CATEGORY c on jp.ID_CATEGORY = c.ID left join KURIR k on k.ID = jp.ID_KURIR left join SELLER s on s.ID = jp.ID_SELLER left join METODE_PEMBAYARAN m on jp.ID_METODE_PEMBAYARAN = m.ID order by jp.nama");
+            forid.initAdapter("select jp.ID from JENIS_PROMO jp left join CATEGORY c on jp.ID_CATEGORY = c.ID left join KURIR k on k.ID = jp.ID_KURIR left join SELLER s on s.ID = jp.ID_SELLER left join METODE_PEMBAYARAN m on jp.ID_METODE_PEMBAYARAN = m.ID order by jp.nama");
             category.initAdapter("select ID, NAMA from CATEGORY where STATUS = '1'");
             kurir.initAdapter("select ID, NAMA from KURIR where STATUS = '1'");
             seller.initAdapter("select ID, NAMA_TOKO from SELLER where STATUS = '1'");
