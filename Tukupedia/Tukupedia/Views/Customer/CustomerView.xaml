@@ -162,7 +162,7 @@
                         </RichTextBox>
                         <materialDesign:RatingBar x:Name="ratingUlasan" HorizontalAlignment="Left" Margin="-5,139,0,0" VerticalAlignment="Top" Height="22" Width="118" Foreground="#FFE9F30F" Grid.ColumnSpan="2"/>
                         <Button Click="btnBeriUlasan_Click" x:Name="btnBeriUlasan" Style="{StaticResource btn-primary}" Content="Beri Ulasan" HorizontalAlignment="Left" Margin="0,212,0,0" VerticalAlignment="Top" Width="540" Grid.ColumnSpan="2"/>
-                        <TextBlock x:Name="tbSudahUlas"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,115,0,0" TextWrapping="Wrap" Text="(Barang sudah diulas!)" VerticalAlignment="Top" RenderTransformOrigin="3.465,1.104" TextAlignment="Center" FontSize="16" FontWeight="Bold"/>
+                        <TextBlock Visibility="Hidden" x:Name="tbSudahUlas"  Style="{StaticResource textblock-md}" HorizontalAlignment="Left" Margin="0,115,0,0" TextWrapping="Wrap" Text="(Barang sudah diulas!)" VerticalAlignment="Top" RenderTransformOrigin="3.465,1.104" TextAlignment="Center" FontSize="16" FontWeight="Bold"/>
 
                     </Grid>
                 </Grid>

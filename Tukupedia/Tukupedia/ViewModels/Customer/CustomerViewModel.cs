@@ -147,10 +147,8 @@ namespace Tukupedia.ViewModels.Customer
         public static void loadCategory(StackPanel sp)
         {
             categories = new CategoryModel();
-            categories.addWhere("STATUS", "1");
-            categories.init();
 
-            foreach (DataRow row in categories.Table.Rows) {
+            foreach (DataRow row in categories.Table.Select("STATUS = '1'")) {
                 CheckBox checkBox = new CheckBox();
                 checkBox.Name = "cb" + row["ID"].ToString();
                 checkBox.Content = row["NAMA"].ToString();
