@@ -13,17 +13,19 @@ namespace Tukupedia.ViewModels.Admin
 {
     class CategoryViewModel
     {
-        CategoryModel cm;
+        CategoryModel cm, forid;
         int selected = -1;
         public CategoryViewModel()
         {
             cm = new CategoryModel();
+            forid = new CategoryModel();
             reload();
         }
 
         void reload()
         {
-            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kategori\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kategori\" from CATEGORY where STATUS = '1' order by KODE");
+            cm.initAdapter($"select KODE as \"Kode\", NAMA as \"Nama Kategori\", case STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status Kategori\" from CATEGORY order by KODE");
+            forid.initAdapter($"select ID from CATEGORY order by KODE");
         }
 
         public DataTable getDataTable()
@@ -85,13 +87,16 @@ namespace Tukupedia.ViewModels.Admin
         public void delete()
         {
             DataRow dr = cm.Table.Rows[selected];
-            if (true)
+            DataRow forid = this.forid.Table.Rows[selected];
+            if (dr[2].ToString() == "Aktif")
             {
                 new DB("category").update("STATUS", "0").where("KODE", dr[0].ToString()).execute();
+                new DB("ITEM").update("STATUS", "0").where("ID_CATEGORY", forid[0].ToString()).execute();
             }
             else
             {
                 new DB("category").update("STATUS", "1").where("KODE", dr[0].ToString()).execute();
+                new DB("ITEM").update("STATUS", "1").where("ID_CATEGORY", forid[0].ToString()).execute();
             }
         }
         public int nice(DataTable nice, string kode)

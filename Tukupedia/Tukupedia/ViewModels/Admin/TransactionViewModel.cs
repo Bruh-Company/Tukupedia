@@ -50,7 +50,7 @@ namespace Tukupedia.ViewModels.Admin
             DataRow dr = hm_helper.Table.Rows[selected];
             dm = new D_Trans_ItemModel();
             dm.initAdapter($"select i.NAMA as \"Nama Item\"" +
-                $", s.NAMA_SELLER as \"Nama Seller\"" +
+                $", s.NAMA_SELLER as \"Nama Toko\"" +
                 $", to_char(i.HARGA) as \"Harga\"" +
                 $", to_char(d.JUMLAH) as \"Jumlah\"" +
                 $", to_char(d.JUMLAH * i.HARGA) as \"Total\" " +
