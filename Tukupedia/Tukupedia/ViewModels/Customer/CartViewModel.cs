@@ -229,7 +229,6 @@ namespace Tukupedia.ViewModels.Customer
             {
                 diskon = 0;
             }
-            MessageBox.Show(diskon.ToString());
             updateHarga(qty,grandTotal,diskon);
         }
         public static void proceedToCheckout()
@@ -239,7 +238,6 @@ namespace Tukupedia.ViewModels.Customer
             string message = validateProceedCheckout();
             if (message == "Success")
             {
-                MessageBox.Show(promo.KODE);
                 App.openConnection(out _);
                 using(OracleTransaction Transaction = App.connection.BeginTransaction())
                 {
