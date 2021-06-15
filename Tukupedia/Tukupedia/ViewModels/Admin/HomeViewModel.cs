@@ -130,8 +130,8 @@ namespace Tukupedia.ViewModels.Admin
             getJenisPembayaran();
             getKategori();
             getPromo();
-            akhir = akhir.AddDays(1);
-            awal = awal.AddDays(-1);
+            //awal = awal.AddDays(-1);
+            //akhir = akhir.AddDays(1);
 
             pv.Clear();
             foreach (int i in jenisPembayaran)
@@ -175,8 +175,8 @@ namespace Tukupedia.ViewModels.Admin
             paramTanggal.EndValue = akhir;
             // pasang paramter tanggal saya ke dalam rpt
             rv.setParam("DateBetween", paramTanggal);
-            rv.setParam("awal", awal);
-            rv.setParam("akhir", akhir);
+            rv.setParam("awal", awal.AddDays(1));
+            rv.setParam("akhir", akhir.AddDays(-1));
             pv.Clear();
             if (isofficial == 0)
             {
