@@ -107,7 +107,8 @@ namespace Tukupedia.ViewModels.Customer
                 "i.NAMA as NAMA " +
                 "FROM ITEM i, SELLER s, CATEGORY c " +
                 "WHERE i.ID_SELLER = s.ID " +
-                "and i.ID_CATEGORY = c.ID ";
+                "and i.ID_CATEGORY = c.ID " +
+                "and i.STATUS = '1'";
 
             string where = "";
             if (keyword != "") {
@@ -137,9 +138,6 @@ namespace Tukupedia.ViewModels.Customer
             items = new ItemModel();
             items.initAdapter(cmd);
             filteredItems = items.Table.Select();
-            if (keyword != "") {
-                
-            }
             loadItems();
             isFiltered = false;
         }

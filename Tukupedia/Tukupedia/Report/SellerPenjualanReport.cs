@@ -106,9 +106,17 @@ namespace Tukupedia.Report {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_idSeller {
+        public CrystalDecisions.Shared.IParameterField Parameter_imagePath {
             get {
                 return this.DataDefinition.ParameterFields[2];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_idHtrans {
+            get {
+                return this.DataDefinition.ParameterFields[3];
             }
         }
     }
