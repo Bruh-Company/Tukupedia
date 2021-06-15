@@ -223,8 +223,12 @@ namespace Tukupedia.ViewModels.Customer
                 {
                     diskon = promo.POTONGAN;
                 }
+                
             }
-            
+            if (!checkPromotion(promo))
+            {
+                diskon = 0;
+            }
             updateHarga(qty,grandTotal,diskon);
         }
         public static void proceedToCheckout()
@@ -252,6 +256,19 @@ namespace Tukupedia.ViewModels.Customer
                         if (checkPromotion(promo, false))
                         {
                             rowHTI["ID_PROMO"] = promo.ID;
+                            if (promo.JENIS_POTONGAN == "P")
+                            {
+                                diskon = Convert.ToInt32((Convert.ToDouble(promo.POTONGAN) * Convert.ToDouble(hargaSebelumOngkir)) / 100.0);
+                                diskon = Math.Min(promo.POTONGAN_MAX, diskon);
+                            }
+                            else
+                            {
+                                diskon = promo.POTONGAN;
+                            }
+                        }
+                        else
+                        {
+                            diskon = 0;
                         }
                         //grandtotal = hargasebelumongkir + ongkir - diskon
                         rowHTI["GRANDTOTAL"] = grandTotal-diskon;
@@ -401,6 +418,7 @@ namespace Tukupedia.ViewModels.Customer
         public static bool checkPromotion(Promo p, bool toggle=true)
         {
             bool valid = false;
+            ViewComponent.tbDiscount.Text = Utility.formatMoney(0); ; ; ;
             if (promo != null)
             {
                 valid = true;
@@ -416,6 +434,10 @@ namespace Tukupedia.ViewModels.Customer
                     }
 
                     valid &= hargaSebelumOngkir >= p.HARGA_MIN;
+                }
+                if (!valid)
+                {
+                    
                 }
                 if(toggle)togglePromotionError(valid);
             }

@@ -130,8 +130,8 @@ namespace Tukupedia.ViewModels.Admin
             getJenisPembayaran();
             getKategori();
             getPromo();
-            akhir = akhir.AddDays(1);
-            awal = awal.AddDays(-1);
+            //awal = awal.AddDays(-1);
+            //akhir = akhir.AddDays(1);
 
             pv.Clear();
             foreach (int i in jenisPembayaran)

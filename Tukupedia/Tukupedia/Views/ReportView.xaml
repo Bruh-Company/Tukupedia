@@ -9,11 +9,9 @@
         xmlns:local="clr-namespace:Tukupedia.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Title="Report" Height="720" Width="1280" WindowStartupLocation="CenterScreen" MinWidth="1280" MinHeight="720" MaxHeight="720" MaxWidth="1280" Loaded="Window_Loaded">
-    <Grid>
+    <Grid Background="#FF303030">
         <Viewer:CrystalReportsViewer Name="reportViewer" Margin="0,32,-0.4,0.4"></Viewer:CrystalReportsViewer>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="1199,0,-0.4,681.6" Width="75" Background="Red" Foreground="White" BorderBrush="Red" Height="Auto" Click="Button_Click"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="1205,0,0,682" Width="75" Background="Red" Foreground="White" BorderBrush="Red" Height="Auto" Click="Button_Click"/>
     </Grid>
 </Window>
