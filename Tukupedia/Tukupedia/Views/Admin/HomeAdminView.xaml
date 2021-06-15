@@ -75,6 +75,7 @@
                 <Button Style="{StaticResource btn-primary}" x:Name="btTambahKategori" Content="Tambah Kategori" Canvas.Left="681" Canvas.Top="360" Width="143" Click="btTambahKategori_Click"/>
                 <Button Style="{StaticResource btn-primary}" x:Name="btUpdateKategori" Content="Update Kategori" Canvas.Left="838" Canvas.Top="360" Width="143" Click="btUpdateKategori_Click"/>
                 <Button Style="{StaticResource btn-danger}" x:Name="btToggleKategori" Content="Matikan Kategori" Canvas.Left="1004" Canvas.Top="360" Width="143" Click="btToogleKategori_Click"/>
+                <Button Style="{StaticResource btn-primary}" x:Name="cancelCategory" Content="Tambah Kategori" Canvas.Left="838" Canvas.Top="397" Width="309" Click="cancelCategory_Click"/>
             </Canvas>
             <Canvas x:Name="CanvasrootCustomer" HorizontalAlignment="Left" Height="624" Margin="-1620,691,0,-626" VerticalAlignment="Top" Width="1252">
                 <DataGrid x:Name="dgCustomer" Height="549" Canvas.Left="10" Canvas.Top="65" Width="869" MouseUp="dgCustomer_MouseDoubleClick" FontSize="14" SelectedCellsChanged="dgCustomer_SelectedCellsChanged"
@@ -148,6 +149,7 @@
                     <TextBox x:Name="tbHargaKurir" Height="41" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="142" Width="300" FontSize="20" TextChanged="tbHargaKurir_TextChanged" PreviewTextInput="tbHargaKurir_PreviewTextInput"/>
                     <Button Style="{StaticResource btn-primary}" x:Name="btUpdateCourier" Content="Update Courier" Canvas.Left="10" Canvas.Top="308" Width="300" FontSize="18" Click="btUpdateCourier_Click"/>
                     <Button Style="{StaticResource btn-primary}" x:Name="btInsertCourier" Content="Insert Courier" Canvas.Left="10" Canvas.Top="234" Width="300" FontSize="18" Click="btInsertCourier_Click"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="cancelCourier" Content="Update Courier" Canvas.Left="10" Canvas.Top="345" Width="300" FontSize="18" Click="cancelCourier_Click"/>
                 </Canvas>
             </Canvas>
             <Canvas x:Name="CanvasrootJenisPembayaran" HorizontalAlignment="Left" Height="624" Margin="-1620,-1279,0,0" VerticalAlignment="Top" Width="1252">
@@ -159,6 +161,7 @@
                 <Button Style="{StaticResource btn-primary}" x:Name="btTambahJenisPembayaran" Content="Tambah Jenis Pembayaran" Canvas.Left="681" Canvas.Top="360" Width="291" Click="btTambahJenisPembayaran_Click"/>
                 <Button Style="{StaticResource btn-primary}" x:Name="btUpdateJenisPembayaran" Content="Update" Canvas.Left="681" Canvas.Top="397" Width="143" Click="btUpdateJenisPembayaran_Click"/>
                 <Button Style="{StaticResource btn-danger}" x:Name="btToggleJenisPembayaran" Content="Matikan" Canvas.Left="829" Canvas.Top="397" Width="143" Click="btToggleJenisPembayaran_Click"/>
+                <Button Style="{StaticResource btn-primary}" x:Name="cancelJenisPembayaran" Content="Cancel" Canvas.Left="681" Canvas.Top="434" Width="291" Click="cancelJenisPembayaran_Click"/>
             </Canvas>
             <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="361.6,-688,-850.4,0" VerticalAlignment="Top" Width="1252" Grid.Column="1">
                 <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">

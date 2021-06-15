@@ -345,6 +345,7 @@ namespace Tukupedia.Views.Admin
             btTambahKategori.Visibility = Visibility.Visible;
             btToggleKategori.Visibility = Visibility.Hidden;
             btUpdateKategori.Visibility = Visibility.Hidden;
+            cancelCategory.Visibility = Visibility.Hidden;
         }
         void reloadCategory()
         {
@@ -529,6 +530,7 @@ namespace Tukupedia.Views.Admin
             btTambahKategori.Visibility = Visibility.Hidden;
             btToggleKategori.Visibility = Visibility.Visible;
             btUpdateKategori.Visibility = Visibility.Visible;
+            cancelCategory.Visibility = Visibility.Visible;
             tbNamaKategori.Text = dr[1].ToString();
             if (dr[2].ToString() == "Aktif") btToggleKategori.Content = "Matikan";
             else btToggleKategori.Content = "Nyalakan";
@@ -717,6 +719,7 @@ namespace Tukupedia.Views.Admin
                 btToggleJenisPembayaran.Visibility = Visibility.Visible;
                 btUpdateJenisPembayaran.Visibility = Visibility.Visible;
                 btTambahJenisPembayaran.Visibility = Visibility.Hidden;
+                cancelJenisPembayaran.Visibility = Visibility.Visible;
                 if (dr[1].ToString() == "Aktif")
                 {
                     btToggleJenisPembayaran.Content = "Matikan";
@@ -745,6 +748,7 @@ namespace Tukupedia.Views.Admin
             btToggleJenisPembayaran.Visibility = Visibility.Hidden;
             btUpdateJenisPembayaran.Visibility = Visibility.Hidden;
             btTambahJenisPembayaran.Visibility = Visibility.Visible;
+            cancelJenisPembayaran.Visibility = Visibility.Hidden;
         }
         void reloadJenisPembayaran()
         {
@@ -819,7 +823,11 @@ namespace Tukupedia.Views.Admin
                 btTambahPromo.Visibility = Visibility.Hidden;
                 btUpdatePromo.Visibility = Visibility.Visible;
                 btHapusPromo.Visibility = Visibility.Visible;
-
+                if (dr["Status"].ToString() == "Aktif")
+                {
+                    btHapusPromo.Content = "Matikan";
+                } 
+                else btHapusPromo.Content = "Nyalakan";
             }
         }
 
@@ -1394,6 +1402,21 @@ namespace Tukupedia.Views.Admin
         private void btGenerateReport_Click(object sender, RoutedEventArgs e)
         {
             hvm.generateReport(getSelected(lbJenisPembayaran), getSelected(lbKurir), getSelected(lbJenisKategori), getSelected(lbJenisPromo), dpTanggalAwalReport.SelectedDate.Value, dpTanggalAkhirReport.SelectedDate.Value, cbisOfficial.SelectedIndex);
+        }
+
+        private void cancelJenisPembayaran_Click(object sender, RoutedEventArgs e)
+        {
+            btJenisPembayaran_Click(null, null);
+        }
+
+        private void cancelCategory_Click(object sender, RoutedEventArgs e)
+        {
+            btCategory_Click(null, null);
+        }
+
+        private void cancelCourier_Click(object sender, RoutedEventArgs e)
+        {
+            btKurir_Click(null, null);
         }
     }
 }

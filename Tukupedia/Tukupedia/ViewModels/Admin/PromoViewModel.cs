@@ -29,7 +29,7 @@ namespace Tukupedia.ViewModels.Admin
         void reload()
         {
             cm.initAdapter($"select p.KODE as \"Kode\", p.POTONGAN as \"Potongan\", p.POTONGAN_MAKS as \"Potongan Maximal\", p.HARGA_MIN as \"Harga Minimal\", case p.JENIS_POTONGAN when 'P' then 'Persenan' else 'Fixed' end as \"Jenis Potongan\", j.NAMA as \"Nama Promo\", to_char(p.TANGGAL_AWAL,'dd-mm-yyyy') || 's/d' || to_char(p.TANGGAL_AKHIR,'dd-mm-yyyy') as \"Masa Berlaku\", case p.STATUS when '1' then 'Aktif' else 'Non Aktif' end as \"Status\", to_char(p.CREATED_AT,'dd-mm-yyyy') as \"Dibuat Pada\" from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID order by KODE");
-            forid.initAdapter("select p.id from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID order by KODE");
+            forid.initAdapter("select p.id, p.ID_JENIS_PROMO from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID order by KODE");
             forcb.initAdapter("select ID, NAMA from JENIS_PROMO order by NAMA");
             masaberlaku.initAdapter("select to_char(p.TANGGAL_AWAL,'dd-mm-yyyy'), to_char(p.TANGGAL_AKHIR,'dd-mm-yyyy') from PROMO p, JENIS_PROMO j where p.ID_JENIS_PROMO = j.ID and p.STATUS = '1' order by KODE");
         }
@@ -118,6 +118,13 @@ namespace Tukupedia.ViewModels.Admin
             }
             else
             {
+                DB debe = new DB();
+                debe.statement = $"select status from jenis_promo where id = '{id[1].ToString()}'";
+                DataRow datarow = debe.getFirst();
+                if(datarow[0].ToString() == "0")
+                {
+                    MessageBox.Show("Jenis Promo ini mati, tidak dapat menghidupkan promo");
+                }
                 new DB("PROMO").update("STATUS", "1").where("ID", id[0].ToString()).execute();
             }
         }
