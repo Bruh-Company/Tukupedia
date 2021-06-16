@@ -703,6 +703,7 @@ namespace Tukupedia.Views.Admin
             jvm.update(tbNamaJenisPembayaran.Text);
             reloadJenisPembayaran();
             tbNamaJenisPembayaran.Text = "";
+            cancelJenisPembayaran.Visibility = Visibility.Hidden;
 
         }
 
@@ -711,6 +712,8 @@ namespace Tukupedia.Views.Admin
             jvm.delete();
             reloadJenisPembayaran();
             tbNamaJenisPembayaran.Text = "";
+            cancelJenisPembayaran.Visibility = Visibility.Hidden;
+
 
         }
 
