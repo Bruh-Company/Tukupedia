@@ -170,7 +170,7 @@ namespace Tukupedia.ViewModels.Customer
                 int id = Convert.ToInt32(row["ID"].ToString()) - 1;
                 if (ViewComponent.spCategory.Children[id] != null) {
                     CheckBox cb = (CheckBox)ViewComponent.spCategory.Children[id];
-                    if (cb.IsChecked == true) listCategoryID.Add(id + 1);
+                    if (cb.IsChecked == true) listCategoryID.Add(id);
                 }
             }
             
