@@ -113,27 +113,27 @@ namespace Tukupedia.ViewModels.Customer
             string where = "";
             if (keyword != "") {
                 where += $"and (i.NAMA like '%{keyword.ToUpper()}%' " +
-                    $"or s.NAMA_TOKO like '%{keyword.ToUpper()}%' ";
+                    $"or s.NAMA_TOKO like '%{keyword.ToUpper()}%' )";
             }
-            if (minPrice <= maxPrice) {
-                if (minPrice > 0) {
-                    if (where == "") where += $"and (i.HARGA > {minPrice} ";
-                    else where += $" or i.HARGA > {minPrice} ";
+            if (minPrice < maxPrice) {
+                
+                if (minPrice >= 0 && maxPrice>=0) {
+                    where += $" and (i.HARGA >= {minPrice} ";
+                    where += $" and i.HARGA <= {maxPrice} ) ";
                 }
-                if (maxPrice > 0) {
-                    if (where == "") where += $"and (i.HARGA > {maxPrice} ";
-                    else where += $" or i.HARGA > {maxPrice} ";
-                }
+                MessageBox.Show("Masuk");
             }
             if (categoryIDs != null && categoryIDs.Count > 0) {
+                where += " and (";
                 foreach (int id in categoryIDs) {
-                    if (where == "") where += $"and (c.ID = {id} ";
-                    else where += $" or c.ID = {id} ";
+                    where += $" or c.ID = {id} ";
                 }
+                where += " )";
             }
-            where += where == "" ? "" : ")";
+            //where += where == "" ? "" : ")";
             cmd += where;
-
+            MessageBox.Show(cmd);
+            Console.WriteLine(cmd);
             items = new ItemModel();
             items.initAdapter(cmd);
             filteredItems = items.Table.Select();
