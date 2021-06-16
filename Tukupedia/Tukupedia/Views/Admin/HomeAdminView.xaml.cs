@@ -904,12 +904,14 @@ namespace Tukupedia.Views.Admin
             }
             else
             {
-                pvm.update(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value);
-                reloadPromo();
-                btTambahPromo.Visibility = Visibility.Visible;
-                btUpdatePromo.Visibility = Visibility.Hidden;
-                btHapusPromo.Visibility = Visibility.Hidden;
-                resetPromo();
+                if (pvm.update(kode, potongan, potonganmax, hargamin, jenispotongan, id_jenis_promo, dpAwalPromo.SelectedDate.Value, dpAkhirPromo.SelectedDate.Value))
+                {
+                    reloadPromo();
+                    btTambahPromo.Visibility = Visibility.Visible;
+                    btUpdatePromo.Visibility = Visibility.Hidden;
+                    btHapusPromo.Visibility = Visibility.Hidden;
+                    resetPromo();
+                }
 
 
             }

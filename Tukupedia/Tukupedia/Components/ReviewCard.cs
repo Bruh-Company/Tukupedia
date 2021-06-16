@@ -184,7 +184,7 @@ namespace Tukupedia.Components
         }
         public void setCustImage(string url)
         {
-            ImageHelper.loadImage(imgSeller, url, ImageHelper.target.customer);
+            ImageHelper.loadImage(imgCust, url, ImageHelper.target.customer);
 
         }
     }

@@ -42,7 +42,7 @@ namespace Tukupedia.ViewModels.Admin
                 return null;
             }
         }
-        bool checkEmail(string email)
+        public bool checkEmail(string email)
         {
             foreach(DataRow dr in sm.Table.Rows)
             {
@@ -56,8 +56,13 @@ namespace Tukupedia.ViewModels.Admin
         }
         public void update(string nama, string email, string alamat, string notelp, int official)
         {
-            if (!checkEmail(email)) return;
             DataRow dr = sm.Table.Rows[selected];
+            if (dr[1].ToString() == email) ;
+            else if (!checkEmail(email))
+            {
+                MessageBox.Show("Email sudah dipakai, tidak dapat mengganti email");
+                return;
+            }
             //new DB("seller").update("TANGGAL_LAHIR", lahir).where("KODE", dr[0].ToString()).execute();
             new DB("seller").update("IS_OFFICIAL", $"{official}", "EMAIL", email, "NAMA_TOKO",nama, "ALAMAT", alamat, "NO_TELP",notelp ).where("KODE", dr[0].ToString()).execute();
             //dr[1] = email;
