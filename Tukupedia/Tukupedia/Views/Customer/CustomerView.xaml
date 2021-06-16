@@ -27,9 +27,9 @@
             <Button Style="{StaticResource btn-navbar}" Content="My Transactions" HorizontalAlignment="Left" Margin="464,0,0,0" VerticalAlignment="Top" Width="159"  FontSize="18" Height="64" FontWeight="Normal" RenderTransformOrigin="-0.506,0.553" Click="goToTransactions"/>
             <Button Style="{StaticResource btn-navbar}" Content="Home" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Top" Width="82" FontSize="18" Height="64" FontWeight="Normal"  RenderTransformOrigin="-0.506,0.553" Click="goToHome"/>
         </Grid>
-        <Grid HorizontalAlignment="Left" Height="621" Margin="0,69,-3892,0" VerticalAlignment="Top" Width="5172">
-            <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274">
-                <Grid HorizontalAlignment="Left" Height="596" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
+        <Grid HorizontalAlignment="Left" Height="651" Margin="0,69,-3892,0" VerticalAlignment="Top" Width="5172">
+            <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="1274">
+                <Grid HorizontalAlignment="Left" Height="631" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
                     <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000"  ValueChanged="SliderMax_OnValueChanged" x:Name="SliderMax" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
                     <TextBox Text="0,00" x:Name="tbMaxPrice" HorizontalAlignment="Left" Height="27" Margin="36,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"  FontSize="16" IsReadOnly="True"/>
@@ -47,25 +47,25 @@
                     <Label Content="Rp" HorizontalAlignment="Left" Margin="10,299,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
                     <Label Content="Rp" HorizontalAlignment="Left" Margin="10,391,0,0" VerticalAlignment="Top" Width="21" Padding="0" FontSize="16" RenderTransformOrigin="0.581,0.417"/>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Height="596" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
+                <Grid HorizontalAlignment="Left" Height="631" Margin="208,10,0,0" VerticalAlignment="Top" Width="1052" Background="#FF404040">
                     <Grid HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="1036">
                         <Button Content="Search" HorizontalAlignment="Left" Margin="786,10,0,0" VerticalAlignment="Top" Width="240" Height="36" Style="{StaticResource btn-primary}" x:Name="btnSearch" Click="btnSearch_Click"/>
                         <TextBox Style="{StaticResource tb-border-1}" HorizontalAlignment="Center" Height="36" Margin="19,10,255,10" TextWrapping="Wrap" VerticalAlignment="Center" Width="762" FontSize="16" CaretBrush="#FF65C65B" x:Name="tbSearch"/>
                     </Grid>
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="515" Margin="10,71,0,0" VerticalAlignment="Top" Width="1032">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Left" Height="550" Margin="10,71,0,0" VerticalAlignment="Top" Width="1032">
                         <WrapPanel x:Name="PanelItems" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1070"/>
                     </ScrollViewer>
 
                 </Grid>
             </Grid>
-            <Grid x:Name="grid_Cart" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1279" Margin="1279,0,0,0">
-                <Grid HorizontalAlignment="Left" Height="594" VerticalAlignment="Top" Width="925" Background="#FF404040" Margin="10,10,0,0">
+            <Grid x:Name="grid_Cart" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="1279" Margin="1279,0,0,0">
+                <Grid HorizontalAlignment="Left" Height="631" VerticalAlignment="Top" Width="925" Background="#FF404040" Margin="10,10,0,0">
                     <Label Content="Cart" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
                     <ScrollViewer  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"  HorizontalAlignment="Left" Height="530" Margin="19,48,0,0" VerticalAlignment="Top" Width="910">
                         <StackPanel Name="spCart" Height="Auto" Width="879"/>
                     </ScrollViewer>
                 </Grid>
-                <Grid HorizontalAlignment="Left" Height="594" Margin="944,10,0,0" VerticalAlignment="Top" Width="310" Background="#FF404040">
+                <Grid HorizontalAlignment="Left" Height="631" Margin="944,10,0,0" VerticalAlignment="Top" Width="310" Background="#FF404040">
                     <materialDesign:Card HorizontalAlignment="Left" Margin="10,16,0,0" VerticalAlignment="Top" Height="238" Width="290" UniformCornerRadius="10" Background="#FF404040">
                         <Grid HorizontalAlignment="Left" Height="218" Margin="10,10,0,0" VerticalAlignment="Top" Width="270">
                             <ComboBox SelectionChanged="cbPromotion_SelectionChanged" x:Name="cbPromotion" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="250" Height="28"/>
@@ -108,8 +108,8 @@
                 </Grid>
 
             </Grid>
-            <Grid x:Name="grid_Transactions" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1274" Margin="2558,0,0,0">
-                <Grid HorizontalAlignment="Left" Margin="10,6,0,18" Width="1243" Background="#FF404040" Height="594">
+            <Grid x:Name="grid_Transactions" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="1274" Margin="2558,0,0,0">
+                <Grid HorizontalAlignment="Left" Margin="10,10,0,10" Width="1243" Background="#FF404040">
                     <Label Content="My Transactions" HorizontalAlignment="Left" Margin="19,10,0,0" VerticalAlignment="Top" FontSize="22" FontWeight="Bold"/>
                     <DataGrid MouseUp="grid_H_Trans_MouseUp" x:Name="grid_H_Trans" HorizontalAlignment="Left" Height="269" Margin="19,50,0,0" VerticalAlignment="Top" Width="662" BorderBrush="#FF737373" IsReadOnly="True"/>
                     <DataGrid MouseUp="grid_D_Trans_MouseUp"  x:Name="grid_D_Trans" HorizontalAlignment="Left" Height="269" Margin="686,50,0,0" VerticalAlignment="Top" Width="545" BorderBrush="#FF737373" IsReadOnly="True"/>
@@ -168,30 +168,30 @@
                 </Grid>
             </Grid>
             <Grid x:Name="grid_Settings" HorizontalAlignment="Left" Height="621" VerticalAlignment="Top" Width="1302" Margin="3837,0,0,0">
-                <Grid HorizontalAlignment="Left" Height="605" Margin="10,6,0,0" VerticalAlignment="Top" Width="1261" Background="#FF404040">
+                <Grid HorizontalAlignment="Left" Height="631" Margin="10,6,0,-20" VerticalAlignment="Top" Width="1261" Background="#FF404040">
                     <Label Content="INFO CUSTOMER" Style="{StaticResource h2-success}" Margin="50,10,940,541"/>
-                    <Button x:Name="btnUbahInfoCustomer" Content="Ubah" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Margin="365,25,789,541" Click="btnUbahInfoCustomer_Click"/>
+                    <Button x:Name="btnUbahInfoCustomer" Content="Ubah" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-secondary}" Margin="364,25,790,576" Click="btnUbahInfoCustomer_Click"/>
 
-                    <Label Content="Nama" Style="{StaticResource xl-secondary}" Margin="50,60,1091,504"/>
-                    <TextBox x:Name="textboxNamaCustomer" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="50,100,704,451"/>
+                    <Label Content="Nama" Style="{StaticResource xl-secondary}" Margin="50,60,1091,531"/>
+                    <TextBox x:Name="textboxNamaCustomer" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="50,100,704,476"/>
 
-                    <Label Content="Email" Style="{StaticResource xl-secondary}" Margin="50,160,1110,404"/>
-                    <TextBox x:Name="textboxEmailInfo" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="50,200,704,351"/>
+                    <Label Content="Email" Style="{StaticResource xl-secondary}" Margin="50,160,1110,436"/>
+                    <TextBox x:Name="textboxEmailInfo" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="50,195,704,390"/>
 
-                    <Label Content="Nomor Telepon" Style="{StaticResource xl-secondary}" Margin="50,280,1032,265"/>
-                    <TextBox x:Name="textboxNoTelpInfo" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="215,267,704,284"/>
+                    <Label Content="Nomor Telepon" Style="{StaticResource xl-secondary}" Margin="50,268,1032,327"/>
+                    <TextBox x:Name="textboxNoTelpInfo" FontSize="24" FontWeight="SemiBold" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,0,0" VerticalContentAlignment="Center" Margin="229,255,690,327"/>
 
-                    <Label Content="Alamat" Style="{StaticResource xl-secondary}" Margin="50,335,1081,225"/>
+                    <Label Content="Alamat" Style="{StaticResource xl-secondary}" Margin="50,335,1081,261"/>
                     <TextBox x:Name="textboxAlamatInfo" FontSize="16" FontWeight="Regular" BorderBrush="#FFFFFF" BorderThickness="0,0,0,2" Padding="5,0,5,0" VerticalContentAlignment="Top" TextWrapping="Wrap" Margin="50,375,704,178"/>
 
-                    <Label Content="Tanggal Lahir" Style="{StaticResource xl-secondary}" Margin="50,446,1053,112"/>
+                    <Label Content="Tanggal Lahir" Style="{StaticResource xl-secondary}" Margin="50,471,1053,123"/>
 
-                    <Button x:Name="btnChangeImage" Content="Pilih Gambar" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Margin="750,473,91,88" Click="btnChangeImage_Click"/>
-                    <DatePicker x:Name="dpickerlahir" HorizontalAlignment="Left" Margin="50,488,0,0" VerticalAlignment="Top" Width="500" FontSize="16" Height="46"/>
-                    <Image  x:Name="imageInfo" Margin="750,150,91,178"/>
-                    <Button x:Name="btnSave" Content="Save" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-primary}" Margin="470,25,684,541" Click="btnSave_Click"/>
-                    <Button x:Name="btnCancel" Content="Cancel" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-danger}" Margin="575,25,579,541" Click="btnCancel_Click"/>
-                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-warning}" Margin="750,518,91,43" Click="btnChangePassword_Click"/>
+                    <Button x:Name="btnChangeImage" Content="Pilih Gambar" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-secondary}" Margin="750,446,91,145" Click="btnChangeImage_Click"/>
+                    <DatePicker x:Name="dpickerlahir" HorizontalAlignment="Left" Margin="50,513,0,0" VerticalAlignment="Top" Width="500" FontSize="16" Height="46"/>
+                    <Image  x:Name="imageInfo" Margin="750,103,91,225"/>
+                    <Button x:Name="btnSave" Content="Save" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-primary}" Margin="476,25,678,576" Click="btnSave_Click" RenderTransformOrigin="0.684,0.629"/>
+                    <Button x:Name="btnCancel" Content="Cancel" Height="Auto" FontSize="16" Padding="0" Style="{StaticResource btn-danger}" Margin="588,25,566,576" Click="btnCancel_Click"/>
+                    <Button x:Name="btnChangePassword" Content="Ganti Password" Height="Auto" FontSize="18" Padding="0" Style="{StaticResource btn-warning}" Margin="750,497,91,97" Click="btnChangePassword_Click"/>
                 </Grid>
             </Grid>
 
