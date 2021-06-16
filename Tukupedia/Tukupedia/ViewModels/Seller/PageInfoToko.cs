@@ -125,7 +125,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         private void resetOSMessage() {
             ViewComponent.labelOSMessage.Visibility = Visibility.Hidden;
-            ViewComponent.btnDaftarOS.Visibility = Visibility.Visible;
+            ViewComponent.btnDaftarOS.Visibility = Visibility.Hidden;
 
             Trans_OSModel model = new Trans_OSModel();
             model.addWhere($"ID_SELLER", seller["ID"].ToString(), "=", false);
@@ -134,6 +134,7 @@ namespace Tukupedia.ViewModels.Seller {
             DataRow row = model.get()[0];
             if (row == null) return;
             ViewComponent.labelOSMessage.Visibility = Visibility.Visible;
+            ViewComponent.btnDaftarOS.Visibility = Visibility.Visible;
             if (row["STATUS"].ToString() == "R") {
                 ViewComponent.labelOSMessage.Text = "Pendaftaran Official Store masih diproses";
                 Color color = (Color)ColorConverter.ConvertFromString("#FFC548");

@@ -50,6 +50,7 @@ namespace Tukupedia.ViewModels.Seller {
 
         public void fillCmbKategori() {
             CategoryModel categoryModel = new CategoryModel();
+            categoryModel.sort = "ID";
             ViewComponent.comboboxKategori.ItemsSource = "";
             ViewComponent.comboboxKategori.ItemsSource = categoryModel.Table.DefaultView;
             ViewComponent.comboboxKategori.DisplayMemberPath = "NAMA";
@@ -148,6 +149,16 @@ namespace Tukupedia.ViewModels.Seller {
             resetPageProduk();
         }
 
+        private int getIndexCBCat(string key) {
+            for (int i = 0; i < ViewComponent.comboboxKategori.Items.Count; i++) {
+                DataRowView drv = (DataRowView)ViewComponent.comboboxKategori.Items[i];
+                DataRow row = drv.Row;
+                string id = row[0].ToString();
+                if (id == key) return i;
+            }
+            return -1;
+        }
+
         public void selectProduk() {
             int selectedIndex = ViewComponent.datagridProduk.SelectedIndex;
             if (selectedIndex == -1) return;
@@ -160,7 +171,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.textboxStok.Text = row["STOK"].ToString();
             ViewComponent.textboxBerat.Text = row["BERAT"].ToString();
             ViewComponent.textboxDeskripsi.Text = row["DESKRIPSI"].ToString();
-            ViewComponent.comboboxKategori.SelectedIndex = Convert.ToInt32(row["ID_CATEGORY"].ToString()) - 1;
+            ViewComponent.comboboxKategori.SelectedIndex = getIndexCBCat(row["ID_CATEGORY"].ToString());
             ViewComponent.comboboxBerat.SelectedIndex = 0;
             if (row["STATUS"].ToString() == "0") ViewComponent.checkboxStatusProduk.IsChecked = false;
             else ViewComponent.checkboxStatusProduk.IsChecked = true;
@@ -282,6 +293,16 @@ namespace Tukupedia.ViewModels.Seller {
             loadDiskusi(itemId);
         }
 
+        public void checkKategoriItem() {
+            if (ViewComponent.comboboxKategori.SelectedIndex != -1) {
+                string id = ViewComponent.comboboxKategori.SelectedValue.ToString();
+                string status = new DB("CATEGORY").select("STATUS").where("ID", id).getFirst()[0].ToString();
+                if (status == "0") {
+                    ViewComponent.checkboxStatusProduk.IsEnabled = false;
+                }
+            }
+        }
+
         public void loadDiskusi(int id) {
             H_DiskusiModel model = new H_DiskusiModel();
             model.addWhere("ID_ITEM", id.ToString());
@@ -328,7 +349,7 @@ namespace Tukupedia.ViewModels.Seller {
         private List<string> getData() {
             List<string> data = new List<string>();
             data.Add(ViewComponent.textboxNamaProduk.Text);
-            data.Add((ViewComponent.comboboxKategori.SelectedIndex + 1).ToString());
+            data.Add((ViewComponent.comboboxKategori.SelectedValue).ToString());
             data.Add(ViewComponent.textboxHarga.Text);
             data.Add(ViewComponent.textboxStok.Text);
 
@@ -360,6 +381,7 @@ namespace Tukupedia.ViewModels.Seller {
             ViewComponent.checkboxStatusProduk.IsChecked = false;
             ViewComponent.datagridProduk.SelectedIndex = -1;
             ViewComponent.imageProduk.Source = null;
+            ViewComponent.checkboxStatusProduk.IsEnabled = true;
             imagePath = "";
             fillDgvProduk();
         }

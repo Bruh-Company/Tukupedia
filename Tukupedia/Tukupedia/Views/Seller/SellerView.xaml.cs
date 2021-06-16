@@ -172,6 +172,10 @@ namespace Tukupedia.Views.Seller {
         private void textboxBerat_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Utility.NumberValidationTextBox(sender, e);
         }
+
+        private void comboboxKategori_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            SellerViewModel.pageProduk.checkKategoriItem();
+        }
         // Produk
 
         // Info
@@ -238,10 +242,5 @@ namespace Tukupedia.Views.Seller {
         {
             SellerViewModel.pageUlasan.sortUlasan();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e) {
-
-        }
-
     }
 }
