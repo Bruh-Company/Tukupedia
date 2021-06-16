@@ -193,6 +193,7 @@ namespace Tukupedia.ViewModels.Customer
             {
                 loadCartItem();
                 updateGrandTotal();
+                checkPromotion(promo);
             }
         }
 
