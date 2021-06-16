@@ -45,16 +45,18 @@ namespace Tukupedia.Components
             ImageHelper.loadImageSwole(profilePic);
             btnKirim.Content = "Send";
             btnKirim.Style = Application.Current.TryFindResource("btn-primary") as Style;
-            btnKirim.Width = 75;
+            btnKirim.Width = 65;
+            btnKirim.Height = 90;
             btnKirim.VerticalAlignment = VerticalAlignment.Center;
             btnKirim.HorizontalAlignment = HorizontalAlignment.Center;
-            btnKirim.Margin = new Thickness(15,0,0,0);
+            btnKirim.Margin = new Thickness(8,0,0,0);
             richTextBox.GotFocus += RichTextBox_GotFocus;
             richTextBox.LostFocus += RichTextBox_LostFocus;
             Utility.setRichTextBoxString(richTextBox, "Reply Here");
             richTextBox.Width = 450;
             richTextBox.Height = 100;
             richTextBox.Foreground = new SolidColorBrush(Colors.White);
+            richTextBox.Margin = new Thickness(10, 0, 0, 0);
 
 
         }
