@@ -112,13 +112,14 @@ namespace Tukupedia.Components
         private void CheckBoxOnClick(object sender, RoutedEventArgs e)
         {
             parent.updateSubTotal();
-            CartViewModel.updateGrandTotal();
             CartViewModel.checkPromotion(CartViewModel.promo);
+            CartViewModel.updateGrandTotal();
         }
 
         private void BtnDeleteOnClick(object sender, RoutedEventArgs e)
         {
             CartViewModel.deleteItemFromCart(Convert.ToInt32(item["ID"]));
+            CartViewModel.updateGrandTotal();
         }
 
         private void BtnPlusOnClick(object sender, RoutedEventArgs e)

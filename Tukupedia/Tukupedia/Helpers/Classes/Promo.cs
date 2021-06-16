@@ -85,7 +85,7 @@ namespace Tukupedia.Helpers.Classes
                 if (JenisPromo["ID_METODE_PEMBAYARAN"].ToString()  !=  "")
                 {
                     valid &= id_payment == JenisPromo["ID_METODE_PEMBAYARAN"].ToString();
-                    MessageBox.Show("ID_METODE_PEMBAYARAN : " + (id_payment == JenisPromo["ID_METODE_PEMBAYARAN"].ToString()).ToString());
+                    //MessageBox.Show("ID_METODE_PEMBAYARAN : " + (id_payment == JenisPromo["ID_METODE_PEMBAYARAN"].ToString()).ToString());
                     jenis["metode_pembayaran"] = true;
                 }
             }
