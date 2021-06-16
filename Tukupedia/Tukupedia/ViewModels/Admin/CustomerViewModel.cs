@@ -42,8 +42,21 @@ namespace Tukupedia.ViewModels.Admin
                 return null;
             }
         }
+        bool checkEmail(string email)
+        {
+            foreach (DataRow dr in cm.Table.Rows)
+            {
+                if (dr[1].ToString() == email)
+                {
+                    MessageBox.Show("Email Sudah dipakai, gagal ganti email");
+                    return false;
+                }
+            }
+            return true;
+        }
         public void update(string nama, string email, string alamat, string notelp, DateTime lahir)
         {
+            if (!checkEmail(email)) return;
             DataRow dr = cm.Table.Rows[selected];
             new DB("customer").update("TANGGAL_LAHIR", lahir).where("KODE",dr[0].ToString()).execute();
             //MessageBox.Show(dr[0].ToString());

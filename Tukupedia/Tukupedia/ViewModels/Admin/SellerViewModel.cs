@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Tukupedia.Helpers.DatabaseHelpers;
 using Tukupedia.Models;
 
@@ -41,8 +42,21 @@ namespace Tukupedia.ViewModels.Admin
                 return null;
             }
         }
+        bool checkEmail(string email)
+        {
+            foreach(DataRow dr in sm.Table.Rows)
+            {
+                if(dr[1].ToString() == email)
+                {
+                    MessageBox.Show("Email Sudah dipakai, gagal ganti email");
+                    return false;
+                }
+            }
+            return true;
+        }
         public void update(string nama, string email, string alamat, string notelp, int official)
         {
+            if (!checkEmail(email)) return;
             DataRow dr = sm.Table.Rows[selected];
             //new DB("seller").update("TANGGAL_LAHIR", lahir).where("KODE", dr[0].ToString()).execute();
             new DB("seller").update("IS_OFFICIAL", $"{official}", "EMAIL", email, "NAMA_TOKO",nama, "ALAMAT", alamat, "NO_TELP",notelp ).where("KODE", dr[0].ToString()).execute();

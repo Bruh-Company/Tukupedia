@@ -166,52 +166,52 @@
             <Canvas x:Name="CanvasrootPromo" HorizontalAlignment="Left" Height="624" Margin="361.6,-688,-850.4,0" VerticalAlignment="Top" Width="1252" Grid.Column="1">
                 <Canvas x:Name="CanvasJenisPromo" Height="554" Canvas.Left="20" Canvas.Top="42" Width="1232">
                     <Label Content="Tukupedia Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="48"/>
-                    <DataGrid x:Name="dgJenisPromo" Height="444" Canvas.Left="8" Canvas.Top="90" Width="640" MouseUp="dgJenisPromo_MouseDoubleClick"
+                    <DataGrid x:Name="dgJenisPromo" Height="226" Canvas.Left="8" Canvas.Top="90" Width="1185" MouseUp="dgJenisPromo_MouseDoubleClick"
                               IsReadOnly="True"/>
-                    <Label Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="679" Canvas.Top="59"/>
-                    <TextBox x:Name="tbJenisPromo" Height="41" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="132" Width="466" FontSize="20"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="btTambahJenisPromo" Content="Tambah Jenis Promo" Canvas.Left="682" Canvas.Top="418" Width="291" Click="btTambahJenisPromo_Click"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="btUpdateJenisPromo" Content="Update" Canvas.Left="682" Canvas.Top="455" Width="143" Click="btUpdateJenisPromo_Click"/>
-                    <Button Style="{StaticResource btn-danger}" x:Name="btHapusJenisPromo" Content="Hapus" Canvas.Left="830" Canvas.Top="455" Width="143" Click="btHapusJenisPromo_Click"/>
-                    <CheckBox x:Name="cebeKategori" Content="Kategori" Canvas.Left="679" Canvas.Top="205" FontSize="24" Click="cebeKategori_Click"/>
-                    <CheckBox x:Name="cebeKurir" Content="Kurir" Canvas.Left="679" Canvas.Top="244" FontSize="24" Click="cebeKurir_Click"/>
-                    <CheckBox x:Name="cebeSeller" Content="Seller" Canvas.Left="679" Canvas.Top="278" FontSize="24" Click="cebeSeller_Click"/>
-                    <CheckBox x:Name="cebeMetodePembayaran" Content="Metode Pembayaran" Canvas.Left="679" Canvas.Top="317" FontSize="24" Click="cebeMetodePembayaran_Click"/>
-                    <ComboBox x:Name="cbKategori" Canvas.Left="946" Canvas.Top="205" Width="199"/>
-                    <ComboBox x:Name="cbKurir" Canvas.Left="946" Canvas.Top="244" Width="199"/>
-                    <ComboBox x:Name="cbSeller" Canvas.Left="946" Canvas.Top="281" Width="199"/>
-                    <ComboBox x:Name="cbMetodePembayaran" Canvas.Left="946" Canvas.Top="320" Width="199"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="cancelJenisPromo" Content="Cancel" Canvas.Left="682" Canvas.Top="492" Width="291" Click="cancelJenisPromo_Click"/>
+                    <Label Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="26" Canvas.Top="343"/>
+                    <TextBox x:Name="tbJenisPromo" Height="41" Canvas.Left="291" TextWrapping="Wrap" Canvas.Top="343" Width="201" FontSize="20"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="btTambahJenisPromo" Content="Tambah Jenis Promo" Canvas.Left="534" Canvas.Top="382" Width="291" Click="btTambahJenisPromo_Click"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="btUpdateJenisPromo" Content="Update" Canvas.Left="534" Canvas.Top="421" Width="143" Click="btUpdateJenisPromo_Click"/>
+                    <Button Style="{StaticResource btn-danger}" x:Name="btHapusJenisPromo" Content="Hapus" Canvas.Left="682" Canvas.Top="421" Width="143" Click="btHapusJenisPromo_Click"/>
+                    <CheckBox x:Name="cebeKategori" Content="Kategori" Canvas.Left="26" Canvas.Top="383" FontSize="24" Click="cebeKategori_Click"/>
+                    <CheckBox x:Name="cebeKurir" Content="Kurir" Canvas.Left="26" Canvas.Top="419" FontSize="24" Click="cebeKurir_Click"/>
+                    <CheckBox x:Name="cebeSeller" Content="Seller" Canvas.Left="26" Canvas.Top="453" FontSize="24" Click="cebeSeller_Click"/>
+                    <CheckBox x:Name="cebeMetodePembayaran" Content="Metode Pembayaran" Canvas.Left="26" Canvas.Top="490" FontSize="24" Click="cebeMetodePembayaran_Click"/>
+                    <ComboBox x:Name="cbKategori" Canvas.Left="293" Canvas.Top="383" Width="199"/>
+                    <ComboBox x:Name="cbKurir" Canvas.Left="293" Canvas.Top="419" Width="199"/>
+                    <ComboBox x:Name="cbSeller" Canvas.Left="293" Canvas.Top="456" Width="199"/>
+                    <ComboBox x:Name="cbMetodePembayaran" Canvas.Left="293" Canvas.Top="493" Width="199"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="cancelJenisPromo" Content="Cancel" Canvas.Left="534" Canvas.Top="457" Width="291" Click="cancelJenisPromo_Click"/>
                 </Canvas>
                 <Button Style="{StaticResource btn-primary}" x:Name="btJenisPromo" Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" FontSize="18" Canvas.Left="10" Canvas.Top="10" Click="btJenisPromo_Click"/>
                 <Button Style="{StaticResource btn-primary}" x:Name="btPromo" Content="Promo" HorizontalAlignment="Left" VerticalAlignment="Top" Height="Auto" FontSize="18" Canvas.Left="146" Canvas.Top="10" Click="btPromo_Click"/>
-                <Canvas x:Name="CanvasPromo" Height="554" Canvas.Left="20" Canvas.Top="47" Width="1232">
+                <Canvas x:Name="CanvasPromo" Height="554" Canvas.Left="1348" Canvas.Top="-31" Width="1232">
                     <Label Content="Tukupedia Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Top="10"/>
-                    <DataGrid x:Name="dgPromo" Height="475" Canvas.Left="8" Canvas.Top="59" Width="640" MouseUp="dgPromo_MouseDoubleClick" SelectedCellsChanged="dgPromo_SelectedCellsChanged"
+                    <DataGrid x:Name="dgPromo" Height="153" Canvas.Left="8" Canvas.Top="59" Width="640" MouseUp="dgPromo_MouseDoubleClick" SelectedCellsChanged="dgPromo_SelectedCellsChanged"
                               IsReadOnly="True"/>
-                    <Label Content="Kode Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="12"/>
-                    <TextBox x:Name="tbKodePromo" Height="32" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="46" Width="466" FontSize="14"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="btTambahPromo" Content="Tambah Jenis Promo" Canvas.Left="684" Canvas.Top="429" Width="291" Click="btTambahPromo_Click"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="btUpdatePromo" Content="Update" Canvas.Left="684" Canvas.Top="467" Width="143" Click="btUpdatePromo_Click"/>
-                    <Button Style="{StaticResource btn-danger}" x:Name="btHapusPromo" Content="Hapus" Canvas.Left="832" Canvas.Top="467" Width="143" Click="btHapusPromo_Click"/>
-                    <Label Content="Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="82"/>
-                    <Label Content="Potongan Max" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="148"/>
-                    <TextBox x:Name="tbPotongan" Height="30" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="112" Width="466" FontSize="14" TextChanged="tbPotongan_TextChanged" PreviewTextInput="tbPotongan_PreviewTextInput"/>
-                    <TextBox x:Name="tbPotonganMax" Height="30" Canvas.Left="682" TextWrapping="Wrap" Canvas.Top="182" Width="466" FontSize="14" PreviewTextInput="tbPotonganMax_PreviewTextInput"/>
-                    <Label Content="Harga Min" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="218"/>
-                    <TextBox x:Name="tbHargaMin" Height="32" Canvas.Left="679" TextWrapping="Wrap" Canvas.Top="252" Width="466" FontSize="14" PreviewTextInput="tbHargaMin_PreviewTextInput"/>
-                    <Label Content="Jenis Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="288"/>
-                    <Label Content="Periode" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="679" Canvas.Top="354"/>
-                    <ComboBox x:Name="cbJenisPotongan" Canvas.Left="682" Canvas.Top="322" Width="210">
+                    <Label Content="Kode Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="29" Canvas.Top="254"/>
+                    <TextBox x:Name="tbKodePromo" Height="32" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="252" Width="210" FontSize="14"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="btTambahPromo" Content="Tambah Jenis Promo" Canvas.Left="839" Canvas.Top="424" Width="291" Click="btTambahPromo_Click"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="btUpdatePromo" Content="Update" Canvas.Left="839" Canvas.Top="462" Width="143" Click="btUpdatePromo_Click"/>
+                    <Button Style="{StaticResource btn-danger}" x:Name="btHapusPromo" Content="Hapus" Canvas.Left="987" Canvas.Top="462" Width="143" Click="btHapusPromo_Click"/>
+                    <Label Content="Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="595" Canvas.Top="237"/>
+                    <Label Content="Potongan Max" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="595" Canvas.Top="293"/>
+                    <TextBox x:Name="tbPotongan" Height="30" Canvas.Left="677" TextWrapping="Wrap" Canvas.Top="237" Width="134" FontSize="14" TextChanged="tbPotongan_TextChanged" PreviewTextInput="tbPotongan_PreviewTextInput"/>
+                    <TextBox x:Name="tbPotonganMax" Height="30" Canvas.Left="582" TextWrapping="Wrap" Canvas.Top="371" Width="188" FontSize="14" PreviewTextInput="tbPotonganMax_PreviewTextInput"/>
+                    <Label Content="Harga Min" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="582" Canvas.Top="426"/>
+                    <TextBox x:Name="tbHargaMin" Height="32" Canvas.Left="675" TextWrapping="Wrap" Canvas.Top="423" Width="201" FontSize="14" PreviewTextInput="tbHargaMin_PreviewTextInput"/>
+                    <Label Content="Jenis Potongan" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="29" Canvas.Top="313"/>
+                    <Label Content="Periode" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="31" Canvas.Top="428"/>
+                    <ComboBox x:Name="cbJenisPotongan" Canvas.Left="160" Canvas.Top="309" Width="210">
                         <ComboBoxItem Content="Persenan"/>
                         <ComboBoxItem Content="Fixed"/>
                     </ComboBox>
-                    <DatePicker x:Name="dpAwalPromo" Canvas.Left="682" Canvas.Top="388" Width="210"/>
-                    <DatePicker x:Name="dpAkhirPromo" Canvas.Left="944" Canvas.Top="388" Width="201"/>
-                    <Label Content="s/d" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="903" Canvas.Top="389"/>
-                    <Label Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="914" Canvas.Top="288"/>
-                    <ComboBox x:Name="cbJenisPromo" Canvas.Left="918" Canvas.Top="322" Width="227"/>
-                    <Button Style="{StaticResource btn-primary}" x:Name="cancelPromo" Content="Cancel" Canvas.Left="684" Canvas.Top="502" Width="291" Click="cancelPromo_Click"/>
+                    <DatePicker x:Name="dpAwalPromo" Canvas.Left="37" Canvas.Top="467" Width="210"/>
+                    <DatePicker x:Name="dpAkhirPromo" Canvas.Left="299" Canvas.Top="467" Width="201"/>
+                    <Label Content="s/d" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="258" Canvas.Top="468"/>
+                    <Label Content="Jenis Promo" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" Canvas.Left="31" Canvas.Top="370"/>
+                    <ComboBox x:Name="cbJenisPromo" Canvas.Left="160" Canvas.Top="370" Width="210"/>
+                    <Button Style="{StaticResource btn-primary}" x:Name="cancelPromo" Content="Cancel" Canvas.Left="839" Canvas.Top="497" Width="291" Click="cancelPromo_Click"/>
                 </Canvas>
             </Canvas>
             <Canvas x:Name="CanvasrootOfficialStore" HorizontalAlignment="Left" Height="613" Margin="2489,785,-2979,-709" VerticalAlignment="Top" Width="1252" Grid.Column="1">
