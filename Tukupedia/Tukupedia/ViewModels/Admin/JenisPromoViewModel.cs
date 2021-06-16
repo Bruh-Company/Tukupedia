@@ -76,6 +76,11 @@ namespace Tukupedia.ViewModels.Admin
         }
         public bool insert(string nama, string id_category, string id_kurir, string id_seller, string id_metode_pembayaran)
         {
+            if(nama == "" || id_category == "")
+            {
+                MessageBox.Show("Nama atau Kategori tidak boleh kosong");
+                return false;
+            }
             try
             {
                 new DB("JENIS_PROMO").insert(

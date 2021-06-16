@@ -182,8 +182,13 @@ namespace Tukupedia.ViewModels.Seller {
 
         private void saveDataSeller() {
             List<string> data = getData();
-            if (!dataValidation(data)) return;
-
+            Admin.SellerViewModel asvm = new Admin.SellerViewModel();
+            if (Session.User["EMAIL"].ToString() == data[2]) ;
+            else if (!dataValidation(data))
+            {
+                MessageBox.Show("Email sudah dipakai, gagal update info");
+                return;
+            }
             string idSeller = seller["ID"].ToString();
 
             SellerModel model = new SellerModel();
