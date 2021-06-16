@@ -31,11 +31,11 @@
             <Grid x:Name="grid_Home" HorizontalAlignment="Left" Height="651" VerticalAlignment="Top" Width="1274">
                 <Grid HorizontalAlignment="Left" Height="631" Margin="10,10,0,0" VerticalAlignment="Top" Width="193" Background="#FF404040">
                     <Label Content="Category" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF65C65B"/>
-                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000"  ValueChanged="SliderMax_OnValueChanged" x:Name="SliderMax" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="10000" Minimum="0" Maximum="10000000"  ValueChanged="SliderMax_OnValueChanged" x:Name="SliderMax" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16"/>
                     <TextBox Text="0,00" x:Name="tbMaxPrice" HorizontalAlignment="Left" Height="27" Margin="36,385,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"  FontSize="16" IsReadOnly="True"/>
                     <Label Content="Maximum Price" HorizontalAlignment="Left" Margin="10,356,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FF65C65B"/>
                     <Button x:Name="btnFilter" Style="{StaticResource btn-primary}" Content="Filter" HorizontalAlignment="Left" Margin="10,450,0,0" VerticalAlignment="Top" Width="173" Height="32" BorderBrush="#FF404040" Click="btnFilter_Click"/>
-                    <Slider IsSnapToTickEnabled="True" TickFrequency="100" Minimum="0" Maximum="1000000000" ValueChanged="SliderMin_OnValueChanged" x:Name="SliderMin" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16" SmallChange="0"/>
+                    <Slider IsSnapToTickEnabled="True" TickFrequency="10000" Minimum="0" Maximum="10000000" ValueChanged="SliderMin_OnValueChanged" x:Name="SliderMin" HorizontalAlignment="Left" Margin="10,331,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.533,-0.205" Width="173" Foreground="#FF65C65B" Height="17" FontSize="16" SmallChange="0"/>
                     <TextBox Text="0,00" x:Name="tbMinPrice" HorizontalAlignment="Left" Height="27" Margin="36,293,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147" FontSize="16" IsReadOnly="True"/>
 
                     <Grid HorizontalAlignment="Left" Margin="10,50,0,350" Width="173" Height="200">
