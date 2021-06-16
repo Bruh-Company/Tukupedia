@@ -550,6 +550,8 @@ namespace Tukupedia.Views.Admin
             cavm.update(tbNamaKategori.Text);
             tbNamaKategori.Text = "";
             reloadCategory();
+            cancelCategory.Visibility = Visibility.Hidden;
+
         }
 
         private void btToogleKategori_Click(object sender, RoutedEventArgs e)
@@ -565,6 +567,7 @@ namespace Tukupedia.Views.Admin
                 btTambahKategori.Visibility = Visibility.Visible;
                 btToggleKategori.Visibility = Visibility.Hidden;
                 btUpdateKategori.Visibility = Visibility.Hidden;
+                cancelCategory.Visibility = Visibility.Hidden;
             }
         }
 
