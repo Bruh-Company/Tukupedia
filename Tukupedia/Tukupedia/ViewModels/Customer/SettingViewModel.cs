@@ -38,6 +38,13 @@ namespace Tukupedia.ViewModels.Customer
         }
         public static void update()
         {
+            Admin.CustomerViewModel acvm = new Admin.CustomerViewModel();
+            if (Session.User["EMAIL"].ToString() == ViewComponent.textboxEmailInfo.Text) ;
+            else if (!acvm.checkEmail(ViewComponent.textboxEmailInfo.Text))
+            {
+                MessageBox.Show("Email sudah dipakai, gagal update info");
+                return;
+            }
             DataRow dr = cm.Table.Rows[0];
             dr["NAMA"] = ViewComponent.textboxNamaCustomer.Text;
             dr["EMAIL"] = ViewComponent.textboxEmailInfo.Text;

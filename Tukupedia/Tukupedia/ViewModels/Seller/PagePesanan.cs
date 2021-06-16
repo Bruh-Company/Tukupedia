@@ -250,18 +250,18 @@ namespace Tukupedia.ViewModels.Seller
             int tidakterima = 0;
             int trans = 0;
             //check stock
-            for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
-            {
-                DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
-                if (drHelper[1].ToString() == "SC")
-                {
-                    if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
-                    {
-                        MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
-                        return;
-                    }
-                }
-            }
+            //for (int i = 0; i < dtrans_helper.Table.Rows.Count; i++)
+            //{
+            //    DataRow dr = dtrans.Table.Rows[i], drHelper = dtrans_helper.Table.Rows[i];
+            //    if (drHelper[1].ToString() == "SC")
+            //    {
+            //        if (Convert.ToInt32(drHelper[2].ToString()) <= Convert.ToInt32(drHelper[3].ToString()))
+            //        {
+            //            MessageBox.Show($"Barang {dr[1].ToString()} tidak mencukupi, transaksi gagal");
+            //            return;
+            //        }
+            //    }
+            //}
             foreach (DataRow dr in dtrans_helper.Table.Rows)
             {
                 if (dr[1].ToString() == "W") tidakterima++;
