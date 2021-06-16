@@ -105,7 +105,7 @@ namespace Tukupedia.ViewModels.Admin
                 MessageBox.Show("Tanggal Awal melebihi tanggal akhir");
                 return false;
             }
-            if (akhir > DateTime.Today)
+            if (akhir < DateTime.Today)
             {
                 MessageBox.Show("Tanggal akhir kurang dari hari ini, status dimatikan");
                 delete(1);
