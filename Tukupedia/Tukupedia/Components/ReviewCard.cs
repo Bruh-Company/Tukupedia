@@ -55,6 +55,7 @@ namespace Tukupedia.Components
             tbUlasan = new TextBlock();
             stackPanelContent.Children.Add(ratingBar);
             stackPanelContent.Children.Add(tbUlasan);
+            stackPanelContent.Margin = new Thickness(20, 10, 10, 10);
             
             stackPanelSeller = new StackPanel();
             stackPanelSellerKeterangan = new StackPanel();
@@ -63,6 +64,7 @@ namespace Tukupedia.Components
             tbKeteranganPenjual = new TextBlock();
             stackPanelSellerKeterangan.Children.Add(tbNamaToko);
             stackPanelSellerKeterangan.Children.Add(tbKeteranganPenjual);
+            stackPanelSellerKeterangan.Margin = new Thickness(10);
             tbReplyUlasan = new TextBlock();
             tbDateSeller = new TextBlock();
 
@@ -126,11 +128,12 @@ namespace Tukupedia.Components
             tbNamaToko.Style = Application.Current.TryFindResource("textblock-md-success") as Style;
             tbDateSeller.FontSize = 12;
             tbReplyUlasan.Style = Application.Current.TryFindResource("textblock-sm") as Style;
-            tbReplyUlasan.Margin = new Thickness(0, 5, 0, 5);
+            tbReplyUlasan.Margin = new Thickness(0, 0, 0, 10);
             tbKeteranganPenjual.Padding = new Thickness(4, 3, 4, 3);
             tbKeteranganPenjual.Margin = new Thickness(3, 0, 3, 0);
             tbKeteranganPenjual.Background = new SolidColorBrush(Color.FromRgb(214, 255, 222));
             tbKeteranganPenjual.Foreground = new SolidColorBrush(Color.FromRgb(42, 187, 52));
+            tbKeteranganPenjual.FontSize = 10;
             sellerCard.Visibility = Visibility.Hidden;
             //TODO GANTI BORDER SHADOW JADI NONE
             sellerCard.BorderBrush = null;
