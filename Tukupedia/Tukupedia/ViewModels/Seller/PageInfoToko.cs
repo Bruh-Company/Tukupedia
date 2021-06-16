@@ -108,7 +108,7 @@ namespace Tukupedia.ViewModels.Seller {
             seller = new DB("SELLER").select().where("ID", seller["ID"].ToString()).getFirst();
 
             ViewComponent.labelNamaToko.Content = seller["NAMA_TOKO"].ToString();
-            imagePath = ImageHelper.getSellerImagePath(seller["IMAGE"].ToString());
+
 
             lbKurirTable = new DB("KURIR_SELLER")
                 .select("KURIR.ID as ID", "KURIR.NAMA as NAMA")
@@ -194,11 +194,19 @@ namespace Tukupedia.ViewModels.Seller {
             SellerModel model = new SellerModel();
             model.init();
             model.addWhere("ID", idSeller, "=", false);
-            foreach (DataRow row in model.get()) {
-                string img = "";
-                if (imagePath != "") img = ImageHelper.saveImage(imagePath, seller["KODE"].ToString(), ImageHelper.target.seller, true);
-                model.updateRow(row, "NAMA_TOKO", data[0], "NAMA_SELLER", data[1], "EMAIL", data[2], "NO_TELP", data[3], "ALAMAT", data[4], "IMAGE", img);
+            DataRow row = model.Table.Select($"ID = '{idSeller}'")[0];
+            string img = "";
+            if (imagePath != "")
+            {
+                img = ImageHelper.saveImage(imagePath, seller["KODE"].ToString(), ImageHelper.target.seller, true);
+                row["IMAGE"] = img;
             }
+            row["NAMA_TOKO"] = data[0];
+            row["NAMA_SELLER"] = data[1];
+            row["EMAIL"] = data[2];
+            row["NO_TELP"] = data[3];
+            row["ALAMAT"] = data[4];
+            model.update();
         }
 
         private void changeState() {
@@ -240,7 +248,10 @@ namespace Tukupedia.ViewModels.Seller {
 
         private void reloadImageInfo() {
             if (seller["IMAGE"].ToString() == "") ImageHelper.loadImageCheems(ViewComponent.imageInfo);
-            else ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString(), ImageHelper.target.seller);
+            else { 
+                ImageHelper.loadImage(ViewComponent.imageInfo, seller["IMAGE"].ToString(), ImageHelper.target.seller);
+                imagePath = ImageHelper.getSellerImagePath(seller["IMAGE"].ToString());
+            }
         }
 
         private void fillTextbox() {
