@@ -102,7 +102,7 @@
                           IsReadOnly="True"/>
                 <Label Content="Tukupedia Seller Center" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Canvas.Left="10" Canvas.Top="10"/>
                 <Canvas x:Name="canvasSeller" Height="604" Canvas.Left="901" Canvas.Top="10" Width="341">
-                    <Label Content="Nama" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="13"/>
+                    <Label Content="Nama Toko" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Canvas.Left="31" Canvas.Top="13"/>
                     <TextBox x:Name="tbNamaSeller" Height="41" Canvas.Left="31" TextWrapping="Wrap" Canvas.Top="50" Width="300" FontSize="20"/>
                     <Button Style="{StaticResource btn-primary}" Content="Reset Password" Canvas.Left="31" Canvas.Top="520" Width="152"/>
                     <Button Style="{StaticResource btn-danger}" x:Name="btBanSeller" Content="Banned User" Canvas.Left="188" Canvas.Top="520" Width="143" Click="btBanSeller_Click"/>
