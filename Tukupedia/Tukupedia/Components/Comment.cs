@@ -41,6 +41,7 @@ namespace Tukupedia.Components
             
             this.spContent.Children.Add(spDesc);
             this.spContent.Children.Add(message);
+            this.spContent.Margin = new Thickness(10, 5, 5, 5);
             
             this.spMain.Children.Add(profilePic);
             this.spMain.Children.Add(spContent);
