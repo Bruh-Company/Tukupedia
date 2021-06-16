@@ -1258,18 +1258,17 @@ namespace Tukupedia.Views.Admin
                 tbMendaftarSejakOS.Text = dr[5].ToString();
                 tbstatusOS.Text = osvm.getOS_Status() ? "Official" : "Merchant";
                 CanvasDetailOfficialStore.Visibility = Visibility.Visible;
-                if (osvm.getOS_Status())
-                {
-                    btTerimaOS.Visibility = Visibility.Hidden;
-                    btTolakOS.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    btTerimaOS.Visibility = Visibility.Visible;
-                    btTolakOS.Visibility = Visibility.Visible;
-                }
                 DataRow temp = osvm.getHtomHelper();
-                if (temp[1].ToString() == "A") btTolakOS.Visibility = Visibility.Visible;
+                if (temp[1].ToString() == "A" || temp[1].ToString() == "D")
+                {
+                    btTolakOS.Visibility = Visibility.Hidden;
+                    btTerimaOS.Visibility = Visibility.Hidden;
+                }
+                if (temp[1].ToString() == "R")
+                {
+                    btTolakOS.Visibility = Visibility.Visible;
+                    btTerimaOS.Visibility = Visibility.Visible;
+                }
             }
         }
 
