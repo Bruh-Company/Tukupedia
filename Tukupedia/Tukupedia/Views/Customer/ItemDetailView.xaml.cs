@@ -134,7 +134,7 @@ namespace Tukupedia.Views.Customer
 
         private void BtnAddCart_OnClick(object sender, RoutedEventArgs e)
         {
-            if (qty < 0)
+            if (qty <= 0)
             {
                 MessageBox.Show("Minimal Pembelian barang adalah 1!");
                 return;

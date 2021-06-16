@@ -377,7 +377,7 @@ namespace Tukupedia.ViewModels.Customer
         {
             Metode_PembayaranModel mpm = new Metode_PembayaranModel();
             comboBox.Items.Clear();
-            foreach (DataRow row in mpm.Table.Rows)
+            foreach (DataRow row in mpm.Table.Select("STATUS ='1'"))
             {
                 ComboBoxItem cbi = new ComboBoxItem();
                 cbi.Content = row["NAMA"].ToString();
