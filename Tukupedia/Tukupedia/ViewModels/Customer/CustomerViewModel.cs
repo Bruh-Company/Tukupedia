@@ -108,12 +108,12 @@ namespace Tukupedia.ViewModels.Customer
                 "FROM ITEM i, SELLER s, CATEGORY c " +
                 "WHERE i.ID_SELLER = s.ID " +
                 "and i.ID_CATEGORY = c.ID " +
-                "and i.STATUS = '1'";
+                "and i.STATUS = '1' ";
 
             string where = "";
             if (keyword != "") {
-                where += $"and (i.NAMA like '%{keyword.ToUpper()}%' " +
-                    $"or s.NAMA_TOKO like '%{keyword.ToUpper()}%' )";
+                where += $" and (i.NAMA like '%{keyword.ToUpper()}%' " +
+                    $" or s.NAMA_TOKO like '%{keyword.ToUpper()}%' ) ";
             }
             if (minPrice < maxPrice) {
                 
@@ -121,21 +121,28 @@ namespace Tukupedia.ViewModels.Customer
                     where += $" and (i.HARGA >= {minPrice} ";
                     where += $" and i.HARGA <= {maxPrice} ) ";
                 }
-                MessageBox.Show("Masuk");
+                //MessageBox.Show("Masuk");
             }
             if (categoryIDs != null && categoryIDs.Count > 0) {
-                where += " and (";
+                //MessageBox.Show("bruh");
+                where += " and ( ";
+                bool first = true;
                 foreach (int id in categoryIDs) {
-                    where += $" or c.ID = {id} ";
+                    if (first)
+                    {
+                        where += $" c.ID = '{id}' ";
+                        first = false;
+                    }
+                    else where += $" or c.ID = '{id}' ";
                 }
-                where += " )";
+                where += " ) ";
             }
             //where += where == "" ? "" : ")";
             cmd += where;
-            MessageBox.Show(cmd);
-            Console.WriteLine(cmd);
+            //Console.WriteLine(cmd);
             items = new ItemModel();
             items.initAdapter(cmd);
+            //MessageBox.Show(cmd);
             filteredItems = items.Table.Select();
             loadItems();
             isFiltered = false;
@@ -163,7 +170,7 @@ namespace Tukupedia.ViewModels.Customer
                 int id = Convert.ToInt32(row["ID"].ToString()) - 1;
                 if (ViewComponent.spCategory.Children[id] != null) {
                     CheckBox cb = (CheckBox)ViewComponent.spCategory.Children[id];
-                    if (cb.IsChecked == true) listCategoryID.Add(id);
+                    if (cb.IsChecked == true) listCategoryID.Add(id + 1);
                 }
             }
             
