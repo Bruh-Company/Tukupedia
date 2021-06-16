@@ -53,7 +53,9 @@ namespace Tukupedia.Components
             tbQty = new TextBlock();
             btnPlus = new Button();
             subtotal = 0;
-            
+
+            spDesc.Margin = new Thickness(10, 0, 0, 0);
+            tbHarga.FontStyle = FontStyles.Italic;
             spDesc.Children.Add(tbnamaItem);
             spDesc.Children.Add(tbHarga);
 
