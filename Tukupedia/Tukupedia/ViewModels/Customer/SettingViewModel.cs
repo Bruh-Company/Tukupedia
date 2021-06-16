@@ -42,7 +42,6 @@ namespace Tukupedia.ViewModels.Customer
             if (Session.User["EMAIL"].ToString() == ViewComponent.textboxEmailInfo.Text) ;
             else if (!acvm.checkEmail(ViewComponent.textboxEmailInfo.Text))
             {
-                MessageBox.Show("Email sudah dipakai, gagal update info");
                 return;
             }
             DataRow dr = cm.Table.Rows[0];

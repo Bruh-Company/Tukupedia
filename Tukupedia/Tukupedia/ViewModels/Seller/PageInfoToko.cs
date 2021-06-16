@@ -184,9 +184,8 @@ namespace Tukupedia.ViewModels.Seller {
             List<string> data = getData();
             Admin.SellerViewModel asvm = new Admin.SellerViewModel();
             if (Session.User["EMAIL"].ToString() == data[2]) ;
-            else if (!dataValidation(data))
+            else if (!asvm.checkEmail(data[2]))
             {
-                MessageBox.Show("Email sudah dipakai, gagal update info");
                 return;
             }
             string idSeller = seller["ID"].ToString();

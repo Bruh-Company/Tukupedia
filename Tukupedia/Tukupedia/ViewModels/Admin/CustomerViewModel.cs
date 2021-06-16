@@ -60,7 +60,6 @@ namespace Tukupedia.ViewModels.Admin
             if (email == dr[1].ToString()) ;
             else if (!checkEmail(email))
             {
-                MessageBox.Show("Email sudah dipakai, tidak dapat mengganti email");
                 return;
             }
             new DB("customer").update("TANGGAL_LAHIR", lahir).where("KODE",dr[0].ToString()).execute();
